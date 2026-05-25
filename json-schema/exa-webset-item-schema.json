@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/exa-ai/main/json-schema/exa-webset-item-schema.json",
+  "title": "Exa Webset Item",
+  "description": "A single item in an Exa Webset — a curated, enrichable collection of web results scoped to a specific query, vertical (companies, people, news, research), or domain.",
+  "type": "object",
+  "required": ["id", "websetId"],
+  "properties": {
+    "id": {"type": "string", "description": "Item identifier."},
+    "websetId": {"type": "string", "description": "Parent Webset identifier."},
+    "source": {"type": "string", "description": "Source URL or domain for the item."},
+    "type": {
+      "type": "string",
+      "enum": ["company", "person", "research", "news", "page"],
+      "description": "Vertical type of the item."
+    },
+    "properties": {
+      "type": "object",
+      "description": "Structured properties extracted for the item — schema varies by vertical (e.g. companyName, industry, headcount, person name, role, email).",
+      "additionalProperties": true
+    },
+    "enrichments": {
+      "type": "object",
+      "description": "Results of enrichment runs applied to the item.",
+      "additionalProperties": true
+    },
+    "evaluations": {
+      "type": "array",
+      "description": "LLM evaluations applied to the item (e.g. relevance, qualification, scoring).",
+      "items": {"type": "object", "additionalProperties": true}
+    },
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": "string", "format": "date-time"}
+  },
+  "additionalProperties": true
+}

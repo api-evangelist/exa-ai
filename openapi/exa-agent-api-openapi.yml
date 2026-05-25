@@ -1,0 +1,1054 @@
+openapi: 3.1.0
+info:
+  title: Exa Agent API
+  version: 2.0.0
+  description: Exa Agent API - subset of the Exa Public API.
+servers:
+- url: https://api.exa.ai
+security:
+- apiKey: []
+- bearer: []
+paths:
+  /agent/runs:
+    post:
+      operationId: createAgentRun
+      summary: Create a run
+      description: 'Create an asynchronous Agent run. By default, the API returns the run object immediately. Set `Accept:
+        text/event-stream` to stream run lifecycle events until the run reaches a terminal status.'
+      tags:
+      - Agent
+      x-codeSamples:
+      - lang: python
+        label: Create a run
+        source: "from exa_py import Exa\n\nexa = Exa(api_key=\"YOUR_EXA_API_KEY\")\nrun = exa.beta.agent.runs.create(\n  \
+          \  betas=[\"agent-2026-05-07\"],\n    query=\"What are the most important AI infrastructure funding rounds announced\
+          \ this week?\",\n)\nprint(run)"
+      - lang: typescript
+        label: Create a run
+        source: "import Exa from \"exa-js\";\n\nconst exa = new Exa();\nconst run = await exa.beta.agent.runs.create({\n \
+          \ betas: [\"agent-2026-05-07\"],\n  query: \"What are the most important AI infrastructure funding rounds announced\
+          \ this week?\"\n});\n\nconsole.log(run);"
+      - lang: bash
+        label: Create a run
+        source: "curl -s -X POST \"https://api.exa.ai/agent/runs\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"\
+          x-api-key: $EXA_API_KEY\" \\\n  -H \"Exa-Beta: agent-2026-05-07\" \\\n  -d '{\n    \"query\": \"What are the most\
+          \ important AI infrastructure funding rounds announced this week?\"\n  }'"
+      - lang: bash
+        label: Stream a run
+        source: "curl -N -X POST \"https://api.exa.ai/agent/runs\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"\
+          Accept: text/event-stream\" \\\n  -H \"x-api-key: $EXA_API_KEY\" \\\n  -H \"Exa-Beta: agent-2026-05-07\" \\\n  -d\
+          \ '{\n    \"query\": \"Find five recently launched developer tools for evaluating AI agents.\"\n  }'"
+      parameters:
+      - $ref: '#/components/parameters/ExaBetaHeader'
+      - $ref: '#/components/parameters/AcceptHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAgentRunRequest'
+            examples:
+              simple:
+                summary: Simple research run
+                value:
+                  query: What are the most important AI infrastructure funding rounds announced this week?
+              structuredOutput:
+                summary: Structured output
+                value:
+                  query: Find recent Series A or Series B AI infrastructure funding rounds.
+                  outputSchema:
+                    type: object
+                    required:
+                    - companies
+                    properties:
+                      companies:
+                        type: array
+                        maxItems: 10
+                        items:
+                          type: object
+                          required:
+                          - name
+                          - round
+                          - amount
+                          - sourceUrl
+                          properties:
+                            name:
+                              type: string
+                            round:
+                              type: string
+                            amount:
+                              type: string
+                            sourceUrl:
+                              type: string
+                              format: uri
+              inputRows:
+                summary: Process input rows
+                value:
+                  query: For each company, find one current executive and cite a source.
+                  input:
+                    data:
+                    - company: Apple
+                      domain: apple.com
+                    - company: Microsoft
+                      domain: microsoft.com
+                    exclusion:
+                    - company: Apple
+                      person: Tim Cook
+              contactFields:
+                summary: Contact fields in structured output
+                value:
+                  query: Find engineering leaders at AI infrastructure companies that raised a Series A or B in the last 6
+                    months.
+                  effort: auto
+                  outputSchema:
+                    type: object
+                    required:
+                    - people
+                    properties:
+                      people:
+                        type: array
+                        maxItems: 10
+                        items:
+                          type: object
+                          required:
+                          - name
+                          - linkedin_url
+                          properties:
+                            name:
+                              type: string
+                            contact_email:
+                              type: string
+                              format: email
+                            linkedin_url:
+                              type: string
+                              format: uri
+      responses:
+        '200':
+          description: Agent run created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRun'
+              examples:
+                running:
+                  summary: Run accepted
+                  value:
+                    id: agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8
+                    object: agent_run
+                    status: running
+                    stopReason: null
+                    createdAt: '2026-05-07T18:31:00.000Z'
+                    completedAt: null
+                    request:
+                      query: What are the most important AI infrastructure funding rounds announced this week?
+                    output:
+                      text: ''
+                      structured: null
+                      grounding: []
+                    usage:
+                      agentComputeUnits: 0
+                      searches: 0
+                      emails: 0
+                      phoneNumbers: 0
+                    costDollars:
+                      total: 0
+                      agentCompute: 0
+                      search: 0
+                      emails: 0
+                      phoneNumbers: 0
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/AgentRunEvent'
+              examples:
+                lifecycle:
+                  summary: Run lifecycle events
+                  value: 'id: 1
+
+                    event: agent_run.created
+
+                    data: {"id":"agent_run_01j...","status":"queued","createdAt":"2026-05-07T21:21:52.051Z"}
+
+
+                    id: 2
+
+                    event: agent_run.started
+
+                    data: {"id":"agent_run_01j...","status":"running"}
+
+
+                    id: 3
+
+                    event: agent_run.completed
+
+                    data: {"id":"agent_run_01j...","object":"agent_run","status":"completed"}'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '401':
+          description: Team context or authentication was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '429':
+          description: Agent run concurrency limit reached.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '500':
+          description: Server error or run timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+    get:
+      operationId: listAgentRuns
+      summary: List runs
+      description: List Agent runs for your team, ordered from newest to oldest.
+      tags:
+      - Agent
+      x-codeSamples:
+      - lang: python
+        label: List runs
+        source: "from exa_py import Exa\n\nexa = Exa(api_key=\"YOUR_EXA_API_KEY\")\nruns = exa.beta.agent.runs.list(\n   \
+          \ betas=[\"agent-2026-05-07\"],\n    limit=10,\n)\nprint(runs)"
+      - lang: typescript
+        label: List runs
+        source: "import Exa from \"exa-js\";\n\nconst exa = new Exa();\nconst runs = await exa.beta.agent.runs.list({\n  betas:\
+          \ [\"agent-2026-05-07\"],\n  limit: 10\n});\n\nconsole.log(runs);"
+      - lang: bash
+        label: List runs
+        source: "curl -s \"https://api.exa.ai/agent/runs?limit=10\" \\\n  -H \"x-api-key: $EXA_API_KEY\" \\\n  -H \"Exa-Beta:\
+          \ agent-2026-05-07\""
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          description: Number of results per page
+          default: 20
+      - in: query
+        name: cursor
+        schema:
+          description: Cursor for pagination. Use the `nextCursor` value from the previous run list response.
+          $ref: '#/components/schemas/AgentRunId'
+      - $ref: '#/components/parameters/ExaBetaHeader'
+      responses:
+        '200':
+          description: Paginated Agent runs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRunList'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '401':
+          description: Team context or authentication was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '500':
+          description: Server error or run timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+  /agent/runs/{id}:
+    get:
+      operationId: getAgentRun
+      summary: Get a run
+      description: Retrieve a single Agent run by ID.
+      tags:
+      - Agent
+      x-codeSamples:
+      - lang: python
+        label: Get a run
+        source: "from exa_py import Exa\n\nexa = Exa(api_key=\"YOUR_EXA_API_KEY\")\nrun_id = \"agent_run_01j...\"\nrun = exa.beta.agent.runs.get(\n\
+          \    run_id,\n    betas=[\"agent-2026-05-07\"],\n)\nprint(run)"
+      - lang: typescript
+        label: Get a run
+        source: "import Exa from \"exa-js\";\n\nconst exa = new Exa();\nconst runId = \"agent_run_01j...\";\nconst run = await\
+          \ exa.beta.agent.runs.get(runId, {\n  betas: [\"agent-2026-05-07\"]\n});\n\nconsole.log(run);"
+      - lang: bash
+        label: Get a run
+        source: "curl -s \"https://api.exa.ai/agent/runs/agent_run_01j...\" \\\n  -H \"x-api-key: $EXA_API_KEY\" \\\n  -H\
+          \ \"Exa-Beta: agent-2026-05-07\""
+      parameters:
+      - in: path
+        name: id
+        schema:
+          description: Agent run ID.
+          $ref: '#/components/schemas/AgentRunId'
+        required: true
+        description: Agent run ID.
+      - $ref: '#/components/parameters/ExaBetaHeader'
+      responses:
+        '200':
+          description: Agent run
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRun'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '401':
+          description: Team context or authentication was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '404':
+          description: Run not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '429':
+          description: Agent run concurrency limit reached.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '500':
+          description: Server error or run timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+    delete:
+      operationId: deleteAgentRun
+      summary: Delete a run
+      description: Delete a stored Agent run.
+      tags:
+      - Agent
+      x-codeSamples:
+      - lang: python
+        label: Delete a run
+        source: "from exa_py import Exa\n\nexa = Exa(api_key=\"YOUR_EXA_API_KEY\")\nrun_id = \"agent_run_01j...\"\ndeleted\
+          \ = exa.beta.agent.runs.delete(\n    run_id,\n    betas=[\"agent-2026-05-07\"],\n)\nprint(deleted)"
+      - lang: typescript
+        label: Delete a run
+        source: "import Exa from \"exa-js\";\n\nconst exa = new Exa();\nconst runId = \"agent_run_01j...\";\nconst deleted\
+          \ = await exa.beta.agent.runs.delete(runId, {\n  betas: [\"agent-2026-05-07\"]\n});\n\nconsole.log(deleted);"
+      - lang: bash
+        label: Delete a run
+        source: "curl -s -X DELETE \"https://api.exa.ai/agent/runs/agent_run_01j...\" \\\n  -H \"x-api-key: $EXA_API_KEY\"\
+          \ \\\n  -H \"Exa-Beta: agent-2026-05-07\""
+      parameters:
+      - in: path
+        name: id
+        schema:
+          description: Agent run ID.
+          $ref: '#/components/schemas/AgentRunId'
+        required: true
+        description: Agent run ID.
+      - $ref: '#/components/parameters/ExaBetaHeader'
+      responses:
+        '200':
+          description: Agent run deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAgentRunResponse'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '401':
+          description: Team context or authentication was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '404':
+          description: Run not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '429':
+          description: Agent run concurrency limit reached.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '500':
+          description: Server error or run timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+  /agent/runs/{id}/cancel:
+    post:
+      operationId: cancelAgentRun
+      summary: Cancel a run
+      description: Cancel a queued or running Agent run. If the run has already reached a terminal status, the API returns
+        the existing run.
+      tags:
+      - Agent
+      x-codeSamples:
+      - lang: python
+        label: Cancel a run
+        source: "from exa_py import Exa\n\nexa = Exa(api_key=\"YOUR_EXA_API_KEY\")\nrun_id = \"agent_run_01j...\"\nrun = exa.beta.agent.runs.cancel(\n\
+          \    run_id,\n    betas=[\"agent-2026-05-07\"],\n)\nprint(run)"
+      - lang: typescript
+        label: Cancel a run
+        source: "import Exa from \"exa-js\";\n\nconst exa = new Exa();\nconst runId = \"agent_run_01j...\";\nconst run = await\
+          \ exa.beta.agent.runs.cancel(runId, {\n  betas: [\"agent-2026-05-07\"]\n});\n\nconsole.log(run);"
+      - lang: bash
+        label: Cancel a run
+        source: "curl -s -X POST \"https://api.exa.ai/agent/runs/agent_run_01j.../cancel\" \\\n  -H \"x-api-key: $EXA_API_KEY\"\
+          \ \\\n  -H \"Exa-Beta: agent-2026-05-07\""
+      parameters:
+      - in: path
+        name: id
+        schema:
+          description: Agent run ID.
+          $ref: '#/components/schemas/AgentRunId'
+        required: true
+        description: Agent run ID.
+      - $ref: '#/components/parameters/ExaBetaHeader'
+      responses:
+        '200':
+          description: Agent run
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRun'
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '401':
+          description: Team context or authentication was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '404':
+          description: Run not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '429':
+          description: Agent run concurrency limit reached.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '500':
+          description: Server error or run timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+  /agent/runs/{id}/events:
+    get:
+      operationId: listAgentRunEvents
+      summary: List run events
+      description: 'List stored events for an Agent run. Set `Accept: text/event-stream` to replay stored events as server-sent
+        events. Use `cursor` for JSON pagination or `Last-Event-ID` for SSE replay.'
+      tags:
+      - Agent
+      x-codeSamples:
+      - lang: python
+        label: List run events
+        source: "from exa_py import Exa\n\nexa = Exa(api_key=\"YOUR_EXA_API_KEY\")\nrun_id = \"agent_run_01j...\"\nevents\
+          \ = exa.beta.agent.runs.events.list(\n    run_id,\n    betas=[\"agent-2026-05-07\"],\n    limit=20,\n)\nprint(events)"
+      - lang: typescript
+        label: List run events
+        source: "import Exa from \"exa-js\";\n\nconst exa = new Exa();\nconst runId = \"agent_run_01j...\";\nconst events\
+          \ = await exa.beta.agent.runs.events.list(runId, {\n  betas: [\"agent-2026-05-07\"],\n  limit: 20\n});\n\nconsole.log(events);"
+      - lang: bash
+        label: List run events
+        source: "curl -s \"https://api.exa.ai/agent/runs/agent_run_01j.../events?limit=20\" \\\n  -H \"x-api-key: $EXA_API_KEY\"\
+          \ \\\n  -H \"Exa-Beta: agent-2026-05-07\""
+      - lang: bash
+        label: Replay run events
+        source: "curl -N \"https://api.exa.ai/agent/runs/agent_run_01j.../events\" \\\n  -H \"Accept: text/event-stream\"\
+          \ \\\n  -H \"Last-Event-ID: 1\" \\\n  -H \"x-api-key: $EXA_API_KEY\" \\\n  -H \"Exa-Beta: agent-2026-05-07\""
+      parameters:
+      - in: path
+        name: id
+        schema:
+          description: Agent run ID.
+          $ref: '#/components/schemas/AgentRunId'
+        required: true
+        description: Agent run ID.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          description: Number of results per page
+          default: 20
+      - in: query
+        name: cursor
+        schema:
+          type: string
+          description: Cursor for pagination. Use the `nextCursor` value from the previous event list response.
+      - $ref: '#/components/parameters/ExaBetaHeader'
+      - $ref: '#/components/parameters/AcceptHeader'
+      - $ref: '#/components/parameters/LastEventId'
+      responses:
+        '200':
+          description: Agent run events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRunEventList'
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/AgentRunEvent'
+              examples:
+                replay:
+                  summary: Replayed run events
+                  value: 'id: 2
+
+                    event: agent_run.started
+
+                    data: {"id":"agent_run_01j...","status":"running"}
+
+
+                    id: 3
+
+                    event: agent_run.completed
+
+                    data: {"id":"agent_run_01j...","object":"agent_run","status":"completed"}
+
+                    '
+        '400':
+          description: Invalid request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '401':
+          description: Team context or authentication was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '404':
+          description: Run not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '429':
+          description: Agent run concurrency limit reached.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+        '500':
+          description: Server error or run timeout.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentErrorResponse'
+components:
+  schemas:
+    AgentCitation:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Source URL.
+        title:
+          type: string
+          description: Source title.
+      required:
+      - url
+      additionalProperties: false
+    AgentCostDollars:
+      type: object
+      properties:
+        total:
+          type: number
+          minimum: 0
+        agentCompute:
+          type: number
+          minimum: 0
+        search:
+          type: number
+          minimum: 0
+        emails:
+          type: number
+          minimum: 0
+        phoneNumbers:
+          type: number
+          minimum: 0
+      required:
+      - total
+      - agentCompute
+      - search
+      - emails
+      - phoneNumbers
+      additionalProperties: false
+    AgentEffort:
+      type: string
+      enum:
+      - low
+      - medium
+      - high
+      - xhigh
+      - auto
+      description: Cost and reasoning effort preference for the run. `auto` lets Exa choose the appropriate effort.
+      default: auto
+    AgentError:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - INVALID_REQUEST
+          - AUTHENTICATION_ERROR
+          - RATE_LIMIT_ERROR
+          - NOT_FOUND
+          - SERVER_ERROR
+        code:
+          type: string
+          enum:
+          - INVALID_REQUEST
+          - MISSING_BETA_HEADER
+          - INVALID_BETA_HEADER
+          - TEAM_NOT_FOUND
+          - RUN_NOT_FOUND
+          - PREVIOUS_RUN_NOT_FOUND
+          - PREVIOUS_RUN_NOT_COMPLETED
+          - CONCURRENCY_LIMIT_REACHED
+          - INVALID_OUTPUT_SCHEMA
+          - TIMEOUT
+          - SERVER_ERROR
+        message:
+          type: string
+      required:
+      - type
+      - code
+      - message
+      additionalProperties:
+        $ref: '#/components/schemas/JsonValue'
+    AgentErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/AgentError'
+      required:
+      - error
+      additionalProperties: false
+    AgentGrounding:
+      type: object
+      properties:
+        field:
+          type: string
+          description: Output field the citations support.
+          example: structured.companies[0].sourceUrl
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentCitation'
+        score:
+          anyOf:
+          - type: number
+            minimum: 0
+            maximum: 1
+          - type: 'null'
+        confidence:
+          anyOf:
+          - type: string
+            enum:
+            - low
+            - medium
+            - high
+            description: Model-reported reliability for this field.
+          - type: 'null'
+      required:
+      - field
+      - citations
+      additionalProperties: false
+    AgentRun:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/AgentRunId'
+        object:
+          type: string
+          const: agent_run
+        status:
+          $ref: '#/components/schemas/AgentRunStatus'
+        stopReason:
+          anyOf:
+          - $ref: '#/components/schemas/AgentStopReason'
+          - type: 'null'
+          description: Why the run stopped. `null` while the run is queued or running.
+        createdAt:
+          type: string
+          format: date-time
+          description: When the run was created
+        completedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          format: date-time
+        request:
+          anyOf:
+          - $ref: '#/components/schemas/AgentRunRequest'
+          - type: 'null'
+        output:
+          $ref: '#/components/schemas/AgentRunOutput'
+        usage:
+          $ref: '#/components/schemas/AgentUsage'
+        costDollars:
+          $ref: '#/components/schemas/AgentCostDollars'
+      required:
+      - id
+      - object
+      - status
+      - stopReason
+      - createdAt
+      - completedAt
+      - request
+      - output
+      - usage
+      - costDollars
+      additionalProperties: false
+    AgentRunEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Event ID within the run.
+        event:
+          type: string
+          enum:
+          - agent_run.created
+          - agent_run.started
+          - agent_run.completed
+          - agent_run.failed
+          - agent_run.cancelled
+        data:
+          $ref: '#/components/schemas/JsonValue'
+        createdAt:
+          type: string
+          format: date-time
+          description: When the event was created
+      required:
+      - id
+      - event
+      - data
+      - createdAt
+      additionalProperties: false
+    AgentRunEventList:
+      type: object
+      properties:
+        object:
+          type: string
+          const: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentRunEvent'
+        hasMore:
+          type: boolean
+          description: Whether there are more results
+        nextCursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+      required:
+      - object
+      - data
+      - hasMore
+      - nextCursor
+      additionalProperties: false
+    AgentRunId:
+      type: string
+      minLength: 1
+      maxLength: 200
+      pattern: ^[A-Za-z0-9_.:-]+$
+      description: Agent run ID. New run IDs are returned with the `agent_run_` prefix.
+      example: agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8
+    AgentRunList:
+      type: object
+      properties:
+        object:
+          type: string
+          const: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentRun'
+        hasMore:
+          type: boolean
+          description: Whether there are more results
+        nextCursor:
+          anyOf:
+          - $ref: '#/components/schemas/AgentRunId'
+          - type: 'null'
+      required:
+      - object
+      - data
+      - hasMore
+      - nextCursor
+      additionalProperties: false
+    AgentRunOutput:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Natural-language answer or summary.
+        structured:
+          anyOf:
+          - $ref: '#/components/schemas/JsonValue'
+          - type: 'null'
+          description: Validated JSON matching `outputSchema`, or `null` when no schema was provided.
+        grounding:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentGrounding'
+          description: Field-level citations emitted by the run.
+      required:
+      - text
+      - structured
+      - grounding
+      additionalProperties: false
+    AgentRunRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          minLength: 1
+          description: Natural-language question or instructions for the request.
+          example: What are the most important AI infrastructure funding rounds announced this week?
+        systemPrompt:
+          type: string
+          description: Additional instructions that guide generated output or agent behavior. Use this for source preferences,
+            novelty constraints, duplication constraints, or other behavior guidance.
+          example: Prefer official sources and avoid duplicate results.
+        input:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                type: object
+                propertyNames:
+                  type: string
+                additionalProperties:
+                  $ref: '#/components/schemas/JsonValue'
+                description: A JSON object record.
+              description: Records the agent should process or enrich.
+            exclusion:
+              type: array
+              items:
+                type: object
+                propertyNames:
+                  type: string
+                additionalProperties:
+                  $ref: '#/components/schemas/JsonValue'
+                description: A JSON object record.
+              description: Records or entities the agent should avoid returning.
+          additionalProperties: false
+        outputSchema:
+          anyOf:
+          - type: object
+            propertyNames:
+              type: string
+            additionalProperties:
+              $ref: '#/components/schemas/JsonValue'
+            description: JSON Schema for validated structured output in `output.structured`. Supports draft-07, 2019-09, and
+              2020-12 via `$schema`.
+          - type: 'null'
+        effort:
+          $ref: '#/components/schemas/AgentEffort'
+        previousRunId:
+          $ref: '#/components/schemas/AgentRunId'
+        metadata:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties:
+            type: string
+          description: Caller-provided key-value metadata for your own tracking.
+          example:
+            slack_channel_id: C123ABC
+            slack_thread_id: '1745444400.123456'
+            user_id: U123ABC
+      additionalProperties:
+        $ref: '#/components/schemas/JsonValue'
+      description: Canonicalized request fields stored with the run.
+    AgentRunStatus:
+      type: string
+      enum:
+      - queued
+      - running
+      - completed
+      - failed
+      - cancelled
+    AgentStopReason:
+      type: string
+      enum:
+      - schema_satisfied
+      - budget_reached
+      - error
+      - cancelled
+    AgentUsage:
+      type: object
+      properties:
+        agentComputeUnits:
+          type: integer
+          minimum: 0
+        searches:
+          type: integer
+          minimum: 0
+        emails:
+          type: integer
+          minimum: 0
+        phoneNumbers:
+          type: integer
+          minimum: 0
+      required:
+      - agentComputeUnits
+      - searches
+      - emails
+      - phoneNumbers
+      additionalProperties: false
+    CreateAgentRunRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          minLength: 1
+          description: Natural-language question or instructions for the request.
+          example: What are the most important AI infrastructure funding rounds announced this week?
+        systemPrompt:
+          type: string
+          description: Additional instructions that guide generated output or agent behavior. Use this for source preferences,
+            novelty constraints, duplication constraints, or other behavior guidance.
+          example: Prefer official sources and avoid duplicate results.
+        input:
+          type: object
+          properties:
+            data:
+              type: array
+              items:
+                type: object
+                propertyNames:
+                  type: string
+                additionalProperties:
+                  $ref: '#/components/schemas/JsonValue'
+                description: A JSON object record.
+              description: Records the agent should process or enrich.
+            exclusion:
+              type: array
+              items:
+                type: object
+                propertyNames:
+                  type: string
+                additionalProperties:
+                  $ref: '#/components/schemas/JsonValue'
+                description: A JSON object record.
+              description: Records or entities the agent should avoid returning.
+          description: Records to process and records or entities to exclude from the answer.
+        outputSchema:
+          anyOf:
+          - type: object
+            propertyNames:
+              type: string
+            additionalProperties:
+              $ref: '#/components/schemas/JsonValue'
+            description: JSON Schema for validated structured output in `output.structured`. Supports draft-07, 2019-09, and
+              2020-12 via `$schema`.
+          - type: 'null'
+        effort:
+          $ref: '#/components/schemas/AgentEffort'
+        previousRunId:
+          description: Completed run ID to continue from. Must belong to the same team.
+          $ref: '#/components/schemas/AgentRunId'
+        metadata:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties:
+            type: string
+          description: Caller-provided metadata stored with the run.
+          example:
+            slack_channel_id: C123ABC
+            slack_thread_id: '1745444400.123456'
+            user_id: U123ABC
+        budget:
+          type: object
+          properties:
+            maxCostDollars:
+              type: number
+              minimum: 0
+              description: Accepted for compatibility and currently ignored.
+          description: Accepted for compatibility and currently ignored.
+          deprecated: true
+      required:
+      - query
+    DeleteAgentRunResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/AgentRunId'
+        object:
+          type: string
+          const: agent_run.deleted
+        deleted:
+          type: boolean
+          const: true
+      required:
+      - id
+      - object
+      - deleted
+      additionalProperties: false
+    JsonValue:
+      description: Any JSON value.
+      oneOf:
+      - type: 'null'
+      - type: boolean
+      - type: number
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/JsonValue'
+      - type: object
+        propertyNames:
+          type: string
+        additionalProperties:
+          $ref: '#/components/schemas/JsonValue'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: x-api-key
+      in: header
+      description: 'Pass your Exa API key in the x-api-key header. You can also authenticate with Authorization: Bearer <key>.'
+    bearer:
+      type: http
+      scheme: bearer
+      description: 'Pass your Exa API key in the x-api-key header. You can also authenticate with Authorization: Bearer <key>.'

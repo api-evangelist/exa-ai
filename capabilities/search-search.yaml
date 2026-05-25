@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Exa Search API \u2014 Search"
+  description: "Exa Search API \u2014 Search. 3 operations. Lead operation: Search. Self-contained Naftiko capability covering\
+    \ one Exa business surface."
+  tags:
+  - Exa
+  - Search
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    EXA_API_KEY: EXA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: search
+    baseUri: https://api.exa.ai
+    description: "Exa Search API \u2014 Search business capability. Self-contained, no shared references."
+    resources:
+    - name: search
+      path: /search
+      operations:
+      - name: search
+        method: POST
+        description: Exa Search
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: contents
+      path: /contents
+      operations:
+      - name: getcontents
+        method: POST
+        description: Exa Contents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: answer
+      path: /answer
+      operations:
+      - name: answer
+        method: POST
+        description: Exa Answer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: x-api-key
+      value: '{{env.EXA_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: search-rest
+    port: 8080
+    description: "REST adapter for Exa Search API \u2014 Search. One Spectral-compliant resource per consumed operation, prefixed\
+      \ with /v1."
+    resources:
+    - path: /v1/search
+      name: search
+      description: REST surface for search.
+      operations:
+      - method: POST
+        name: search
+        description: Exa Search
+        call: search.search
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/contents
+      name: contents
+      description: REST surface for contents.
+      operations:
+      - method: POST
+        name: getcontents
+        description: Exa Contents
+        call: search.getcontents
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/answer
+      name: answer
+      description: REST surface for answer.
+      operations:
+      - method: POST
+        name: answer
+        description: Exa Answer
+        call: search.answer
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: search-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Exa Search API \u2014 Search. One tool per consumed operation, routed inline through this\
+      \ capability's consumes block."
+    tools:
+    - name: exa-search
+      description: Exa Search
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: search.search
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-contents
+      description: Exa Contents
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: search.getcontents
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-answer
+      description: Exa Answer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: search.answer
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

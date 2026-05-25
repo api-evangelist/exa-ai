@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: Exa Team API
+  version: 2.0.0
+  description: Exa Team API - subset of the Exa Public API.
+servers:
+- url: https://api.exa.ai
+security:
+- apiKey: []
+- bearer: []
+paths:
+  /v0/teams/me:
+    get:
+      operationId: teams-me-get
+      summary: Get Team Info
+      description: Returns information about the authenticated team, including current concurrency usage and limits.
+      tags:
+      - Teams
+      x-codeSamples:
+      - lang: bash
+        label: Get team info
+        source: "curl -X GET 'https://api.exa.ai/websets/v0/teams/me' \\\n  -H 'x-api-key: YOUR-EXA-API-KEY'"
+      - lang: python
+        label: Get team info
+        source: "import requests\n\nheaders = {\n    'x-api-key': 'YOUR-EXA-API-KEY'\n}\n\nresponse = requests.get(\n    'https://api.exa.ai/websets/v0/teams/me',\n\
+          \    headers=headers\n)\n\nprint(response.json())"
+      - lang: javascript
+        label: Get team info
+        source: "const response = await fetch('https://api.exa.ai/websets/v0/teams/me', {\n  method: 'GET',\n  headers: {\n\
+          \    'x-api-key': 'YOUR-EXA-API-KEY'\n  }\n});\n\nconst result = await response.json();\nconsole.log(result);"
+      responses:
+        '200':
+          description: Team information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsetsTeamInfo'
+components:
+  schemas:
+    WebsetsTeamInfo:
+      type: object
+      properties:
+        object:
+          type: string
+          const: team
+          description: The object type, always `"team"`.
+        id:
+          type: string
+          description: Unique identifier for the team.
+        name:
+          type: string
+          description: Name of the team.
+        concurrency:
+          type: object
+          properties:
+            active:
+              type: integer
+              description: Number of requests currently being processed.
+            queued:
+              type: integer
+              description: Number of requests currently queued.
+          required:
+          - active
+          - queued
+          additionalProperties: false
+          description: Current concurrency usage.
+        limits:
+          type: object
+          properties:
+            maxConcurrent:
+              anyOf:
+              - type: integer
+              - type: 'null'
+              description: Maximum number of concurrent requests allowed. Null means unlimited.
+            maxQueued:
+              anyOf:
+              - type: integer
+              - type: 'null'
+              description: Maximum number of queued requests allowed. Null means unlimited.
+          required:
+          - maxConcurrent
+          - maxQueued
+          additionalProperties: false
+          description: Concurrency limits for the team.
+      required:
+      - object
+      - id
+      - name
+      - concurrency
+      - limits
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: x-api-key
+      in: header
+      description: 'Pass your Exa API key in the x-api-key header. You can also authenticate with Authorization: Bearer <key>.'
+    bearer:
+      type: http
+      scheme: bearer
+      description: 'Pass your Exa API key in the x-api-key header. You can also authenticate with Authorization: Bearer <key>.'

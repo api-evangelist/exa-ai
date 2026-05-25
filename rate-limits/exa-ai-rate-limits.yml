@@ -1,0 +1,76 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Exa
+providerId: exa-ai
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - AI
+  - Search
+  - Rate Limiting
+  - Quotas
+description: Reconciled rate limits for the Exa Search, Contents, Answer, Research, Monitors, Agent, and Websets APIs. Per-team rate limits enforced via x-api-key, with tunable per-key limits through the Team Management API.
+sources:
+  - https://exa.ai/docs/reference/search-api-guide
+  - https://exa.ai/docs/api-reference/openapi
+  - https://exa.ai/pricing
+headers:
+  limit: x-ratelimit-limit
+  remaining: x-ratelimit-remaining
+  reset: x-ratelimit-reset
+  retryAfter: retry-after
+responseCodes:
+  throttled: 429
+  quotaExceeded: 402
+algorithm: token-bucket
+notes:
+  - Exa publishes per-team rate limits, not per-user. Teams can subdivide limits across API keys via the Team Management API (POST /api-keys with `rateLimit` and `budget`).
+  - The free tier provides 1,000 requests/month with the same per-second limits as paid plans; throttling kicks in above sustained burst rates.
+  - Deep Search and Agent endpoints have higher per-request costs and longer-running operations, so concurrency is the practical limit rather than RPM.
+limits:
+  - tier: Free
+    surface: All public endpoints
+    monthlyRequests: 1000
+    rpm: null
+    description: 1,000 free requests/month shared across Search, Contents, Answer, Research, Monitors, and Agent.
+  - tier: Search (paid)
+    surface: /search, /contents, /answer
+    monthlyRequests: -1
+    rpm: null
+    description: Standard token-bucket throughput; per-team rate limit configurable, default suitable for production agent workloads.
+  - tier: Deep Search / Research
+    surface: /research/v1
+    monthlyRequests: -1
+    concurrency: null
+    description: Long-running asynchronous research tasks; concurrency limit governs how many tasks can run in parallel per team.
+  - tier: Monitors
+    surface: /monitors, /v0/monitors
+    monthlyRequests: -1
+    description: Scheduled monitors run on internal cadence; webhook delivery is throttled per webhook endpoint.
+  - tier: Agent
+    surface: /agent/runs
+    monthlyRequests: -1
+    description: Effort-mode-priced agent runs; concurrency limit governs parallel runs per team.
+  - tier: Websets
+    surface: /v0/websets
+    monthlyRequests: -1
+    description: Asynchronous webset creation, enrichment, and search; long-running tasks tracked via Events API.
+perKeyControls:
+  description: Teams can mint per-key rate limits and per-key monthly budgets via the Team Management API (POST /api-keys).
+  endpoint: https://admin-api.exa.ai/team-management/api-keys
+  fields:
+    - rateLimit
+    - budget
+quotas:
+  - name: free-monthly-requests
+    metric: request
+    limit: 1000
+    timeFrame: month
+    appliesTo: Free tier teams
+billing:
+  paymentMethods:
+    - credit-card
+    - invoice (Enterprise)
+  spendLimitBehavior: API key budget enforces hard stop; team-level overage uses configured payment method.

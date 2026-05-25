@@ -1,0 +1,301 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Exa Team Management API \u2014 Team Management"
+  description: "Exa Team Management API \u2014 Team Management. 6 operations. Lead operation: Create API Key. Self-contained\
+    \ Naftiko capability covering one Exa business surface."
+  tags:
+  - Exa
+  - Team Management
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    EXA_API_KEY: EXA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: team-management
+    baseUri: https://admin-api.exa.ai/team-management
+    description: "Exa Team Management API \u2014 Team Management business capability. Self-contained, no shared references."
+    resources:
+    - name: api-keys
+      path: /api-keys
+      operations:
+      - name: createapikey
+        method: POST
+        description: Exa Create API Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: listapikeys
+        method: GET
+        description: Exa List API Keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: api_key_id
+          in: query
+          type: string
+          description: Optional API key ID to retrieve a specific key
+          required: false
+    - name: api-keys-id
+      path: /api-keys/{id}
+      operations:
+      - name: getapikey
+        method: GET
+        description: Exa Get API Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The unique identifier of the API key
+          required: true
+      - name: updateapikey
+        method: PUT
+        description: Exa Update API Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The unique identifier of the API key to update
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteapikey
+        method: DELETE
+        description: Exa Delete API Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The unique identifier of the API key to delete
+          required: true
+    - name: api-keys-id-usage
+      path: /api-keys/{id}/usage
+      operations:
+      - name: getapikeyusage
+        method: GET
+        description: Exa Get API Key Usage
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The unique identifier of the API key
+          required: true
+        - name: start_date
+          in: query
+          type: string
+          description: Start date for the usage period (ISO 8601 format). Defaults to 30 days ago. Must be within the last
+            6 months (180 days).
+          required: false
+        - name: end_date
+          in: query
+          type: string
+          description: End date for the usage period (ISO 8601 format). Defaults to current time.
+          required: false
+        - name: group_by
+          in: query
+          type: string
+          description: Time granularity for grouping results. Currently reserved for future enhancements and does not change
+            the response shape. Defaults to 'day'.
+          required: false
+    authentication:
+      type: apikey
+      key: x-api-key
+      value: '{{env.EXA_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: team-management-rest
+    port: 8080
+    description: "REST adapter for Exa Team Management API \u2014 Team Management. One Spectral-compliant resource per consumed\
+      \ operation, prefixed with /v1."
+    resources:
+    - path: /v1/api-keys
+      name: api-keys
+      description: REST surface for api-keys.
+      operations:
+      - method: POST
+        name: createapikey
+        description: Exa Create API Key
+        call: team-management.createapikey
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listapikeys
+        description: Exa List API Keys
+        call: team-management.listapikeys
+        with:
+          api_key_id: rest.api_key_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api-keys/{id}
+      name: api-keys-id
+      description: REST surface for api-keys-id.
+      operations:
+      - method: GET
+        name: getapikey
+        description: Exa Get API Key
+        call: team-management.getapikey
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateapikey
+        description: Exa Update API Key
+        call: team-management.updateapikey
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapikey
+        description: Exa Delete API Key
+        call: team-management.deleteapikey
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api-keys/{id}/usage
+      name: api-keys-id-usage
+      description: REST surface for api-keys-id-usage.
+      operations:
+      - method: GET
+        name: getapikeyusage
+        description: Exa Get API Key Usage
+        call: team-management.getapikeyusage
+        with:
+          id: rest.id
+          start_date: rest.start_date
+          end_date: rest.end_date
+          group_by: rest.group_by
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: team-management-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Exa Team Management API \u2014 Team Management. One tool per consumed operation, routed\
+      \ inline through this capability's consumes block."
+    tools:
+    - name: exa-create-api-key
+      description: Exa Create API Key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: team-management.createapikey
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-list-api-keys
+      description: Exa List API Keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: team-management.listapikeys
+      with:
+        api_key_id: tools.api_key_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-get-api-key
+      description: Exa Get API Key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: team-management.getapikey
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-update-api-key
+      description: Exa Update API Key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: team-management.updateapikey
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-delete-api-key
+      description: Exa Delete API Key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: team-management.deleteapikey
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-get-api-key-usage
+      description: Exa Get API Key Usage
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: team-management.getapikeyusage
+      with:
+        id: tools.id
+        start_date: tools.start_date
+        end_date: tools.end_date
+        group_by: tools.group_by
+      outputParameters:
+      - type: object
+        mapping: $.

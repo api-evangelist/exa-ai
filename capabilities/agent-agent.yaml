@@ -1,0 +1,299 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Exa Agent API \u2014 Agent"
+  description: "Exa Agent API \u2014 Agent. 6 operations. Lead operation: Create a run. Self-contained Naftiko capability\
+    \ covering one Exa business surface."
+  tags:
+  - Exa
+  - Agent
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    EXA_API_KEY: EXA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: agent
+    baseUri: https://api.exa.ai
+    description: "Exa Agent API \u2014 Agent business capability. Self-contained, no shared references."
+    resources:
+    - name: agent-runs
+      path: /agent/runs
+      operations:
+      - name: createagentrun
+        method: POST
+        description: Exa Create a run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: listagentruns
+        method: GET
+        description: Exa List runs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: limit
+          required: false
+        - name: cursor
+          in: query
+          type: string
+          description: cursor
+          required: false
+    - name: agent-runs-id
+      path: /agent/runs/{id}
+      operations:
+      - name: getagentrun
+        method: GET
+        description: Exa Get a run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Agent run ID.
+          required: true
+      - name: deleteagentrun
+        method: DELETE
+        description: Exa Delete a run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Agent run ID.
+          required: true
+    - name: agent-runs-id-cancel
+      path: /agent/runs/{id}/cancel
+      operations:
+      - name: cancelagentrun
+        method: POST
+        description: Exa Cancel a run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Agent run ID.
+          required: true
+    - name: agent-runs-id-events
+      path: /agent/runs/{id}/events
+      operations:
+      - name: listagentrunevents
+        method: GET
+        description: Exa List run events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Agent run ID.
+          required: true
+        - name: limit
+          in: query
+          type: integer
+          description: limit
+          required: false
+        - name: cursor
+          in: query
+          type: string
+          description: cursor
+          required: false
+    authentication:
+      type: apikey
+      key: x-api-key
+      value: '{{env.EXA_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: agent-rest
+    port: 8080
+    description: "REST adapter for Exa Agent API \u2014 Agent. One Spectral-compliant resource per consumed operation, prefixed\
+      \ with /v1."
+    resources:
+    - path: /v1/agent/runs
+      name: agent-runs
+      description: REST surface for agent-runs.
+      operations:
+      - method: POST
+        name: createagentrun
+        description: Exa Create a run
+        call: agent.createagentrun
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: listagentruns
+        description: Exa List runs
+        call: agent.listagentruns
+        with:
+          limit: rest.limit
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agent/runs/{id}
+      name: agent-runs-id
+      description: REST surface for agent-runs-id.
+      operations:
+      - method: GET
+        name: getagentrun
+        description: Exa Get a run
+        call: agent.getagentrun
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteagentrun
+        description: Exa Delete a run
+        call: agent.deleteagentrun
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agent/runs/{id}/cancel
+      name: agent-runs-id-cancel
+      description: REST surface for agent-runs-id-cancel.
+      operations:
+      - method: POST
+        name: cancelagentrun
+        description: Exa Cancel a run
+        call: agent.cancelagentrun
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agent/runs/{id}/events
+      name: agent-runs-id-events
+      description: REST surface for agent-runs-id-events.
+      operations:
+      - method: GET
+        name: listagentrunevents
+        description: Exa List run events
+        call: agent.listagentrunevents
+        with:
+          id: rest.id
+          limit: rest.limit
+          cursor: rest.cursor
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: agent-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Exa Agent API \u2014 Agent. One tool per consumed operation, routed inline through this\
+      \ capability's consumes block."
+    tools:
+    - name: exa-create-a-run
+      description: Exa Create a run
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent.createagentrun
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-list-runs
+      description: Exa List runs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent.listagentruns
+      with:
+        limit: tools.limit
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-get-a-run
+      description: Exa Get a run
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent.getagentrun
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-delete-a-run
+      description: Exa Delete a run
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: agent.deleteagentrun
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-cancel-a-run
+      description: Exa Cancel a run
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: agent.cancelagentrun
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-list-run-events
+      description: Exa List run events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: agent.listagentrunevents
+      with:
+        id: tools.id
+        limit: tools.limit
+        cursor: tools.cursor
+      outputParameters:
+      - type: object
+        mapping: $.

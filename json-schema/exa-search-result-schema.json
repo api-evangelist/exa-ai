@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/exa-ai/main/json-schema/exa-search-result-schema.json",
+  "title": "Exa Search Result",
+  "description": "A single search result returned from the Exa /search endpoint. Captures the URL, title, author, published date, relevance score, optional text and highlights, and the Exa result identifier.",
+  "type": "object",
+  "required": ["url", "id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable Exa identifier for the result, suitable for use with /contents and /findSimilar."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical URL of the result."
+    },
+    "title": {
+      "type": ["string", "null"],
+      "description": "Page title."
+    },
+    "author": {
+      "type": ["string", "null"],
+      "description": "Detected author of the page, when available."
+    },
+    "publishedDate": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "ISO 8601 published date, when detected."
+    },
+    "score": {
+      "type": ["number", "null"],
+      "description": "Relevance score assigned by Exa, higher is more relevant."
+    },
+    "text": {
+      "type": ["string", "null"],
+      "description": "Full or truncated page text when contents.text was requested."
+    },
+    "highlights": {
+      "type": "array",
+      "description": "Token-efficient highlight snippets selected by Exa to reduce LLM context usage by ~90%.",
+      "items": {"type": "string"}
+    },
+    "highlightScores": {
+      "type": "array",
+      "description": "Per-highlight relevance scores aligned with the highlights array.",
+      "items": {"type": "number"}
+    },
+    "summary": {
+      "type": ["string", "null"],
+      "description": "Optional Exa-generated summary of the page contents."
+    },
+    "image": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Hero image URL detected for the result."
+    },
+    "favicon": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Favicon URL detected for the result's domain."
+    },
+    "subpages": {
+      "type": "array",
+      "description": "Subpages returned when contents.subpages was requested.",
+      "items": {"$ref": "#"}
+    }
+  },
+  "additionalProperties": true
+}

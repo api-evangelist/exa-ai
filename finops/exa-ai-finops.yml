@@ -1,0 +1,109 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Exa
+providerId: exa-ai
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - FinOps
+  - Cost Management
+  - FOCUS
+  - AI
+  - Search
+description: FOCUS-aligned FinOps definition for the Exa API — request-based metering with per-result, per-page, per-enrichment, and per-effort-mode lanes. The Exa Team Management API exposes per-key usage so cost can be allocated by workload.
+sources:
+  - https://exa.ai/pricing
+  - https://exa.ai/docs/reference/search-api-guide
+  - https://exa.ai/docs/api-reference/openapi
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Exa
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Credit
+    - Adjustment
+  primaryUnit: request
+  secondaryUnits:
+    - result
+    - page
+    - run
+    - enrichment
+    - call
+focusColumns:
+  ServiceName: Exa API
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Exa
+  PublisherName: Exa
+  InvoiceIssuerName: Exa
+  PricingCategory: Usage-Based
+  PricingUnit: 1K requests
+  BillingCurrency: USD
+meters:
+  - name: search_requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api_key
+      - endpoint
+      - latency_tier
+  - name: contents_pages
+    unit: page
+    aggregation: sum
+    dimensions:
+      - api_key
+      - content_type
+  - name: deep_search_requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api_key
+      - effort
+  - name: research_tasks
+    unit: task
+    aggregation: sum
+    dimensions:
+      - api_key
+      - depth
+  - name: monitor_runs
+    unit: run
+    aggregation: sum
+    dimensions:
+      - api_key
+      - monitor_id
+  - name: agent_runs
+    unit: run
+    aggregation: sum
+    dimensions:
+      - api_key
+      - effort
+  - name: enrichments
+    unit: enrichment
+    aggregation: sum
+    dimensions:
+      - api_key
+      - type
+allocation:
+  primaryKey: api_key
+  secondaryKey: workspace/team
+  notes: Exa exposes per-key budget and rate-limit settings via the Team Management API, enabling cost allocation per workload, agent, or environment.
+exportApi:
+  description: The Team Management API surfaces per-key usage via GET /api-keys/{id}/usage, providing aggregated request, content, and enrichment counts for FinOps ingestion.
+  endpoint: https://admin-api.exa.ai/team-management/api-keys/{id}/usage
+optimizationLevers:
+  - Use `numResults` <= 10 to avoid the $1 per 1,000 additional-result charge
+  - Prefer `highlights` over full page contents for token-efficient retrieval (~90% token reduction per Exa docs)
+  - Choose the right latency tier — fast (180ms), auto (~1s), or deep (~10s)
+  - Choose the lowest effective effort mode on Agent runs — low ($0.025) vs x-high ($2.00) is an 80x difference
+  - Cache `findSimilar` and Contents results for repeated queries in agent workflows

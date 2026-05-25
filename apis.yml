@@ -1,0 +1,322 @@
+aid: exa-ai
+url: https://raw.githubusercontent.com/api-evangelist/exa-ai/refs/heads/main/apis.yml
+apis:
+- aid: exa-ai:exa-search-api
+  name: Exa Search API
+  tags:
+  - AI
+  - Search
+  - Web Search
+  - Neural Search
+  - LLM
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  properties:
+  - url: https://exa.ai/docs/reference/search-api-guide
+    type: Documentation
+  - url: https://exa.ai/docs/reference/search
+    type: Documentation
+  - url: https://exa.ai/docs/reference/contents-api-guide
+    type: Documentation
+  - url: https://exa.ai/docs/reference/answer
+    type: Documentation
+  - url: openapi/exa-search-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/exa-search-result-schema.json
+    type: JSONSchema
+  - url: json-ld/exa-ai-context.jsonld
+    type: JSONLD
+  - type: NaftikoCapability
+    url: capabilities/search-search.yaml
+  description: Exa's prompt-engineered Search API performs semantic and keyword web search optimized for LLM and
+    agent consumption. Returns a list of relevant results with URLs, titles, authors, published dates, relevance
+    scores, and optional token-efficient highlights, summaries, or full text via the bundled Contents API. The
+    Answer endpoint returns an LLM-generated answer grounded in web citations. Verticals include Code, Companies,
+    News, People, Research, and Financials. Latency tiers run from fast (180ms) to auto (~1s) to deep (~10s).
+- aid: exa-ai:exa-research-api
+  name: Exa Research API
+  tags:
+  - AI
+  - Search
+  - Research
+  - Agents
+  - Deep Search
+  humanURL: https://exa.ai/docs/reference/research/overview
+  baseURL: https://api.exa.ai
+  properties:
+  - url: https://exa.ai/docs/reference/research/overview
+    type: Documentation
+  - url: https://exa.ai/docs/reference/research/create-a-task
+    type: Documentation
+  - url: https://exa.ai/docs/reference/research/get-a-task
+    type: Documentation
+  - url: https://exa.ai/docs/reference/research/list-tasks
+    type: Documentation
+  - url: openapi/exa-research-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/research-research.yaml
+  description: Asynchronous multi-step deep-research tasks. Submit a research instruction, Exa orchestrates a
+    Deep Search agent across the live web with structured outputs and web-grounded citations, and you poll for
+    the completed report. Lives under /research/v1 with create, get, and list operations.
+- aid: exa-ai:exa-monitors-api
+  name: Exa Monitors API
+  tags:
+  - AI
+  - Search
+  - Monitors
+  - Webhooks
+  - Scheduled
+  humanURL: https://exa.ai/docs/reference/monitors-api-guide
+  baseURL: https://api.exa.ai
+  properties:
+  - url: https://exa.ai/docs/reference/monitors-api-guide
+    type: Documentation
+  - url: https://exa.ai/docs/reference/monitors/create-a-monitor
+    type: Documentation
+  - url: https://exa.ai/docs/reference/monitors/list-monitors
+    type: Documentation
+  - url: openapi/exa-monitors-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/monitors-monitors.yaml
+  description: Schedule recurring Exa searches and receive webhook notifications when fresh matching content
+    appears on the web. Supports create, list, get, update, delete, batch actions, manual trigger, and run
+    history. Two API versions are exposed — the original /monitors namespace and the newer /v0/monitors surface
+    aligned with Websets.
+- aid: exa-ai:exa-agent-api
+  name: Exa Agent API
+  tags:
+  - AI
+  - Agents
+  - Search
+  - LLM
+  humanURL: https://exa.ai/docs/reference/agent-api-guide
+  baseURL: https://api.exa.ai
+  properties:
+  - url: https://exa.ai/docs/reference/agent-api-guide
+    type: Documentation
+  - url: https://exa.ai/docs/reference/agent-api/create-a-run
+    type: Documentation
+  - url: https://exa.ai/docs/reference/agent-api/get-a-run
+    type: Documentation
+  - url: openapi/exa-agent-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/agent-agent.yaml
+  description: Run an Exa-hosted research agent at four effort modes — low ($0.025), medium ($0.10), high
+    ($0.50), and x-high ($2.00) — with built-in web search, content retrieval, structured outputs, and event
+    streaming. Create, list, get, cancel, delete, and stream events from runs under /agent/runs.
+- aid: exa-ai:exa-websets-api
+  name: Exa Websets API
+  tags:
+  - AI
+  - Search
+  - Websets
+  - Enrichment
+  - Webhooks
+  - Imports
+  humanURL: https://exa.ai/docs/websets/api-guide
+  baseURL: https://api.exa.ai
+  properties:
+  - url: https://exa.ai/docs/websets/api-guide
+    type: Documentation
+  - url: https://exa.ai/docs/websets/api/overview
+    type: Documentation
+  - url: https://exa.ai/docs/websets/api/websets/create-a-webset
+    type: Documentation
+  - url: openapi/exa-websets-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/exa-webset-item-schema.json
+    type: JSONSchema
+  - type: NaftikoCapability
+    url: capabilities/websets-websets.yaml
+  description: Curated, enrichable collections of web results scoped to a query, vertical (companies, people,
+    news, research), or imported list. Compose searches, attach LLM-driven enrichments, evaluate items, subscribe
+    to webhooks for asynchronous events, and import seed lists. Endpoints under /v0/websets, /v0/webhooks,
+    /v0/events, and /v0/imports.
+- aid: exa-ai:exa-team-api
+  name: Exa Team API
+  tags:
+  - AI
+  - Search
+  - Team
+  - Account
+  humanURL: https://exa.ai/docs
+  baseURL: https://api.exa.ai
+  properties:
+  - url: https://exa.ai/docs
+    type: Documentation
+  - url: openapi/exa-team-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/team-team.yaml
+  description: Lightweight team-info endpoint at /v0/teams/me — returns the authenticated team identity and
+    metadata for the API key.
+- aid: exa-ai:exa-team-management-api
+  name: Exa Team Management API
+  tags:
+  - AI
+  - Search
+  - Administration
+  - API Keys
+  - Team Management
+  humanURL: https://admin-api.exa.ai/team-management
+  baseURL: https://admin-api.exa.ai/team-management
+  properties:
+  - url: https://exa.ai/docs
+    type: Documentation
+  - url: openapi/exa-team-management-api-openapi.yml
+    type: OpenAPI
+  - type: NaftikoCapability
+    url: capabilities/team-management-team-management.yaml
+  description: Admin API for managing API keys within a team — create, list, get, update, delete keys with
+    optional per-key rate limits and budgets, plus a per-key usage endpoint at GET /api-keys/{id}/usage. The
+    foundation for per-workload cost allocation and FinOps reporting against Exa.
+name: Exa
+tags:
+- AI
+- Search
+- Web Search
+- Neural Search
+- LLM
+- Agents
+- Research
+- Websets
+kind: contract
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+common:
+- type: Portal
+  url: https://exa.ai
+- type: Documentation
+  url: https://exa.ai/docs
+- type: GettingStarted
+  url: https://exa.ai/docs/getting-started
+- type: Documentation
+  url: https://exa.ai/docs/reference/search-api-guide
+- type: SignUp
+  url: https://dashboard.exa.ai
+- type: Sandbox
+  url: https://dashboard.exa.ai/playground
+- type: Pricing
+  url: https://exa.ai/pricing
+- type: ChangeLog
+  url: https://exa.ai/changelog
+- type: Blog
+  url: https://exa.ai/blog
+- type: StatusPage
+  url: https://status.exa.ai
+- type: TermsOfService
+  url: https://exa.ai/terms
+- type: PrivacyPolicy
+  url: https://exa.ai/privacy
+- type: Support
+  url: https://exa.ai/contact
+- type: LinkedIn
+  url: https://www.linkedin.com/company/exa-ai
+- type: GitHubOrganization
+  url: https://github.com/exa-labs
+- type: SDK
+  url: https://github.com/exa-labs/exa-py
+  name: Python SDK
+- type: SDK
+  url: https://github.com/exa-labs/exa-js
+  name: JavaScript / TypeScript SDK
+- type: Tool
+  url: https://github.com/exa-labs/exa-mcp-server
+  name: Exa MCP Server
+- type: Tool
+  url: https://github.com/exa-labs/websets-mcp-server
+  name: Websets MCP Server
+- type: Tool
+  url: https://github.com/exa-labs/zed-exa-mcp-extension
+  name: Zed Exa MCP Extension
+- type: Tool
+  url: https://github.com/exa-labs/exa-for-sheets
+  name: Exa for Google Sheets
+- type: Tool
+  url: https://github.com/exa-labs/n8n-integration
+  name: Exa n8n Integration
+- type: CodeExamples
+  url: https://github.com/exa-labs/exa-hallucination-detector
+  name: Exa Hallucination Detector
+- type: CodeExamples
+  url: https://github.com/exa-labs/company-researcher
+  name: Company Researcher
+- type: CodeExamples
+  url: https://github.com/exa-labs/exa-deepseek-chat
+  name: Exa + DeepSeek R1 Chat
+- type: CodeExamples
+  url: https://github.com/exa-labs/exa-o3mini-chat
+  name: Exa + OpenAI o3-mini Chat
+- type: CodeExamples
+  url: https://github.com/exa-labs/answer-chat-app
+  name: Exa Answer Chat App
+- type: CodeExamples
+  url: https://github.com/exa-labs/jfk-files-app
+  name: JFK Files Chat
+- type: CodeExamples
+  url: https://github.com/exa-labs/research-paper-app
+  name: Research Paper App
+- type: CodeExamples
+  url: https://github.com/exa-labs/websets-news-monitor
+  name: Websets News Monitor
+- type: Authentication
+  url: https://exa.ai/docs/getting-started/authentication
+- type: OpenAPI
+  url: https://exa.ai/docs/exa-spec.json
+- type: OpenAPI
+  url: https://exa.ai/docs/team-management-spec.yaml
+- url: plans/exa-ai-plans-pricing.yml
+  type: Plans
+- url: rate-limits/exa-ai-rate-limits.yml
+  type: RateLimits
+- url: finops/exa-ai-finops.yml
+  type: FinOps
+- type: Features
+  data:
+  - Neural and keyword web search built specifically for LLMs and agents
+  - Token-efficient highlights — claimed ~90% reduction in LLM context cost vs full page text
+  - Latency tiers — fast (~180ms), auto (~1s), deep (~10s)
+  - Verticals — Code, Companies, News, People, Research, Financials
+  - Structured outputs with web-grounded citations
+  - Contents API for full-page text, summaries, highlights, and subpages
+  - Answer endpoint — LLM-grounded answers with sources, streaming optional
+  - Research API — asynchronous deep-research tasks
+  - Agent API — managed research agents with low/medium/high/x-high effort modes
+  - Monitors API — scheduled searches with webhook notifications
+  - Websets — curated, enrichable result collections with imports and webhooks
+  - Webhooks for Webset events, enrichments, monitor runs, and agent runs
+  - Team Management API with per-key rate limits, budgets, and usage reporting
+  - Official SDKs in Python (exa-py) and JavaScript / TypeScript (exa-js)
+  - Exa MCP server and Websets MCP server for agent tool integration
+  - n8n node, Google Sheets extension, Zed editor extension
+  - Free tier — 1,000 requests/month
+  - Pay-as-you-go from $7 per 1,000 search requests; $1 per 1,000 content pages
+  - $1,000 startup/education grant program
+  sources:
+  - https://exa.ai
+  - https://exa.ai/pricing
+  - https://exa.ai/docs/reference/search-api-guide
+  - https://exa.ai/docs/websets/api-guide
+  - https://exa.ai/docs/llms.txt
+  - https://github.com/exa-labs
+  updated: '2026-05-25'
+created: '2026-05-25T00:00:00.000Z'
+modified: '2026-05-25'
+position: Consuming
+description: Exa is a web search API and AI research platform built specifically for LLMs and agents — semantic
+  and keyword search across the open web with token-efficient highlights, structured outputs, sub-200ms latency
+  tiers, and verticals for code, companies, news, people, research, and financials. The platform pairs the core
+  Search, Contents, and Answer endpoints with Research (asynchronous deep research), Agent (managed multi-step
+  agents at four effort modes), Monitors (scheduled searches with webhooks), and Websets (curated, enrichable
+  result collections). Customers include Cognition (Devin), HubSpot, Monday, Databricks, AWS, and Cursor; Exa
+  raised a $250M Series C to build the search engine for AIs. Open SDKs in Python and JavaScript, an MCP server,
+  Google Sheets and n8n integrations, and a free tier of 1,000 requests/month round out the surface.
+maintainers:
+- FN: Kin Lane
+  email: info@apievangelist.com
+  X: apievangelist
+  url: https://apievangelist.com
+specificationVersion: '0.16'

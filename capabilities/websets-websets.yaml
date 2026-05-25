@@ -1,0 +1,1477 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Exa Websets API \u2014 Websets"
+  description: "Exa Websets API \u2014 Websets. 31 operations. Lead operation: Create a Webset. Self-contained Naftiko capability\
+    \ covering one Exa business surface."
+  tags:
+  - Exa
+  - Websets
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    EXA_API_KEY: EXA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: websets
+    baseUri: https://api.exa.ai
+    description: "Exa Websets API \u2014 Websets business capability. Self-contained, no shared references."
+    resources:
+    - name: v0-websets
+      path: /v0/websets
+      operations:
+      - name: websetscreate
+        method: POST
+        description: Exa Create a Webset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: websetslist
+        method: GET
+        description: Exa List all Websets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor to paginate through the results
+          required: false
+        - name: limit
+          in: query
+          type: number
+          description: The number of Websets to return
+          required: false
+        - name: search
+          in: query
+          type: string
+          description: Search term to filter Websets by ID, external ID, or title
+          required: false
+    - name: v0-websets-id
+      path: /v0/websets/{id}
+      operations:
+      - name: websetsget
+        method: GET
+        description: Exa Get a Webset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The id or externalId of the Webset.
+          required: true
+        - name: expand
+          in: query
+          type: array
+          description: Expand the response with the specified resources
+          required: false
+      - name: websetsupdate
+        method: POST
+        description: Exa Update a Webset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The id or externalId of the Webset
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: websetsdelete
+        method: DELETE
+        description: Exa Delete a Webset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The id or externalId of the Webset
+          required: true
+    - name: v0-websets-id-cancel
+      path: /v0/websets/{id}/cancel
+      operations:
+      - name: websetscancel
+        method: POST
+        description: Exa Cancel a running Webset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The id or externalId of the Webset
+          required: true
+    - name: v0-websets-preview
+      path: /v0/websets/preview
+      operations:
+      - name: websetspreview
+        method: POST
+        description: Exa Preview a webset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: search
+          in: path
+          type: boolean
+          description: Weather you want to search for a preview list of items or not
+          required: false
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v0-websets-webset-items-id
+      path: /v0/websets/{webset}/items/{id}
+      operations:
+      - name: websetsitemsget
+        method: GET
+        description: Exa Get an Item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: webset
+          in: path
+          type: string
+          description: The id or externalId of the Webset
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The id of the Webset item
+          required: true
+      - name: websetsitemsdelete
+        method: DELETE
+        description: Exa Delete an Item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: webset
+          in: path
+          type: string
+          description: The id or externalId of the Webset
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The id of the Webset item
+          required: true
+    - name: v0-websets-webset-items
+      path: /v0/websets/{webset}/items
+      operations:
+      - name: websetsitemslist
+        method: GET
+        description: Exa List all Items for a Webset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: webset
+          in: path
+          type: string
+          description: The id or externalId of the Webset
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor to paginate through the results
+          required: false
+        - name: limit
+          in: query
+          type: number
+          description: The number of results to return
+          required: false
+        - name: sourceId
+          in: query
+          type: string
+          description: The id of the source
+          required: false
+    - name: v0-websets-webset-enrichments
+      path: /v0/websets/{webset}/enrichments
+      operations:
+      - name: websetsenrichmentscreate
+        method: POST
+        description: Exa Create an Enrichment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: webset
+          in: path
+          type: string
+          description: The id or externalId of the Webset
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v0-websets-webset-enrichments-id
+      path: /v0/websets/{webset}/enrichments/{id}
+      operations:
+      - name: websetsenrichmentsupdate
+        method: PATCH
+        description: Exa Update an Enrichment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: webset
+          in: path
+          type: string
+          description: webset
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: websetsenrichmentsget
+        method: GET
+        description: Exa Get an Enrichment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: webset
+          in: path
+          type: string
+          description: The id or externalId of the Webset
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The id of the Enrichment
+          required: true
+      - name: websetsenrichmentsdelete
+        method: DELETE
+        description: Exa Delete an Enrichment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: webset
+          in: path
+          type: string
+          description: The id or externalId of the Webset
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The id of the Enrichment
+          required: true
+    - name: v0-websets-webset-enrichments-id-cancel
+      path: /v0/websets/{webset}/enrichments/{id}/cancel
+      operations:
+      - name: websetsenrichmentscancel
+        method: POST
+        description: Exa Cancel a running Enrichment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: webset
+          in: path
+          type: string
+          description: The id or externalId of the Webset
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The id of the Enrichment
+          required: true
+    - name: v0-webhooks
+      path: /v0/webhooks
+      operations:
+      - name: webhookscreate
+        method: POST
+        description: Exa Create a Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: webhookslist
+        method: GET
+        description: Exa List webhooks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor to paginate through the results
+          required: false
+        - name: limit
+          in: query
+          type: number
+          description: The number of results to return
+          required: false
+    - name: v0-webhooks-id
+      path: /v0/webhooks/{id}
+      operations:
+      - name: webhooksget
+        method: GET
+        description: Exa Get a Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The id of the webhook
+          required: true
+      - name: webhooksupdate
+        method: PATCH
+        description: Exa Update a Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The id of the webhook
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: webhooksdelete
+        method: DELETE
+        description: Exa Delete a Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The id of the webhook
+          required: true
+    - name: v0-webhooks-id-attempts
+      path: /v0/webhooks/{id}/attempts
+      operations:
+      - name: webhooksattemptslist
+        method: GET
+        description: Exa List webhook attempts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The ID of the webhook
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor to paginate through the results
+          required: false
+        - name: limit
+          in: query
+          type: number
+          description: The number of results to return
+          required: false
+        - name: eventType
+          in: query
+          type: string
+          description: The type of event to filter by
+          required: false
+        - name: successful
+          in: query
+          type: boolean
+          description: Filter attempts by their success status
+          required: false
+    - name: v0-events
+      path: /v0/events
+      operations:
+      - name: eventslist
+        method: GET
+        description: Exa List all Events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor to paginate through the results
+          required: false
+        - name: limit
+          in: query
+          type: number
+          description: The number of results to return
+          required: false
+        - name: types
+          in: query
+          type: array
+          description: The types of events to filter by
+          required: false
+        - name: createdBefore
+          in: query
+          type: string
+          description: Filter events created before or at this timestamp (inclusive). Must be a valid ISO 8601 datetime string.
+            All times are in UTC.
+          required: false
+        - name: createdAfter
+          in: query
+          type: string
+          description: Filter events created after or at this timestamp (inclusive). Must be a valid ISO 8601 datetime string.
+            All times are in UTC.
+          required: false
+    - name: v0-events-id
+      path: /v0/events/{id}
+      operations:
+      - name: eventsget
+        method: GET
+        description: Exa Get an Event
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The id of the event
+          required: true
+    - name: v0-websets-webset-searches
+      path: /v0/websets/{webset}/searches
+      operations:
+      - name: websetssearchescreate
+        method: POST
+        description: Exa Create a Search
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: webset
+          in: path
+          type: string
+          description: The id of the Webset
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v0-websets-webset-searches-id
+      path: /v0/websets/{webset}/searches/{id}
+      operations:
+      - name: websetssearchesget
+        method: GET
+        description: Exa Get a Search
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: webset
+          in: path
+          type: string
+          description: The id of the Webset
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The id of the Search
+          required: true
+    - name: v0-websets-webset-searches-id-cancel
+      path: /v0/websets/{webset}/searches/{id}/cancel
+      operations:
+      - name: websetssearchescancel
+        method: POST
+        description: Exa Cancel a running Search
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: webset
+          in: path
+          type: string
+          description: The id of the Webset
+          required: true
+        - name: id
+          in: path
+          type: string
+          description: The id of the Search
+          required: true
+    - name: v0-imports
+      path: /v0/imports
+      operations:
+      - name: importscreate
+        method: POST
+        description: Exa Create an Import
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: importslist
+        method: GET
+        description: Exa List Imports
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor to paginate through the results
+          required: false
+        - name: limit
+          in: query
+          type: number
+          description: The number of results to return
+          required: false
+    - name: v0-imports-id
+      path: /v0/imports/{id}
+      operations:
+      - name: importsget
+        method: GET
+        description: Exa Get Import
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The id of the Import
+          required: true
+      - name: importsupdate
+        method: PATCH
+        description: Exa Update Import
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The id of the Import
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: importsdelete
+        method: DELETE
+        description: Exa Delete Import
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: The id of the Import
+          required: true
+    authentication:
+      type: apikey
+      key: x-api-key
+      value: '{{env.EXA_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: websets-rest
+    port: 8080
+    description: "REST adapter for Exa Websets API \u2014 Websets. One Spectral-compliant resource per consumed operation,\
+      \ prefixed with /v1."
+    resources:
+    - path: /v1/v0/websets
+      name: v0-websets
+      description: REST surface for v0-websets.
+      operations:
+      - method: POST
+        name: websetscreate
+        description: Exa Create a Webset
+        call: websets.websetscreate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: websetslist
+        description: Exa List all Websets
+        call: websets.websetslist
+        with:
+          cursor: rest.cursor
+          limit: rest.limit
+          search: rest.search
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/websets/{id}
+      name: v0-websets-id
+      description: REST surface for v0-websets-id.
+      operations:
+      - method: GET
+        name: websetsget
+        description: Exa Get a Webset
+        call: websets.websetsget
+        with:
+          id: rest.id
+          expand: rest.expand
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: websetsupdate
+        description: Exa Update a Webset
+        call: websets.websetsupdate
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: websetsdelete
+        description: Exa Delete a Webset
+        call: websets.websetsdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/websets/{id}/cancel
+      name: v0-websets-id-cancel
+      description: REST surface for v0-websets-id-cancel.
+      operations:
+      - method: POST
+        name: websetscancel
+        description: Exa Cancel a running Webset
+        call: websets.websetscancel
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/websets/preview
+      name: v0-websets-preview
+      description: REST surface for v0-websets-preview.
+      operations:
+      - method: POST
+        name: websetspreview
+        description: Exa Preview a webset
+        call: websets.websetspreview
+        with:
+          search: rest.search
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/websets/{webset}/items/{id}
+      name: v0-websets-webset-items-id
+      description: REST surface for v0-websets-webset-items-id.
+      operations:
+      - method: GET
+        name: websetsitemsget
+        description: Exa Get an Item
+        call: websets.websetsitemsget
+        with:
+          webset: rest.webset
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: websetsitemsdelete
+        description: Exa Delete an Item
+        call: websets.websetsitemsdelete
+        with:
+          webset: rest.webset
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/websets/{webset}/items
+      name: v0-websets-webset-items
+      description: REST surface for v0-websets-webset-items.
+      operations:
+      - method: GET
+        name: websetsitemslist
+        description: Exa List all Items for a Webset
+        call: websets.websetsitemslist
+        with:
+          webset: rest.webset
+          cursor: rest.cursor
+          limit: rest.limit
+          sourceId: rest.sourceId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/websets/{webset}/enrichments
+      name: v0-websets-webset-enrichments
+      description: REST surface for v0-websets-webset-enrichments.
+      operations:
+      - method: POST
+        name: websetsenrichmentscreate
+        description: Exa Create an Enrichment
+        call: websets.websetsenrichmentscreate
+        with:
+          webset: rest.webset
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/websets/{webset}/enrichments/{id}
+      name: v0-websets-webset-enrichments-id
+      description: REST surface for v0-websets-webset-enrichments-id.
+      operations:
+      - method: PATCH
+        name: websetsenrichmentsupdate
+        description: Exa Update an Enrichment
+        call: websets.websetsenrichmentsupdate
+        with:
+          webset: rest.webset
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: websetsenrichmentsget
+        description: Exa Get an Enrichment
+        call: websets.websetsenrichmentsget
+        with:
+          webset: rest.webset
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: websetsenrichmentsdelete
+        description: Exa Delete an Enrichment
+        call: websets.websetsenrichmentsdelete
+        with:
+          webset: rest.webset
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/websets/{webset}/enrichments/{id}/cancel
+      name: v0-websets-webset-enrichments-id-cancel
+      description: REST surface for v0-websets-webset-enrichments-id-cancel.
+      operations:
+      - method: POST
+        name: websetsenrichmentscancel
+        description: Exa Cancel a running Enrichment
+        call: websets.websetsenrichmentscancel
+        with:
+          webset: rest.webset
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/webhooks
+      name: v0-webhooks
+      description: REST surface for v0-webhooks.
+      operations:
+      - method: POST
+        name: webhookscreate
+        description: Exa Create a Webhook
+        call: websets.webhookscreate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: webhookslist
+        description: Exa List webhooks
+        call: websets.webhookslist
+        with:
+          cursor: rest.cursor
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/webhooks/{id}
+      name: v0-webhooks-id
+      description: REST surface for v0-webhooks-id.
+      operations:
+      - method: GET
+        name: webhooksget
+        description: Exa Get a Webhook
+        call: websets.webhooksget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: webhooksupdate
+        description: Exa Update a Webhook
+        call: websets.webhooksupdate
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: webhooksdelete
+        description: Exa Delete a Webhook
+        call: websets.webhooksdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/webhooks/{id}/attempts
+      name: v0-webhooks-id-attempts
+      description: REST surface for v0-webhooks-id-attempts.
+      operations:
+      - method: GET
+        name: webhooksattemptslist
+        description: Exa List webhook attempts
+        call: websets.webhooksattemptslist
+        with:
+          id: rest.id
+          cursor: rest.cursor
+          limit: rest.limit
+          eventType: rest.eventType
+          successful: rest.successful
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/events
+      name: v0-events
+      description: REST surface for v0-events.
+      operations:
+      - method: GET
+        name: eventslist
+        description: Exa List all Events
+        call: websets.eventslist
+        with:
+          cursor: rest.cursor
+          limit: rest.limit
+          types: rest.types
+          createdBefore: rest.createdBefore
+          createdAfter: rest.createdAfter
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/events/{id}
+      name: v0-events-id
+      description: REST surface for v0-events-id.
+      operations:
+      - method: GET
+        name: eventsget
+        description: Exa Get an Event
+        call: websets.eventsget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/websets/{webset}/searches
+      name: v0-websets-webset-searches
+      description: REST surface for v0-websets-webset-searches.
+      operations:
+      - method: POST
+        name: websetssearchescreate
+        description: Exa Create a Search
+        call: websets.websetssearchescreate
+        with:
+          webset: rest.webset
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/websets/{webset}/searches/{id}
+      name: v0-websets-webset-searches-id
+      description: REST surface for v0-websets-webset-searches-id.
+      operations:
+      - method: GET
+        name: websetssearchesget
+        description: Exa Get a Search
+        call: websets.websetssearchesget
+        with:
+          webset: rest.webset
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/websets/{webset}/searches/{id}/cancel
+      name: v0-websets-webset-searches-id-cancel
+      description: REST surface for v0-websets-webset-searches-id-cancel.
+      operations:
+      - method: POST
+        name: websetssearchescancel
+        description: Exa Cancel a running Search
+        call: websets.websetssearchescancel
+        with:
+          webset: rest.webset
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/imports
+      name: v0-imports
+      description: REST surface for v0-imports.
+      operations:
+      - method: POST
+        name: importscreate
+        description: Exa Create an Import
+        call: websets.importscreate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: importslist
+        description: Exa List Imports
+        call: websets.importslist
+        with:
+          cursor: rest.cursor
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v0/imports/{id}
+      name: v0-imports-id
+      description: REST surface for v0-imports-id.
+      operations:
+      - method: GET
+        name: importsget
+        description: Exa Get Import
+        call: websets.importsget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: importsupdate
+        description: Exa Update Import
+        call: websets.importsupdate
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: importsdelete
+        description: Exa Delete Import
+        call: websets.importsdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: websets-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Exa Websets API \u2014 Websets. One tool per consumed operation, routed inline through this\
+      \ capability's consumes block."
+    tools:
+    - name: exa-create-a-webset
+      description: Exa Create a Webset
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: websets.websetscreate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-list-all-websets
+      description: Exa List all Websets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: websets.websetslist
+      with:
+        cursor: tools.cursor
+        limit: tools.limit
+        search: tools.search
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-get-a-webset
+      description: Exa Get a Webset
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: websets.websetsget
+      with:
+        id: tools.id
+        expand: tools.expand
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-update-a-webset
+      description: Exa Update a Webset
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: websets.websetsupdate
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-delete-a-webset
+      description: Exa Delete a Webset
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: websets.websetsdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-cancel-a-running-webset
+      description: Exa Cancel a running Webset
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: websets.websetscancel
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-preview-a-webset
+      description: Exa Preview a webset
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: websets.websetspreview
+      with:
+        search: tools.search
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-get-an-item
+      description: Exa Get an Item
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: websets.websetsitemsget
+      with:
+        webset: tools.webset
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-delete-an-item
+      description: Exa Delete an Item
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: websets.websetsitemsdelete
+      with:
+        webset: tools.webset
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-list-all-items-for-a-webset
+      description: Exa List all Items for a Webset
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: websets.websetsitemslist
+      with:
+        webset: tools.webset
+        cursor: tools.cursor
+        limit: tools.limit
+        sourceId: tools.sourceId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-create-an-enrichment
+      description: Exa Create an Enrichment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: websets.websetsenrichmentscreate
+      with:
+        webset: tools.webset
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-update-an-enrichment
+      description: Exa Update an Enrichment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: false
+      call: websets.websetsenrichmentsupdate
+      with:
+        webset: tools.webset
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-get-an-enrichment
+      description: Exa Get an Enrichment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: websets.websetsenrichmentsget
+      with:
+        webset: tools.webset
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-delete-an-enrichment
+      description: Exa Delete an Enrichment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: websets.websetsenrichmentsdelete
+      with:
+        webset: tools.webset
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-cancel-a-running-enrichment
+      description: Exa Cancel a running Enrichment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: websets.websetsenrichmentscancel
+      with:
+        webset: tools.webset
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-create-a-webhook
+      description: Exa Create a Webhook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: websets.webhookscreate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-list-webhooks
+      description: Exa List webhooks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: websets.webhookslist
+      with:
+        cursor: tools.cursor
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-get-a-webhook
+      description: Exa Get a Webhook
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: websets.webhooksget
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-update-a-webhook
+      description: Exa Update a Webhook
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: false
+      call: websets.webhooksupdate
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-delete-a-webhook
+      description: Exa Delete a Webhook
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: websets.webhooksdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-list-webhook-attempts
+      description: Exa List webhook attempts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: websets.webhooksattemptslist
+      with:
+        id: tools.id
+        cursor: tools.cursor
+        limit: tools.limit
+        eventType: tools.eventType
+        successful: tools.successful
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-list-all-events
+      description: Exa List all Events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: websets.eventslist
+      with:
+        cursor: tools.cursor
+        limit: tools.limit
+        types: tools.types
+        createdBefore: tools.createdBefore
+        createdAfter: tools.createdAfter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-get-an-event
+      description: Exa Get an Event
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: websets.eventsget
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-create-a-search
+      description: Exa Create a Search
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: websets.websetssearchescreate
+      with:
+        webset: tools.webset
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-get-a-search
+      description: Exa Get a Search
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: websets.websetssearchesget
+      with:
+        webset: tools.webset
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-cancel-a-running-search
+      description: Exa Cancel a running Search
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: websets.websetssearchescancel
+      with:
+        webset: tools.webset
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-create-an-import
+      description: Exa Create an Import
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: websets.importscreate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-list-imports
+      description: Exa List Imports
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: websets.importslist
+      with:
+        cursor: tools.cursor
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-get-import
+      description: Exa Get Import
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: websets.importsget
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-update-import
+      description: Exa Update Import
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: false
+      call: websets.importsupdate
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exa-delete-import
+      description: Exa Delete Import
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: websets.importsdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

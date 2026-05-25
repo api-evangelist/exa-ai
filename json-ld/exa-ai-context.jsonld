@@ -1,0 +1,163 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "exa": "https://api.exa.ai/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "SearchRequest": {
+      "@id": "exa:SearchRequest",
+      "@context": {
+        "query": {"@id": "exa:SearchRequest/query", "@type": "xsd:string"},
+        "type": {"@id": "exa:SearchRequest/type", "@type": "xsd:string"},
+        "category": {"@id": "exa:SearchRequest/category", "@type": "xsd:string"},
+        "numResults": {"@id": "exa:SearchRequest/numResults", "@type": "xsd:integer"},
+        "includeDomains": {"@id": "exa:SearchRequest/includeDomains", "@container": "@list"},
+        "excludeDomains": {"@id": "exa:SearchRequest/excludeDomains", "@container": "@list"},
+        "startCrawlDate": {"@id": "exa:SearchRequest/startCrawlDate", "@type": "xsd:dateTime"},
+        "endCrawlDate": {"@id": "exa:SearchRequest/endCrawlDate", "@type": "xsd:dateTime"},
+        "startPublishedDate": {"@id": "exa:SearchRequest/startPublishedDate", "@type": "xsd:dateTime"},
+        "endPublishedDate": {"@id": "exa:SearchRequest/endPublishedDate", "@type": "xsd:dateTime"},
+        "useAutoprompt": {"@id": "exa:SearchRequest/useAutoprompt", "@type": "xsd:boolean"},
+        "contents": {"@id": "exa:SearchRequest/contents", "@type": "exa:ContentsOptions"}
+      }
+    },
+
+    "SearchResult": {
+      "@id": "exa:SearchResult",
+      "@context": {
+        "id": {"@id": "exa:SearchResult/id", "@type": "xsd:string"},
+        "url": {"@id": "schema:url", "@type": "xsd:anyURI"},
+        "title": {"@id": "schema:name", "@type": "xsd:string"},
+        "author": {"@id": "schema:author", "@type": "xsd:string"},
+        "publishedDate": {"@id": "schema:datePublished", "@type": "xsd:dateTime"},
+        "score": {"@id": "exa:SearchResult/score", "@type": "xsd:decimal"},
+        "text": {"@id": "schema:text", "@type": "xsd:string"},
+        "highlights": {"@id": "exa:SearchResult/highlights", "@container": "@list"},
+        "highlightScores": {"@id": "exa:SearchResult/highlightScores", "@container": "@list"},
+        "summary": {"@id": "schema:abstract", "@type": "xsd:string"},
+        "image": {"@id": "schema:image", "@type": "xsd:anyURI"},
+        "favicon": {"@id": "exa:SearchResult/favicon", "@type": "xsd:anyURI"},
+        "subpages": {"@id": "exa:SearchResult/subpages", "@container": "@list"}
+      }
+    },
+
+    "ContentsOptions": {
+      "@id": "exa:ContentsOptions",
+      "@context": {
+        "text": {"@id": "exa:ContentsOptions/text"},
+        "highlights": {"@id": "exa:ContentsOptions/highlights"},
+        "summary": {"@id": "exa:ContentsOptions/summary"},
+        "livecrawl": {"@id": "exa:ContentsOptions/livecrawl", "@type": "xsd:string"},
+        "subpages": {"@id": "exa:ContentsOptions/subpages", "@type": "xsd:integer"},
+        "extras": {"@id": "exa:ContentsOptions/extras"}
+      }
+    },
+
+    "AnswerRequest": {
+      "@id": "exa:AnswerRequest",
+      "@context": {
+        "query": {"@id": "exa:AnswerRequest/query", "@type": "xsd:string"},
+        "stream": {"@id": "exa:AnswerRequest/stream", "@type": "xsd:boolean"},
+        "model": {"@id": "exa:AnswerRequest/model", "@type": "xsd:string"},
+        "outputSchema": {"@id": "exa:AnswerRequest/outputSchema"}
+      }
+    },
+
+    "ResearchTask": {
+      "@id": "exa:ResearchTask",
+      "@context": {
+        "id": {"@id": "exa:ResearchTask/id", "@type": "xsd:string"},
+        "instructions": {"@id": "exa:ResearchTask/instructions", "@type": "xsd:string"},
+        "status": {"@id": "exa:ResearchTask/status", "@type": "xsd:string"},
+        "model": {"@id": "exa:ResearchTask/model", "@type": "xsd:string"},
+        "output": {"@id": "exa:ResearchTask/output"},
+        "citations": {"@id": "exa:ResearchTask/citations", "@container": "@list"},
+        "createdAt": {"@id": "dcterms:created", "@type": "xsd:dateTime"},
+        "completedAt": {"@id": "exa:ResearchTask/completedAt", "@type": "xsd:dateTime"}
+      }
+    },
+
+    "Monitor": {
+      "@id": "exa:Monitor",
+      "@context": {
+        "id": {"@id": "exa:Monitor/id", "@type": "xsd:string"},
+        "search": {"@id": "exa:Monitor/search"},
+        "trigger": {"@id": "exa:Monitor/trigger"},
+        "webhook": {"@id": "exa:Monitor/webhook"},
+        "createdAt": {"@id": "dcterms:created", "@type": "xsd:dateTime"}
+      }
+    },
+
+    "AgentRun": {
+      "@id": "exa:AgentRun",
+      "@context": {
+        "id": {"@id": "exa:AgentRun/id", "@type": "xsd:string"},
+        "effort": {"@id": "exa:AgentRun/effort", "@type": "xsd:string"},
+        "status": {"@id": "exa:AgentRun/status", "@type": "xsd:string"},
+        "output": {"@id": "exa:AgentRun/output"},
+        "costDollars": {"@id": "exa:AgentRun/costDollars", "@type": "xsd:decimal"},
+        "createdAt": {"@id": "dcterms:created", "@type": "xsd:dateTime"}
+      }
+    },
+
+    "Webset": {
+      "@id": "exa:Webset",
+      "@context": {
+        "id": {"@id": "exa:Webset/id", "@type": "xsd:string"},
+        "title": {"@id": "schema:name", "@type": "xsd:string"},
+        "searches": {"@id": "exa:Webset/searches", "@container": "@list"},
+        "enrichments": {"@id": "exa:Webset/enrichments", "@container": "@list"},
+        "items": {"@id": "exa:Webset/items", "@container": "@list"},
+        "createdAt": {"@id": "dcterms:created", "@type": "xsd:dateTime"}
+      }
+    },
+
+    "WebsetItem": {
+      "@id": "exa:WebsetItem",
+      "@context": {
+        "id": {"@id": "exa:WebsetItem/id", "@type": "xsd:string"},
+        "websetId": {"@id": "exa:WebsetItem/websetId", "@type": "xsd:string"},
+        "source": {"@id": "exa:WebsetItem/source", "@type": "xsd:anyURI"},
+        "type": {"@id": "exa:WebsetItem/type", "@type": "xsd:string"},
+        "properties": {"@id": "exa:WebsetItem/properties"},
+        "enrichments": {"@id": "exa:WebsetItem/enrichments"},
+        "evaluations": {"@id": "exa:WebsetItem/evaluations", "@container": "@list"},
+        "createdAt": {"@id": "dcterms:created", "@type": "xsd:dateTime"},
+        "updatedAt": {"@id": "dcterms:modified", "@type": "xsd:dateTime"}
+      }
+    },
+
+    "Webhook": {
+      "@id": "exa:Webhook",
+      "@context": {
+        "id": {"@id": "exa:Webhook/id", "@type": "xsd:string"},
+        "url": {"@id": "schema:url", "@type": "xsd:anyURI"},
+        "events": {"@id": "exa:Webhook/events", "@container": "@list"},
+        "status": {"@id": "exa:Webhook/status", "@type": "xsd:string"}
+      }
+    },
+
+    "ApiKey": {
+      "@id": "exa:ApiKey",
+      "@context": {
+        "id": {"@id": "exa:ApiKey/id", "@type": "xsd:string"},
+        "name": {"@id": "schema:name", "@type": "xsd:string"},
+        "rateLimit": {"@id": "exa:ApiKey/rateLimit", "@type": "xsd:integer"},
+        "budget": {"@id": "exa:ApiKey/budget", "@type": "xsd:decimal"},
+        "createdAt": {"@id": "dcterms:created", "@type": "xsd:dateTime"}
+      }
+    },
+
+    "ErrorResponse": {
+      "@id": "exa:ErrorResponse",
+      "@context": {
+        "error": {"@id": "exa:ErrorResponse/error", "@type": "xsd:string"},
+        "message": {"@id": "schema:description", "@type": "xsd:string"},
+        "statusCode": {"@id": "exa:ErrorResponse/statusCode", "@type": "xsd:integer"}
+      }
+    }
+  }
+}

@@ -1,0 +1,219 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Exa
+providerId: exa-ai
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - AI
+  - Search
+  - LLM
+  - Agents
+description: 'Reconciled plans and per-request pricing for the Exa API — neural web search, contents extraction, answers, research, monitors, agent runs, and websets. Source: exa.ai/pricing and docs.exa.ai.'
+sources:
+  - https://exa.ai/pricing
+  - https://exa.ai/docs/reference/search-api-guide
+  - https://exa.ai/docs/websets/api-guide
+plans:
+  - id: exa-free
+    name: Free
+    type: free
+    description: 1,000 free requests per month with full access to Search, Contents, latency tiers (180ms–1s), and basic features.
+    entries:
+      - label: Monthly free requests
+        name: free-requests
+        type: quota
+        metric: request
+        limit: 1000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+  - id: exa-search
+    name: Search
+    type: usage-based
+    description: Real-time web search with token-efficient page contents and configurable latency. Pay per 1,000 requests.
+    entries:
+      - label: Search requests
+        name: search-requests
+        type: metered
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1000
+        price: '7.00'
+        userMultiplied: false
+      - label: Additional results above 10
+        name: additional-results
+        type: metered
+        metric: result
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1000
+        price: '1.00'
+        userMultiplied: false
+  - id: exa-deep-search
+    name: Deep Search
+    type: usage-based
+    description: Multi-step agent workflows with structured outputs and web-grounded citations.
+    entries:
+      - label: Deep search request (low)
+        name: deep-low
+        type: metered
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1000
+        price: '12.00'
+        userMultiplied: false
+      - label: Deep search request (high)
+        name: deep-high
+        type: metered
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1000
+        price: '15.00'
+        userMultiplied: false
+  - id: exa-contents
+    name: Contents
+    type: usage-based
+    description: Full page contents for LLM context, with highlights and configurable livecrawl policies.
+    entries:
+      - label: Pages per content type
+        name: contents-pages
+        type: metered
+        metric: page
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1000
+        price: '1.00'
+        userMultiplied: false
+  - id: exa-monitors
+    name: Monitors
+    type: usage-based
+    description: Scheduled searches that identify fresh events on the web and notify via webhooks.
+    entries:
+      - label: Monitor runs
+        name: monitor-runs
+        type: metered
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1000
+        price: '15.00'
+        userMultiplied: false
+  - id: exa-agent
+    name: Agent
+    type: usage-based
+    description: Multi-step Exa Agent runs with effort modes — low, medium, high, x-high — plus search and enrichment add-ons.
+    entries:
+      - label: Agent run (low effort)
+        name: agent-low
+        type: metered
+        metric: run
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.025'
+        userMultiplied: false
+      - label: Agent run (medium effort)
+        name: agent-medium
+        type: metered
+        metric: run
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.10'
+        userMultiplied: false
+      - label: Agent run (high effort)
+        name: agent-high
+        type: metered
+        metric: run
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.50'
+        userMultiplied: false
+      - label: Agent run (x-high effort)
+        name: agent-xhigh
+        type: metered
+        metric: run
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '2.00'
+        userMultiplied: false
+      - label: Search call inside an agent run
+        name: agent-search-call
+        type: metered
+        metric: call
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.007'
+        userMultiplied: false
+      - label: Email enrichment
+        name: agent-email-enrich
+        type: metered
+        metric: enrichment
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.02'
+        userMultiplied: false
+      - label: Phone enrichment
+        name: agent-phone-enrich
+        type: metered
+        metric: enrichment
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '0.07'
+        userMultiplied: false
+  - id: exa-enterprise
+    name: Enterprise
+    type: contract
+    description: Custom-priced contract for high-volume usage, custom datasets, dedicated support, and SSO.
+    entries:
+      - label: Custom contract
+        name: enterprise-contract
+        type: contract
+        metric: contract
+        limit: -1
+        timeFrame: contract
+        geo: global
+        unit: 1
+        price: 'Contact'
+        userMultiplied: false
+  - id: exa-startup-grant
+    name: Startup/Education Grant
+    type: credit
+    description: $1,000 in free credits for qualifying startups and educational projects.
+    entries:
+      - label: Grant credits
+        name: grant-credits
+        type: credit
+        metric: usd
+        limit: 1000
+        timeFrame: contract
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
