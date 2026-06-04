@@ -1,0 +1,119 @@
+arazzo: 1.0.1
+info:
+  title: Exa Scout then Research
+  summary: Scout sources with a quick search, then launch and poll a deep research task.
+  description: >-
+    Pairs Exa's fast Search API with its deep Research API. The workflow first
+    runs a quick search to confirm the topic has live sources and capture a top
+    reference url, then submits a deep research task whose instructions cover the
+    same topic, and polls the research task until it leaves the running state and
+    reaches completed. Every step spells out its request inline so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: searchApi
+  url: ../openapi/exa-search-api-openapi.yml
+  type: openapi
+- name: researchApi
+  url: ../openapi/exa-research-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: scout-then-research
+  summary: Scout a topic with search, then run and poll a deep research task.
+  description: >-
+    Runs a scouting search to confirm sources exist for a topic, then creates a
+    research task with the supplied instructions and polls it until completed.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - query
+    - instructions
+    properties:
+      apiKey:
+        type: string
+        description: Your Exa API key, sent in the x-api-key header.
+      query:
+        type: string
+        description: Scouting search query used to confirm the topic has live sources.
+      instructions:
+        type: string
+        description: Instructions for the deep research task.
+      model:
+        type: string
+        description: Research model to use.
+        default: exa-research
+  steps:
+  - stepId: scoutSearch
+    description: >-
+      Run a quick search to confirm the topic has live sources and capture a top
+      reference url.
+    operationId: search
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        query: $inputs.query
+        type: fast
+        numResults: 5
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      topReferenceUrl: $response.body#/results/0/url
+  - stepId: createResearch
+    description: >-
+      Submit a deep research task with the supplied instructions and model;
+      capture the researchId for polling.
+    operationId: ResearchController_createResearch
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        instructions: $inputs.instructions
+        model: $inputs.model
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      researchId: $response.body#/researchId
+  - stepId: pollResearch
+    description: >-
+      Poll the research task by id until it reaches completed, looping back while
+      it is still running.
+    operationId: ResearchController_getResearch
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: researchId
+      in: path
+      value: $steps.createResearch.outputs.researchId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      output: $response.body#/output/content
+    onSuccess:
+    - name: stillRunning
+      type: goto
+      stepId: pollResearch
+      criteria:
+      - context: $response.body
+        condition: $.status == "running"
+        type: jsonpath
+    - name: completed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "completed"
+        type: jsonpath
+  outputs:
+    topReferenceUrl: $steps.scoutSearch.outputs.topReferenceUrl
+    researchId: $steps.createResearch.outputs.researchId
+    status: $steps.pollResearch.outputs.status
+    output: $steps.pollResearch.outputs.output

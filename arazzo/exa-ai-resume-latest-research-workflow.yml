@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: Exa Resume Latest Research
+  summary: Find the most recent research task and poll it until it completes.
+  description: >-
+    Picks up an in-flight research task without already knowing its id. The
+    workflow lists research requests newest-first, captures the researchId of
+    the most recent task, then polls the get-research endpoint until that task
+    leaves the running state and reaches completed, branching back to keep
+    polling while it is still running and reading the final output once done.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: researchApi
+  url: ../openapi/exa-research-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: resume-latest-research
+  summary: List research tasks, take the newest, and poll it to completion.
+  description: >-
+    Lists research requests newest-first, selects the most recent researchId,
+    and polls the get endpoint until that task reaches the completed status.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    properties:
+      apiKey:
+        type: string
+        description: Your Exa API key, sent in the x-api-key header.
+      limit:
+        type: integer
+        description: How many research requests to list when finding the newest.
+        default: 10
+  steps:
+  - stepId: listResearch
+    description: >-
+      List research requests ordered newest-first and capture the researchId of
+      the most recent task.
+    operationId: ResearchController_listResearch
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: limit
+      in: query
+      value: $inputs.limit
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      latestResearchId: $response.body#/data/0/researchId
+      hasMore: $response.body#/hasMore
+  - stepId: pollResearch
+    description: >-
+      Fetch the latest research task by id and inspect its status. While it is
+      still running, loop back and poll again; once completed, finish.
+    operationId: ResearchController_getResearch
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: researchId
+      in: path
+      value: $steps.listResearch.outputs.latestResearchId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      output: $response.body#/output/content
+    onSuccess:
+    - name: stillRunning
+      type: goto
+      stepId: pollResearch
+      criteria:
+      - context: $response.body
+        condition: $.status == "running"
+        type: jsonpath
+    - name: completed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "completed"
+        type: jsonpath
+  outputs:
+    latestResearchId: $steps.listResearch.outputs.latestResearchId
+    status: $steps.pollResearch.outputs.status
+    output: $steps.pollResearch.outputs.output

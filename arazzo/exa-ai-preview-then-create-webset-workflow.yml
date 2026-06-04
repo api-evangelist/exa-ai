@@ -1,0 +1,82 @@
+arazzo: 1.0.1
+info:
+  title: Exa Preview then Create Webset
+  summary: Preview how a query decomposes, then commit it to a real Webset.
+  description: >-
+    Lets a caller see how Exa will interpret a search before paying to run it.
+    The workflow first calls the preview endpoint, which performs the same query
+    analysis that webset creation does and returns the detected entity type and
+    generated search criteria, and then commits the same query to a real Webset
+    that begins processing immediately. Every step spells out its request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: websetsApi
+  url: ../openapi/exa-websets-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: preview-then-create-webset
+  summary: Preview a query's decomposition, then create the Webset from it.
+  description: >-
+    Calls the preview endpoint to inspect the detected entity and criteria for a
+    query, then creates a Webset using the same query and target count.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - query
+    properties:
+      apiKey:
+        type: string
+        description: Your Exa API key, sent in the x-api-key header.
+      query:
+        type: string
+        description: Natural-language search query to preview and then commit.
+      count:
+        type: integer
+        description: Number of items the Webset will attempt to find.
+        default: 10
+  steps:
+  - stepId: previewWebset
+    description: >-
+      Preview how the query decomposes, returning the detected entity and the
+      generated search criteria without creating a Webset.
+    operationId: websets-preview
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        search:
+          query: $inputs.query
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      previewEntity: $response.body#/search/entity
+  - stepId: createWebset
+    description: >-
+      Commit the previewed query to a real Webset with the requested item count.
+      It begins processing immediately; capture its id and status.
+    operationId: websets-create
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        search:
+          query: $inputs.query
+          count: $inputs.count
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      websetId: $response.body#/id
+      status: $response.body#/status
+  outputs:
+    previewEntity: $steps.previewWebset.outputs.previewEntity
+    websetId: $steps.createWebset.outputs.websetId
+    status: $steps.createWebset.outputs.status

@@ -1,0 +1,129 @@
+arazzo: 1.0.1
+info:
+  title: Exa Create Webset and List Items
+  summary: Create a Webset from a search, poll until it settles, then list its items.
+  description: >-
+    Drives Exa Websets from creation through results. The workflow creates a
+    Webset with an embedded search query and target count, which begins
+    processing immediately, then polls the get-webset endpoint until the Webset
+    leaves its running and pending states and returns to idle, branching back to
+    keep polling while it is still working, and finally lists the structured
+    items the Webset collected. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: websetsApi
+  url: ../openapi/exa-websets-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-webset-and-list-items
+  summary: Create a Webset, poll until idle, and list the collected items.
+  description: >-
+    Creates a Webset with an embedded search, polls the webset until it returns
+    to the idle status, then lists the structured items it found.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - query
+    properties:
+      apiKey:
+        type: string
+        description: Your Exa API key, sent in the x-api-key header.
+      query:
+        type: string
+        description: Natural-language search query describing the entities to collect.
+      count:
+        type: integer
+        description: Number of items the Webset will attempt to find.
+        default: 10
+      limit:
+        type: integer
+        description: Number of items to return when listing.
+        default: 20
+  steps:
+  - stepId: createWebset
+    description: >-
+      Create a Webset with an embedded search query and target count. It begins
+      processing immediately; capture its id and initial status.
+    operationId: websets-create
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        search:
+          query: $inputs.query
+          count: $inputs.count
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      websetId: $response.body#/id
+      status: $response.body#/status
+  - stepId: pollWebset
+    description: >-
+      Fetch the Webset by id and inspect its status. While it is still running
+      or pending, loop back and poll again; once it returns to idle, continue.
+    operationId: websets-get
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: id
+      in: path
+      value: $steps.createWebset.outputs.websetId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: stillRunning
+      type: goto
+      stepId: pollWebset
+      criteria:
+      - context: $response.body
+        condition: $.status == "running"
+        type: jsonpath
+    - name: stillPending
+      type: goto
+      stepId: pollWebset
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending"
+        type: jsonpath
+    - name: settled
+      type: goto
+      stepId: listItems
+      criteria:
+      - context: $response.body
+        condition: $.status == "idle"
+        type: jsonpath
+  - stepId: listItems
+    description: >-
+      List the structured items the Webset collected, capturing the first item
+      id and the pagination cursor.
+    operationId: websets-items-list
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: webset
+      in: path
+      value: $steps.createWebset.outputs.websetId
+    - name: limit
+      in: query
+      value: $inputs.limit
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstItemId: $response.body#/data/0/id
+      hasMore: $response.body#/hasMore
+      nextCursor: $response.body#/nextCursor
+  outputs:
+    websetId: $steps.createWebset.outputs.websetId
+    firstItemId: $steps.listItems.outputs.firstItemId
+    hasMore: $steps.listItems.outputs.hasMore
+    nextCursor: $steps.listItems.outputs.nextCursor

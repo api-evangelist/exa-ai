@@ -1,0 +1,145 @@
+arazzo: 1.0.1
+info:
+  title: Exa Webset Item Deep Contents
+  summary: Build a Webset, list its items, and deep-fetch the top item's contents.
+  description: >-
+    Bridges the Websets and Search APIs. The workflow creates a Webset from a
+    search query and waits for it to settle to idle, lists the structured items
+    the Webset collected and captures the url on the top item's properties, then
+    crosses over to the Search API's contents endpoint to retrieve the full text
+    and a summary for that item url. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: websetsApi
+  url: ../openapi/exa-websets-api-openapi.yml
+  type: openapi
+- name: searchApi
+  url: ../openapi/exa-search-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: webset-item-deep-contents
+  summary: Collect a Webset, then deep-fetch full contents for its top item.
+  description: >-
+    Creates a Webset, waits for it to settle, lists its items, and retrieves the
+    full text and summary for the top item's url via the contents endpoint.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - query
+    properties:
+      apiKey:
+        type: string
+        description: Your Exa API key, sent in the x-api-key header.
+      query:
+        type: string
+        description: Natural-language search query describing the entities to collect.
+      count:
+        type: integer
+        description: Number of items the Webset will attempt to find.
+        default: 10
+  steps:
+  - stepId: createWebset
+    description: >-
+      Create a Webset with the search query. It begins processing immediately;
+      capture its id.
+    operationId: websets-create
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        search:
+          query: $inputs.query
+          count: $inputs.count
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      websetId: $response.body#/id
+  - stepId: pollWebset
+    description: >-
+      Poll the Webset until it returns to idle, looping while it is still running
+      or pending.
+    operationId: websets-get
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: id
+      in: path
+      value: $steps.createWebset.outputs.websetId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: stillRunning
+      type: goto
+      stepId: pollWebset
+      criteria:
+      - context: $response.body
+        condition: $.status == "running"
+        type: jsonpath
+    - name: stillPending
+      type: goto
+      stepId: pollWebset
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending"
+        type: jsonpath
+    - name: settled
+      type: goto
+      stepId: listItems
+      criteria:
+      - context: $response.body
+        condition: $.status == "idle"
+        type: jsonpath
+  - stepId: listItems
+    description: >-
+      List the Webset items and capture the url on the top item's properties.
+    operationId: websets-items-list
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: webset
+      in: path
+      value: $steps.createWebset.outputs.websetId
+    - name: limit
+      in: query
+      value: 10
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      topItemId: $response.body#/data/0/id
+      topItemUrl: $response.body#/data/0/properties/url
+  - stepId: fetchItemContents
+    description: >-
+      Cross to the Search API's contents endpoint to retrieve the full text and
+      a summary for the top item's url.
+    operationId: getContents
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        urls:
+        - $steps.listItems.outputs.topItemUrl
+        text: true
+        summary: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      text: $response.body#/results/0/text
+      summary: $response.body#/results/0/summary
+  outputs:
+    websetId: $steps.createWebset.outputs.websetId
+    topItemUrl: $steps.listItems.outputs.topItemUrl
+    itemText: $steps.fetchItemContents.outputs.text
+    itemSummary: $steps.fetchItemContents.outputs.summary

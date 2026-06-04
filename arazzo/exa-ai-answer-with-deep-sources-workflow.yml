@@ -1,0 +1,84 @@
+arazzo: 1.0.1
+info:
+  title: Exa Answer with Deep Sources
+  summary: Get a cited answer to a question, then deep-fetch the top citation.
+  description: >-
+    Turns the Exa answer endpoint into a grounded research step. The workflow
+    asks a natural-language question and receives a direct answer along with the
+    citations Exa used to ground it, then takes the top citation and retrieves
+    its full extracted text and a summary from the contents endpoint so the
+    caller can verify the answer against the complete source document. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: searchApi
+  url: ../openapi/exa-search-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: answer-with-deep-sources
+  summary: Produce a cited answer and deep-fetch the primary citation.
+  description: >-
+    Calls the answer endpoint for a question, captures the answer and its
+    citations, then retrieves the full contents of the top citation for
+    verification.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - query
+    properties:
+      apiKey:
+        type: string
+        description: Your Exa API key, sent in the x-api-key header.
+      query:
+        type: string
+        description: The natural-language question to answer.
+  steps:
+  - stepId: getAnswer
+    description: >-
+      Ask Exa the question and receive a direct answer plus the citations used
+      to ground it, capturing the answer and the top citation url.
+    operationId: answer
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        query: $inputs.query
+        text: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      answer: $response.body#/answer
+      topCitationUrl: $response.body#/citations/0/url
+      topCitationTitle: $response.body#/citations/0/title
+  - stepId: fetchCitationContents
+    description: >-
+      Retrieve the full text and a summary for the top citation so the answer
+      can be verified against the complete source document.
+    operationId: getContents
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        urls:
+        - $steps.getAnswer.outputs.topCitationUrl
+        text: true
+        summary:
+          query: $inputs.query
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      citationText: $response.body#/results/0/text
+      citationSummary: $response.body#/results/0/summary
+  outputs:
+    answer: $steps.getAnswer.outputs.answer
+    topCitationUrl: $steps.getAnswer.outputs.topCitationUrl
+    citationText: $steps.fetchCitationContents.outputs.citationText
+    citationSummary: $steps.fetchCitationContents.outputs.citationSummary

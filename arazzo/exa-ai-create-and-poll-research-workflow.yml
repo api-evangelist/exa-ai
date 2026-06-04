@@ -1,0 +1,99 @@
+arazzo: 1.0.1
+info:
+  title: Exa Create and Poll Research
+  summary: Kick off an Exa research task and poll until it completes, then read output.
+  description: >-
+    Drives Exa's asynchronous research model end to end. The workflow submits a
+    research task with natural-language instructions, captures the returned
+    researchId, then polls the get-research endpoint in a loop until the task
+    leaves the running state and reaches completed, branching back to keep
+    polling while it is still running and reading the final grounded output and
+    citations once it is done. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: researchApi
+  url: ../openapi/exa-research-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-and-poll-research
+  summary: Create a research task and poll until it completes, then return its output.
+  description: >-
+    Submits research instructions, captures the researchId, and polls the get
+    endpoint until the task reaches the completed status before returning the
+    research output content.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - instructions
+    properties:
+      apiKey:
+        type: string
+        description: Your Exa API key, sent in the x-api-key header.
+      instructions:
+        type: string
+        description: Instructions describing what to research and what the output should look like.
+      model:
+        type: string
+        description: Research model to use.
+        default: exa-research
+  steps:
+  - stepId: createResearch
+    description: >-
+      Submit a new research task with the supplied instructions and model,
+      capturing the researchId for polling.
+    operationId: ResearchController_createResearch
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        instructions: $inputs.instructions
+        model: $inputs.model
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      researchId: $response.body#/researchId
+      status: $response.body#/status
+  - stepId: pollResearch
+    description: >-
+      Fetch the research task by id and inspect its status. While it is still
+      running, loop back and poll again; once it is completed, continue.
+    operationId: ResearchController_getResearch
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: researchId
+      in: path
+      value: $steps.createResearch.outputs.researchId
+    - name: events
+      in: query
+      value: "true"
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      output: $response.body#/output/content
+    onSuccess:
+    - name: stillRunning
+      type: goto
+      stepId: pollResearch
+      criteria:
+      - context: $response.body
+        condition: $.status == "running"
+        type: jsonpath
+    - name: completed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "completed"
+        type: jsonpath
+  outputs:
+    researchId: $steps.createResearch.outputs.researchId
+    status: $steps.pollResearch.outputs.status
+    output: $steps.pollResearch.outputs.output

@@ -1,0 +1,94 @@
+arazzo: 1.0.1
+info:
+  title: Exa Search and Fetch Contents
+  summary: Run an Exa neural search and pull full page contents for the top result.
+  description: >-
+    The most common Exa retrieval pattern. The workflow runs a prompt-engineered
+    Exa search to find the most relevant documents for a query, captures the
+    document id and url of the top result, and then calls the contents endpoint
+    to retrieve the full extracted text, highlights, and a summary for that
+    document. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: searchApi
+  url: ../openapi/exa-search-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: search-and-fetch-contents
+  summary: Search Exa, then fetch full contents for the top-ranked result.
+  description: >-
+    Performs an Exa search for the supplied query, selects the highest ranked
+    result, and retrieves its full text, highlights, and summary from the
+    contents endpoint.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - query
+    properties:
+      apiKey:
+        type: string
+        description: Your Exa API key, sent in the x-api-key header.
+      query:
+        type: string
+        description: The natural-language search query.
+      numResults:
+        type: integer
+        description: How many results the search should return.
+        default: 10
+      summaryQuery:
+        type: string
+        description: Optional query guiding the LLM-generated summary of the contents.
+        default: Main contributions
+  steps:
+  - stepId: runSearch
+    description: >-
+      Run an Exa auto search for the query and request a list of relevant
+      results, capturing the id and url of the top match.
+    operationId: search
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        query: $inputs.query
+        type: auto
+        numResults: $inputs.numResults
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      topResultId: $response.body#/results/0/id
+      topResultUrl: $response.body#/results/0/url
+      requestId: $response.body#/requestId
+  - stepId: fetchContents
+    description: >-
+      Retrieve the full text, highlights, and a summary for the top result URL
+      returned by the search.
+    operationId: getContents
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        urls:
+        - $steps.runSearch.outputs.topResultUrl
+        text: true
+        highlights: true
+        summary:
+          query: $inputs.summaryQuery
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      text: $response.body#/results/0/text
+      summary: $response.body#/results/0/summary
+      highlights: $response.body#/results/0/highlights
+  outputs:
+    topResultUrl: $steps.runSearch.outputs.topResultUrl
+    text: $steps.fetchContents.outputs.text
+    summary: $steps.fetchContents.outputs.summary
+    highlights: $steps.fetchContents.outputs.highlights

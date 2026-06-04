@@ -1,0 +1,179 @@
+arazzo: 1.0.1
+info:
+  title: Exa Expand Webset Search
+  summary: Build a Webset, add a follow-up search, and poll it to completion.
+  description: >-
+    Grows an existing Webset with additional results. The workflow creates a
+    Webset from an initial query and waits for it to settle to idle, then adds a
+    second Search to the same Webset with a follow-up query so more matching
+    items are discovered, and polls that Search by id until it leaves the
+    created, pending, and running states and reaches completed, branching back
+    to keep polling while it is still in progress. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: websetsApi
+  url: ../openapi/exa-websets-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: expand-webset-search
+  summary: Create a Webset, add a follow-up search, and poll it until completed.
+  description: >-
+    Creates a Webset, waits for it to settle, adds a second search with a new
+    query, and polls that search until it reaches the completed status.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - query
+    - followUpQuery
+    properties:
+      apiKey:
+        type: string
+        description: Your Exa API key, sent in the x-api-key header.
+      query:
+        type: string
+        description: Initial search query used to create the Webset.
+      followUpQuery:
+        type: string
+        description: Follow-up query used to add a second search to the Webset.
+      count:
+        type: integer
+        description: Number of items the initial search will attempt to find.
+        default: 10
+      followUpCount:
+        type: integer
+        description: Number of items the follow-up search will attempt to find.
+        default: 5
+  steps:
+  - stepId: createWebset
+    description: >-
+      Create a Webset with the initial query. It begins processing immediately;
+      capture its id.
+    operationId: websets-create
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        search:
+          query: $inputs.query
+          count: $inputs.count
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      websetId: $response.body#/id
+  - stepId: pollWebset
+    description: >-
+      Poll the Webset until it returns to idle, looping while it is still running
+      or pending.
+    operationId: websets-get
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: id
+      in: path
+      value: $steps.createWebset.outputs.websetId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: stillRunning
+      type: goto
+      stepId: pollWebset
+      criteria:
+      - context: $response.body
+        condition: $.status == "running"
+        type: jsonpath
+    - name: stillPending
+      type: goto
+      stepId: pollWebset
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending"
+        type: jsonpath
+    - name: settled
+      type: goto
+      stepId: addSearch
+      criteria:
+      - context: $response.body
+        condition: $.status == "idle"
+        type: jsonpath
+  - stepId: addSearch
+    description: >-
+      Add a second Search to the Webset with the follow-up query to discover
+      more matching items; capture the new search id.
+    operationId: websets-searches-create
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: webset
+      in: path
+      value: $steps.createWebset.outputs.websetId
+    requestBody:
+      contentType: application/json
+      payload:
+        query: $inputs.followUpQuery
+        count: $inputs.followUpCount
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      searchId: $response.body#/id
+      status: $response.body#/status
+  - stepId: pollSearch
+    description: >-
+      Poll the follow-up Search by id until it reaches completed, looping back
+      while it is still created, pending, or running.
+    operationId: websets-searches-get
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: webset
+      in: path
+      value: $steps.createWebset.outputs.websetId
+    - name: id
+      in: path
+      value: $steps.addSearch.outputs.searchId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: stillCreated
+      type: goto
+      stepId: pollSearch
+      criteria:
+      - context: $response.body
+        condition: $.status == "created"
+        type: jsonpath
+    - name: stillPending
+      type: goto
+      stepId: pollSearch
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending"
+        type: jsonpath
+    - name: stillRunning
+      type: goto
+      stepId: pollSearch
+      criteria:
+      - context: $response.body
+        condition: $.status == "running"
+        type: jsonpath
+    - name: completed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "completed"
+        type: jsonpath
+  outputs:
+    websetId: $steps.createWebset.outputs.websetId
+    searchId: $steps.addSearch.outputs.searchId
+    searchStatus: $steps.pollSearch.outputs.status

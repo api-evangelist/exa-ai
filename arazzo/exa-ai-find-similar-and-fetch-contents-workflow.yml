@@ -1,0 +1,112 @@
+arazzo: 1.0.1
+info:
+  title: Exa Find Similar and Fetch Contents
+  summary: Find pages similar to a seed result, then fetch their full contents.
+  description: >-
+    Exa does not expose a dedicated find-similar endpoint in this specification,
+    so the workflow adapts the find-similar pattern using the search and
+    contents operations. It first runs a seed search to anchor on a high-quality
+    result, then issues a second neural search whose query is steered toward
+    documents like that seed and which excludes the original result's domain to
+    surface fresh-but-similar sources, and finally retrieves full text and a
+    summary for the best similar match. Every step spells out its request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: searchApi
+  url: ../openapi/exa-search-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: find-similar-and-fetch-contents
+  summary: Anchor on a seed result, find similar pages, and fetch their contents.
+  description: >-
+    Runs a seed search to find an anchor document, then runs a second steered
+    search that looks for pages similar to that anchor, and retrieves the full
+    contents of the top similar result.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - query
+    properties:
+      apiKey:
+        type: string
+        description: Your Exa API key, sent in the x-api-key header.
+      query:
+        type: string
+        description: The seed topic to anchor the similarity search on.
+      similarQuery:
+        type: string
+        description: A query steering the similar-results search (e.g. "More articles like the above").
+      excludeDomain:
+        type: string
+        description: A domain to exclude from the similar search so results are not duplicates of the seed source.
+  steps:
+  - stepId: seedSearch
+    description: >-
+      Run a seed search to find an anchor document for the topic and capture its
+      url and title.
+    operationId: search
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        query: $inputs.query
+        type: auto
+        numResults: 5
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      anchorUrl: $response.body#/results/0/url
+      anchorTitle: $response.body#/results/0/title
+  - stepId: similarSearch
+    description: >-
+      Run a second search steered toward documents similar to the anchor while
+      excluding the anchor's own domain so fresh-but-similar sources surface.
+    operationId: search
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        query: $inputs.similarQuery
+        type: auto
+        numResults: 10
+        excludeDomains:
+        - $inputs.excludeDomain
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      similarUrl: $response.body#/results/0/url
+      similarId: $response.body#/results/0/id
+  - stepId: fetchSimilarContents
+    description: >-
+      Retrieve the full text and a summary for the top similar result.
+    operationId: getContents
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        urls:
+        - $steps.similarSearch.outputs.similarUrl
+        text: true
+        summary: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      text: $response.body#/results/0/text
+      summary: $response.body#/results/0/summary
+  outputs:
+    anchorUrl: $steps.seedSearch.outputs.anchorUrl
+    similarUrl: $steps.similarSearch.outputs.similarUrl
+    similarText: $steps.fetchSimilarContents.outputs.text
+    similarSummary: $steps.fetchSimilarContents.outputs.summary

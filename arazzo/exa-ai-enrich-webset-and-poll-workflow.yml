@@ -1,0 +1,164 @@
+arazzo: 1.0.1
+info:
+  title: Exa Enrich Webset and Poll
+  summary: Build a Webset, then add an enrichment column and poll until it completes.
+  description: >-
+    Extends a Webset with an AI enrichment. The workflow creates a Webset from a
+    search query, polls it until it returns to idle, then attaches an enrichment
+    that asks an agent to extract a described data point onto each item, and
+    finally polls the enrichment until it leaves the pending state and reaches
+    completed, branching back to keep polling while it is still pending. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: websetsApi
+  url: ../openapi/exa-websets-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: enrich-webset-and-poll
+  summary: Create a Webset, enrich its items, and poll the enrichment to completion.
+  description: >-
+    Creates a Webset, waits for it to settle to idle, creates an enrichment over
+    its items, and polls the enrichment until it reaches the completed status.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - query
+    - enrichmentDescription
+    properties:
+      apiKey:
+        type: string
+        description: Your Exa API key, sent in the x-api-key header.
+      query:
+        type: string
+        description: Natural-language search query describing the entities to collect.
+      count:
+        type: integer
+        description: Number of items the Webset will attempt to find.
+        default: 10
+      enrichmentDescription:
+        type: string
+        description: Description of the enrichment task to run on each item (e.g. "Company revenue").
+      format:
+        type: string
+        description: Format of the enrichment response (text, date, number, options, email, phone, url).
+        default: text
+  steps:
+  - stepId: createWebset
+    description: >-
+      Create a Webset with an embedded search query. It begins processing
+      immediately; capture its id and status.
+    operationId: websets-create
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        search:
+          query: $inputs.query
+          count: $inputs.count
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      websetId: $response.body#/id
+  - stepId: pollWebset
+    description: >-
+      Poll the Webset until it returns to idle, looping while it is still running
+      or pending.
+    operationId: websets-get
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: id
+      in: path
+      value: $steps.createWebset.outputs.websetId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: stillRunning
+      type: goto
+      stepId: pollWebset
+      criteria:
+      - context: $response.body
+        condition: $.status == "running"
+        type: jsonpath
+    - name: stillPending
+      type: goto
+      stepId: pollWebset
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending"
+        type: jsonpath
+    - name: settled
+      type: goto
+      stepId: createEnrichment
+      criteria:
+      - context: $response.body
+        condition: $.status == "idle"
+        type: jsonpath
+  - stepId: createEnrichment
+    description: >-
+      Attach an enrichment to the Webset that asks an agent to extract the
+      described data point onto each item; capture the enrichment id and status.
+    operationId: websets-enrichments-create
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: webset
+      in: path
+      value: $steps.createWebset.outputs.websetId
+    requestBody:
+      contentType: application/json
+      payload:
+        description: $inputs.enrichmentDescription
+        format: $inputs.format
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      enrichmentId: $response.body#/id
+      status: $response.body#/status
+  - stepId: pollEnrichment
+    description: >-
+      Poll the enrichment by id until it reaches completed, looping back while it
+      is still pending.
+    operationId: websets-enrichments-get
+    parameters:
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: webset
+      in: path
+      value: $steps.createWebset.outputs.websetId
+    - name: id
+      in: path
+      value: $steps.createEnrichment.outputs.enrichmentId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+    onSuccess:
+    - name: stillPending
+      type: goto
+      stepId: pollEnrichment
+      criteria:
+      - context: $response.body
+        condition: $.status == "pending"
+        type: jsonpath
+    - name: completed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status == "completed"
+        type: jsonpath
+  outputs:
+    websetId: $steps.createWebset.outputs.websetId
+    enrichmentId: $steps.createEnrichment.outputs.enrichmentId
+    enrichmentStatus: $steps.pollEnrichment.outputs.status
