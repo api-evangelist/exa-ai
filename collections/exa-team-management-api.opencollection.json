@@ -1,0 +1,194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Team Management API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Team Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API Keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://admin-api.exa.ai/team-management/api-keys",
+            "params": [
+              {
+                "name": "api_key_id",
+                "value": "",
+                "type": "query",
+                "description": "Optional API key ID to retrieve a specific key"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns all API keys belonging to the authenticated team. Includes ID, name, and rate limit for each key."
+        },
+        {
+          "info": {
+            "name": "Create API Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://admin-api.exa.ai/team-management/api-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new API key for the authenticated team. Optionally specify a name, rate limit, and budget for the API key."
+        },
+        {
+          "info": {
+            "name": "Get API Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://admin-api.exa.ai/team-management/api-keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the API key"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves details of a specific API key by its ID."
+        },
+        {
+          "info": {
+            "name": "Update API Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://admin-api.exa.ai/team-management/api-keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the API key to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Updates an existing API key's name and/or rate limit. Only API keys belonging to the authenticated team can be updated."
+        },
+        {
+          "info": {
+            "name": "Delete API Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://admin-api.exa.ai/team-management/api-keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the API key to delete"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes an API key. Only API keys belonging to the authenticated team can be deleted."
+        },
+        {
+          "info": {
+            "name": "Get API Key Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://admin-api.exa.ai/team-management/api-keys/:id/usage",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the API key"
+              },
+              {
+                "name": "start_date",
+                "value": "2025-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Start date for the usage period (ISO 8601 format). Defaults to 30 days ago. Must be within the last 6 months (180 days)."
+              },
+              {
+                "name": "end_date",
+                "value": "2025-01-31T23:59:59Z",
+                "type": "query",
+                "description": "End date for the usage period (ISO 8601 format). Defaults to current time."
+              },
+              {
+                "name": "group_by",
+                "value": "day",
+                "type": "query",
+                "description": "Time granularity for grouping results. Currently reserved for future enhancements and does not change the response shape. Defaults to 'day'."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieves usage analytics and billing data for a specific API key over a given time period. Returns cost breakdown by price type from the billing system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

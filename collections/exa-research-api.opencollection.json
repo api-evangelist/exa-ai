@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Exa Research API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Research",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List research requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/research/v1",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor to paginate through the results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (1-50)"
+              }
+            ]
+          },
+          "docs": "Get a paginated list of research requests"
+        },
+        {
+          "info": {
+            "name": "Create a new research request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/research/v1",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new research request"
+        },
+        {
+          "info": {
+            "name": "Get a research request by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/research/v1/:researchId",
+            "params": [
+              {
+                "name": "researchId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the research request to retrieve"
+              },
+              {
+                "name": "stream",
+                "value": "",
+                "type": "query",
+                "description": "Set to \"true\" to receive real-time updates via Server-Sent Events (SSE)"
+              },
+              {
+                "name": "events",
+                "value": "",
+                "type": "query",
+                "description": "Set to \"true\" to include the detailed event log of all operations performed"
+              }
+            ]
+          },
+          "docs": "Retrieve research by ID. Add ?stream=true for real-time SSE updates."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1954 @@
+{
+  "item": [
+    {
+      "id": "a0003123-efee-49bf-b6bc-7f11840d0df5",
+      "name": "Monitors",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ab608b5-8f96-4567-9403-6da820e131a9",
+          "name": "Create a Monitor",
+          "request": {
+            "name": "Create a Monitor",
+            "description": {
+              "content": "Creates a new Monitor to run recurring Exa searches on a schedule.\n\nMonitors automatically execute your search query on a recurring schedule and deliver results to your webhook endpoint with automatic deduplication:\n\n- **Date-based filtering** only fetches content since the last run\n\n- **Semantic deduplication** tracks previous outputs to surface only new developments\n\nThe response includes a `webhookSecret` that is only returned once at creation time. Store it securely for webhook signature verification.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "monitors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"search\": {\n    \"query\": \"<string>\",\n    \"numResults\": 10,\n    \"contents\": {\n      \"text\": false,\n      \"highlights\": false,\n      \"summary\": \"<boolean>\",\n      \"extras\": {\n        \"links\": 0,\n        \"imageLinks\": 0,\n        \"richImageLinks\": 0,\n        \"richLinks\": 0,\n        \"codeBlocks\": 0\n      },\n      \"context\": \"<boolean>\",\n      \"livecrawl\": \"<string>\",\n      \"livecrawlTimeout\": 10000,\n      \"maxAgeHours\": \"<integer>\",\n      \"filterEmptyResults\": \"<boolean>\",\n      \"subpages\": 0,\n      \"subpageTarget\": \"<string>\"\n    }\n  },\n  \"webhook\": {\n    \"url\": \"<uri>\",\n    \"events\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\",\n  \"trigger\": {\n    \"type\": \"interval\",\n    \"period\": \"<string>\"\n  },\n  \"outputSchema\": {\n    \"type\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bb52cc7c-4a6f-4971-aa0f-2a547d0f33aa",
+              "name": "The created monitor with webhook secret",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search\": {\n    \"query\": \"Latest developments in LLM capabilities\",\n    \"numResults\": 10,\n    \"contents\": {\n      \"text\": false,\n      \"highlights\": false,\n      \"summary\": true,\n      \"extras\": {\n        \"links\": 1,\n        \"imageLinks\": 1,\n        \"richImageLinks\": 0,\n        \"richLinks\": 0,\n        \"codeBlocks\": 0\n      },\n      \"context\": true,\n      \"livecrawl\": \"always\",\n      \"livecrawlTimeout\": 1000,\n      \"maxAgeHours\": 24,\n      \"filterEmptyResults\": true,\n      \"subpages\": 1,\n      \"subpageTarget\": \"string\"\n    }\n  },\n  \"webhook\": {\n    \"url\": \"https://XBaSFvoW.vzOmQr5Z9fA+huhBlW8wVo65j3NkHp-0IsE5Dfn9S8xZRHPH+X8u\",\n    \"events\": [\n      \"monitor.updated\",\n      \"monitor.created\"\n    ]\n  },\n  \"name\": \"<string>\",\n  \"trigger\": {\n    \"type\": \"interval\",\n    \"period\": \"6h\"\n  },\n  \"outputSchema\": {\n    \"type\": \"string\",\n    \"description\": \"string\"\n  },\n  \"metadata\": {\n    \"slack_channel_id\": \"C123ABC\",\n    \"slack_thread_id\": \"1745444400.123456\",\n    \"user_id\": \"U123ABC\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"paused\",\n  \"search\": {\n    \"query\": \"Latest developments in LLM capabilities\",\n    \"numResults\": 10,\n    \"contents\": {\n      \"text\": false,\n      \"highlights\": false,\n      \"summary\": true,\n      \"extras\": {\n        \"links\": 1,\n        \"imageLinks\": 1,\n        \"richImageLinks\": 0,\n        \"richLinks\": 0,\n        \"codeBlocks\": 0\n      },\n      \"context\": true,\n      \"livecrawl\": \"fallback\",\n      \"livecrawlTimeout\": 1000,\n      \"maxAgeHours\": 24,\n      \"filterEmptyResults\": false,\n      \"subpages\": 1,\n      \"subpageTarget\": \"string\"\n    }\n  },\n  \"trigger\": {\n    \"type\": \"interval\",\n    \"period\": \"6h\"\n  },\n  \"outputSchema\": {\n    \"type\": \"string\",\n    \"description\": \"string\"\n  },\n  \"metadata\": {\n    \"slack_channel_id\": \"C123ABC\",\n    \"slack_thread_id\": \"1745444400.123456\",\n    \"user_id\": \"U123ABC\"\n  },\n  \"webhook\": {\n    \"url\": \"https://iCgPwgbtfvdVjB.ykv2VE4I3CH4wGt\",\n    \"events\": [\n      \"monitor.updated\",\n      \"monitor.run.created\"\n    ]\n  },\n  \"nextRunAt\": \"1991-05-17T18:06:18.511Z\",\n  \"createdAt\": \"1956-05-04T00:30:46.078Z\",\n  \"updatedAt\": \"2001-07-29T20:48:02.193Z\",\n  \"webhookSecret\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00e45891-d78d-4569-8b28-64df79025189",
+          "name": "List Monitors",
+          "request": {
+            "name": "List Monitors",
+            "description": {
+              "content": "Lists all monitors for the authenticated team. Supports filtering by status and cursor-based pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "monitors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata[key_0]",
+                  "value": "<string>",
+                  "description": "Filter monitors by metadata key-value pairs (exact match, AND semantics). Use bracket notation: `metadata[key]=value`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2e46b94-eef6-4905-879e-574341b09ec7",
+              "name": "A paginated list of monitors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata[key_0]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"paused\",\n      \"search\": {\n        \"query\": \"Latest developments in LLM capabilities\",\n        \"numResults\": 10,\n        \"contents\": {\n          \"text\": false,\n          \"highlights\": false,\n          \"summary\": true,\n          \"extras\": {\n            \"links\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"imageLinks\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"richImageLinks\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"richLinks\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"codeBlocks\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"context\": true,\n          \"livecrawl\": \"preferred\",\n          \"livecrawlTimeout\": 1000,\n          \"maxAgeHours\": 24,\n          \"filterEmptyResults\": false,\n          \"subpages\": 1,\n          \"subpageTarget\": \"string\"\n        }\n      },\n      \"trigger\": {\n        \"type\": \"interval\",\n        \"period\": \"6h\"\n      },\n      \"outputSchema\": {\n        \"type\": \"string\",\n        \"description\": \"string\"\n      },\n      \"metadata\": {\n        \"slack_channel_id\": \"C123ABC\",\n        \"slack_thread_id\": \"1745444400.123456\",\n        \"user_id\": \"U123ABC\"\n      },\n      \"webhook\": {\n        \"url\": \"https://mbPGszUJiXFJW.aoA+ci4pAZ-L.epapbhRpUw218Vn\",\n        \"events\": [\n          \"monitor.created\",\n          \"monitor.run.completed\"\n        ]\n      },\n      \"nextRunAt\": \"1975-05-12T15:58:39.529Z\",\n      \"createdAt\": \"1985-09-19T08:32:08.379Z\",\n      \"updatedAt\": \"2007-12-27T06:01:36.253Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"disabled\",\n      \"search\": {\n        \"query\": \"Latest developments in LLM capabilities\",\n        \"numResults\": 10,\n        \"contents\": {\n          \"text\": false,\n          \"highlights\": false,\n          \"summary\": true,\n          \"extras\": {\n            \"links\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"imageLinks\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"richImageLinks\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"richLinks\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"codeBlocks\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"context\": true,\n          \"livecrawl\": \"preferred\",\n          \"livecrawlTimeout\": 1000,\n          \"maxAgeHours\": 24,\n          \"filterEmptyResults\": false,\n          \"subpages\": 1,\n          \"subpageTarget\": \"string\"\n        }\n      },\n      \"trigger\": {\n        \"type\": \"interval\",\n        \"period\": \"6h\"\n      },\n      \"outputSchema\": {\n        \"type\": \"string\",\n        \"description\": \"string\"\n      },\n      \"metadata\": {\n        \"slack_channel_id\": \"C123ABC\",\n        \"slack_thread_id\": \"1745444400.123456\",\n        \"user_id\": \"U123ABC\"\n      },\n      \"webhook\": {\n        \"url\": \"https://CZxLymfKGhoYIKXOOQKTyOx.yzfavueaOXblRyXp6-BCXogIvBWmrrT1FObnUPhLLl3qn+47cLmB7Cp\",\n        \"events\": [\n          \"monitor.run.created\",\n          \"monitor.run.created\"\n        ]\n      },\n      \"nextRunAt\": \"1958-01-22T11:50:56.301Z\",\n      \"createdAt\": \"2017-07-13T22:52:38.925Z\",\n      \"updatedAt\": \"1973-03-23T09:10:14.146Z\"\n    }\n  ],\n  \"hasMore\": false,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00bed185-2ed4-406b-8a0d-2435c2055717",
+          "name": "Batch Action on Monitors",
+          "request": {
+            "name": "Batch Action on Monitors",
+            "description": {
+              "content": "Perform a batch action on monitors matching the provided filters.\n\nSupported actions:\n- **delete**: Permanently remove matching monitors\n- **pause**: Pause matching monitors\n- **unpause**: Unpause matching monitors\n\nUse `dry_run: true` (the default) to preview which monitors would be affected before performing the action. Results are paginated via the `limit` parameter; loop until `has_more` is `false` to process all matching monitors.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "monitors",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"filter\": {\n    \"name\": \"<string>\",\n    \"status\": \"<string>\",\n    \"metadata\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\",\n      \"key_3\": \"<string>\"\n    }\n  },\n  \"dry_run\": true,\n  \"limit\": 50\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "98c3c7bc-6f98-46e9-a86b-986c3416e5e0",
+              "name": "Batch action result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitors",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"filter\": {\n    \"name\": \"<string>\",\n    \"status\": \"<string>\",\n    \"metadata\": {\n      \"key_0\": \"<string>\"\n    }\n  },\n  \"dry_run\": true,\n  \"limit\": 50\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"delete\",\n  \"affected\": 853,\n  \"ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"dry_run\": true,\n  \"has_more\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8aa915be-f4aa-4859-a909-94a56c5a9d1d",
+          "name": "Get a Monitor",
+          "request": {
+            "name": "Get a Monitor",
+            "description": {
+              "content": "Retrieves a single monitor by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "monitors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The monitor ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "10e05d21-f8e3-440d-89fa-72cfa30efb06",
+              "name": "The monitor",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The monitor ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"paused\",\n  \"search\": {\n    \"query\": \"Latest developments in LLM capabilities\",\n    \"numResults\": 10,\n    \"contents\": {\n      \"text\": false,\n      \"highlights\": false,\n      \"summary\": true,\n      \"extras\": {\n        \"links\": 1,\n        \"imageLinks\": 1,\n        \"richImageLinks\": 0,\n        \"richLinks\": 0,\n        \"codeBlocks\": 0\n      },\n      \"context\": true,\n      \"livecrawl\": \"always\",\n      \"livecrawlTimeout\": 1000,\n      \"maxAgeHours\": 24,\n      \"filterEmptyResults\": true,\n      \"subpages\": 1,\n      \"subpageTarget\": \"string\"\n    }\n  },\n  \"trigger\": {\n    \"type\": \"interval\",\n    \"period\": \"6h\"\n  },\n  \"outputSchema\": {\n    \"type\": \"string\",\n    \"description\": \"string\"\n  },\n  \"metadata\": {\n    \"slack_channel_id\": \"C123ABC\",\n    \"slack_thread_id\": \"1745444400.123456\",\n    \"user_id\": \"U123ABC\"\n  },\n  \"webhook\": {\n    \"url\": \"http://lkyEihONnyDNxcuyIBBFBjw.lsbE+V8mt3uKNfLu+KuniI4fdo+2MTPO3DVUkjuAvGtLOXZStLZ3qT1QSjRV\",\n    \"events\": [\n      \"monitor.run.completed\",\n      \"monitor.run.created\"\n    ]\n  },\n  \"nextRunAt\": \"1950-05-30T00:56:11.384Z\",\n  \"createdAt\": \"1995-11-14T11:25:36.501Z\",\n  \"updatedAt\": \"1970-09-17T18:10:02.248Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8109d630-5a66-46ed-a182-a9922f7a8357",
+          "name": "Update a Monitor",
+          "request": {
+            "name": "Update a Monitor",
+            "description": {
+              "content": "Updates an existing monitor. All fields are optional. For `search`, you can send a partial object containing only the fields you want to change. Set `trigger` to `null` to remove the schedule.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "monitors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The monitor ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"status\": \"<string>\",\n  \"search\": {\n    \"query\": \"<string>\",\n    \"numResults\": 10,\n    \"contents\": {\n      \"text\": false,\n      \"highlights\": false,\n      \"summary\": \"<boolean>\",\n      \"extras\": {\n        \"links\": 0,\n        \"imageLinks\": 0,\n        \"richImageLinks\": 0,\n        \"richLinks\": 0,\n        \"codeBlocks\": 0\n      },\n      \"context\": \"<boolean>\",\n      \"livecrawl\": \"<string>\",\n      \"livecrawlTimeout\": 10000,\n      \"maxAgeHours\": \"<integer>\",\n      \"filterEmptyResults\": \"<boolean>\",\n      \"subpages\": 0,\n      \"subpageTarget\": \"<string>\"\n    }\n  },\n  \"trigger\": {\n    \"type\": \"interval\",\n    \"period\": \"<string>\"\n  },\n  \"outputSchema\": {\n    \"type\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  },\n  \"webhook\": {\n    \"url\": \"<uri>\",\n    \"events\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "489fc47c-1351-4f1d-bd45-b74457f934de",
+              "name": "The updated monitor",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The monitor ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"status\": \"<string>\",\n  \"search\": {\n    \"query\": \"Latest developments in LLM capabilities\",\n    \"numResults\": 10,\n    \"contents\": {\n      \"text\": false,\n      \"highlights\": false,\n      \"summary\": false,\n      \"extras\": {\n        \"links\": 1,\n        \"imageLinks\": 1,\n        \"richImageLinks\": 0,\n        \"richLinks\": 0,\n        \"codeBlocks\": 0\n      },\n      \"context\": true,\n      \"livecrawl\": \"always\",\n      \"livecrawlTimeout\": 1000,\n      \"maxAgeHours\": 24,\n      \"filterEmptyResults\": false,\n      \"subpages\": 1,\n      \"subpageTarget\": \"string\"\n    }\n  },\n  \"trigger\": {\n    \"type\": \"interval\",\n    \"period\": \"<string>\"\n  },\n  \"outputSchema\": {\n    \"type\": \"string\",\n    \"description\": \"string\"\n  },\n  \"metadata\": {\n    \"slack_channel_id\": \"C123ABC\",\n    \"slack_thread_id\": \"1745444400.123456\",\n    \"user_id\": \"U123ABC\"\n  },\n  \"webhook\": {\n    \"url\": \"<uri>\",\n    \"events\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"paused\",\n  \"search\": {\n    \"query\": \"Latest developments in LLM capabilities\",\n    \"numResults\": 10,\n    \"contents\": {\n      \"text\": false,\n      \"highlights\": false,\n      \"summary\": true,\n      \"extras\": {\n        \"links\": 1,\n        \"imageLinks\": 1,\n        \"richImageLinks\": 0,\n        \"richLinks\": 0,\n        \"codeBlocks\": 0\n      },\n      \"context\": true,\n      \"livecrawl\": \"always\",\n      \"livecrawlTimeout\": 1000,\n      \"maxAgeHours\": 24,\n      \"filterEmptyResults\": true,\n      \"subpages\": 1,\n      \"subpageTarget\": \"string\"\n    }\n  },\n  \"trigger\": {\n    \"type\": \"interval\",\n    \"period\": \"6h\"\n  },\n  \"outputSchema\": {\n    \"type\": \"string\",\n    \"description\": \"string\"\n  },\n  \"metadata\": {\n    \"slack_channel_id\": \"C123ABC\",\n    \"slack_thread_id\": \"1745444400.123456\",\n    \"user_id\": \"U123ABC\"\n  },\n  \"webhook\": {\n    \"url\": \"http://lkyEihONnyDNxcuyIBBFBjw.lsbE+V8mt3uKNfLu+KuniI4fdo+2MTPO3DVUkjuAvGtLOXZStLZ3qT1QSjRV\",\n    \"events\": [\n      \"monitor.run.completed\",\n      \"monitor.run.created\"\n    ]\n  },\n  \"nextRunAt\": \"1950-05-30T00:56:11.384Z\",\n  \"createdAt\": \"1995-11-14T11:25:36.501Z\",\n  \"updatedAt\": \"1970-09-17T18:10:02.248Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ebfeb6d-9373-40b5-83e1-90246a0575c3",
+          "name": "Delete a Monitor",
+          "request": {
+            "name": "Delete a Monitor",
+            "description": {
+              "content": "Deletes a monitor. This cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "monitors",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The monitor ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e00bc5ac-20c5-4d4d-8108-d39b5cd6827b",
+              "name": "The deleted monitor",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The monitor ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"paused\",\n  \"search\": {\n    \"query\": \"Latest developments in LLM capabilities\",\n    \"numResults\": 10,\n    \"contents\": {\n      \"text\": false,\n      \"highlights\": false,\n      \"summary\": true,\n      \"extras\": {\n        \"links\": 1,\n        \"imageLinks\": 1,\n        \"richImageLinks\": 0,\n        \"richLinks\": 0,\n        \"codeBlocks\": 0\n      },\n      \"context\": true,\n      \"livecrawl\": \"always\",\n      \"livecrawlTimeout\": 1000,\n      \"maxAgeHours\": 24,\n      \"filterEmptyResults\": true,\n      \"subpages\": 1,\n      \"subpageTarget\": \"string\"\n    }\n  },\n  \"trigger\": {\n    \"type\": \"interval\",\n    \"period\": \"6h\"\n  },\n  \"outputSchema\": {\n    \"type\": \"string\",\n    \"description\": \"string\"\n  },\n  \"metadata\": {\n    \"slack_channel_id\": \"C123ABC\",\n    \"slack_thread_id\": \"1745444400.123456\",\n    \"user_id\": \"U123ABC\"\n  },\n  \"webhook\": {\n    \"url\": \"http://lkyEihONnyDNxcuyIBBFBjw.lsbE+V8mt3uKNfLu+KuniI4fdo+2MTPO3DVUkjuAvGtLOXZStLZ3qT1QSjRV\",\n    \"events\": [\n      \"monitor.run.completed\",\n      \"monitor.run.created\"\n    ]\n  },\n  \"nextRunAt\": \"1950-05-30T00:56:11.384Z\",\n  \"createdAt\": \"1995-11-14T11:25:36.501Z\",\n  \"updatedAt\": \"1970-09-17T18:10:02.248Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed4a6728-4acc-473b-9335-c32ccfb2d5aa",
+          "name": "Trigger a Monitor",
+          "request": {
+            "name": "Trigger a Monitor",
+            "description": {
+              "content": "Triggers a run immediately, regardless of the schedule. Works for monitors with status `active` or `paused`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "monitors",
+                ":id",
+                "trigger"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The monitor ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58d513d0-7d44-49f9-bb90-204aee1f6eb8",
+              "name": "Whether the monitor was triggered",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitors",
+                    ":id",
+                    "trigger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The monitor ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"triggered\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4dd1121-1739-4251-83f5-abf9dfc4df5f",
+          "name": "Create a Monitor",
+          "request": {
+            "name": "Create a Monitor",
+            "description": {
+              "content": "Creates a new `Monitor` to continuously keep your Websets updated with fresh data.\n\nMonitors automatically run on your defined schedule to ensure your Websets stay current without manual intervention:\n\n- **Find new content**: Execute `search` operations to discover fresh items matching your criteria\n- **Update existing content**: Run `refresh` operations to update items contents and enrichments\n- **Automated scheduling**: Configure `cron` expressions and `timezone` for precise scheduling control",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "monitors"
+              ],
+              "host": [
+                "{{v0-monitors-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"websetId\": \"<string>\",\n  \"cadence\": {\n    \"cron\": \"<string>\",\n    \"timezone\": \"Etc/UTC\"\n  },\n  \"behavior\": {\n    \"type\": \"search\",\n    \"config\": {\n      \"count\": \"<number>\",\n      \"query\": \"<string>\",\n      \"criteria\": [\n        {\n          \"description\": \"<string>\"\n        },\n        {\n          \"description\": \"<string>\"\n        }\n      ],\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"behavior\": \"append\"\n    }\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ef4b7c98-6a30-4ab0-b246-ad9af65c9c0e",
+              "name": "Monitor created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "monitors"
+                  ],
+                  "host": [
+                    "{{v0-monitors-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"websetId\": \"<string>\",\n  \"cadence\": {\n    \"cron\": \"<string>\",\n    \"timezone\": \"Etc/UTC\"\n  },\n  \"behavior\": {\n    \"type\": \"search\",\n    \"config\": {\n      \"count\": \"<number>\",\n      \"query\": \"<string>\",\n      \"criteria\": [\n        {\n          \"description\": \"<string>\"\n        },\n        {\n          \"description\": \"<string>\"\n        }\n      ],\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"behavior\": \"append\"\n    }\n  },\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"monitor\",\n  \"status\": \"disabled\",\n  \"websetId\": \"string\",\n  \"cadence\": {\n    \"cron\": \"string\",\n    \"timezone\": \"Etc/UTC\"\n  },\n  \"behavior\": {\n    \"type\": \"search\",\n    \"config\": {\n      \"count\": 7283.250243365814,\n      \"query\": \"string\",\n      \"criteria\": [\n        {\n          \"description\": \"string\"\n        },\n        {\n          \"description\": \"string\"\n        }\n      ],\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"behavior\": \"append\"\n    }\n  },\n  \"lastRun\": {\n    \"id\": \"string\",\n    \"object\": \"monitor_run\",\n    \"monitorId\": \"string\",\n    \"status\": \"running\",\n    \"type\": \"search\",\n    \"completedAt\": \"1997-09-04T03:22:00.880Z\",\n    \"failedAt\": \"1985-09-11T08:25:34.134Z\",\n    \"failedReason\": \"string\",\n    \"canceledAt\": \"1964-09-01T23:16:25.816Z\",\n    \"createdAt\": \"1976-04-26T11:27:47.919Z\",\n    \"updatedAt\": \"2011-07-30T05:32:10.961Z\"\n  },\n  \"nextRunAt\": \"1970-08-26T05:19:28.707Z\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  },\n  \"createdAt\": \"1991-11-19T02:06:25.223Z\",\n  \"updatedAt\": \"1975-03-08T19:21:06.888Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a334dd8-baa7-49ff-b71d-3db873326981",
+          "name": "List Monitors",
+          "request": {
+            "name": "List Monitors",
+            "description": {
+              "content": "Lists all monitors for the Webset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "monitors"
+              ],
+              "host": [
+                "{{v0-monitors-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "The cursor to paginate through the results"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "websetId",
+                  "value": "<string>",
+                  "description": "The id of the Webset to list monitors for"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4c646acb-4f79-49ae-894c-363e8a0e1a47",
+              "name": "List of monitors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "monitors"
+                  ],
+                  "host": [
+                    "{{v0-monitors-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "websetId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor\",\n      \"status\": \"disabled\",\n      \"websetId\": \"string\",\n      \"cadence\": {\n        \"cron\": \"string\",\n        \"timezone\": \"Etc/UTC\"\n      },\n      \"behavior\": {\n        \"type\": \"search\",\n        \"config\": {\n          \"count\": 9015.694263773878,\n          \"query\": \"string\",\n          \"criteria\": [\n            {\n              \"description\": \"string\"\n            },\n            {\n              \"description\": \"string\"\n            }\n          ],\n          \"entity\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"behavior\": \"append\"\n        }\n      },\n      \"lastRun\": {\n        \"id\": \"string\",\n        \"object\": \"monitor_run\",\n        \"monitorId\": \"string\",\n        \"status\": \"created\",\n        \"type\": \"search\",\n        \"completedAt\": \"1966-09-28T22:45:25.623Z\",\n        \"failedAt\": \"2010-11-25T21:43:56.929Z\",\n        \"failedReason\": \"string\",\n        \"canceledAt\": \"2001-06-13T10:30:29.331Z\",\n        \"createdAt\": \"1949-10-19T09:04:38.406Z\",\n        \"updatedAt\": \"1961-11-16T16:43:56.150Z\"\n      },\n      \"nextRunAt\": \"2005-07-23T05:27:43.555Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"createdAt\": \"1983-07-23T21:45:41.685Z\",\n      \"updatedAt\": \"2009-03-26T09:40:12.795Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor\",\n      \"status\": \"enabled\",\n      \"websetId\": \"string\",\n      \"cadence\": {\n        \"cron\": \"string\",\n        \"timezone\": \"Etc/UTC\"\n      },\n      \"behavior\": {\n        \"type\": \"search\",\n        \"config\": {\n          \"count\": 1252.8922406995737,\n          \"query\": \"string\",\n          \"criteria\": [\n            {\n              \"description\": \"string\"\n            },\n            {\n              \"description\": \"string\"\n            }\n          ],\n          \"entity\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"behavior\": \"append\"\n        }\n      },\n      \"lastRun\": {\n        \"id\": \"string\",\n        \"object\": \"monitor_run\",\n        \"monitorId\": \"string\",\n        \"status\": \"canceled\",\n        \"type\": \"refresh\",\n        \"completedAt\": \"1953-08-12T09:37:14.950Z\",\n        \"failedAt\": \"2005-03-12T00:29:51.517Z\",\n        \"failedReason\": \"string\",\n        \"canceledAt\": \"2020-04-08T22:19:23.945Z\",\n        \"createdAt\": \"1987-02-08T23:46:39.851Z\",\n        \"updatedAt\": \"2026-04-14T00:55:39.786Z\"\n      },\n      \"nextRunAt\": \"1971-06-26T14:10:18.472Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"createdAt\": \"1990-04-13T14:20:27.878Z\",\n      \"updatedAt\": \"1984-03-04T22:20:55.101Z\"\n    }\n  ],\n  \"hasMore\": false,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c05574a-625f-4984-874d-1fa9426424ce",
+          "name": "Get Monitor",
+          "request": {
+            "name": "Get Monitor",
+            "description": {
+              "content": "Gets a specific monitor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "monitors",
+                ":id"
+              ],
+              "host": [
+                "{{v0-monitors-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the Monitor"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4a51d320-06fe-49a7-b4ee-b4e69ff57522",
+              "name": "Monitor details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-monitors-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Monitor"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"monitor\",\n  \"status\": \"disabled\",\n  \"websetId\": \"string\",\n  \"cadence\": {\n    \"cron\": \"string\",\n    \"timezone\": \"Etc/UTC\"\n  },\n  \"behavior\": {\n    \"type\": \"search\",\n    \"config\": {\n      \"count\": 7283.250243365814,\n      \"query\": \"string\",\n      \"criteria\": [\n        {\n          \"description\": \"string\"\n        },\n        {\n          \"description\": \"string\"\n        }\n      ],\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"behavior\": \"append\"\n    }\n  },\n  \"lastRun\": {\n    \"id\": \"string\",\n    \"object\": \"monitor_run\",\n    \"monitorId\": \"string\",\n    \"status\": \"running\",\n    \"type\": \"search\",\n    \"completedAt\": \"1997-09-04T03:22:00.880Z\",\n    \"failedAt\": \"1985-09-11T08:25:34.134Z\",\n    \"failedReason\": \"string\",\n    \"canceledAt\": \"1964-09-01T23:16:25.816Z\",\n    \"createdAt\": \"1976-04-26T11:27:47.919Z\",\n    \"updatedAt\": \"2011-07-30T05:32:10.961Z\"\n  },\n  \"nextRunAt\": \"1970-08-26T05:19:28.707Z\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  },\n  \"createdAt\": \"1991-11-19T02:06:25.223Z\",\n  \"updatedAt\": \"1975-03-08T19:21:06.888Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d51f4d52-2255-4368-b7ba-a4343bf77616",
+          "name": "Update Monitor",
+          "request": {
+            "name": "Update Monitor",
+            "description": {
+              "content": "Updates a monitor configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "monitors",
+                ":id"
+              ],
+              "host": [
+                "{{v0-monitors-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the Monitor"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"cadence\": {\n    \"cron\": \"<string>\",\n    \"timezone\": \"Etc/UTC\"\n  },\n  \"behavior\": {\n    \"type\": \"search\",\n    \"config\": {\n      \"count\": \"<number>\",\n      \"query\": \"<string>\",\n      \"criteria\": [\n        {\n          \"description\": \"<string>\"\n        },\n        {\n          \"description\": \"<string>\"\n        }\n      ],\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"behavior\": \"append\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "56d8a696-cd3b-41e4-bfd0-70ec715b01e4",
+              "name": "Monitor updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-monitors-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Monitor"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\",\n    \"key_4\": \"<string>\"\n  },\n  \"cadence\": {\n    \"cron\": \"string\",\n    \"timezone\": \"Etc/UTC\"\n  },\n  \"behavior\": {\n    \"type\": \"search\",\n    \"config\": {\n      \"count\": 113.08832826937808,\n      \"query\": \"string\",\n      \"criteria\": [\n        {\n          \"description\": \"string\"\n        },\n        {\n          \"description\": \"string\"\n        }\n      ],\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"behavior\": \"append\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"monitor\",\n  \"status\": \"disabled\",\n  \"websetId\": \"string\",\n  \"cadence\": {\n    \"cron\": \"string\",\n    \"timezone\": \"Etc/UTC\"\n  },\n  \"behavior\": {\n    \"type\": \"search\",\n    \"config\": {\n      \"count\": 7283.250243365814,\n      \"query\": \"string\",\n      \"criteria\": [\n        {\n          \"description\": \"string\"\n        },\n        {\n          \"description\": \"string\"\n        }\n      ],\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"behavior\": \"append\"\n    }\n  },\n  \"lastRun\": {\n    \"id\": \"string\",\n    \"object\": \"monitor_run\",\n    \"monitorId\": \"string\",\n    \"status\": \"running\",\n    \"type\": \"search\",\n    \"completedAt\": \"1997-09-04T03:22:00.880Z\",\n    \"failedAt\": \"1985-09-11T08:25:34.134Z\",\n    \"failedReason\": \"string\",\n    \"canceledAt\": \"1964-09-01T23:16:25.816Z\",\n    \"createdAt\": \"1976-04-26T11:27:47.919Z\",\n    \"updatedAt\": \"2011-07-30T05:32:10.961Z\"\n  },\n  \"nextRunAt\": \"1970-08-26T05:19:28.707Z\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  },\n  \"createdAt\": \"1991-11-19T02:06:25.223Z\",\n  \"updatedAt\": \"1975-03-08T19:21:06.888Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02934275-6c3a-4258-862d-a605a4d69256",
+          "name": "Delete Monitor",
+          "request": {
+            "name": "Delete Monitor",
+            "description": {
+              "content": "Deletes a monitor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "monitors",
+                ":id"
+              ],
+              "host": [
+                "{{v0-monitors-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the Monitor"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ca6a975c-9087-4b4d-aa1b-50cd2ba72d4e",
+              "name": "Monitor deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "monitors",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-monitors-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Monitor"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"monitor\",\n  \"status\": \"disabled\",\n  \"websetId\": \"string\",\n  \"cadence\": {\n    \"cron\": \"string\",\n    \"timezone\": \"Etc/UTC\"\n  },\n  \"behavior\": {\n    \"type\": \"search\",\n    \"config\": {\n      \"count\": 7283.250243365814,\n      \"query\": \"string\",\n      \"criteria\": [\n        {\n          \"description\": \"string\"\n        },\n        {\n          \"description\": \"string\"\n        }\n      ],\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"behavior\": \"append\"\n    }\n  },\n  \"lastRun\": {\n    \"id\": \"string\",\n    \"object\": \"monitor_run\",\n    \"monitorId\": \"string\",\n    \"status\": \"running\",\n    \"type\": \"search\",\n    \"completedAt\": \"1997-09-04T03:22:00.880Z\",\n    \"failedAt\": \"1985-09-11T08:25:34.134Z\",\n    \"failedReason\": \"string\",\n    \"canceledAt\": \"1964-09-01T23:16:25.816Z\",\n    \"createdAt\": \"1976-04-26T11:27:47.919Z\",\n    \"updatedAt\": \"2011-07-30T05:32:10.961Z\"\n  },\n  \"nextRunAt\": \"1970-08-26T05:19:28.707Z\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  },\n  \"createdAt\": \"1991-11-19T02:06:25.223Z\",\n  \"updatedAt\": \"1975-03-08T19:21:06.888Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "dd3d821f-f91c-4b6b-b21b-6623bb3ed0bd",
+      "name": "Runs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f6ac685f-0295-49ca-873c-9aaa14cdcded",
+          "name": "List Runs",
+          "request": {
+            "name": "List Runs",
+            "description": {
+              "content": "Lists all runs for a monitor with cursor-based pagination. Runs are returned in reverse chronological order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "monitors",
+                ":id",
+                "runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The monitor ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "065c7908-f35c-4848-8666-80f868118d4e",
+              "name": "A paginated list of runs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitors",
+                    ":id",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The monitor ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"monitorId\": \"string\",\n      \"status\": \"pending\",\n      \"output\": {\n        \"results\": [\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"content\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"grounding\": [\n          {\n            \"field\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"citations\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"field\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"citations\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"failReason\": \"search_failed\",\n      \"startedAt\": \"1949-12-05T00:09:16.924Z\",\n      \"completedAt\": \"2009-01-24T08:11:11.052Z\",\n      \"failedAt\": \"1999-01-21T14:21:57.529Z\",\n      \"cancelledAt\": \"1998-11-17T19:11:23.066Z\",\n      \"durationMs\": 1822,\n      \"createdAt\": \"2012-07-04T15:20:00.313Z\",\n      \"updatedAt\": \"2025-11-26T06:27:42.536Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"monitorId\": \"string\",\n      \"status\": \"running\",\n      \"output\": {\n        \"results\": [\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"content\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"grounding\": [\n          {\n            \"field\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"citations\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"field\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"citations\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"failReason\": \"invalid_params\",\n      \"startedAt\": \"1978-08-24T02:49:49.015Z\",\n      \"completedAt\": \"1969-04-19T06:27:43.317Z\",\n      \"failedAt\": \"1990-01-20T22:14:56.209Z\",\n      \"cancelledAt\": \"1990-06-29T10:17:41.031Z\",\n      \"durationMs\": 5895,\n      \"createdAt\": \"1963-06-06T23:33:33.772Z\",\n      \"updatedAt\": \"2001-03-17T19:57:19.096Z\"\n    }\n  ],\n  \"hasMore\": true,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c16df69-c5f2-4352-985e-3e0fa5cf1c76",
+          "name": "Get a Run",
+          "request": {
+            "name": "Get a Run",
+            "description": {
+              "content": "Retrieves a single run by its ID, including the full output if the run is completed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "monitors",
+                ":id",
+                "runs",
+                ":runId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The monitor ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "runId",
+                  "description": "(Required) The run ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3cbd72e9-efee-48ff-b968-ecbec63ef097",
+              "name": "The run",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitors",
+                    ":id",
+                    "runs",
+                    ":runId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The monitor ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "runId",
+                      "description": "(Required) The run ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"monitorId\": \"string\",\n  \"status\": \"cancelled\",\n  \"output\": {\n    \"results\": [\n      {\n        \"key_0\": null,\n        \"key_1\": null\n      },\n      {\n        \"key_0\": null\n      }\n    ],\n    \"content\": null,\n    \"grounding\": [\n      {\n        \"field\": \"string\",\n        \"citations\": [\n          {\n            \"url\": \"https://PGtHKTiuZKgdhcucxj.bcPL18UwvttBdROF9Rrz8qHGUBGdIdRPQ2LPslhSzF.5ImbeXUk-teV5L+EJ5Zxq\",\n            \"title\": \"string\"\n          },\n          {\n            \"url\": \"http://sDVwMRnwpCFepaDzRsaxQHGYHgCMvk.qzqlQ.JnoFdvJ1IiOXb\",\n            \"title\": \"string\"\n          }\n        ],\n        \"confidence\": \"low\"\n      },\n      {\n        \"field\": \"string\",\n        \"citations\": [\n          {\n            \"url\": \"https://SVxuGmXJtCwTVA.dbsK.REmAaXNMV9yZC\",\n            \"title\": \"string\"\n          },\n          {\n            \"url\": \"https://MzWPzuDVbUlOTWgXXlkZj.duKbdb917aud+GaCmwM96pxHqM5MEzg\",\n            \"title\": \"string\"\n          }\n        ],\n        \"confidence\": \"low\"\n      }\n    ]\n  },\n  \"failReason\": \"api_key_invalid\",\n  \"startedAt\": \"1962-04-16T21:39:02.677Z\",\n  \"completedAt\": \"1986-06-22T14:14:41.948Z\",\n  \"failedAt\": \"1970-08-10T06:51:37.995Z\",\n  \"cancelledAt\": \"2010-04-26T05:56:46.617Z\",\n  \"durationMs\": 295,\n  \"createdAt\": \"2006-08-07T21:27:03.590Z\",\n  \"updatedAt\": \"1970-07-31T11:40:22.650Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0bdcffee-7fb7-4a0e-bfee-103f5dd411ea",
+      "name": "Monitors Runs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "da700a92-4ade-49a2-a293-6cbe0a6ad185",
+          "name": "List Monitor Runs",
+          "request": {
+            "name": "List Monitor Runs",
+            "description": {
+              "content": "Lists all runs for the Monitor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "monitors",
+                ":monitor",
+                "runs"
+              ],
+              "host": [
+                "{{v0-monitors-monitor-runs-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "monitor",
+                  "description": "(Required) The id of the Monitor to list runs for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b2b2933b-eace-4f6c-ae5b-63f7d7a7316d",
+              "name": "List of monitor runs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "monitors",
+                    ":monitor",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{v0-monitors-monitor-runs-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor",
+                      "description": "(Required) The id of the Monitor to list runs for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor_run\",\n      \"monitorId\": \"string\",\n      \"status\": \"running\",\n      \"type\": \"refresh\",\n      \"completedAt\": \"1960-11-04T09:46:11.773Z\",\n      \"failedAt\": \"1985-08-22T14:53:19.010Z\",\n      \"failedReason\": \"string\",\n      \"canceledAt\": \"1978-10-28T21:48:49.397Z\",\n      \"createdAt\": \"1974-04-14T00:23:51.848Z\",\n      \"updatedAt\": \"2002-12-20T01:46:55.631Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor_run\",\n      \"monitorId\": \"string\",\n      \"status\": \"completed\",\n      \"type\": \"search\",\n      \"completedAt\": \"1997-06-04T19:01:01.330Z\",\n      \"failedAt\": \"1979-04-17T23:19:52.404Z\",\n      \"failedReason\": \"string\",\n      \"canceledAt\": \"1966-07-14T19:29:40.819Z\",\n      \"createdAt\": \"1983-02-06T11:52:51.881Z\",\n      \"updatedAt\": \"1967-07-31T23:32:53.803Z\"\n    }\n  ],\n  \"hasMore\": true,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b15d670-8ad9-44be-801a-046b79d154e9",
+          "name": "Get Monitor Run",
+          "request": {
+            "name": "Get Monitor Run",
+            "description": {
+              "content": "Gets a specific monitor run.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "monitors",
+                ":monitor",
+                "runs",
+                ":id"
+              ],
+              "host": [
+                "{{v0-monitors-monitor-runs-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "monitor",
+                  "description": "(Required) The id of the Monitor to get the run for"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "386fedbe-620d-43be-94f5-0cf1f3a37b34",
+              "name": "Monitor run details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "monitors",
+                    ":monitor",
+                    "runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-monitors-monitor-runs-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor",
+                      "description": "(Required) The id of the Monitor to get the run for"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"monitor_run\",\n  \"monitorId\": \"string\",\n  \"status\": \"created\",\n  \"type\": \"refresh\",\n  \"completedAt\": \"1978-08-26T01:39:19.023Z\",\n  \"failedAt\": \"2014-03-18T02:54:21.157Z\",\n  \"failedReason\": \"string\",\n  \"canceledAt\": \"1952-03-03T01:37:33.538Z\",\n  \"createdAt\": \"1949-02-10T19:57:24.646Z\",\n  \"updatedAt\": \"1961-11-05T18:11:18.215Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.exa.ai",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-monitors-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-monitors-id-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-monitors-monitor-runs-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-monitors-monitor-runs-id-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c640e18f-7769-4ac6-84fe-dab2b39cf39c",
+    "name": "Exa Monitors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Exa Monitors API - subset of the Exa Public API.",
+      "type": "text/plain"
+    }
+  }
+}

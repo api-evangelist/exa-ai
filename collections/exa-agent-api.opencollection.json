@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Exa Agent API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agent",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/agent/runs",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Agent runs for your team, ordered from newest to oldest."
+        },
+        {
+          "info": {
+            "name": "Create a run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/agent/runs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an asynchronous Agent run. By default, the API returns the run object immediately. Set `Accept: text/event-stream` to stream run lifecycle events until the run reaches a terminal status."
+        },
+        {
+          "info": {
+            "name": "Get a run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/agent/runs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent run ID."
+              }
+            ]
+          },
+          "docs": "Retrieve a single Agent run by ID."
+        },
+        {
+          "info": {
+            "name": "Delete a run",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.exa.ai/agent/runs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent run ID."
+              }
+            ]
+          },
+          "docs": "Delete a stored Agent run."
+        },
+        {
+          "info": {
+            "name": "Cancel a run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/agent/runs/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent run ID."
+              }
+            ]
+          },
+          "docs": "Cancel a queued or running Agent run. If the run has already reached a terminal status, the API returns the existing run."
+        },
+        {
+          "info": {
+            "name": "List run events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/agent/runs/:id/events",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent run ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List stored events for an Agent run. Set `Accept: text/event-stream` to replay stored events as server-sent events. Use `cursor` for JSON pagination or `Last-Event-ID` for SSE replay."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

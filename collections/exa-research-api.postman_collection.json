@@ -1,0 +1,368 @@
+{
+  "item": [
+    {
+      "id": "907193c5-e05d-45ac-bbcb-9ab44d876695",
+      "name": "Research",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "610b79a2-ff79-4099-97d7-3307474a253f",
+          "name": "List research requests",
+          "request": {
+            "name": "List research requests",
+            "description": {
+              "content": "Get a paginated list of research requests",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "research",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "The cursor to paginate through the results"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of results per page (1-50)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7c3206a6-b5a8-4a9b-869c-b613aedabf58",
+              "name": "List of research requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "research",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"researchId\": \"string\",\n      \"createdAt\": 867.5185114398054,\n      \"instructions\": \"string\",\n      \"status\": \"pending\",\n      \"model\": \"exa-research\",\n      \"outputSchema\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    },\n    {\n      \"researchId\": \"string\",\n      \"createdAt\": 4981.428471878733,\n      \"instructions\": \"string\",\n      \"status\": \"pending\",\n      \"model\": \"exa-research\",\n      \"outputSchema\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    }\n  ],\n  \"hasMore\": true,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7da5b8ec-ebd2-4c7e-b234-3a4b34b6699a",
+          "name": "Create a new research request",
+          "request": {
+            "name": "Create a new research request",
+            "description": {},
+            "url": {
+              "path": [
+                "research",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instructions\": \"<string>\",\n  \"model\": \"exa-research\",\n  \"outputSchema\": {\n    \"key_0\": {}\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f7d0dd56-1daf-4d62-9d7d-cc229a460002",
+              "name": "Research request created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "research",
+                    "v1"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"exa-research\",\n  \"instructions\": \"What species of ant are similar to honeypot ants?\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"researchId\": \"string\",\n  \"createdAt\": 6143.034570338324,\n  \"instructions\": \"string\",\n  \"status\": \"pending\",\n  \"model\": \"exa-research\",\n  \"outputSchema\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ff91a15-b369-46a4-9178-f68446318336",
+          "name": "Get a research request by id",
+          "request": {
+            "name": "Get a research request by id",
+            "description": {
+              "content": "Retrieve research by ID. Add ?stream=true for real-time SSE updates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "research",
+                "v1",
+                ":researchId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "stream",
+                  "value": "<string>",
+                  "description": "Set to \"true\" to receive real-time updates via Server-Sent Events (SSE)"
+                },
+                {
+                  "disabled": false,
+                  "key": "events",
+                  "value": "<string>",
+                  "description": "Set to \"true\" to include the detailed event log of all operations performed"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "researchId",
+                  "description": "(Required) The unique identifier of the research request to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "23e6453c-adad-4d46-9a23-416e702fd0e4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "research",
+                    "v1",
+                    ":researchId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "stream",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "events",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "researchId",
+                      "description": "(Required) The unique identifier of the research request to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"researchId\": \"string\",\n  \"createdAt\": 6143.034570338324,\n  \"instructions\": \"string\",\n  \"status\": \"pending\",\n  \"model\": \"exa-research\",\n  \"outputSchema\": {\n    \"key_0\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.exa.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fbcd498b-c54c-4afa-ab3d-3142b6fc9595",
+    "name": "Exa Research API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Exa Research API - subset of the Exa Public API.",
+      "type": "text/plain"
+    }
+  }
+}

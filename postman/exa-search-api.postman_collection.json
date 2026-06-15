@@ -1,0 +1,369 @@
+{
+  "info": {
+    "_postman_id": "505446c4-7a89-4aea-af9a-f3c07939f609",
+    "name": "Exa Search API",
+    "description": "Exa Search API - subset of the Exa Public API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:08:17.000Z",
+    "updatedAt": "2026-06-05T15:08:18.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-505446c4-7a89-4aea-af9a-f3c07939f609"
+  },
+  "item": [
+    {
+      "name": "search",
+      "item": [
+        {
+          "name": "Search",
+          "id": "21156349-70eb-4203-9f65-142d199e762b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"includeDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startCrawlDate\": \"<dateTime>\",\n  \"endCrawlDate\": \"<dateTime>\",\n  \"startPublishedDate\": \"<dateTime>\",\n  \"endPublishedDate\": \"<dateTime>\",\n  \"numResults\": 10,\n  \"context\": \"<boolean>\",\n  \"moderation\": false,\n  \"contents\": {\n    \"text\": false,\n    \"highlights\": false,\n    \"summary\": {\n      \"query\": \"<string>\",\n      \"schema\": {\n        \"magna959\": \"<null>\"\n      }\n    },\n    \"extras\": {\n      \"links\": 0,\n      \"imageLinks\": 0,\n      \"richImageLinks\": 0,\n      \"richLinks\": 0,\n      \"codeBlocks\": 0\n    },\n    \"context\": \"<boolean>\",\n    \"livecrawl\": \"preferred\",\n    \"livecrawlTimeout\": 10000,\n    \"maxAgeHours\": \"<integer>\",\n    \"subpages\": 0,\n    \"subpageTarget\": \"<string>\"\n  },\n  \"additionalQueries\": [\n    \"<string>\"\n  ],\n  \"type\": \"auto\",\n  \"category\": \"company\",\n  \"userLocation\": \"<string>\",\n  \"compliance\": \"hipaa\",\n  \"outputSchema\": {\n    \"type\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"systemPrompt\": \"<string>\",\n  \"stream\": false\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/search",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search"
+              ]
+            },
+            "description": "Perform a search with an Exa prompt-engineered query and retrieve a list of relevant results. Optionally get contents."
+          },
+          "response": [
+            {
+              "id": "a1fee7a0-048b-48a9-86ea-645645f1c198",
+              "name": "OK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"includeDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"excludeDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startCrawlDate\": \"<dateTime>\",\n  \"endCrawlDate\": \"<dateTime>\",\n  \"startPublishedDate\": \"<dateTime>\",\n  \"endPublishedDate\": \"<dateTime>\",\n  \"numResults\": 10,\n  \"context\": \"<boolean>\",\n  \"moderation\": false,\n  \"contents\": {\n    \"text\": false,\n    \"highlights\": false,\n    \"summary\": {\n      \"query\": \"<string>\",\n      \"schema\": {\n        \"magna959\": \"<null>\"\n      }\n    },\n    \"extras\": {\n      \"links\": 0,\n      \"imageLinks\": 0,\n      \"richImageLinks\": 0,\n      \"richLinks\": 0,\n      \"codeBlocks\": 0\n    },\n    \"context\": \"<boolean>\",\n    \"livecrawl\": \"preferred\",\n    \"livecrawlTimeout\": 10000,\n    \"maxAgeHours\": \"<integer>\",\n    \"subpages\": 0,\n    \"subpageTarget\": \"<string>\"\n  },\n  \"additionalQueries\": [\n    \"<string>\"\n  ],\n  \"type\": \"auto\",\n  \"category\": \"company\",\n  \"userLocation\": \"<string>\",\n  \"compliance\": \"hipaa\",\n  \"outputSchema\": {\n    \"type\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  \"systemPrompt\": \"<string>\",\n  \"stream\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/search",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "search"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"results\": [\n    {\n      \"title\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"publishedDate\": \"<dateTime>\",\n      \"author\": \"<string>\",\n      \"id\": \"<string>\",\n      \"image\": \"<uri>\",\n      \"favicon\": \"<uri>\",\n      \"text\": \"<string>\",\n      \"highlights\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"highlightScores\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"summary\": \"<string>\",\n      \"subpages\": [\n        {\n          \"title\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"publishedDate\": \"<dateTime>\",\n          \"author\": \"<string>\",\n          \"id\": \"<string>\",\n          \"image\": \"<uri>\",\n          \"favicon\": \"<uri>\"\n        },\n        {\n          \"title\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"publishedDate\": \"<dateTime>\",\n          \"author\": \"<string>\",\n          \"id\": \"<string>\",\n          \"image\": \"<uri>\",\n          \"favicon\": \"<uri>\"\n        }\n      ],\n      \"entities\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\",\n          \"version\": \"<integer>\",\n          \"properties\": {\n            \"name\": \"<string>\",\n            \"foundedYear\": \"<integer>\",\n            \"description\": \"<string>\",\n            \"workforce\": {\n              \"total\": \"<number>\"\n            },\n            \"headquarters\": {\n              \"address\": \"<string>\",\n              \"city\": \"<string>\",\n              \"postalCode\": \"<string>\",\n              \"country\": \"<string>\"\n            },\n            \"financials\": {\n              \"revenueAnnual\": \"<number>\",\n              \"fundingTotal\": \"<number>\",\n              \"fundingLatestRound\": {\n                \"name\": \"<string>\",\n                \"date\": \"<string>\",\n                \"amount\": \"<number>\"\n              }\n            },\n            \"webTraffic\": {\n              \"visitsMonthly\": \"<number>\",\n              \"countryRank\": \"<integer>\",\n              \"avgDurationSeconds\": \"<number>\",\n              \"history\": [\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                },\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                }\n              ]\n            }\n          }\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\",\n          \"version\": \"<integer>\",\n          \"properties\": {\n            \"name\": \"<string>\",\n            \"foundedYear\": \"<integer>\",\n            \"description\": \"<string>\",\n            \"workforce\": {\n              \"total\": \"<number>\"\n            },\n            \"headquarters\": {\n              \"address\": \"<string>\",\n              \"city\": \"<string>\",\n              \"postalCode\": \"<string>\",\n              \"country\": \"<string>\"\n            },\n            \"financials\": {\n              \"revenueAnnual\": \"<number>\",\n              \"fundingTotal\": \"<number>\",\n              \"fundingLatestRound\": {\n                \"name\": \"<string>\",\n                \"date\": \"<string>\",\n                \"amount\": \"<number>\"\n              }\n            },\n            \"webTraffic\": {\n              \"visitsMonthly\": \"<number>\",\n              \"countryRank\": \"<integer>\",\n              \"avgDurationSeconds\": \"<number>\",\n              \"history\": [\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                },\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                }\n              ]\n            }\n          }\n        }\n      ],\n      \"extras\": {\n        \"links\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"publishedDate\": \"<dateTime>\",\n      \"author\": \"<string>\",\n      \"id\": \"<string>\",\n      \"image\": \"<uri>\",\n      \"favicon\": \"<uri>\",\n      \"text\": \"<string>\",\n      \"highlights\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"highlightScores\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"summary\": \"<string>\",\n      \"subpages\": [\n        {\n          \"title\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"publishedDate\": \"<dateTime>\",\n          \"author\": \"<string>\",\n          \"id\": \"<string>\",\n          \"image\": \"<uri>\",\n          \"favicon\": \"<uri>\"\n        },\n        {\n          \"title\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"publishedDate\": \"<dateTime>\",\n          \"author\": \"<string>\",\n          \"id\": \"<string>\",\n          \"image\": \"<uri>\",\n          \"favicon\": \"<uri>\"\n        }\n      ],\n      \"entities\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\",\n          \"version\": \"<integer>\",\n          \"properties\": {\n            \"name\": \"<string>\",\n            \"foundedYear\": \"<integer>\",\n            \"description\": \"<string>\",\n            \"workforce\": {\n              \"total\": \"<number>\"\n            },\n            \"headquarters\": {\n              \"address\": \"<string>\",\n              \"city\": \"<string>\",\n              \"postalCode\": \"<string>\",\n              \"country\": \"<string>\"\n            },\n            \"financials\": {\n              \"revenueAnnual\": \"<number>\",\n              \"fundingTotal\": \"<number>\",\n              \"fundingLatestRound\": {\n                \"name\": \"<string>\",\n                \"date\": \"<string>\",\n                \"amount\": \"<number>\"\n              }\n            },\n            \"webTraffic\": {\n              \"visitsMonthly\": \"<number>\",\n              \"countryRank\": \"<integer>\",\n              \"avgDurationSeconds\": \"<number>\",\n              \"history\": [\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                },\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                }\n              ]\n            }\n          }\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\",\n          \"version\": \"<integer>\",\n          \"properties\": {\n            \"name\": \"<string>\",\n            \"foundedYear\": \"<integer>\",\n            \"description\": \"<string>\",\n            \"workforce\": {\n              \"total\": \"<number>\"\n            },\n            \"headquarters\": {\n              \"address\": \"<string>\",\n              \"city\": \"<string>\",\n              \"postalCode\": \"<string>\",\n              \"country\": \"<string>\"\n            },\n            \"financials\": {\n              \"revenueAnnual\": \"<number>\",\n              \"fundingTotal\": \"<number>\",\n              \"fundingLatestRound\": {\n                \"name\": \"<string>\",\n                \"date\": \"<string>\",\n                \"amount\": \"<number>\"\n              }\n            },\n            \"webTraffic\": {\n              \"visitsMonthly\": \"<number>\",\n              \"countryRank\": \"<integer>\",\n              \"avgDurationSeconds\": \"<number>\",\n              \"history\": [\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                },\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                }\n              ]\n            }\n          }\n        }\n      ],\n      \"extras\": {\n        \"links\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"output\": {\n    \"content\": \"<string>\",\n    \"grounding\": [\n      {\n        \"field\": \"<string>\",\n        \"citations\": [\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          },\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          }\n        ],\n        \"confidence\": \"medium\"\n      },\n      {\n        \"field\": \"<string>\",\n        \"citations\": [\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          },\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          }\n        ],\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"requestId\": \"<string>\",\n  \"resolvedSearchType\": \"<string>\",\n  \"context\": \"<string>\",\n  \"costDollars\": {\n    \"total\": \"<float>\",\n    \"search\": {\n      \"neural\": \"<float>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T15:08:18.000Z",
+              "updatedAt": "2026-06-05T15:08:18.000Z",
+              "uid": "35240-a1fee7a0-048b-48a9-86ea-645645f1c198"
+            }
+          ],
+          "createdAt": "2026-06-05T15:08:18.000Z",
+          "updatedAt": "2026-06-05T15:08:18.000Z",
+          "uid": "35240-21156349-70eb-4203-9f65-142d199e762b"
+        }
+      ],
+      "id": "dceeaa2e-b9eb-4ee0-a002-a903b26f069a",
+      "createdAt": "2026-06-05T15:08:18.000Z",
+      "updatedAt": "2026-06-05T15:08:18.000Z",
+      "uid": "35240-dceeaa2e-b9eb-4ee0-a002-a903b26f069a"
+    },
+    {
+      "name": "contents",
+      "item": [
+        {
+          "name": "Contents",
+          "id": "ee37e1bc-be2e-4ff2-9c3d-233506ede7af",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"urls\": [\n    \"<string>\"\n  ],\n  \"ids\": [\n    \"<string>\"\n  ],\n  \"compliance\": \"hipaa\",\n  \"text\": false,\n  \"highlights\": false,\n  \"summary\": {\n    \"query\": \"<string>\",\n    \"schema\": {\n      \"consectetur_c\": \"<null>\",\n      \"voluptate_16\": \"<null>\",\n      \"cupidatat_4c\": \"<null>\"\n    }\n  },\n  \"extras\": {\n    \"links\": 0,\n    \"imageLinks\": 0,\n    \"richImageLinks\": 0,\n    \"richLinks\": 0,\n    \"codeBlocks\": 0\n  },\n  \"context\": \"<boolean>\",\n  \"livecrawl\": \"never\",\n  \"livecrawlTimeout\": 10000,\n  \"maxAgeHours\": \"<integer>\",\n  \"subpages\": 0,\n  \"subpageTarget\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/contents",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "contents"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "326241c4-a2ec-4b13-abbe-50045b8c0e6a",
+              "name": "OK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"urls\": [\n    \"<string>\"\n  ],\n  \"ids\": [\n    \"<string>\"\n  ],\n  \"compliance\": \"hipaa\",\n  \"text\": false,\n  \"highlights\": false,\n  \"summary\": {\n    \"query\": \"<string>\",\n    \"schema\": {\n      \"consectetur_c\": \"<null>\",\n      \"voluptate_16\": \"<null>\",\n      \"cupidatat_4c\": \"<null>\"\n    }\n  },\n  \"extras\": {\n    \"links\": 0,\n    \"imageLinks\": 0,\n    \"richImageLinks\": 0,\n    \"richLinks\": 0,\n    \"codeBlocks\": 0\n  },\n  \"context\": \"<boolean>\",\n  \"livecrawl\": \"never\",\n  \"livecrawlTimeout\": 10000,\n  \"maxAgeHours\": \"<integer>\",\n  \"subpages\": 0,\n  \"subpageTarget\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/contents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "contents"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"requestId\": \"<string>\",\n  \"results\": [\n    {\n      \"title\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"publishedDate\": \"<dateTime>\",\n      \"author\": \"<string>\",\n      \"id\": \"<string>\",\n      \"image\": \"<uri>\",\n      \"favicon\": \"<uri>\",\n      \"text\": \"<string>\",\n      \"highlights\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"highlightScores\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"summary\": \"<string>\",\n      \"subpages\": [\n        {\n          \"title\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"publishedDate\": \"<dateTime>\",\n          \"author\": \"<string>\",\n          \"id\": \"<string>\",\n          \"image\": \"<uri>\",\n          \"favicon\": \"<uri>\"\n        },\n        {\n          \"title\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"publishedDate\": \"<dateTime>\",\n          \"author\": \"<string>\",\n          \"id\": \"<string>\",\n          \"image\": \"<uri>\",\n          \"favicon\": \"<uri>\"\n        }\n      ],\n      \"entities\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\",\n          \"version\": \"<integer>\",\n          \"properties\": {\n            \"name\": \"<string>\",\n            \"foundedYear\": \"<integer>\",\n            \"description\": \"<string>\",\n            \"workforce\": {\n              \"total\": \"<number>\"\n            },\n            \"headquarters\": {\n              \"address\": \"<string>\",\n              \"city\": \"<string>\",\n              \"postalCode\": \"<string>\",\n              \"country\": \"<string>\"\n            },\n            \"financials\": {\n              \"revenueAnnual\": \"<number>\",\n              \"fundingTotal\": \"<number>\",\n              \"fundingLatestRound\": {\n                \"name\": \"<string>\",\n                \"date\": \"<string>\",\n                \"amount\": \"<number>\"\n              }\n            },\n            \"webTraffic\": {\n              \"visitsMonthly\": \"<number>\",\n              \"countryRank\": \"<integer>\",\n              \"avgDurationSeconds\": \"<number>\",\n              \"history\": [\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                },\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                }\n              ]\n            }\n          }\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\",\n          \"version\": \"<integer>\",\n          \"properties\": {\n            \"name\": \"<string>\",\n            \"foundedYear\": \"<integer>\",\n            \"description\": \"<string>\",\n            \"workforce\": {\n              \"total\": \"<number>\"\n            },\n            \"headquarters\": {\n              \"address\": \"<string>\",\n              \"city\": \"<string>\",\n              \"postalCode\": \"<string>\",\n              \"country\": \"<string>\"\n            },\n            \"financials\": {\n              \"revenueAnnual\": \"<number>\",\n              \"fundingTotal\": \"<number>\",\n              \"fundingLatestRound\": {\n                \"name\": \"<string>\",\n                \"date\": \"<string>\",\n                \"amount\": \"<number>\"\n              }\n            },\n            \"webTraffic\": {\n              \"visitsMonthly\": \"<number>\",\n              \"countryRank\": \"<integer>\",\n              \"avgDurationSeconds\": \"<number>\",\n              \"history\": [\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                },\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                }\n              ]\n            }\n          }\n        }\n      ],\n      \"extras\": {\n        \"links\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"publishedDate\": \"<dateTime>\",\n      \"author\": \"<string>\",\n      \"id\": \"<string>\",\n      \"image\": \"<uri>\",\n      \"favicon\": \"<uri>\",\n      \"text\": \"<string>\",\n      \"highlights\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"highlightScores\": [\n        \"<float>\",\n        \"<float>\"\n      ],\n      \"summary\": \"<string>\",\n      \"subpages\": [\n        {\n          \"title\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"publishedDate\": \"<dateTime>\",\n          \"author\": \"<string>\",\n          \"id\": \"<string>\",\n          \"image\": \"<uri>\",\n          \"favicon\": \"<uri>\"\n        },\n        {\n          \"title\": \"<string>\",\n          \"url\": \"<uri>\",\n          \"publishedDate\": \"<dateTime>\",\n          \"author\": \"<string>\",\n          \"id\": \"<string>\",\n          \"image\": \"<uri>\",\n          \"favicon\": \"<uri>\"\n        }\n      ],\n      \"entities\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\",\n          \"version\": \"<integer>\",\n          \"properties\": {\n            \"name\": \"<string>\",\n            \"foundedYear\": \"<integer>\",\n            \"description\": \"<string>\",\n            \"workforce\": {\n              \"total\": \"<number>\"\n            },\n            \"headquarters\": {\n              \"address\": \"<string>\",\n              \"city\": \"<string>\",\n              \"postalCode\": \"<string>\",\n              \"country\": \"<string>\"\n            },\n            \"financials\": {\n              \"revenueAnnual\": \"<number>\",\n              \"fundingTotal\": \"<number>\",\n              \"fundingLatestRound\": {\n                \"name\": \"<string>\",\n                \"date\": \"<string>\",\n                \"amount\": \"<number>\"\n              }\n            },\n            \"webTraffic\": {\n              \"visitsMonthly\": \"<number>\",\n              \"countryRank\": \"<integer>\",\n              \"avgDurationSeconds\": \"<number>\",\n              \"history\": [\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                },\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                }\n              ]\n            }\n          }\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\",\n          \"version\": \"<integer>\",\n          \"properties\": {\n            \"name\": \"<string>\",\n            \"foundedYear\": \"<integer>\",\n            \"description\": \"<string>\",\n            \"workforce\": {\n              \"total\": \"<number>\"\n            },\n            \"headquarters\": {\n              \"address\": \"<string>\",\n              \"city\": \"<string>\",\n              \"postalCode\": \"<string>\",\n              \"country\": \"<string>\"\n            },\n            \"financials\": {\n              \"revenueAnnual\": \"<number>\",\n              \"fundingTotal\": \"<number>\",\n              \"fundingLatestRound\": {\n                \"name\": \"<string>\",\n                \"date\": \"<string>\",\n                \"amount\": \"<number>\"\n              }\n            },\n            \"webTraffic\": {\n              \"visitsMonthly\": \"<number>\",\n              \"countryRank\": \"<integer>\",\n              \"avgDurationSeconds\": \"<number>\",\n              \"history\": [\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                },\n                {\n                  \"value\": \"<number>\",\n                  \"dateFrom\": \"<string>\",\n                  \"dateTo\": \"<string>\"\n                }\n              ]\n            }\n          }\n        }\n      ],\n      \"extras\": {\n        \"links\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"context\": \"<string>\",\n  \"statuses\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"success\",\n      \"source\": \"cached\",\n      \"error\": {\n        \"tag\": \"<string>\",\n        \"httpStatusCode\": \"<integer>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"success\",\n      \"source\": \"crawled\",\n      \"error\": {\n        \"tag\": \"<string>\",\n        \"httpStatusCode\": \"<integer>\"\n      }\n    }\n  ],\n  \"costDollars\": {\n    \"total\": \"<float>\",\n    \"search\": {\n      \"neural\": \"<float>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T15:08:18.000Z",
+              "updatedAt": "2026-06-05T15:08:18.000Z",
+              "uid": "35240-326241c4-a2ec-4b13-abbe-50045b8c0e6a"
+            }
+          ],
+          "createdAt": "2026-06-05T15:08:18.000Z",
+          "updatedAt": "2026-06-05T15:08:18.000Z",
+          "uid": "35240-ee37e1bc-be2e-4ff2-9c3d-233506ede7af"
+        }
+      ],
+      "id": "c9eededb-effb-4db4-b9ae-78a164c59756",
+      "createdAt": "2026-06-05T15:08:18.000Z",
+      "updatedAt": "2026-06-05T15:08:18.000Z",
+      "uid": "35240-c9eededb-effb-4db4-b9ae-78a164c59756"
+    },
+    {
+      "name": "answer",
+      "item": [
+        {
+          "name": "Answer",
+          "id": "a1f1f267-4279-4823-9c17-8a8178d2b090",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"stream\": false,\n  \"text\": false,\n  \"outputSchema\": {\n    \"type\": \"<string>\",\n    \"properties\": {\n      \"laborum__4a\": \"<null>\"\n    },\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"description\": \"<string>\",\n    \"additionalProperties\": false,\n    \"mollit7\": \"<null>\",\n    \"nisi_d43\": \"<null>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/answer",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "answer"
+              ]
+            },
+            "description": "Performs a search based on the query and generates either a direct answer or a detailed summary with citations, depending on the query type."
+          },
+          "response": [
+            {
+              "id": "714b930a-b808-4e0c-89b0-91a91793365b",
+              "name": "OK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"stream\": false,\n  \"text\": false,\n  \"outputSchema\": {\n    \"type\": \"<string>\",\n    \"properties\": {\n      \"laborum__4a\": \"<null>\"\n    },\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"description\": \"<string>\",\n    \"additionalProperties\": false,\n    \"mollit7\": \"<null>\",\n    \"nisi_d43\": \"<null>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/answer",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "answer"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"answer\": \"<string>\",\n  \"requestId\": \"<string>\",\n  \"citations\": [\n    {\n      \"title\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"publishedDate\": \"<dateTime>\",\n      \"author\": \"<string>\",\n      \"id\": \"<string>\",\n      \"image\": \"<uri>\",\n      \"favicon\": \"<uri>\",\n      \"text\": \"<string>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"url\": \"<uri>\",\n      \"publishedDate\": \"<dateTime>\",\n      \"author\": \"<string>\",\n      \"id\": \"<string>\",\n      \"image\": \"<uri>\",\n      \"favicon\": \"<uri>\",\n      \"text\": \"<string>\"\n    }\n  ],\n  \"costDollars\": {\n    \"total\": \"<float>\",\n    \"search\": {\n      \"neural\": \"<float>\"\n    }\n  }\n}",
+              "createdAt": "2026-06-05T15:08:18.000Z",
+              "updatedAt": "2026-06-05T15:08:18.000Z",
+              "uid": "35240-714b930a-b808-4e0c-89b0-91a91793365b"
+            }
+          ],
+          "createdAt": "2026-06-05T15:08:18.000Z",
+          "updatedAt": "2026-06-05T15:08:18.000Z",
+          "uid": "35240-a1f1f267-4279-4823-9c17-8a8178d2b090"
+        }
+      ],
+      "id": "8661c398-5496-41ac-8328-bf7b94db30b1",
+      "createdAt": "2026-06-05T15:08:18.000Z",
+      "updatedAt": "2026-06-05T15:08:18.000Z",
+      "uid": "35240-8661c398-5496-41ac-8328-bf7b94db30b1"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.exa.ai"
+    }
+  ]
+}

@@ -1,0 +1,1023 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Exa Websets API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Websets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Websets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/websets",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor to paginate through the results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of Websets to return"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search term to filter Websets by ID, external ID, or title"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a list of Websets.\n\nYou can paginate through the results using the `cursor` parameter.\n\nYou can filter results using the `search` parameter to find Websets by ID, external ID, or title."
+        },
+        {
+          "info": {
+            "name": "Create a Webset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/v0/websets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new Webset with optional search, import, and enrichment configurations. The Webset will automatically begin processing once created.\n\nYou can specify an `externalId` to reference the Webset with your own identifiers for easier integration."
+        },
+        {
+          "info": {
+            "name": "Get a Webset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/websets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id or externalId of the Webset."
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "Expand the response with the specified resources"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a Webset"
+        },
+        {
+          "info": {
+            "name": "Update a Webset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/v0/websets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id or externalId of the Webset"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a Webset"
+        },
+        {
+          "info": {
+            "name": "Delete a Webset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.exa.ai/v0/websets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id or externalId of the Webset"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes a Webset.\n\nOnce deleted, the Webset and all its Items will no longer be available."
+        },
+        {
+          "info": {
+            "name": "Cancel a running Webset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/v0/websets/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id or externalId of the Webset"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Cancels all operations being performed on a Webset.\n\nAny enrichment or search will be stopped and the Webset will be marked as `idle`."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Websets Preview",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Preview a webset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/v0/websets/preview",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "path",
+                "description": "Weather you want to search for a preview list of items or not"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Preview how a search query will be decomposed before creating a webset. This endpoint performs the same query analysis that happens during webset creation, allowing you to see the detected entity type, generated search criteria, and available enrichment columns in advance.\n\nUse this to help users understand how their search will be interpreted before committing to a full webset creation."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get an Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/websets/:webset/items/:id",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id or externalId of the Webset"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Webset item"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a Webset Item."
+        },
+        {
+          "info": {
+            "name": "Delete an Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.exa.ai/v0/websets/:webset/items/:id",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id or externalId of the Webset"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Webset item"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes an Item from the Webset.\n\nThis will cancel any enrichment process for it."
+        },
+        {
+          "info": {
+            "name": "List all Items for a Webset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/websets/:webset/items",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id or externalId of the Webset"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor to paginate through the results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return"
+              },
+              {
+                "name": "sourceId",
+                "value": "",
+                "type": "query",
+                "description": "The id of the source"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a list of Webset Items.\n\nYou can paginate through the Items using the `cursor` parameter."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Enrichments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an Enrichment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/v0/websets/:webset/enrichments",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id or externalId of the Webset"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create an Enrichment for a Webset."
+        },
+        {
+          "info": {
+            "name": "Get an Enrichment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/websets/:webset/enrichments/:id",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id or externalId of the Webset"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Enrichment"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get an Enrichment"
+        },
+        {
+          "info": {
+            "name": "Update an Enrichment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.exa.ai/v0/websets/:webset/enrichments/:id",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update an Enrichment configuration for a Webset."
+        },
+        {
+          "info": {
+            "name": "Delete an Enrichment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.exa.ai/v0/websets/:webset/enrichments/:id",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id or externalId of the Webset"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Enrichment"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "When deleting an Enrichment, any running enrichments will be canceled and all existing `enrichment_result` generated by this Enrichment will no longer be available."
+        },
+        {
+          "info": {
+            "name": "Cancel a running Enrichment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/v0/websets/:webset/enrichments/:id/cancel",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id or externalId of the Webset"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Enrichment"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "All running enrichments will be canceled. You can not resume an Enrichment after it has been canceled."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/webhooks",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor to paginate through the results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List webhooks"
+        },
+        {
+          "info": {
+            "name": "Create a Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/v0/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a Webhook"
+        },
+        {
+          "info": {
+            "name": "Get a Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the webhook"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a Webhook"
+        },
+        {
+          "info": {
+            "name": "Update a Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.exa.ai/v0/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the webhook"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a Webhook"
+        },
+        {
+          "info": {
+            "name": "Delete a Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.exa.ai/v0/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the webhook"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a Webhook"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks Attempts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhook attempts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/webhooks/:id/attempts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the webhook"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor to paginate through the results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return"
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query",
+                "description": "The type of event to filter by"
+              },
+              {
+                "name": "successful",
+                "value": "",
+                "type": "query",
+                "description": "Filter attempts by their success status"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all attempts made by a Webhook ordered in descending order."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/events",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor to paginate through the results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "The types of events to filter by"
+              },
+              {
+                "name": "createdBefore",
+                "value": "",
+                "type": "query",
+                "description": "Filter events created before or at this timestamp (inclusive). Must be a valid ISO 8601 datetime string. All times are in UTC."
+              },
+              {
+                "name": "createdAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filter events created after or at this timestamp (inclusive). Must be a valid ISO 8601 datetime string. All times are in UTC."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all events that have occurred in the system.\n\nYou can paginate through the results using the `cursor` parameter."
+        },
+        {
+          "info": {
+            "name": "Get an Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/events/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the event"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a single Event by id.\n\nYou can subscribe to Events by creating a Webhook."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Searches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/v0/websets/:webset/searches",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Webset"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new Search for the Webset.\n\nThe default behavior is to reuse the previous Search results and evaluate them against the new criteria."
+        },
+        {
+          "info": {
+            "name": "Get a Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/websets/:webset/searches/:id",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Webset"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Search"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Gets a Search by id"
+        },
+        {
+          "info": {
+            "name": "Cancel a running Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/v0/websets/:webset/searches/:id/cancel",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Webset"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Search"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Cancels a currently running Search.\n\nYou can cancel all searches at once by using the `websets/:webset/cancel` endpoint."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Imports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Imports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/imports",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor to paginate through the results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists all imports for the Webset."
+        },
+        {
+          "info": {
+            "name": "Create an Import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/v0/imports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new import to upload your data into Websets. Imports can be used to:\n\n- **Enrich**: Enhance your data with additional information using our AI-powered enrichment engine\n- **Search**: Query your data using Websets' agentic search with natural language filters\n- **Exclude**: Prevent duplicate or already known results from appearing in your searches\n\nOnce the import is created, you can upload your data to the returned `uploadUrl` until `uploadValidUntil` (by default 1 hour)."
+        },
+        {
+          "info": {
+            "name": "Get Import",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/imports/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Import"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Gets a specific import."
+        },
+        {
+          "info": {
+            "name": "Update Import",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.exa.ai/v0/imports/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Import"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Updates a import configuration."
+        },
+        {
+          "info": {
+            "name": "Delete Import",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.exa.ai/v0/imports/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Import"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes a import."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

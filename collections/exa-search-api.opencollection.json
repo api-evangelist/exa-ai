@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Exa Search API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.exa.ai/search",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Perform a search with an Exa prompt-engineered query and retrieve a list of relevant results. Optionally get contents."
+    },
+    {
+      "info": {
+        "name": "Contents",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.exa.ai/contents",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Contents"
+    },
+    {
+      "info": {
+        "name": "Answer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.exa.ai/answer",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Performs a search based on the query and generates either a direct answer or a detailed summary with citations, depending on the query type."
+    }
+  ],
+  "bundled": true
+}

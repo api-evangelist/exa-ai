@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Exa Team API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Team Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/teams/me"
+          },
+          "docs": "Returns information about the authenticated team, including current concurrency usage and limits."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

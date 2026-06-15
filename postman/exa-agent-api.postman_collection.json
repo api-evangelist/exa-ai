@@ -1,0 +1,2094 @@
+{
+  "info": {
+    "_postman_id": "d3aadfa0-f938-4042-a0d7-f683f11010e7",
+    "name": "Exa Agent API",
+    "description": "Exa Agent API - subset of the Exa Public API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:08:23.000Z",
+    "updatedAt": "2026-06-05T15:08:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d3aadfa0-f938-4042-a0d7-f683f11010e7"
+  },
+  "item": [
+    {
+      "name": "agent",
+      "item": [
+        {
+          "name": "runs",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "cancel",
+                  "item": [
+                    {
+                      "name": "Cancel a run",
+                      "id": "a22f8068-e407-4c98-9df2-892964bfa3e5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agent/runs/:id/cancel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agent",
+                            "runs",
+                            ":id",
+                            "cancel"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ad18897a-ce9e-4e63-b416-366dc7b36d25",
+                              "key": "id",
+                              "value": "dVsLA",
+                              "description": "(Required) Agent run ID."
+                            }
+                          ]
+                        },
+                        "description": "Cancel a queued or running Agent run. If the run has already reached a terminal status, the API returns the existing run."
+                      },
+                      "response": [
+                        {
+                          "id": "0ec52280-9359-4170-b519-29cd9cb5acde",
+                          "name": "Agent run",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/agent/runs/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "agent",
+                                "runs",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"eL\",\n  \"object\": \"<string>\",\n  \"status\": \"queued\",\n  \"stopReason\": \"cancelled\",\n  \"createdAt\": \"<dateTime>\",\n  \"completedAt\": \"<dateTime>\",\n  \"request\": {\n    \"query\": \"<string>\",\n    \"systemPrompt\": \"<string>\",\n    \"input\": {\n      \"data\": [\n        {\n          \"dolore_24\": \"<null>\"\n        },\n        {\n          \"laborumb\": \"<null>\"\n        }\n      ],\n      \"exclusion\": [\n        {\n          \"dolor_07a\": \"<null>\",\n          \"Lorem44\": \"<null>\",\n          \"laboris65\": \"<null>\",\n          \"cillume9\": \"<null>\"\n        },\n        {\n          \"cillum7f\": \"<null>\",\n          \"eu275\": \"<null>\",\n          \"proident_247\": \"<null>\"\n        }\n      ]\n    },\n    \"outputSchema\": {\n      \"veniam30\": \"<null>\",\n      \"magnab53\": \"<null>\"\n    },\n    \"effort\": \"auto\",\n    \"previousRunId\": \"FsU\",\n    \"metadata\": {\n      \"ullamco04\": \"<string>\"\n    },\n    \"Excepteur_5\": \"<null>\",\n    \"adipisicing_136\": \"<null>\"\n  },\n  \"output\": {\n    \"text\": \"<string>\",\n    \"structured\": \"<null>\",\n    \"grounding\": [\n      {\n        \"field\": \"<string>\",\n        \"citations\": [\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          },\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          }\n        ],\n        \"score\": \"<number>\",\n        \"confidence\": \"medium\"\n      },\n      {\n        \"field\": \"<string>\",\n        \"citations\": [\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          },\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          }\n        ],\n        \"score\": \"<number>\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"usage\": {\n    \"agentComputeUnits\": \"<integer>\",\n    \"searches\": \"<integer>\",\n    \"emails\": \"<integer>\",\n    \"phoneNumbers\": \"<integer>\"\n  },\n  \"costDollars\": {\n    \"total\": \"<number>\",\n    \"agentCompute\": \"<number>\",\n    \"search\": \"<number>\",\n    \"emails\": \"<number>\",\n    \"phoneNumbers\": \"<number>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:08:23.000Z",
+                          "updatedAt": "2026-06-05T15:08:23.000Z",
+                          "uid": "35240-0ec52280-9359-4170-b519-29cd9cb5acde"
+                        },
+                        {
+                          "id": "0aa2e99a-371b-4683-9b7d-eb6905275cb4",
+                          "name": "Invalid request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/agent/runs/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "agent",
+                                "runs",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:08:23.000Z",
+                          "updatedAt": "2026-06-05T15:08:23.000Z",
+                          "uid": "35240-0aa2e99a-371b-4683-9b7d-eb6905275cb4"
+                        },
+                        {
+                          "id": "e27872d7-3fce-447d-9e6d-a570709159f1",
+                          "name": "Team context or authentication was not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/agent/runs/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "agent",
+                                "runs",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:08:23.000Z",
+                          "updatedAt": "2026-06-05T15:08:23.000Z",
+                          "uid": "35240-e27872d7-3fce-447d-9e6d-a570709159f1"
+                        },
+                        {
+                          "id": "0b3b38e2-7e15-4edb-afd8-f34483a414dd",
+                          "name": "Run not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/agent/runs/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "agent",
+                                "runs",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:08:23.000Z",
+                          "updatedAt": "2026-06-05T15:08:23.000Z",
+                          "uid": "35240-0b3b38e2-7e15-4edb-afd8-f34483a414dd"
+                        },
+                        {
+                          "id": "dc2fe8b2-c341-47db-86dc-8335c0397148",
+                          "name": "Agent run concurrency limit reached.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/agent/runs/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "agent",
+                                "runs",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:08:23.000Z",
+                          "updatedAt": "2026-06-05T15:08:23.000Z",
+                          "uid": "35240-dc2fe8b2-c341-47db-86dc-8335c0397148"
+                        },
+                        {
+                          "id": "9c829bec-ba83-415f-90e9-d04027c66bf8",
+                          "name": "Server error or run timeout.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/agent/runs/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "agent",
+                                "runs",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:08:23.000Z",
+                          "updatedAt": "2026-06-05T15:08:23.000Z",
+                          "uid": "35240-9c829bec-ba83-415f-90e9-d04027c66bf8"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:08:23.000Z",
+                      "updatedAt": "2026-06-05T15:08:23.000Z",
+                      "uid": "35240-a22f8068-e407-4c98-9df2-892964bfa3e5"
+                    }
+                  ],
+                  "id": "593016cb-5b4f-4561-a194-9ef44cc215aa",
+                  "createdAt": "2026-06-05T15:08:23.000Z",
+                  "updatedAt": "2026-06-05T15:08:23.000Z",
+                  "uid": "35240-593016cb-5b4f-4561-a194-9ef44cc215aa"
+                },
+                {
+                  "name": "events",
+                  "item": [
+                    {
+                      "name": "List run events",
+                      "id": "6b3d0387-3a26-41dd-a595-b93365506cf1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agent/runs/:id/events?limit=20&cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agent",
+                            "runs",
+                            ":id",
+                            "events"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "20"
+                            },
+                            {
+                              "key": "cursor",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "dea840d0-d8d2-40a4-9532-ba1c8ca01f7e",
+                              "key": "id",
+                              "value": "dVsLA",
+                              "description": "(Required) Agent run ID."
+                            }
+                          ]
+                        },
+                        "description": "List stored events for an Agent run. Set `Accept: text/event-stream` to replay stored events as server-sent events. Use `cursor` for JSON pagination or `Last-Event-ID` for SSE replay."
+                      },
+                      "response": [
+                        {
+                          "id": "83866a79-cde8-406f-9d88-5ae84b1e8056",
+                          "name": "Agent run events",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/agent/runs/:id/events?limit=20&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "agent",
+                                "runs",
+                                ":id",
+                                "events"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"object\": \"<string>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"event\": \"agent_run.started\",\n      \"data\": \"<null>\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"event\": \"agent_run.completed\",\n      \"data\": \"<null>\",\n      \"createdAt\": \"<dateTime>\"\n    }\n  ],\n  \"hasMore\": \"<boolean>\",\n  \"nextCursor\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:08:23.000Z",
+                          "updatedAt": "2026-06-05T15:08:23.000Z",
+                          "uid": "35240-83866a79-cde8-406f-9d88-5ae84b1e8056"
+                        },
+                        {
+                          "id": "ec00c2e5-f3f3-4ce1-9120-016fa2f97e8e",
+                          "name": "Invalid request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/agent/runs/:id/events?limit=20&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "agent",
+                                "runs",
+                                ":id",
+                                "events"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:08:23.000Z",
+                          "updatedAt": "2026-06-05T15:08:23.000Z",
+                          "uid": "35240-ec00c2e5-f3f3-4ce1-9120-016fa2f97e8e"
+                        },
+                        {
+                          "id": "4d1ee566-4dee-4696-980a-fd0ff49ef33d",
+                          "name": "Team context or authentication was not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/agent/runs/:id/events?limit=20&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "agent",
+                                "runs",
+                                ":id",
+                                "events"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:08:23.000Z",
+                          "updatedAt": "2026-06-05T15:08:23.000Z",
+                          "uid": "35240-4d1ee566-4dee-4696-980a-fd0ff49ef33d"
+                        },
+                        {
+                          "id": "fcc42c98-783f-43ab-96f9-a08f33b4e866",
+                          "name": "Run not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/agent/runs/:id/events?limit=20&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "agent",
+                                "runs",
+                                ":id",
+                                "events"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:08:23.000Z",
+                          "updatedAt": "2026-06-05T15:08:23.000Z",
+                          "uid": "35240-fcc42c98-783f-43ab-96f9-a08f33b4e866"
+                        },
+                        {
+                          "id": "fdc21174-b56b-4e8b-b950-85ba4ee08950",
+                          "name": "Agent run concurrency limit reached.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/agent/runs/:id/events?limit=20&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "agent",
+                                "runs",
+                                ":id",
+                                "events"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:08:23.000Z",
+                          "updatedAt": "2026-06-05T15:08:23.000Z",
+                          "uid": "35240-fdc21174-b56b-4e8b-b950-85ba4ee08950"
+                        },
+                        {
+                          "id": "43f9ca5d-f90f-408f-9c7c-1a9134cf3003",
+                          "name": "Server error or run timeout.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/agent/runs/:id/events?limit=20&cursor=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "agent",
+                                "runs",
+                                ":id",
+                                "events"
+                              ],
+                              "query": [
+                                {
+                                  "key": "limit",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:08:23.000Z",
+                          "updatedAt": "2026-06-05T15:08:23.000Z",
+                          "uid": "35240-43f9ca5d-f90f-408f-9c7c-1a9134cf3003"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:08:23.000Z",
+                      "updatedAt": "2026-06-05T15:08:23.000Z",
+                      "uid": "35240-6b3d0387-3a26-41dd-a595-b93365506cf1"
+                    }
+                  ],
+                  "id": "6c9206ab-de84-44f9-a0ba-b4903588452b",
+                  "createdAt": "2026-06-05T15:08:23.000Z",
+                  "updatedAt": "2026-06-05T15:08:23.000Z",
+                  "uid": "35240-6c9206ab-de84-44f9-a0ba-b4903588452b"
+                },
+                {
+                  "name": "Get a run",
+                  "id": "5aa72983-3019-420a-ad32-cf7f5d116153",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agent/runs/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent",
+                        "runs",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d3217b00-e87a-49ff-aebb-60e4309bc155",
+                          "key": "id",
+                          "value": "dVsLA",
+                          "description": "(Required) Agent run ID."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a single Agent run by ID."
+                  },
+                  "response": [
+                    {
+                      "id": "265b9445-47f3-4a88-8524-36c8caa26ab0",
+                      "name": "Agent run",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agent/runs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agent",
+                            "runs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"eL\",\n  \"object\": \"<string>\",\n  \"status\": \"queued\",\n  \"stopReason\": \"cancelled\",\n  \"createdAt\": \"<dateTime>\",\n  \"completedAt\": \"<dateTime>\",\n  \"request\": {\n    \"query\": \"<string>\",\n    \"systemPrompt\": \"<string>\",\n    \"input\": {\n      \"data\": [\n        {\n          \"dolore_24\": \"<null>\"\n        },\n        {\n          \"laborumb\": \"<null>\"\n        }\n      ],\n      \"exclusion\": [\n        {\n          \"dolor_07a\": \"<null>\",\n          \"Lorem44\": \"<null>\",\n          \"laboris65\": \"<null>\",\n          \"cillume9\": \"<null>\"\n        },\n        {\n          \"cillum7f\": \"<null>\",\n          \"eu275\": \"<null>\",\n          \"proident_247\": \"<null>\"\n        }\n      ]\n    },\n    \"outputSchema\": {\n      \"veniam30\": \"<null>\",\n      \"magnab53\": \"<null>\"\n    },\n    \"effort\": \"auto\",\n    \"previousRunId\": \"FsU\",\n    \"metadata\": {\n      \"ullamco04\": \"<string>\"\n    },\n    \"Excepteur_5\": \"<null>\",\n    \"adipisicing_136\": \"<null>\"\n  },\n  \"output\": {\n    \"text\": \"<string>\",\n    \"structured\": \"<null>\",\n    \"grounding\": [\n      {\n        \"field\": \"<string>\",\n        \"citations\": [\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          },\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          }\n        ],\n        \"score\": \"<number>\",\n        \"confidence\": \"medium\"\n      },\n      {\n        \"field\": \"<string>\",\n        \"citations\": [\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          },\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          }\n        ],\n        \"score\": \"<number>\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"usage\": {\n    \"agentComputeUnits\": \"<integer>\",\n    \"searches\": \"<integer>\",\n    \"emails\": \"<integer>\",\n    \"phoneNumbers\": \"<integer>\"\n  },\n  \"costDollars\": {\n    \"total\": \"<number>\",\n    \"agentCompute\": \"<number>\",\n    \"search\": \"<number>\",\n    \"emails\": \"<number>\",\n    \"phoneNumbers\": \"<number>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:23.000Z",
+                      "updatedAt": "2026-06-05T15:08:23.000Z",
+                      "uid": "35240-265b9445-47f3-4a88-8524-36c8caa26ab0"
+                    },
+                    {
+                      "id": "907902ea-aa16-4c35-9984-f0dc43cd7e43",
+                      "name": "Invalid request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agent/runs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agent",
+                            "runs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:23.000Z",
+                      "updatedAt": "2026-06-05T15:08:23.000Z",
+                      "uid": "35240-907902ea-aa16-4c35-9984-f0dc43cd7e43"
+                    },
+                    {
+                      "id": "9f02174c-4e01-4124-a9da-d616ccd14ced",
+                      "name": "Team context or authentication was not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agent/runs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agent",
+                            "runs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:23.000Z",
+                      "updatedAt": "2026-06-05T15:08:23.000Z",
+                      "uid": "35240-9f02174c-4e01-4124-a9da-d616ccd14ced"
+                    },
+                    {
+                      "id": "fd775f96-4a43-4572-918d-6f67a5238135",
+                      "name": "Run not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agent/runs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agent",
+                            "runs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:23.000Z",
+                      "updatedAt": "2026-06-05T15:08:23.000Z",
+                      "uid": "35240-fd775f96-4a43-4572-918d-6f67a5238135"
+                    },
+                    {
+                      "id": "018d80ed-affd-4073-a883-8a9c48b205b5",
+                      "name": "Agent run concurrency limit reached.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agent/runs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agent",
+                            "runs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:23.000Z",
+                      "updatedAt": "2026-06-05T15:08:23.000Z",
+                      "uid": "35240-018d80ed-affd-4073-a883-8a9c48b205b5"
+                    },
+                    {
+                      "id": "d4f955ab-6380-453a-a8e2-9a8335b68ac1",
+                      "name": "Server error or run timeout.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agent/runs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agent",
+                            "runs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:23.000Z",
+                      "updatedAt": "2026-06-05T15:08:23.000Z",
+                      "uid": "35240-d4f955ab-6380-453a-a8e2-9a8335b68ac1"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:23.000Z",
+                  "updatedAt": "2026-06-05T15:08:23.000Z",
+                  "uid": "35240-5aa72983-3019-420a-ad32-cf7f5d116153"
+                },
+                {
+                  "name": "Delete a run",
+                  "id": "4413077b-4baf-4af8-b950-7c75f382cff5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agent/runs/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent",
+                        "runs",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1d6db41d-ce70-43f1-9786-99c6d01f902e",
+                          "key": "id",
+                          "value": "dVsLA",
+                          "description": "(Required) Agent run ID."
+                        }
+                      ]
+                    },
+                    "description": "Delete a stored Agent run."
+                  },
+                  "response": [
+                    {
+                      "id": "267e8298-5288-4f2d-b880-4c6a41f54b6d",
+                      "name": "Agent run deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agent/runs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agent",
+                            "runs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \".UL\",\n  \"object\": \"<string>\",\n  \"deleted\": \"<boolean>\"\n}",
+                      "createdAt": "2026-06-05T15:08:23.000Z",
+                      "updatedAt": "2026-06-05T15:08:23.000Z",
+                      "uid": "35240-267e8298-5288-4f2d-b880-4c6a41f54b6d"
+                    },
+                    {
+                      "id": "4c7e810a-0802-4570-a061-50f87e374c75",
+                      "name": "Invalid request.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agent/runs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agent",
+                            "runs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:23.000Z",
+                      "updatedAt": "2026-06-05T15:08:23.000Z",
+                      "uid": "35240-4c7e810a-0802-4570-a061-50f87e374c75"
+                    },
+                    {
+                      "id": "674a110e-99b7-4b45-920a-43b038759644",
+                      "name": "Team context or authentication was not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agent/runs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agent",
+                            "runs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:23.000Z",
+                      "updatedAt": "2026-06-05T15:08:23.000Z",
+                      "uid": "35240-674a110e-99b7-4b45-920a-43b038759644"
+                    },
+                    {
+                      "id": "99948864-81b5-4e9b-b728-9c5275ada8ee",
+                      "name": "Run not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agent/runs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agent",
+                            "runs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:23.000Z",
+                      "updatedAt": "2026-06-05T15:08:23.000Z",
+                      "uid": "35240-99948864-81b5-4e9b-b728-9c5275ada8ee"
+                    },
+                    {
+                      "id": "f720809d-83e8-4400-83c7-3d345dda93f3",
+                      "name": "Agent run concurrency limit reached.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agent/runs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agent",
+                            "runs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:23.000Z",
+                      "updatedAt": "2026-06-05T15:08:23.000Z",
+                      "uid": "35240-f720809d-83e8-4400-83c7-3d345dda93f3"
+                    },
+                    {
+                      "id": "11a93ce1-f7c1-41ac-9db1-32d6744d4665",
+                      "name": "Server error or run timeout.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agent/runs/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agent",
+                            "runs",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:23.000Z",
+                      "updatedAt": "2026-06-05T15:08:23.000Z",
+                      "uid": "35240-11a93ce1-f7c1-41ac-9db1-32d6744d4665"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:23.000Z",
+                  "updatedAt": "2026-06-05T15:08:23.000Z",
+                  "uid": "35240-4413077b-4baf-4af8-b950-7c75f382cff5"
+                }
+              ],
+              "id": "55e806c1-d3a7-4616-bac0-0993227f67d0",
+              "createdAt": "2026-06-05T15:08:23.000Z",
+              "updatedAt": "2026-06-05T15:08:23.000Z",
+              "uid": "35240-55e806c1-d3a7-4616-bac0-0993227f67d0"
+            },
+            {
+              "name": "Create a run",
+              "id": "5f60605a-4e22-494d-b831-a69bfe01fe6b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"input\": {\n    \"data\": [\n      {\n        \"essef1\": \"<null>\",\n        \"ullamco_e5c\": \"<null>\"\n      },\n      {\n        \"esse_0\": \"<null>\"\n      }\n    ],\n    \"exclusion\": [\n      {\n        \"eiusmod6b\": \"<null>\",\n        \"eiusmodc\": \"<null>\",\n        \"in_de\": \"<null>\"\n      },\n      {\n        \"site\": \"<null>\",\n        \"consectetur_6e\": \"<null>\",\n        \"eiusmod_faf\": \"<null>\"\n      }\n    ]\n  },\n  \"outputSchema\": {\n    \"commodod\": \"<null>\",\n    \"laboris2\": \"<null>\"\n  },\n  \"effort\": \"auto\",\n  \"previousRunId\": \"AkOac3Sd\",\n  \"metadata\": {\n    \"estcbf\": \"<string>\",\n    \"ad_5\": \"<string>\",\n    \"Duisf_2\": \"<string>\"\n  },\n  \"budget\": {\n    \"maxCostDollars\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent/runs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "runs"
+                  ]
+                },
+                "description": "Create an asynchronous Agent run. By default, the API returns the run object immediately. Set `Accept: text/event-stream` to stream run lifecycle events until the run reaches a terminal status."
+              },
+              "response": [
+                {
+                  "id": "4f139dfc-838d-434e-86a7-30b1969a5b05",
+                  "name": "Agent run created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"query\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"input\": {\n    \"data\": [\n      {\n        \"essef1\": \"<null>\",\n        \"ullamco_e5c\": \"<null>\"\n      },\n      {\n        \"esse_0\": \"<null>\"\n      }\n    ],\n    \"exclusion\": [\n      {\n        \"eiusmod6b\": \"<null>\",\n        \"eiusmodc\": \"<null>\",\n        \"in_de\": \"<null>\"\n      },\n      {\n        \"site\": \"<null>\",\n        \"consectetur_6e\": \"<null>\",\n        \"eiusmod_faf\": \"<null>\"\n      }\n    ]\n  },\n  \"outputSchema\": {\n    \"commodod\": \"<null>\",\n    \"laboris2\": \"<null>\"\n  },\n  \"effort\": \"auto\",\n  \"previousRunId\": \"AkOac3Sd\",\n  \"metadata\": {\n    \"estcbf\": \"<string>\",\n    \"ad_5\": \"<string>\",\n    \"Duisf_2\": \"<string>\"\n  },\n  \"budget\": {\n    \"maxCostDollars\": \"<number>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/agent/runs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent",
+                        "runs"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"eL\",\n  \"object\": \"<string>\",\n  \"status\": \"queued\",\n  \"stopReason\": \"cancelled\",\n  \"createdAt\": \"<dateTime>\",\n  \"completedAt\": \"<dateTime>\",\n  \"request\": {\n    \"query\": \"<string>\",\n    \"systemPrompt\": \"<string>\",\n    \"input\": {\n      \"data\": [\n        {\n          \"dolore_24\": \"<null>\"\n        },\n        {\n          \"laborumb\": \"<null>\"\n        }\n      ],\n      \"exclusion\": [\n        {\n          \"dolor_07a\": \"<null>\",\n          \"Lorem44\": \"<null>\",\n          \"laboris65\": \"<null>\",\n          \"cillume9\": \"<null>\"\n        },\n        {\n          \"cillum7f\": \"<null>\",\n          \"eu275\": \"<null>\",\n          \"proident_247\": \"<null>\"\n        }\n      ]\n    },\n    \"outputSchema\": {\n      \"veniam30\": \"<null>\",\n      \"magnab53\": \"<null>\"\n    },\n    \"effort\": \"auto\",\n    \"previousRunId\": \"FsU\",\n    \"metadata\": {\n      \"ullamco04\": \"<string>\"\n    },\n    \"Excepteur_5\": \"<null>\",\n    \"adipisicing_136\": \"<null>\"\n  },\n  \"output\": {\n    \"text\": \"<string>\",\n    \"structured\": \"<null>\",\n    \"grounding\": [\n      {\n        \"field\": \"<string>\",\n        \"citations\": [\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          },\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          }\n        ],\n        \"score\": \"<number>\",\n        \"confidence\": \"medium\"\n      },\n      {\n        \"field\": \"<string>\",\n        \"citations\": [\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          },\n          {\n            \"url\": \"<uri>\",\n            \"title\": \"<string>\"\n          }\n        ],\n        \"score\": \"<number>\",\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"usage\": {\n    \"agentComputeUnits\": \"<integer>\",\n    \"searches\": \"<integer>\",\n    \"emails\": \"<integer>\",\n    \"phoneNumbers\": \"<integer>\"\n  },\n  \"costDollars\": {\n    \"total\": \"<number>\",\n    \"agentCompute\": \"<number>\",\n    \"search\": \"<number>\",\n    \"emails\": \"<number>\",\n    \"phoneNumbers\": \"<number>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:08:23.000Z",
+                  "updatedAt": "2026-06-05T15:08:23.000Z",
+                  "uid": "35240-4f139dfc-838d-434e-86a7-30b1969a5b05"
+                },
+                {
+                  "id": "3dfbcbdb-42eb-4b86-a619-bd8a20f44904",
+                  "name": "Invalid request.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"query\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"input\": {\n    \"data\": [\n      {\n        \"essef1\": \"<null>\",\n        \"ullamco_e5c\": \"<null>\"\n      },\n      {\n        \"esse_0\": \"<null>\"\n      }\n    ],\n    \"exclusion\": [\n      {\n        \"eiusmod6b\": \"<null>\",\n        \"eiusmodc\": \"<null>\",\n        \"in_de\": \"<null>\"\n      },\n      {\n        \"site\": \"<null>\",\n        \"consectetur_6e\": \"<null>\",\n        \"eiusmod_faf\": \"<null>\"\n      }\n    ]\n  },\n  \"outputSchema\": {\n    \"commodod\": \"<null>\",\n    \"laboris2\": \"<null>\"\n  },\n  \"effort\": \"auto\",\n  \"previousRunId\": \"AkOac3Sd\",\n  \"metadata\": {\n    \"estcbf\": \"<string>\",\n    \"ad_5\": \"<string>\",\n    \"Duisf_2\": \"<string>\"\n  },\n  \"budget\": {\n    \"maxCostDollars\": \"<number>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/agent/runs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent",
+                        "runs"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:08:23.000Z",
+                  "updatedAt": "2026-06-05T15:08:23.000Z",
+                  "uid": "35240-3dfbcbdb-42eb-4b86-a619-bd8a20f44904"
+                },
+                {
+                  "id": "6aadef58-cfa2-4a5a-898a-dcba610a0693",
+                  "name": "Team context or authentication was not found.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"query\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"input\": {\n    \"data\": [\n      {\n        \"essef1\": \"<null>\",\n        \"ullamco_e5c\": \"<null>\"\n      },\n      {\n        \"esse_0\": \"<null>\"\n      }\n    ],\n    \"exclusion\": [\n      {\n        \"eiusmod6b\": \"<null>\",\n        \"eiusmodc\": \"<null>\",\n        \"in_de\": \"<null>\"\n      },\n      {\n        \"site\": \"<null>\",\n        \"consectetur_6e\": \"<null>\",\n        \"eiusmod_faf\": \"<null>\"\n      }\n    ]\n  },\n  \"outputSchema\": {\n    \"commodod\": \"<null>\",\n    \"laboris2\": \"<null>\"\n  },\n  \"effort\": \"auto\",\n  \"previousRunId\": \"AkOac3Sd\",\n  \"metadata\": {\n    \"estcbf\": \"<string>\",\n    \"ad_5\": \"<string>\",\n    \"Duisf_2\": \"<string>\"\n  },\n  \"budget\": {\n    \"maxCostDollars\": \"<number>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/agent/runs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent",
+                        "runs"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:08:23.000Z",
+                  "updatedAt": "2026-06-05T15:08:23.000Z",
+                  "uid": "35240-6aadef58-cfa2-4a5a-898a-dcba610a0693"
+                },
+                {
+                  "id": "1d55db55-85bd-40dc-b2c3-5206fcfad2ec",
+                  "name": "Agent run concurrency limit reached.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"query\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"input\": {\n    \"data\": [\n      {\n        \"essef1\": \"<null>\",\n        \"ullamco_e5c\": \"<null>\"\n      },\n      {\n        \"esse_0\": \"<null>\"\n      }\n    ],\n    \"exclusion\": [\n      {\n        \"eiusmod6b\": \"<null>\",\n        \"eiusmodc\": \"<null>\",\n        \"in_de\": \"<null>\"\n      },\n      {\n        \"site\": \"<null>\",\n        \"consectetur_6e\": \"<null>\",\n        \"eiusmod_faf\": \"<null>\"\n      }\n    ]\n  },\n  \"outputSchema\": {\n    \"commodod\": \"<null>\",\n    \"laboris2\": \"<null>\"\n  },\n  \"effort\": \"auto\",\n  \"previousRunId\": \"AkOac3Sd\",\n  \"metadata\": {\n    \"estcbf\": \"<string>\",\n    \"ad_5\": \"<string>\",\n    \"Duisf_2\": \"<string>\"\n  },\n  \"budget\": {\n    \"maxCostDollars\": \"<number>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/agent/runs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent",
+                        "runs"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:08:23.000Z",
+                  "updatedAt": "2026-06-05T15:08:23.000Z",
+                  "uid": "35240-1d55db55-85bd-40dc-b2c3-5206fcfad2ec"
+                },
+                {
+                  "id": "d2724c4d-e30a-47a8-a5d0-a0a0bc950075",
+                  "name": "Server error or run timeout.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"query\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"input\": {\n    \"data\": [\n      {\n        \"essef1\": \"<null>\",\n        \"ullamco_e5c\": \"<null>\"\n      },\n      {\n        \"esse_0\": \"<null>\"\n      }\n    ],\n    \"exclusion\": [\n      {\n        \"eiusmod6b\": \"<null>\",\n        \"eiusmodc\": \"<null>\",\n        \"in_de\": \"<null>\"\n      },\n      {\n        \"site\": \"<null>\",\n        \"consectetur_6e\": \"<null>\",\n        \"eiusmod_faf\": \"<null>\"\n      }\n    ]\n  },\n  \"outputSchema\": {\n    \"commodod\": \"<null>\",\n    \"laboris2\": \"<null>\"\n  },\n  \"effort\": \"auto\",\n  \"previousRunId\": \"AkOac3Sd\",\n  \"metadata\": {\n    \"estcbf\": \"<string>\",\n    \"ad_5\": \"<string>\",\n    \"Duisf_2\": \"<string>\"\n  },\n  \"budget\": {\n    \"maxCostDollars\": \"<number>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/agent/runs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent",
+                        "runs"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:08:23.000Z",
+                  "updatedAt": "2026-06-05T15:08:23.000Z",
+                  "uid": "35240-d2724c4d-e30a-47a8-a5d0-a0a0bc950075"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:23.000Z",
+              "updatedAt": "2026-06-05T15:08:23.000Z",
+              "uid": "35240-5f60605a-4e22-494d-b831-a69bfe01fe6b"
+            },
+            {
+              "name": "List runs",
+              "id": "e1417edd-a6e8-4b2c-8c85-f30f6fe08fe3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent/runs?limit=20&cursor=dVsLA",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent",
+                    "runs"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "dVsLA"
+                    }
+                  ]
+                },
+                "description": "List Agent runs for your team, ordered from newest to oldest."
+              },
+              "response": [
+                {
+                  "id": "80b2f25c-25b3-48b6-8451-5d879d1651dc",
+                  "name": "Paginated Agent runs",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agent/runs?limit=20&cursor=dVsLA",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent",
+                        "runs"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "key": "cursor",
+                          "value": "dVsLA"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"object\": \"<string>\",\n  \"data\": [\n    {\n      \"id\": \"hTKQ\",\n      \"object\": \"<string>\",\n      \"status\": \"cancelled\",\n      \"stopReason\": \"cancelled\",\n      \"createdAt\": \"<dateTime>\",\n      \"completedAt\": \"<dateTime>\",\n      \"request\": {\n        \"query\": \"<string>\",\n        \"systemPrompt\": \"<string>\",\n        \"input\": {\n          \"data\": [\n            {\n              \"aute_3\": \"<null>\",\n              \"do_bd\": \"<null>\"\n            },\n            {\n              \"velit_57\": \"<null>\",\n              \"commodo_88\": \"<null>\",\n              \"estdd\": \"<null>\",\n              \"minim_f\": \"<null>\"\n            }\n          ],\n          \"exclusion\": [\n            {\n              \"cillum7\": \"<null>\"\n            },\n            {\n              \"minim887\": \"<null>\"\n            }\n          ]\n        },\n        \"outputSchema\": {\n          \"idd\": \"<null>\"\n        },\n        \"effort\": \"auto\",\n        \"previousRunId\": \"4vT-6m\",\n        \"metadata\": {\n          \"deserunt81\": \"<string>\",\n          \"nostrude4\": \"<string>\"\n        }\n      },\n      \"output\": {\n        \"text\": \"<string>\",\n        \"structured\": \"<null>\",\n        \"grounding\": [\n          {\n            \"field\": \"<string>\",\n            \"citations\": [\n              {\n                \"url\": \"<uri>\",\n                \"title\": \"<string>\"\n              },\n              {\n                \"url\": \"<uri>\",\n                \"title\": \"<string>\"\n              }\n            ],\n            \"score\": \"<number>\",\n            \"confidence\": \"high\"\n          },\n          {\n            \"field\": \"<string>\",\n            \"citations\": [\n              {\n                \"url\": \"<uri>\",\n                \"title\": \"<string>\"\n              },\n              {\n                \"url\": \"<uri>\",\n                \"title\": \"<string>\"\n              }\n            ],\n            \"score\": \"<number>\",\n            \"confidence\": \"high\"\n          }\n        ]\n      },\n      \"usage\": {\n        \"agentComputeUnits\": \"<integer>\",\n        \"searches\": \"<integer>\",\n        \"emails\": \"<integer>\",\n        \"phoneNumbers\": \"<integer>\"\n      },\n      \"costDollars\": {\n        \"total\": \"<number>\",\n        \"agentCompute\": \"<number>\",\n        \"search\": \"<number>\",\n        \"emails\": \"<number>\",\n        \"phoneNumbers\": \"<number>\"\n      }\n    },\n    {\n      \"id\": \"hrJI\",\n      \"object\": \"<string>\",\n      \"status\": \"failed\",\n      \"stopReason\": \"error\",\n      \"createdAt\": \"<dateTime>\",\n      \"completedAt\": \"<dateTime>\",\n      \"request\": {\n        \"query\": \"<string>\",\n        \"systemPrompt\": \"<string>\",\n        \"input\": {\n          \"data\": [\n            {\n              \"doloreb3\": \"<null>\",\n              \"deserunt_102\": \"<null>\",\n              \"exercitation_c85\": \"<null>\"\n            },\n            {\n              \"veniam_5\": \"<null>\",\n              \"aute_1\": \"<null>\",\n              \"quid91\": \"<null>\"\n            }\n          ],\n          \"exclusion\": [\n            {\n              \"ipsumb_1\": \"<null>\",\n              \"reprehenderit_8\": \"<null>\",\n              \"elit_3\": \"<null>\",\n              \"dolor_ba\": \"<null>\"\n            },\n            {\n              \"ad86e\": \"<null>\",\n              \"Ut_40e\": \"<null>\",\n              \"mollit08c\": \"<null>\"\n            }\n          ]\n        },\n        \"outputSchema\": {\n          \"magna_c\": \"<null>\"\n        },\n        \"effort\": \"auto\",\n        \"previousRunId\": \".x0\",\n        \"metadata\": {\n          \"exercitation_3\": \"<string>\"\n        }\n      },\n      \"output\": {\n        \"text\": \"<string>\",\n        \"structured\": \"<null>\",\n        \"grounding\": [\n          {\n            \"field\": \"<string>\",\n            \"citations\": [\n              {\n                \"url\": \"<uri>\",\n                \"title\": \"<string>\"\n              },\n              {\n                \"url\": \"<uri>\",\n                \"title\": \"<string>\"\n              }\n            ],\n            \"score\": \"<number>\",\n            \"confidence\": \"medium\"\n          },\n          {\n            \"field\": \"<string>\",\n            \"citations\": [\n              {\n                \"url\": \"<uri>\",\n                \"title\": \"<string>\"\n              },\n              {\n                \"url\": \"<uri>\",\n                \"title\": \"<string>\"\n              }\n            ],\n            \"score\": \"<number>\",\n            \"confidence\": \"medium\"\n          }\n        ]\n      },\n      \"usage\": {\n        \"agentComputeUnits\": \"<integer>\",\n        \"searches\": \"<integer>\",\n        \"emails\": \"<integer>\",\n        \"phoneNumbers\": \"<integer>\"\n      },\n      \"costDollars\": {\n        \"total\": \"<number>\",\n        \"agentCompute\": \"<number>\",\n        \"search\": \"<number>\",\n        \"emails\": \"<number>\",\n        \"phoneNumbers\": \"<number>\"\n      }\n    }\n  ],\n  \"hasMore\": \"<boolean>\",\n  \"nextCursor\": \".3-vpvYI_\"\n}",
+                  "createdAt": "2026-06-05T15:08:23.000Z",
+                  "updatedAt": "2026-06-05T15:08:23.000Z",
+                  "uid": "35240-80b2f25c-25b3-48b6-8451-5d879d1651dc"
+                },
+                {
+                  "id": "29b2ded9-7a2c-4111-aa43-ebd3191ea012",
+                  "name": "Invalid request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agent/runs?limit=20&cursor=dVsLA",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent",
+                        "runs"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "key": "cursor",
+                          "value": "dVsLA"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:08:23.000Z",
+                  "updatedAt": "2026-06-05T15:08:23.000Z",
+                  "uid": "35240-29b2ded9-7a2c-4111-aa43-ebd3191ea012"
+                },
+                {
+                  "id": "04f670ef-5445-45e7-8cd6-542adcf91ca0",
+                  "name": "Team context or authentication was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agent/runs?limit=20&cursor=dVsLA",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent",
+                        "runs"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "key": "cursor",
+                          "value": "dVsLA"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:08:23.000Z",
+                  "updatedAt": "2026-06-05T15:08:23.000Z",
+                  "uid": "35240-04f670ef-5445-45e7-8cd6-542adcf91ca0"
+                },
+                {
+                  "id": "c6f59a3f-46a5-41b7-a92a-151fd134c961",
+                  "name": "Server error or run timeout.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agent/runs?limit=20&cursor=dVsLA",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent",
+                        "runs"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "key": "cursor",
+                          "value": "dVsLA"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_BETA_HEADER\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:08:23.000Z",
+                  "updatedAt": "2026-06-05T15:08:23.000Z",
+                  "uid": "35240-c6f59a3f-46a5-41b7-a92a-151fd134c961"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:23.000Z",
+              "updatedAt": "2026-06-05T15:08:23.000Z",
+              "uid": "35240-e1417edd-a6e8-4b2c-8c85-f30f6fe08fe3"
+            }
+          ],
+          "id": "d94e7d48-2a17-44ec-b45a-b48a5e8e1a39",
+          "createdAt": "2026-06-05T15:08:23.000Z",
+          "updatedAt": "2026-06-05T15:08:23.000Z",
+          "uid": "35240-d94e7d48-2a17-44ec-b45a-b48a5e8e1a39"
+        }
+      ],
+      "id": "90f9293e-fbfb-4d05-88c1-b7c54f0c2c37",
+      "createdAt": "2026-06-05T15:08:23.000Z",
+      "updatedAt": "2026-06-05T15:08:23.000Z",
+      "uid": "35240-90f9293e-fbfb-4d05-88c1-b7c54f0c2c37"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.exa.ai"
+    }
+  ]
+}

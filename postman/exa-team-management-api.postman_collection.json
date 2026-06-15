@@ -1,0 +1,1947 @@
+{
+  "info": {
+    "_postman_id": "c9d848b7-b88e-457a-b95b-8af32dc65c76",
+    "name": "Team Management API",
+    "description": "API for managing API keys within teams. Provides CRUD operations for creating, listing, updating, and deleting API keys with team-based access controls.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:08:31.000Z",
+    "updatedAt": "2026-06-05T15:08:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c9d848b7-b88e-457a-b95b-8af32dc65c76"
+  },
+  "item": [
+    {
+      "name": "api-keys",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "usage",
+              "item": [
+                {
+                  "name": "Get API Key Usage",
+                  "id": "378c7982-082a-4140-a9d2-3f338d79f6b0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-api-key",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id/usage?start_date=<dateTime>&end_date=<dateTime>&group_by=day",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id",
+                        "usage"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start date for the usage period (ISO 8601 format). Defaults to 30 days ago. Must be within the last 6 months (180 days).",
+                          "key": "start_date",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "End date for the usage period (ISO 8601 format). Defaults to current time.",
+                          "key": "end_date",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Time granularity for grouping results. Currently reserved for future enhancements and does not change the response shape. Defaults to 'day'.",
+                          "key": "group_by",
+                          "value": "day"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "b6f00334-5a92-420f-b63b-2a5fe8def018",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) The unique identifier of the API key"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves usage analytics and billing data for a specific API key over a given time period. Returns cost breakdown by price type from the billing system."
+                  },
+                  "response": [
+                    {
+                      "id": "bba13abc-58c6-446a-89a3-bba0ff9f8b4e",
+                      "name": "Usage data retrieved successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api-keys/:id/usage?start_date=<dateTime>&end_date=<dateTime>&group_by=day",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api-keys",
+                            ":id",
+                            "usage"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start date for the usage period (ISO 8601 format). Defaults to 30 days ago. Must be within the last 6 months (180 days).",
+                              "key": "start_date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the usage period (ISO 8601 format). Defaults to current time.",
+                              "key": "end_date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Time granularity for grouping results. Currently reserved for future enhancements and does not change the response shape. Defaults to 'day'.",
+                              "key": "group_by",
+                              "value": "day"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"api_key_id\": \"<uuid>\",\n  \"api_key_name\": \"<string,null>\",\n  \"team_id\": \"<uuid>\",\n  \"period\": {\n    \"start\": \"<dateTime>\",\n    \"end\": \"<dateTime>\"\n  },\n  \"total_cost_usd\": \"<number>\",\n  \"cost_breakdown\": [\n    {\n      \"price_id\": \"<string>\",\n      \"price_name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"amount_usd\": \"<number>\"\n    },\n    {\n      \"price_id\": \"<string>\",\n      \"price_name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"amount_usd\": \"<number>\"\n    }\n  ],\n  \"metadata\": {\n    \"generated_at\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:31.000Z",
+                      "updatedAt": "2026-06-05T15:08:31.000Z",
+                      "uid": "35240-bba13abc-58c6-446a-89a3-bba0ff9f8b4e"
+                    },
+                    {
+                      "id": "7df3cae9-e7e1-40f6-80c0-da39774003f4",
+                      "name": "Bad Request - Invalid parameters",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api-keys/:id/usage?start_date=<dateTime>&end_date=<dateTime>&group_by=day",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api-keys",
+                            ":id",
+                            "usage"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start date for the usage period (ISO 8601 format). Defaults to 30 days ago. Must be within the last 6 months (180 days).",
+                              "key": "start_date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the usage period (ISO 8601 format). Defaults to current time.",
+                              "key": "end_date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Time granularity for grouping results. Currently reserved for future enhancements and does not change the response shape. Defaults to 'day'.",
+                              "key": "group_by",
+                              "value": "day"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:08:31.000Z",
+                      "updatedAt": "2026-06-05T15:08:31.000Z",
+                      "uid": "35240-7df3cae9-e7e1-40f6-80c0-da39774003f4"
+                    },
+                    {
+                      "id": "9b834842-27c6-4c85-83a7-4168e7c612f3",
+                      "name": "Unauthorized - Invalid or missing service key",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api-keys/:id/usage?start_date=<dateTime>&end_date=<dateTime>&group_by=day",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api-keys",
+                            ":id",
+                            "usage"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start date for the usage period (ISO 8601 format). Defaults to 30 days ago. Must be within the last 6 months (180 days).",
+                              "key": "start_date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the usage period (ISO 8601 format). Defaults to current time.",
+                              "key": "end_date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Time granularity for grouping results. Currently reserved for future enhancements and does not change the response shape. Defaults to 'day'.",
+                              "key": "group_by",
+                              "value": "day"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:08:31.000Z",
+                      "updatedAt": "2026-06-05T15:08:31.000Z",
+                      "uid": "35240-9b834842-27c6-4c85-83a7-4168e7c612f3"
+                    },
+                    {
+                      "id": "6383482f-e503-4c1e-bb62-48ac71cd2649",
+                      "name": "Not Found - API key does not exist",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api-keys/:id/usage?start_date=<dateTime>&end_date=<dateTime>&group_by=day",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api-keys",
+                            ":id",
+                            "usage"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start date for the usage period (ISO 8601 format). Defaults to 30 days ago. Must be within the last 6 months (180 days).",
+                              "key": "start_date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the usage period (ISO 8601 format). Defaults to current time.",
+                              "key": "end_date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Time granularity for grouping results. Currently reserved for future enhancements and does not change the response shape. Defaults to 'day'.",
+                              "key": "group_by",
+                              "value": "day"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:08:31.000Z",
+                      "updatedAt": "2026-06-05T15:08:31.000Z",
+                      "uid": "35240-6383482f-e503-4c1e-bb62-48ac71cd2649"
+                    },
+                    {
+                      "id": "85f00088-b123-44be-876b-49c70c382fc3",
+                      "name": "Internal Server Error - Failed to fetch usage data",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api-keys/:id/usage?start_date=<dateTime>&end_date=<dateTime>&group_by=day",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api-keys",
+                            ":id",
+                            "usage"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start date for the usage period (ISO 8601 format). Defaults to 30 days ago. Must be within the last 6 months (180 days).",
+                              "key": "start_date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "End date for the usage period (ISO 8601 format). Defaults to current time.",
+                              "key": "end_date",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Time granularity for grouping results. Currently reserved for future enhancements and does not change the response shape. Defaults to 'day'.",
+                              "key": "group_by",
+                              "value": "day"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:08:31.000Z",
+                      "updatedAt": "2026-06-05T15:08:31.000Z",
+                      "uid": "35240-85f00088-b123-44be-876b-49c70c382fc3"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-378c7982-082a-4140-a9d2-3f338d79f6b0"
+                }
+              ],
+              "id": "c4cc613c-5c1a-4439-a1d2-84d8965b032f",
+              "createdAt": "2026-06-05T15:08:31.000Z",
+              "updatedAt": "2026-06-05T15:08:31.000Z",
+              "uid": "35240-c4cc613c-5c1a-4439-a1d2-84d8965b032f"
+            },
+            {
+              "name": "Get API Key",
+              "id": "b78af726-f9ad-48ca-ab1b-97b0dacba956",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api-keys/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-keys",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "4c20e8ed-db4a-45b9-8dfa-568147dc176d",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) The unique identifier of the API key"
+                    }
+                  ]
+                },
+                "description": "Retrieves details of a specific API key by its ID."
+              },
+              "response": [
+                {
+                  "id": "8d15b2ad-6034-430d-a092-ae636187520d",
+                  "name": "API key retrieved successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"apiKey\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"rateLimit\": \"<integer,null>\",\n    \"budgetCents\": \"<integer,null>\",\n    \"isOverBudget\": \"<boolean>\",\n    \"teamId\": \"<uuid>\",\n    \"createdAt\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-8d15b2ad-6034-430d-a092-ae636187520d"
+                },
+                {
+                  "id": "c2318a44-13af-424a-809b-22a319510f87",
+                  "name": "Bad request - invalid API key ID format",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-c2318a44-13af-424a-809b-22a319510f87"
+                },
+                {
+                  "id": "74d65a3f-0c87-446d-ad52-071ad370657c",
+                  "name": "Unauthorized - Invalid or missing service key",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-74d65a3f-0c87-446d-ad52-071ad370657c"
+                },
+                {
+                  "id": "390705c4-b27c-4672-9e43-d6be5346d62a",
+                  "name": "Not found - API key does not exist",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-390705c4-b27c-4672-9e43-d6be5346d62a"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:31.000Z",
+              "updatedAt": "2026-06-05T15:08:31.000Z",
+              "uid": "35240-b78af726-f9ad-48ca-ab1b-97b0dacba956"
+            },
+            {
+              "name": "Update API Key",
+              "id": "ae3ef30b-43d0-44b0-9c3c-9a799b5ff9e8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rateLimit\": \"<integer>\",\n  \"budgetCents\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api-keys/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-keys",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "31223e02-38a0-42c6-a8ed-7dfd062e12cf",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) The unique identifier of the API key to update"
+                    }
+                  ]
+                },
+                "description": "Updates an existing API key's name and/or rate limit. Only API keys belonging to the authenticated team can be updated."
+              },
+              "response": [
+                {
+                  "id": "6a47d9f4-ec13-417c-9267-b730485112ca",
+                  "name": "API key updated successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"rateLimit\": \"<integer>\",\n  \"budgetCents\": \"<integer,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"apiKey\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"rateLimit\": \"<integer,null>\",\n    \"budgetCents\": \"<integer,null>\",\n    \"isOverBudget\": \"<boolean>\",\n    \"teamId\": \"<uuid>\",\n    \"userId\": \"<uuid>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-6a47d9f4-ec13-417c-9267-b730485112ca"
+                },
+                {
+                  "id": "cec1c513-ae89-41d3-85c7-62b142fdf304",
+                  "name": "Bad Request - Invalid parameters",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"rateLimit\": \"<integer>\",\n  \"budgetCents\": \"<integer,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-cec1c513-ae89-41d3-85c7-62b142fdf304"
+                },
+                {
+                  "id": "d85012b3-b3c0-4e5f-8155-84cc312091f6",
+                  "name": "Unauthorized - Invalid or missing service key",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"rateLimit\": \"<integer>\",\n  \"budgetCents\": \"<integer,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-d85012b3-b3c0-4e5f-8155-84cc312091f6"
+                },
+                {
+                  "id": "ddc045a6-5e63-4410-a048-abbc9625aa94",
+                  "name": "Forbidden - API key belongs to a different team",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"rateLimit\": \"<integer>\",\n  \"budgetCents\": \"<integer,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-ddc045a6-5e63-4410-a048-abbc9625aa94"
+                },
+                {
+                  "id": "bdc8da1c-b710-4c8d-817b-94c996e1f65b",
+                  "name": "Not Found - API key does not exist",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"rateLimit\": \"<integer>\",\n  \"budgetCents\": \"<integer,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-bdc8da1c-b710-4c8d-817b-94c996e1f65b"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:31.000Z",
+              "updatedAt": "2026-06-05T15:08:31.000Z",
+              "uid": "35240-ae3ef30b-43d0-44b0-9c3c-9a799b5ff9e8"
+            },
+            {
+              "name": "Delete API Key",
+              "id": "a8ef252b-5852-4db7-b3f8-71bbb21af5d9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api-keys/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-keys",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8db5e327-ff31-438f-b252-b412f49dfb26",
+                      "key": "id",
+                      "value": "<uuid>",
+                      "description": "(Required) The unique identifier of the API key to delete"
+                    }
+                  ]
+                },
+                "description": "Deletes an API key. Only API keys belonging to the authenticated team can be deleted."
+              },
+              "response": [
+                {
+                  "id": "82036249-f281-4932-9c8e-03922184693b",
+                  "name": "API key deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": \"<boolean>\"\n}",
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-82036249-f281-4932-9c8e-03922184693b"
+                },
+                {
+                  "id": "95043afe-f997-4d07-aa5d-d1db5149293b",
+                  "name": "Bad Request - Invalid parameters",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-95043afe-f997-4d07-aa5d-d1db5149293b"
+                },
+                {
+                  "id": "a0bff826-f9f0-45f0-b0f1-8c83dd2495e8",
+                  "name": "Unauthorized - Invalid or missing service key",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-a0bff826-f9f0-45f0-b0f1-8c83dd2495e8"
+                },
+                {
+                  "id": "64c4046f-0104-4327-b105-4d959e5cc6f7",
+                  "name": "Forbidden - API key belongs to a different team",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-64c4046f-0104-4327-b105-4d959e5cc6f7"
+                },
+                {
+                  "id": "1030ebca-1e3d-4a59-8c9d-4ecc5d0fc519",
+                  "name": "Not Found - API key does not exist",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api-keys/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api-keys",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:08:31.000Z",
+                  "updatedAt": "2026-06-05T15:08:31.000Z",
+                  "uid": "35240-1030ebca-1e3d-4a59-8c9d-4ecc5d0fc519"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:31.000Z",
+              "updatedAt": "2026-06-05T15:08:31.000Z",
+              "uid": "35240-a8ef252b-5852-4db7-b3f8-71bbb21af5d9"
+            }
+          ],
+          "id": "cf04e350-56e9-4630-95b3-010c886af50d",
+          "createdAt": "2026-06-05T15:08:31.000Z",
+          "updatedAt": "2026-06-05T15:08:31.000Z",
+          "uid": "35240-cf04e350-56e9-4630-95b3-010c886af50d"
+        },
+        {
+          "name": "Create API Key",
+          "id": "a02216bd-700e-4401-b977-04ad6caceb9f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"rateLimit\": \"<integer>\",\n  \"budgetCents\": \"<integer,null>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api-keys",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api-keys"
+              ]
+            },
+            "description": "Creates a new API key for the authenticated team. Optionally specify a name, rate limit, and budget for the API key."
+          },
+          "response": [
+            {
+              "id": "2e79357c-d0c9-43c3-864c-c7de0fa194f5",
+              "name": "API key created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rateLimit\": \"<integer>\",\n  \"budgetCents\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api-keys",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-keys"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"apiKey\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"rateLimit\": \"<integer,null>\",\n    \"budgetCents\": \"<integer,null>\",\n    \"isOverBudget\": \"<boolean>\",\n    \"teamId\": \"<uuid>\",\n    \"userId\": \"<uuid>\",\n    \"createdAt\": \"<dateTime>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:08:31.000Z",
+              "updatedAt": "2026-06-05T15:08:31.000Z",
+              "uid": "35240-2e79357c-d0c9-43c3-864c-c7de0fa194f5"
+            },
+            {
+              "id": "48d12aa6-8868-43e3-b71f-4adfa2d40c2b",
+              "name": "Bad Request - Invalid parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rateLimit\": \"<integer>\",\n  \"budgetCents\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api-keys",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-keys"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:08:31.000Z",
+              "updatedAt": "2026-06-05T15:08:31.000Z",
+              "uid": "35240-48d12aa6-8868-43e3-b71f-4adfa2d40c2b"
+            },
+            {
+              "id": "b3eec849-e338-4d01-aa16-154f68d8f501",
+              "name": "Unauthorized - Invalid or missing service key",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rateLimit\": \"<integer>\",\n  \"budgetCents\": \"<integer,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api-keys",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-keys"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:08:31.000Z",
+              "updatedAt": "2026-06-05T15:08:31.000Z",
+              "uid": "35240-b3eec849-e338-4d01-aa16-154f68d8f501"
+            }
+          ],
+          "createdAt": "2026-06-05T15:08:31.000Z",
+          "updatedAt": "2026-06-05T15:08:31.000Z",
+          "uid": "35240-a02216bd-700e-4401-b977-04ad6caceb9f"
+        },
+        {
+          "name": "List API Keys",
+          "id": "b0302396-5e84-4856-bfda-1ef008133818",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api-keys?api_key_id=<uuid>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api-keys"
+              ],
+              "query": [
+                {
+                  "description": "Optional API key ID to retrieve a specific key",
+                  "key": "api_key_id",
+                  "value": "<uuid>"
+                }
+              ]
+            },
+            "description": "Returns all API keys belonging to the authenticated team. Includes ID, name, and rate limit for each key."
+          },
+          "response": [
+            {
+              "id": "d9047f77-1a94-4bd3-8093-a584d13d4266",
+              "name": "List of API keys retrieved successfully",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api-keys?api_key_id=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-keys"
+                  ],
+                  "query": [
+                    {
+                      "description": "Optional API key ID to retrieve a specific key",
+                      "key": "api_key_id",
+                      "value": "<uuid>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"apiKeys\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"rateLimit\": \"<integer,null>\",\n      \"budgetCents\": \"<integer,null>\",\n      \"isOverBudget\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"rateLimit\": \"<integer,null>\",\n      \"budgetCents\": \"<integer,null>\",\n      \"isOverBudget\": \"<boolean>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:08:31.000Z",
+              "updatedAt": "2026-06-05T15:08:31.000Z",
+              "uid": "35240-d9047f77-1a94-4bd3-8093-a584d13d4266"
+            },
+            {
+              "id": "28137112-9be0-40b4-b8db-f16222233149",
+              "name": "Bad request - invalid API key ID format",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api-keys?api_key_id=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-keys"
+                  ],
+                  "query": [
+                    {
+                      "description": "Optional API key ID to retrieve a specific key",
+                      "key": "api_key_id",
+                      "value": "<uuid>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:08:31.000Z",
+              "updatedAt": "2026-06-05T15:08:31.000Z",
+              "uid": "35240-28137112-9be0-40b4-b8db-f16222233149"
+            },
+            {
+              "id": "c951632e-2e87-408c-9cf8-d9ba61b180b9",
+              "name": "Unauthorized - Invalid or missing service key",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api-keys?api_key_id=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-keys"
+                  ],
+                  "query": [
+                    {
+                      "description": "Optional API key ID to retrieve a specific key",
+                      "key": "api_key_id",
+                      "value": "<uuid>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:08:31.000Z",
+              "updatedAt": "2026-06-05T15:08:31.000Z",
+              "uid": "35240-c951632e-2e87-408c-9cf8-d9ba61b180b9"
+            },
+            {
+              "id": "aecb44a9-5556-4b22-ba98-4535675948d7",
+              "name": "Forbidden - insufficient permissions to access this API key",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api-keys?api_key_id=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-keys"
+                  ],
+                  "query": [
+                    {
+                      "description": "Optional API key ID to retrieve a specific key",
+                      "key": "api_key_id",
+                      "value": "<uuid>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:08:31.000Z",
+              "updatedAt": "2026-06-05T15:08:31.000Z",
+              "uid": "35240-aecb44a9-5556-4b22-ba98-4535675948d7"
+            },
+            {
+              "id": "8b6de450-88d6-484f-9eb2-e0cf08ef8da6",
+              "name": "Not found - API key or team not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api-keys?api_key_id=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api-keys"
+                  ],
+                  "query": [
+                    {
+                      "description": "Optional API key ID to retrieve a specific key",
+                      "key": "api_key_id",
+                      "value": "<uuid>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:08:31.000Z",
+              "updatedAt": "2026-06-05T15:08:31.000Z",
+              "uid": "35240-8b6de450-88d6-484f-9eb2-e0cf08ef8da6"
+            }
+          ],
+          "createdAt": "2026-06-05T15:08:31.000Z",
+          "updatedAt": "2026-06-05T15:08:31.000Z",
+          "uid": "35240-b0302396-5e84-4856-bfda-1ef008133818"
+        }
+      ],
+      "id": "6067417c-806b-4a0e-82ad-13366df31c6e",
+      "createdAt": "2026-06-05T15:08:31.000Z",
+      "updatedAt": "2026-06-05T15:08:31.000Z",
+      "uid": "35240-6067417c-806b-4a0e-82ad-13366df31c6e"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://admin-api.exa.ai/team-management"
+    }
+  ]
+}

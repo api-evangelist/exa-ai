@@ -1,0 +1,2148 @@
+{
+  "item": [
+    {
+      "id": "e3bbbf8e-96a5-4e75-ab94-933a65628498",
+      "name": "Agent",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c8da2c84-7420-45b8-86d8-43e88cba06fd",
+          "name": "Create a run",
+          "request": {
+            "name": "Create a run",
+            "description": {
+              "content": "Create an asynchronous Agent run. By default, the API returns the run object immediately. Set `Accept: text/event-stream` to stream run lifecycle events until the run reaches a terminal status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agent",
+                "runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"input\": {\n    \"data\": [\n      {\n        \"key_0\": \"<null>\",\n        \"key_1\": \"<null>\",\n        \"key_2\": \"<null>\"\n      },\n      {\n        \"key_0\": \"<null>\"\n      }\n    ],\n    \"exclusion\": [\n      {\n        \"key_0\": \"<null>\",\n        \"key_1\": \"<null>\",\n        \"key_2\": \"<null>\"\n      },\n      {\n        \"key_0\": \"<null>\",\n        \"key_1\": \"<null>\",\n        \"key_2\": \"<null>\"\n      }\n    ]\n  },\n  \"outputSchema\": {\n    \"key_0\": \"<null>\",\n    \"key_1\": \"<null>\"\n  },\n  \"effort\": \"auto\",\n  \"previousRunId\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"budget\": {\n    \"maxCostDollars\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "95b4fe49-05ee-4058-9ce5-061170c04f7c",
+              "name": "Agent run created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"What are the most important AI infrastructure funding rounds announced this week?\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8\",\n  \"object\": \"agent_run\",\n  \"status\": \"running\",\n  \"stopReason\": null,\n  \"createdAt\": \"2026-05-07T18:31:00.000Z\",\n  \"completedAt\": null,\n  \"request\": {\n    \"query\": \"What are the most important AI infrastructure funding rounds announced this week?\"\n  },\n  \"output\": {\n    \"text\": \"\",\n    \"structured\": null,\n    \"grounding\": []\n  },\n  \"usage\": {\n    \"agentComputeUnits\": 0,\n    \"searches\": 0,\n    \"emails\": 0,\n    \"phoneNumbers\": 0\n  },\n  \"costDollars\": {\n    \"total\": 0,\n    \"agentCompute\": 0,\n    \"search\": 0,\n    \"emails\": 0,\n    \"phoneNumbers\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09016292-c7ff-4144-8ac4-e24d818075b6",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"What are the most important AI infrastructure funding rounds announced this week?\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce2d1f7b-92d7-40e9-832e-e066ee086ca8",
+              "name": "Team context or authentication was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"What are the most important AI infrastructure funding rounds announced this week?\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d8fb2ca-85ea-4024-a03a-9135288148d8",
+              "name": "Agent run concurrency limit reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"What are the most important AI infrastructure funding rounds announced this week?\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec93ff80-9393-4f94-9013-5f88515a3ab7",
+              "name": "Server error or run timeout.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"What are the most important AI infrastructure funding rounds announced this week?\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd41a816-2986-437e-a59d-63248d6423d9",
+          "name": "List runs",
+          "request": {
+            "name": "List runs",
+            "description": {
+              "content": "List Agent runs for your team, ordered from newest to oldest.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agent",
+                "runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "57da0b94-21fe-4ee6-84ee-ba9bf37e2c16",
+              "name": "Paginated Agent runs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"data\": [\n    {\n      \"id\": \"agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8\",\n      \"object\": \"string\",\n      \"status\": \"completed\",\n      \"stopReason\": \"schema_satisfied\",\n      \"createdAt\": \"2024-01-18T03:46:40.677Z\",\n      \"completedAt\": \"1961-12-04T21:52:32.621Z\",\n      \"request\": {\n        \"query\": \"What are the most important AI infrastructure funding rounds announced this week?\",\n        \"systemPrompt\": \"Prefer official sources and avoid duplicate results.\",\n        \"input\": {\n          \"data\": [\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_3\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"exclusion\": [\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"outputSchema\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_3\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"effort\": \"auto\",\n        \"previousRunId\": \"agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8\",\n        \"metadata\": {\n          \"slack_channel_id\": \"C123ABC\",\n          \"slack_thread_id\": \"1745444400.123456\",\n          \"user_id\": \"U123ABC\"\n        }\n      },\n      \"output\": {\n        \"text\": \"string\",\n        \"structured\": null,\n        \"grounding\": [\n          {\n            \"field\": \"structured.companies[0].sourceUrl\",\n            \"citations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"score\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"field\": \"structured.companies[0].sourceUrl\",\n            \"citations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"score\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"usage\": {\n        \"agentComputeUnits\": 1007,\n        \"searches\": 2432,\n        \"emails\": 2916,\n        \"phoneNumbers\": 7650\n      },\n      \"costDollars\": {\n        \"total\": 6381.5179065596785,\n        \"agentCompute\": 5361.703051452567,\n        \"search\": 297.2403717751781,\n        \"emails\": 3928.093662397234,\n        \"phoneNumbers\": 4152.0748096302605\n      }\n    },\n    {\n      \"id\": \"agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8\",\n      \"object\": \"string\",\n      \"status\": \"failed\",\n      \"stopReason\": \"schema_satisfied\",\n      \"createdAt\": \"1976-09-27T03:31:16.612Z\",\n      \"completedAt\": \"2002-05-27T18:12:21.481Z\",\n      \"request\": {\n        \"query\": \"What are the most important AI infrastructure funding rounds announced this week?\",\n        \"systemPrompt\": \"Prefer official sources and avoid duplicate results.\",\n        \"input\": {\n          \"data\": [\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"exclusion\": [\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_3\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"outputSchema\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_3\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"effort\": \"auto\",\n        \"previousRunId\": \"agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8\",\n        \"metadata\": {\n          \"slack_channel_id\": \"C123ABC\",\n          \"slack_thread_id\": \"1745444400.123456\",\n          \"user_id\": \"U123ABC\"\n        }\n      },\n      \"output\": {\n        \"text\": \"string\",\n        \"structured\": null,\n        \"grounding\": [\n          {\n            \"field\": \"structured.companies[0].sourceUrl\",\n            \"citations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"score\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"field\": \"structured.companies[0].sourceUrl\",\n            \"citations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"score\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"usage\": {\n        \"agentComputeUnits\": 2934,\n        \"searches\": 3253,\n        \"emails\": 2200,\n        \"phoneNumbers\": 3532\n      },\n      \"costDollars\": {\n        \"total\": 1522.1605885235433,\n        \"agentCompute\": 1384.1770902099115,\n        \"search\": 1984.1448820410346,\n        \"emails\": 2606.6389859074147,\n        \"phoneNumbers\": 8436.751107201879\n      }\n    }\n  ],\n  \"hasMore\": false,\n  \"nextCursor\": \"agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc8e6ef7-c4d5-4b10-b54a-60e5f6cc80d3",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bbd4837-6b5b-4eaa-8813-95cdaa4187a1",
+              "name": "Team context or authentication was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e46e28d-99ff-4f41-9c97-7e7b3e9d8605",
+              "name": "Server error or run timeout.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "011fa05f-0a6f-4d4e-ba2b-e10ce3a421cb",
+          "name": "Get a run",
+          "request": {
+            "name": "Get a run",
+            "description": {
+              "content": "Retrieve a single Agent run by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agent",
+                "runs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Agent run ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c6c4fc4-6974-4991-abc6-971d90f98478",
+              "name": "Agent run",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8\",\n  \"object\": \"string\",\n  \"status\": \"cancelled\",\n  \"stopReason\": \"error\",\n  \"createdAt\": \"1968-11-16T17:02:20.896Z\",\n  \"completedAt\": \"1971-10-05T14:18:56.802Z\",\n  \"request\": {\n    \"query\": \"What are the most important AI infrastructure funding rounds announced this week?\",\n    \"systemPrompt\": \"Prefer official sources and avoid duplicate results.\",\n    \"input\": {\n      \"data\": [\n        {\n          \"key_0\": null\n        },\n        {\n          \"key_0\": null,\n          \"key_1\": null\n        }\n      ],\n      \"exclusion\": [\n        {\n          \"key_0\": null,\n          \"key_1\": null,\n          \"key_2\": null\n        },\n        {\n          \"key_0\": null\n        }\n      ]\n    },\n    \"outputSchema\": {\n      \"key_0\": null\n    },\n    \"effort\": \"auto\",\n    \"previousRunId\": \"agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8\",\n    \"metadata\": {\n      \"slack_channel_id\": \"C123ABC\",\n      \"slack_thread_id\": \"1745444400.123456\",\n      \"user_id\": \"U123ABC\"\n    }\n  },\n  \"output\": {\n    \"text\": \"string\",\n    \"structured\": null,\n    \"grounding\": [\n      {\n        \"field\": \"structured.companies[0].sourceUrl\",\n        \"citations\": [\n          {\n            \"url\": \"https://dzWJOkpCbbbphttDvZiuGvwXs.goxvTNhOsbvLOvnOoHKY9iy2ndJ,P,atvuqqotX4E0K7yrS8m3Ab\",\n            \"title\": \"string\"\n          },\n          {\n            \"url\": \"https://GSSPJuHdizZIkicBgINdgIo.mfYHHy-iRi.GJtrl-\",\n            \"title\": \"string\"\n          }\n        ],\n        \"score\": 0.8080585579152454,\n        \"confidence\": \"low\"\n      },\n      {\n        \"field\": \"structured.companies[0].sourceUrl\",\n        \"citations\": [\n          {\n            \"url\": \"http://iKDiRNkP.iyaukwcscDGPI4tDOykIgZ,twgvuYtkOEa+8IxaslPeJZeQh5u,hXL9ywvt8Q\",\n            \"title\": \"string\"\n          },\n          {\n            \"url\": \"http://yhbqBBPLOLUkPcGSemlwCJQqfK.tnydJ2T-5CoaE9fwZWBycrDxGMQOcEHwLECHXni,HTEm,XqV7i3N\",\n            \"title\": \"string\"\n          }\n        ],\n        \"score\": 0.14779575684580615,\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"usage\": {\n    \"agentComputeUnits\": 6610,\n    \"searches\": 4399,\n    \"emails\": 3762,\n    \"phoneNumbers\": 7917\n  },\n  \"costDollars\": {\n    \"total\": 7179.632020925884,\n    \"agentCompute\": 6097.798212751182,\n    \"search\": 2410.0940478803377,\n    \"emails\": 5674.594410454404,\n    \"phoneNumbers\": 9525.384996774972\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe11ccfe-e9ba-44d1-965d-fc6845c37f1a",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65b95e66-8793-4854-891f-6e6b92794f58",
+              "name": "Team context or authentication was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe684a7a-1fff-4042-b4d3-bb33c8a5090a",
+              "name": "Run not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "185f284b-3d3e-416e-ac34-06f2eff83ac3",
+              "name": "Agent run concurrency limit reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4234e71c-0a5c-480a-a021-bb53ff44aae2",
+              "name": "Server error or run timeout.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71525a61-e0ca-43d1-84a5-2322bbb489fd",
+          "name": "Delete a run",
+          "request": {
+            "name": "Delete a run",
+            "description": {
+              "content": "Delete a stored Agent run.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agent",
+                "runs",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Agent run ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff746596-4c3b-4db1-ac5b-72fb34e2abaa",
+              "name": "Agent run deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8\",\n  \"object\": \"string\",\n  \"deleted\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ee55ebf-7109-4752-8bc3-c82fea69375d",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af4d30c9-df55-4324-9e60-8412aa857f7c",
+              "name": "Team context or authentication was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6a0cf73-91f4-4c25-a550-7e8e04d79bf4",
+              "name": "Run not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8b7882c-6777-437f-b483-3c64252b520d",
+              "name": "Agent run concurrency limit reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73d58cb2-fbe1-47a3-90a3-e11f26e6c3a8",
+              "name": "Server error or run timeout.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31c4e996-3cdb-4141-8159-1127552d6899",
+          "name": "Cancel a run",
+          "request": {
+            "name": "Cancel a run",
+            "description": {
+              "content": "Cancel a queued or running Agent run. If the run has already reached a terminal status, the API returns the existing run.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agent",
+                "runs",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Agent run ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9611ca04-6a4a-4b6b-8e41-11fad514ddf7",
+              "name": "Agent run",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8\",\n  \"object\": \"string\",\n  \"status\": \"cancelled\",\n  \"stopReason\": \"error\",\n  \"createdAt\": \"1968-11-16T17:02:20.896Z\",\n  \"completedAt\": \"1971-10-05T14:18:56.802Z\",\n  \"request\": {\n    \"query\": \"What are the most important AI infrastructure funding rounds announced this week?\",\n    \"systemPrompt\": \"Prefer official sources and avoid duplicate results.\",\n    \"input\": {\n      \"data\": [\n        {\n          \"key_0\": null\n        },\n        {\n          \"key_0\": null,\n          \"key_1\": null\n        }\n      ],\n      \"exclusion\": [\n        {\n          \"key_0\": null,\n          \"key_1\": null,\n          \"key_2\": null\n        },\n        {\n          \"key_0\": null\n        }\n      ]\n    },\n    \"outputSchema\": {\n      \"key_0\": null\n    },\n    \"effort\": \"auto\",\n    \"previousRunId\": \"agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8\",\n    \"metadata\": {\n      \"slack_channel_id\": \"C123ABC\",\n      \"slack_thread_id\": \"1745444400.123456\",\n      \"user_id\": \"U123ABC\"\n    }\n  },\n  \"output\": {\n    \"text\": \"string\",\n    \"structured\": null,\n    \"grounding\": [\n      {\n        \"field\": \"structured.companies[0].sourceUrl\",\n        \"citations\": [\n          {\n            \"url\": \"https://dzWJOkpCbbbphttDvZiuGvwXs.goxvTNhOsbvLOvnOoHKY9iy2ndJ,P,atvuqqotX4E0K7yrS8m3Ab\",\n            \"title\": \"string\"\n          },\n          {\n            \"url\": \"https://GSSPJuHdizZIkicBgINdgIo.mfYHHy-iRi.GJtrl-\",\n            \"title\": \"string\"\n          }\n        ],\n        \"score\": 0.8080585579152454,\n        \"confidence\": \"low\"\n      },\n      {\n        \"field\": \"structured.companies[0].sourceUrl\",\n        \"citations\": [\n          {\n            \"url\": \"http://iKDiRNkP.iyaukwcscDGPI4tDOykIgZ,twgvuYtkOEa+8IxaslPeJZeQh5u,hXL9ywvt8Q\",\n            \"title\": \"string\"\n          },\n          {\n            \"url\": \"http://yhbqBBPLOLUkPcGSemlwCJQqfK.tnydJ2T-5CoaE9fwZWBycrDxGMQOcEHwLECHXni,HTEm,XqV7i3N\",\n            \"title\": \"string\"\n          }\n        ],\n        \"score\": 0.14779575684580615,\n        \"confidence\": \"high\"\n      }\n    ]\n  },\n  \"usage\": {\n    \"agentComputeUnits\": 6610,\n    \"searches\": 4399,\n    \"emails\": 3762,\n    \"phoneNumbers\": 7917\n  },\n  \"costDollars\": {\n    \"total\": 7179.632020925884,\n    \"agentCompute\": 6097.798212751182,\n    \"search\": 2410.0940478803377,\n    \"emails\": 5674.594410454404,\n    \"phoneNumbers\": 9525.384996774972\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf0e4f74-dd61-49cb-b33d-40ab6f558470",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "534f0e0e-c534-4074-b71c-9ba3db5dee9e",
+              "name": "Team context or authentication was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b55cc989-2a4f-4cad-9c5a-4f5e7f8520bb",
+              "name": "Run not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36276d23-670d-40a2-b84c-e2e341bac039",
+              "name": "Agent run concurrency limit reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "648a5cc2-4c58-49e6-a6b0-7f39e7cdb79a",
+              "name": "Server error or run timeout.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "492dee78-e7bc-4366-8f28-1382cb5530f0",
+          "name": "List run events",
+          "request": {
+            "name": "List run events",
+            "description": {
+              "content": "List stored events for an Agent run. Set `Accept: text/event-stream` to replay stored events as server-sent events. Use `cursor` for JSON pagination or `Last-Event-ID` for SSE replay.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "agent",
+                "runs",
+                ":id",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Agent run ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "842b6bdf-f6a4-4b80-a5f6-3226f9024b75",
+              "name": "Agent run events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"event\": \"agent_run.failed\",\n      \"data\": null,\n      \"createdAt\": \"1979-06-04T07:54:06.187Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"event\": \"agent_run.completed\",\n      \"data\": null,\n      \"createdAt\": \"1948-11-20T06:53:21.589Z\"\n    }\n  ],\n  \"hasMore\": false,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf17fedc-49cb-4503-bc61-02b17e4e54c8",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6ada090-9ab9-4fcf-bac9-c6b647987161",
+              "name": "Team context or authentication was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c403640-9b6b-4030-bdf7-a865bf3b8058",
+              "name": "Run not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4be82ac3-9cea-4cd6-aee9-377b36e73200",
+              "name": "Agent run concurrency limit reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6fc7ea91-bbb4-43f8-89c3-c4c15c03eaf5",
+              "name": "Server error or run timeout.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agent",
+                    "runs",
+                    ":id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Agent run ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"RATE_LIMIT_ERROR\",\n    \"code\": \"INVALID_REQUEST\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.exa.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "39eb3858-bf44-4bd0-985d-80d0bd7abe56",
+    "name": "Exa Agent API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Exa Agent API - subset of the Exa Public API.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,382 @@
+{
+  "info": {
+    "_postman_id": "0275d6a9-207c-42ef-9724-2703fabd8b05",
+    "name": "Exa Research API",
+    "description": "Exa Research API - subset of the Exa Public API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:08:20.000Z",
+    "updatedAt": "2026-06-05T15:08:20.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0275d6a9-207c-42ef-9724-2703fabd8b05"
+  },
+  "item": [
+    {
+      "name": "research",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "{researchId}",
+              "item": [
+                {
+                  "name": "Get a research request by id",
+                  "id": "e239635b-eba3-4665-ab70-eaa0c7041981",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/research/v1/:researchId?stream=<string>&events=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "research",
+                        "v1",
+                        ":researchId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Set to \"true\" to receive real-time updates via Server-Sent Events (SSE)",
+                          "key": "stream",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Set to \"true\" to include the detailed event log of all operations performed",
+                          "key": "events",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "9ad210fe-d14a-4b4c-8880-bdbbef49622c",
+                          "key": "researchId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the research request to retrieve"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve research by ID. Add ?stream=true for real-time SSE updates."
+                  },
+                  "response": [
+                    {
+                      "id": "6dbc0fee-597f-45ff-baa3-7453f2bd9581",
+                      "name": "response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/research/v1/:researchId?stream=<string>&events=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "research",
+                            "v1",
+                            ":researchId"
+                          ],
+                          "query": [
+                            {
+                              "description": "Set to \"true\" to receive real-time updates via Server-Sent Events (SSE)",
+                              "key": "stream",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Set to \"true\" to include the detailed event log of all operations performed",
+                              "key": "events",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "researchId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"researchId\": \"<string>\",\n  \"createdAt\": \"<number>\",\n  \"instructions\": \"<string>\",\n  \"status\": \"pending\",\n  \"model\": \"exa-research\",\n  \"outputSchema\": {\n    \"laboris8\": {},\n    \"consectetur_e\": {},\n    \"et_12\": {}\n  }\n}",
+                      "createdAt": "2026-06-05T15:08:20.000Z",
+                      "updatedAt": "2026-06-05T15:08:20.000Z",
+                      "uid": "35240-6dbc0fee-597f-45ff-baa3-7453f2bd9581"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:08:20.000Z",
+                  "updatedAt": "2026-06-05T15:08:20.000Z",
+                  "uid": "35240-e239635b-eba3-4665-ab70-eaa0c7041981"
+                }
+              ],
+              "id": "1db9c7b7-2f59-455c-b5d5-f9faf8dad3e1",
+              "createdAt": "2026-06-05T15:08:20.000Z",
+              "updatedAt": "2026-06-05T15:08:20.000Z",
+              "uid": "35240-1db9c7b7-2f59-455c-b5d5-f9faf8dad3e1"
+            },
+            {
+              "name": "List research requests",
+              "id": "277d1b5e-40d1-4ff4-90ae-322d029d3c35",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/research/v1?cursor=<string>&limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "research",
+                    "v1"
+                  ],
+                  "query": [
+                    {
+                      "description": "The cursor to paginate through the results",
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Number of results per page (1-50)",
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                },
+                "description": "Get a paginated list of research requests"
+              },
+              "response": [
+                {
+                  "id": "55d47b2b-c6e0-4b36-969f-0f8c6b44c5a4",
+                  "name": "List of research requests",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/research/v1?cursor=<string>&limit=10",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "research",
+                        "v1"
+                      ],
+                      "query": [
+                        {
+                          "description": "The cursor to paginate through the results",
+                          "key": "cursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Number of results per page (1-50)",
+                          "key": "limit",
+                          "value": "10"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"researchId\": \"<string>\",\n      \"createdAt\": \"<number>\",\n      \"instructions\": \"<string>\",\n      \"status\": \"pending\",\n      \"model\": \"exa-research\",\n      \"outputSchema\": {\n        \"irure1\": {},\n        \"cupidatat_e\": {},\n        \"incididunt524\": {}\n      }\n    },\n    {\n      \"researchId\": \"<string>\",\n      \"createdAt\": \"<number>\",\n      \"instructions\": \"<string>\",\n      \"status\": \"pending\",\n      \"model\": \"exa-research\",\n      \"outputSchema\": {\n        \"sit_e\": {},\n        \"enim_b1\": {}\n      }\n    }\n  ],\n  \"hasMore\": \"<boolean>\",\n  \"nextCursor\": \"<string,null>\"\n}",
+                  "createdAt": "2026-06-05T15:08:20.000Z",
+                  "updatedAt": "2026-06-05T15:08:20.000Z",
+                  "uid": "35240-55d47b2b-c6e0-4b36-969f-0f8c6b44c5a4"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:20.000Z",
+              "updatedAt": "2026-06-05T15:08:20.000Z",
+              "uid": "35240-277d1b5e-40d1-4ff4-90ae-322d029d3c35"
+            },
+            {
+              "name": "Create a new research request",
+              "id": "e5ca00b4-2bbd-4976-81c2-76274ce0a22c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instructions\": \"<string>\",\n  \"model\": \"exa-research\",\n  \"outputSchema\": {\n    \"mollit__0f\": {},\n    \"laboris54\": {}\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/research/v1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "research",
+                    "v1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "7e4f2d5a-8d4e-4d3d-befa-c73b8b491d04",
+                  "name": "Research request created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"instructions\": \"<string>\",\n  \"model\": \"exa-research\",\n  \"outputSchema\": {\n    \"mollit__0f\": {},\n    \"laboris54\": {}\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/research/v1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "research",
+                        "v1"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"researchId\": \"<string>\",\n  \"createdAt\": \"<number>\",\n  \"instructions\": \"<string>\",\n  \"status\": \"pending\",\n  \"model\": \"exa-research\",\n  \"outputSchema\": {\n    \"laboris8\": {},\n    \"consectetur_e\": {},\n    \"et_12\": {}\n  }\n}",
+                  "createdAt": "2026-06-05T15:08:20.000Z",
+                  "updatedAt": "2026-06-05T15:08:20.000Z",
+                  "uid": "35240-7e4f2d5a-8d4e-4d3d-befa-c73b8b491d04"
+                }
+              ],
+              "createdAt": "2026-06-05T15:08:20.000Z",
+              "updatedAt": "2026-06-05T15:08:20.000Z",
+              "uid": "35240-e5ca00b4-2bbd-4976-81c2-76274ce0a22c"
+            }
+          ],
+          "id": "4ef57428-2651-45eb-a179-d79ea5f1bea4",
+          "createdAt": "2026-06-05T15:08:20.000Z",
+          "updatedAt": "2026-06-05T15:08:20.000Z",
+          "uid": "35240-4ef57428-2651-45eb-a179-d79ea5f1bea4"
+        }
+      ],
+      "id": "c21c47f2-c0ca-4a9f-af25-ac34919c5ab6",
+      "createdAt": "2026-06-05T15:08:20.000Z",
+      "updatedAt": "2026-06-05T15:08:20.000Z",
+      "uid": "35240-c21c47f2-c0ca-4a9f-af25-ac34919c5ab6"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.exa.ai"
+    }
+  ]
+}
