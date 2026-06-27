@@ -181,42 +181,39 @@ access: 3rd-Party
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/exa/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/exa-ai-answer-with-deep-sources-workflow.yml
-        name: Exa Answer with Deep Sources
-        summary: Get a cited answer to a question, then deep-fetch the top citation.
-      - url: arazzo/exa-ai-create-and-poll-research-workflow.yml
-        name: Exa Create and Poll Research
-        summary: Kick off an Exa research task and poll until it completes, then read output.
-      - url: arazzo/exa-ai-create-webset-and-list-items-workflow.yml
-        name: Exa Create Webset and List Items
-        summary: Create a Webset from a search, poll until it settles, then list its items.
-      - url: arazzo/exa-ai-enrich-webset-and-poll-workflow.yml
-        name: Exa Enrich Webset and Poll
-        summary: Build a Webset, then add an enrichment column and poll until it completes.
-      - url: arazzo/exa-ai-expand-webset-search-workflow.yml
-        name: Exa Expand Webset Search
-        summary: Build a Webset, add a follow-up search, and poll it to completion.
-      - url: arazzo/exa-ai-find-similar-and-fetch-contents-workflow.yml
-        name: Exa Find Similar and Fetch Contents
-        summary: Find pages similar to a seed result, then fetch their full contents.
-      - url: arazzo/exa-ai-preview-then-create-webset-workflow.yml
-        name: Exa Preview then Create Webset
-        summary: Preview how a query decomposes, then commit it to a real Webset.
-      - url: arazzo/exa-ai-resume-latest-research-workflow.yml
-        name: Exa Resume Latest Research
-        summary: Find the most recent research task and poll it until it completes.
-      - url: arazzo/exa-ai-scout-then-research-workflow.yml
-        name: Exa Scout then Research
-        summary: Scout sources with a quick search, then launch and poll a deep research task.
-      - url: arazzo/exa-ai-search-and-fetch-contents-workflow.yml
-        name: Exa Search and Fetch Contents
-        summary: Run an Exa neural search and pull full page contents for the top result.
-      - url: arazzo/exa-ai-webset-item-deep-contents-workflow.yml
-        name: Exa Webset Item Deep Contents
-        summary: Build a Webset, list its items, and deep-fetch the top item's contents.
+  - type: Arazzo
+    url: arazzo/exa-ai-answer-with-deep-sources-workflow.yml
+    name: Exa Answer with Deep Sources
+  - type: Arazzo
+    url: arazzo/exa-ai-create-and-poll-research-workflow.yml
+    name: Exa Create and Poll Research
+  - type: Arazzo
+    url: arazzo/exa-ai-create-webset-and-list-items-workflow.yml
+    name: Exa Create Webset and List Items
+  - type: Arazzo
+    url: arazzo/exa-ai-enrich-webset-and-poll-workflow.yml
+    name: Exa Enrich Webset and Poll
+  - type: Arazzo
+    url: arazzo/exa-ai-expand-webset-search-workflow.yml
+    name: Exa Expand Webset Search
+  - type: Arazzo
+    url: arazzo/exa-ai-find-similar-and-fetch-contents-workflow.yml
+    name: Exa Find Similar and Fetch Contents
+  - type: Arazzo
+    url: arazzo/exa-ai-preview-then-create-webset-workflow.yml
+    name: Exa Preview then Create Webset
+  - type: Arazzo
+    url: arazzo/exa-ai-resume-latest-research-workflow.yml
+    name: Exa Resume Latest Research
+  - type: Arazzo
+    url: arazzo/exa-ai-scout-then-research-workflow.yml
+    name: Exa Scout then Research
+  - type: Arazzo
+    url: arazzo/exa-ai-search-and-fetch-contents-workflow.yml
+    name: Exa Search and Fetch Contents
+  - type: Arazzo
+    url: arazzo/exa-ai-webset-item-deep-contents-workflow.yml
+    name: Exa Webset Item Deep Contents
   - type: Portal
     url: https://exa.ai
   - type: Documentation
@@ -225,7 +222,7 @@ common:
     url: https://exa.ai/docs/getting-started
   - type: Documentation
     url: https://exa.ai/docs/reference/search-api-guide
-  - type: SignUp
+  - type: Signup
     url: https://dashboard.exa.ai
   - type: Sandbox
     url: https://dashboard.exa.ai/playground
@@ -247,25 +244,25 @@ common:
     url: https://www.linkedin.com/company/exa-ai
   - type: GitHubOrganization
     url: https://github.com/exa-labs
-  - type: SDK
+  - type: SDKs
     url: https://github.com/exa-labs/exa-py
     name: Python SDK
-  - type: SDK
+  - type: SDKs
     url: https://github.com/exa-labs/exa-js
     name: JavaScript / TypeScript SDK
-  - type: Tool
+  - type: Tools
     url: https://github.com/exa-labs/exa-mcp-server
     name: Exa MCP Server
-  - type: Tool
+  - type: Tools
     url: https://github.com/exa-labs/websets-mcp-server
     name: Websets MCP Server
-  - type: Tool
+  - type: Tools
     url: https://github.com/exa-labs/zed-exa-mcp-extension
     name: Zed Exa MCP Extension
-  - type: Tool
+  - type: Tools
     url: https://github.com/exa-labs/exa-for-sheets
     name: Exa for Google Sheets
-  - type: Tool
+  - type: Tools
     url: https://github.com/exa-labs/n8n-integration
     name: Exa n8n Integration
   - type: CodeExamples
