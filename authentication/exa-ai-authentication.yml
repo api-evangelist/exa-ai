@@ -1,0 +1,38 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/exa-agent-api-openapi.yml, openapi/exa-monitors-api-openapi.yml, openapi/exa-research-api-openapi.yml,
+  openapi/exa-search-api-openapi.yml, openapi/exa-team-api-openapi.yml, openapi/exa-team-management-api-openapi.yml,
+  openapi/exa-websets-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  description: 'Pass your Exa API key in the x-api-key header. You can also authenticate with
+    Authorization: Bearer <key>.'
+  sources:
+  - openapi/exa-agent-api-openapi.yml
+  - openapi/exa-monitors-api-openapi.yml
+  - openapi/exa-research-api-openapi.yml
+  - openapi/exa-search-api-openapi.yml
+  - openapi/exa-team-api-openapi.yml
+  - openapi/exa-team-management-api-openapi.yml
+  - openapi/exa-websets-api-openapi.yml
+- name: bearer
+  type: http
+  scheme: bearer
+  description: 'Pass your Exa API key in the x-api-key header. You can also authenticate with
+    Authorization: Bearer <key>.'
+  sources:
+  - openapi/exa-agent-api-openapi.yml
+  - openapi/exa-monitors-api-openapi.yml
+  - openapi/exa-research-api-openapi.yml
+  - openapi/exa-search-api-openapi.yml
+  - openapi/exa-team-api-openapi.yml
+  - openapi/exa-websets-api-openapi.yml

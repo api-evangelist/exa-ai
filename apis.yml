@@ -179,6 +179,12 @@ kind: contract
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+  - type: VulnerabilityDisclosure
+    url: security/exa-ai-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/exa-ai-domain-security.yml
+  - type: Authentication
+    url: authentication/exa-ai-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/exa/overview
   - type: Arazzo
