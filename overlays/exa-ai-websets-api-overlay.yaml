@@ -1,0 +1,16 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Exa Websets API
+  version: 1.0.0
+extends: openapi/exa-websets-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-slug: exa-ai
+      x-apievangelist-provider: Exa
+      x-apievangelist-catalog: https://apis.io/provider/exa-ai
+      x-apievangelist-authentication: authentication/exa-ai-authentication.yml
+      x-apievangelist-errors: errors/exa-ai-problem-types.yml
+      x-apievangelist-conventions: conventions/exa-ai-conventions.yml
+      x-apievangelist-lifecycle: lifecycle/exa-ai-lifecycle.yml
+      x-apievangelist-mcp: mcp/exa-ai-mcp.yml

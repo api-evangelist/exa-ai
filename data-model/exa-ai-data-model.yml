@@ -1,0 +1,37 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from the object relationships in openapi/*.yml (path structure, $ref
+  links, and id-reference fields such as websetId, monitorId, searchId,
+  enrichmentId) across the Websets, Monitors, Research, Agent, and Team
+  Management specs, plus the Exa object reference at exa.ai/docs. Captures the
+  core entity-relationship graph behind Exa's async search/enrichment surface.
+docs: https://exa.ai/docs/websets/api/overview
+notation: >-
+  relationships use has_one / has_many / belongs_to with the foreign-key field
+  name; direction is from the entity that owns the reference.
+entities:
+  - {name: Team, domain: account, description: The authenticated team that owns API keys and usage.}
+  - {name: ApiKey, domain: account, description: A per-team API key with optional rate limit and budget.}
+  - {name: Webset, id_prefix: webset_, domain: websets, description: A curated, enrichable collection of web results scoped to a query or import.}
+  - {name: WebsetItem, id_prefix: witem_, domain: websets, description: A single result/entity within a webset.}
+  - {name: WebsetSearch, domain: websets, description: A search that populates or expands a webset.}
+  - {name: Enrichment, domain: websets, description: An LLM-driven enrichment applied to webset items.}
+  - {name: Import, domain: websets, description: A seed list imported into a webset.}
+  - {name: Webhook, domain: websets, description: A subscription that delivers webset/event notifications.}
+  - {name: Event, domain: websets, description: An asynchronous event (item created, enrichment completed, etc.).}
+  - {name: Monitor, domain: monitors, description: A scheduled recurring search that emits runs and webhooks.}
+  - {name: MonitorRun, domain: monitors, description: A single execution of a monitor.}
+  - {name: ResearchTask, domain: research, description: An asynchronous multi-step deep-research task under /research/v1.}
+  - {name: AgentRun, domain: agent, description: A managed research-agent run under /agent/runs with an effort mode.}
+  - {name: AgentRunEvent, domain: agent, description: A streamed event emitted during an agent run.}
+relationships:
+  - {from: Team, to: ApiKey, kind: has_many, via: team}
+  - {from: Webset, to: WebsetItem, kind: has_many, via: websetId}
+  - {from: Webset, to: WebsetSearch, kind: has_many, via: websetId}
+  - {from: Webset, to: Enrichment, kind: has_many, via: websetId}
+  - {from: Webset, to: Import, kind: has_many, via: websetId}
+  - {from: WebsetItem, to: Enrichment, kind: belongs_to, via: enrichmentId}
+  - {from: Webhook, to: Event, kind: has_many, via: webhookId}
+  - {from: Monitor, to: MonitorRun, kind: has_many, via: monitorId}
+  - {from: AgentRun, to: AgentRunEvent, kind: has_many, via: runId}

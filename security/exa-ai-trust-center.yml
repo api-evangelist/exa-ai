@@ -1,0 +1,32 @@
+generated: '2026-06-20'
+method: searched
+probe: true
+url: https://trust.exa.ai/
+source: https://exa.ai/docs/reference/security
+description: >-
+  Exa's security & compliance posture. Exa operates a trust center at
+  trust.exa.ai (HTTP 200; content is JS-rendered so the automated keyword probe
+  recorded trust=none — this is the searched, human-verified fill). Exa
+  announced SOC 2 Type II certification in 2026 (previously SOC 2 Type I in
+  2024). HIPAA compliance and Zero Data Retention are offered to Enterprise
+  customers. SOC 2 reports and a Data Processing Agreement are available through
+  the trust center.
+certifications:
+  - {name: SOC 2 Type II, status: certified, note: Announced 2026; previously SOC 2 Type I (2024).}
+  - {name: HIPAA, availability: Enterprise plans, note: Available on request via sales@exa.ai.}
+  - {name: GDPR, note: Data Processing Agreement available via the trust center.}
+data_protection:
+  zero_data_retention: Available for Enterprise customers.
+  sanctioned_country_blocking: >-
+    API access blocked from Crimea, Cuba, Iran, North Korea, Russia, Syria,
+    Ukraine, and Venezuela to comply with sanctions and trade restrictions.
+report_access:
+  soc_reports: Available through the trust center (trust.exa.ai).
+  dpa: Data Processing Agreement available through the trust center.
+  enterprise_contact: sales@exa.ai
+docs:
+  - https://trust.exa.ai/
+  - https://exa.ai/docs/reference/security
+evidence:
+  - {source: https://exa.ai/docs/reference/security, keywords: [soc 2 type ii, hipaa, zero data retention, trust center, data processing agreement]}
+  - {source: https://trust.exa.ai/, kind: trust center, status: 200}

@@ -1,0 +1,44 @@
+generated: '2026-06-20'
+method: searched
+source: https://exa.ai/docs/reference/sdks
+description: >-
+  First-party Exa client libraries and tools, verified against the public
+  package registries (registry.npmjs.org, pypi.org) and the exa-labs GitHub
+  organization. Registry name and latest version recorded at fetch time. The
+  MCP server binaries are catalogued here; their tool surfaces live in
+  mcp/exa-ai-mcp.yml.
+packages:
+  - language: python
+    registry: pypi
+    name: exa-py
+    version: 2.16.0
+    url: https://pypi.org/project/exa-py/
+    source: https://github.com/exa-labs/exa-py
+    install: pip install exa-py
+    official: true
+  - language: javascript
+    registry: npm
+    name: exa-js
+    version: 2.16.0
+    url: https://www.npmjs.com/package/exa-js
+    source: https://github.com/exa-labs/exa-js
+    install: npm install exa-js
+    official: true
+  - language: javascript
+    registry: npm
+    name: exa-mcp-server
+    version: 3.2.1
+    url: https://www.npmjs.com/package/exa-mcp-server
+    source: https://github.com/exa-labs/exa-mcp-server
+    install: npx -y exa-mcp-server
+    official: true
+    note: >-
+      Local (stdio) Exa MCP server for Claude Desktop, Cursor, and other MCP
+      clients; complements the hosted https://mcp.exa.ai/mcp server.
+  - language: javascript
+    registry: github
+    name: websets-mcp-server
+    url: https://github.com/exa-labs/websets-mcp-server
+    source: https://github.com/exa-labs/websets-mcp-server
+    official: true
+    note: MCP server dedicated to the Websets API.

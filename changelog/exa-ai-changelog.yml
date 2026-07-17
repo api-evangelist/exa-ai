@@ -1,0 +1,55 @@
+generated: '2026-06-20'
+method: searched
+source: https://exa.ai/docs/changelog
+docs: https://exa.ai/docs/changelog
+description: >-
+  Structured capture of Exa's dated documentation changelog. Exa versions its
+  API surface by URL path (/v0, /v1, /research/v1) and by named search
+  generations (Exa 2.0 introduced Fast/Auto/Deep search types). Parameter-level
+  changes are announced in the changelog with deprecation windows. This artifact
+  records the recent window; the live changelog is the source of truth.
+versioning:
+  scheme: url-path + named search generations
+  detail: lifecycle/exa-ai-lifecycle.yml
+  current_generation: Exa 2.0 (Fast / Auto / Deep)
+entries:
+  - date: '2026-07'
+    highlights:
+      - Exa Agent and Exa Connect integrated into the MCP server for multi-step research tasks.
+  - date: '2026-06'
+    highlights:
+      - Introducing the Exa Agent API (managed multi-step research agents).
+      - Exa Connect premium data-source partnerships.
+  - date: '2026-04'
+    breaking:
+      - Deprecated the legacy /research endpoint, legacy fields, and older date parameters.
+  - date: '2026-03'
+    highlights:
+      - Monitors feature launch (scheduled searches with webhook notifications).
+      - Deep search revamp with structured outputs.
+      - Pricing reductions.
+  - date: '2026-02'
+    highlights:
+      - maxCharacters is now the preferred way to control highlight length.
+      - maxAgeHours added for precise content-freshness control.
+      - Unauthenticated users can try the Exa MCP for free (rate-limited).
+    deprecations:
+      - numSentences and highlightsPerUrl highlight parameters deprecated.
+      - Boolean livecrawl options superseded by maxAgeHours.
+  - date: '2026-01'
+    highlights:
+      - Company Search with fine-tuned retrieval model and entity-matching pipeline.
+  - date: '2025-12'
+    highlights:
+      - People Search expanded to 1B+ profiles.
+  - date: '2025-11'
+    highlights:
+      - JS SDK highlights restoration; Deep search type; language filtering.
+  - date: '2025-10'
+    breaking:
+      - Exa 2.0 major SDK update — contents included by default, standalone highlights removed.
+      - Exa Fast (sub-350ms), Exa Auto (default, higher quality), Exa Deep (agentic retrieval).
+      - use_autoprompt field deprecated and removed from all responses.
+  - date: '2025-08'
+    highlights:
+      - Domain filters support URL paths and subdomain wildcards (*.substack.com, /blog).

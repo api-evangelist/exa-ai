@@ -1,0 +1,67 @@
+generated: '2026-06-20'
+method: searched
+description: >-
+  Results of probing the /.well-known/ discovery surface for every base host in
+  apis.yml (api.exa.ai, admin-api.exa.ai) plus the marketing host (exa.ai) and
+  the MCP hosts (mcp.exa.ai, auth.exa.ai). Status is the HTTP code observed at
+  fetch time. The core API and marketing hosts publish no /.well-known/
+  documents. The hosted MCP server exposes RFC 9728 OAuth protected-resource
+  metadata, which in turn references the RFC 8414 authorization-server metadata
+  at auth.exa.ai — both saved verbatim.
+hosts:
+  - host: https://api.exa.ai
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://admin-api.exa.ai
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://exa.ai
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://mcp.exa.ai
+    documents:
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        type: application/json
+        file: exa-ai-mcp-oauth-protected-resource.json
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/security.txt
+        status: 404
+  - host: https://auth.exa.ai
+    documents:
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        type: application/json
+        file: exa-ai-auth-oauth-authorization-server.json
+      - path: /.well-known/openid-configuration
+        status: 404

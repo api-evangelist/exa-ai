@@ -1,0 +1,66 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://exa.ai/docs/getting-started/authentication, https://exa.ai/docs/reference
+  (Websets/Monitors list endpoints), and derived from openapi/*.yml (cursor/limit
+  params, error schema, requestId response fields).
+description: >-
+  Cross-cutting request/response conventions that apply across Exa's REST
+  surface — authentication, pagination, versioning, the error envelope, request
+  tracing, and rate-limit signaling. These are the runtime-semantics conventions
+  OpenAPI does not fully express.
+base_urls:
+  - https://api.exa.ai
+  - https://admin-api.exa.ai/team-management
+api_style: REST over HTTPS, JSON request and response bodies
+authentication:
+  scheme: API key
+  mechanism: >-
+    Pass the API key in the x-api-key header. Authorization: Bearer <key> is also
+    accepted. The Team Management admin API uses a service key in x-api-key.
+  key_types: [standard API key, service key (admin API)]
+  docs: https://exa.ai/docs/getting-started/authentication
+  detail: authentication/exa-ai-authentication.yml
+  no_oauth_note: >-
+    The core APIs are API-key only (no OAuth scope surface). OAuth (scope
+    mcp:tools, auth.exa.ai) applies solely to the hosted MCP server, not the
+    REST API — see mcp/exa-ai-mcp.yml.
+idempotency:
+  supported: false
+  note: >-
+    No Idempotency-Key header is documented or present in the OpenAPI specs.
+    Async product surfaces (Research, Agent, Websets, Monitors) are inherently
+    create-then-poll, mitigating duplicate-submission concerns.
+pagination:
+  style: cursor
+  request_params:
+    limit: page size
+    cursor: opaque cursor returned by the previous page
+  response_fields:
+    data: array of items
+    hasMore: boolean — whether more pages exist
+    nextCursor: cursor to pass to fetch the next page
+  applies_to: Websets, Webset Items, Searches, Enrichments, Monitors, Imports, Webhooks, Events, Agent runs.
+  docs: https://exa.ai/docs/reference
+field_selection:
+  note: >-
+    Content shaping is per-request via the Contents API options (text, highlights,
+    summary, subpages, maxCharacters) rather than a generic sparse-fieldset syntax.
+metadata:
+  note: Websets and Monitors accept a free-form metadata object on create/update.
+request_tracing:
+  header: X-Request-Id
+  note: Responses carry a requestId; include X-Request-Id / requestId when contacting support.
+versioning:
+  scheme: url-path + named search generations
+  detail: lifecycle/exa-ai-lifecycle.yml
+error_envelope:
+  media_type: application/json
+  shape: '{ "error": string }'
+  note: >-
+    Errors are returned as a JSON object with a human-readable "error" string,
+    not RFC 9457 application/problem+json. See errors/exa-ai-problem-types.yml.
+rate_limits:
+  signaling: HTTP 429 on limit exceeded; per-key rate limits and budgets configurable via the Team Management API.
+  detail: rate-limits/exa-ai-rate-limits.yml
+  docs: https://exa.ai/docs/reference/rate-limits

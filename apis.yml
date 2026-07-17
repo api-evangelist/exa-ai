@@ -187,6 +187,49 @@ common:
     url: security/exa-ai-domain-security.yml
   - type: Authentication
     url: authentication/exa-ai-authentication.yml
+  - type: TrustCenter
+    url: security/exa-ai-trust-center.yml
+  - type: Packages
+    url: packages/exa-ai-packages.yml
+  - type: MCPServer
+    url: mcp/exa-ai-mcp.yml
+  - type: WellKnown
+    url: well-known/exa-ai-well-known.yml
+  - type: LLMsTxt
+    url: llms/exa-ai-llms.txt
+  - type: Conformance
+    url: conformance/exa-ai-conformance.yml
+  - type: ErrorCatalog
+    url: errors/exa-ai-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/exa-ai-lifecycle.yml
+  - type: Conventions
+    url: conventions/exa-ai-conventions.yml
+  - type: ChangeLog
+    url: changelog/exa-ai-changelog.yml
+  - type: DataModel
+    url: data-model/exa-ai-data-model.yml
+  - type: Overlay
+    url: overlays/exa-ai-search-api-overlay.yaml
+    name: Exa Search API enhancements
+  - type: Overlay
+    url: overlays/exa-ai-research-api-overlay.yaml
+    name: Exa Research API enhancements
+  - type: Overlay
+    url: overlays/exa-ai-monitors-api-overlay.yaml
+    name: Exa Monitors API enhancements
+  - type: Overlay
+    url: overlays/exa-ai-agent-api-overlay.yaml
+    name: Exa Agent API enhancements
+  - type: Overlay
+    url: overlays/exa-ai-websets-api-overlay.yaml
+    name: Exa Websets API enhancements
+  - type: Overlay
+    url: overlays/exa-ai-team-api-overlay.yaml
+    name: Exa Team API enhancements
+  - type: Overlay
+    url: overlays/exa-ai-team-management-api-overlay.yaml
+    name: Exa Team Management API enhancements
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/exa/overview
   - type: Arazzo
@@ -339,7 +382,7 @@ common:
       - https://github.com/exa-labs
     updated: '2026-05-25'
 created: '2026-05-25T00:00:00.000Z'
-modified: '2026-05-25'
+modified: '2026-06-20'
 position: Consuming
 description: >-
   Exa is a web search API and AI research platform built specifically for LLMs and agents — semantic and keyword search

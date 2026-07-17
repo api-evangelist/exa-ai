@@ -1,0 +1,43 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://exa.ai/docs/changelog, https://exa.ai/docs/reference (versioned URL
+  paths), https://status.exa.ai; deprecated parameters/operations derived from
+  openapi/*.yml deprecated flags.
+versioning:
+  scheme: url-path
+  mechanism: >-
+    Version is encoded in the URL path. The core Search/Contents/Answer surface
+    is unversioned at api.exa.ai; newer product surfaces are versioned —
+    /research/v1 (Research), /v0/websets, /v0/webhooks, /v0/events, /v0/imports,
+    /v0/monitors (Websets-aligned Monitors), /agent/runs (Agent). Search quality
+    is also versioned by named generation (Exa 2.0: Fast / Auto / Deep).
+  current: v1 (research) / v0 (websets, monitors, imports, webhooks, events)
+  docs: https://exa.ai/docs/reference
+deprecation:
+  policy: >-
+    Deprecated parameters and endpoints are announced in the documentation
+    changelog with a removal window; deprecated fields are removed from responses
+    at the next major search generation. No RFC 8594 Sunset/Deprecation response
+    headers are advertised.
+  changelog: https://exa.ai/docs/changelog
+  sunset_header: false
+  recent:
+    - Legacy /research endpoint deprecated (2026-04) in favor of /research/v1.
+    - numSentences and highlightsPerUrl highlight parameters deprecated (2026-02).
+    - use_autoprompt removed from all responses (Exa 2.0, 2025-10).
+    - Boolean livecrawl options superseded by maxAgeHours.
+sla:
+  url: null
+  public_uptime_target: null
+  notes: >-
+    Exa does not publish a numeric uptime SLA for standard plans; availability
+    commitments are handled through Enterprise agreements.
+status_page: https://status.exa.ai
+rate_limits: https://exa.ai/docs/reference/rate-limits
+deprecated_operations:
+  - note: >-
+      Several request/response fields are flagged deprecated within the OpenAPI
+      specs (openapi/exa-search-api-openapi.yml, openapi/exa-monitors-api-openapi.yml,
+      openapi/exa-agent-api-openapi.yml) rather than whole operations; see the
+      deprecated flags in those specs for the field-level list.

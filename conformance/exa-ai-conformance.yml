@@ -1,0 +1,43 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from openapi/*.yml (securitySchemes, error schema, cursor/limit
+  pagination params) and Exa documentation claims (docs.exa.ai authentication,
+  rate-limits, security). Cross-checked against the hosted MCP OAuth metadata
+  (well-known/exa-ai-auth-oauth-authorization-server.json).
+standards:
+  - id: apikey-auth
+    conforms: true
+    evidence: openapi securitySchemes define an apiKey scheme (x-api-key header) plus http bearer.
+  - id: oauth2
+    conforms: partial
+    evidence: >-
+      OAuth 2.0 (authorization_code + PKCE S256, scope mcp:tools) is exposed only
+      for the hosted MCP server via auth.exa.ai; the REST APIs are API-key only.
+  - id: oidc
+    conforms: false
+    evidence: No /.well-known/openid-configuration on any Exa host (all return 404).
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: 'Errors are returned as {"error": string} JSON, not application/problem+json.'
+  - id: pagination
+    conforms: true
+    evidence: Cursor-based list pagination via cursor + limit params with hasMore/nextCursor response fields.
+  - id: idempotency
+    conforms: false
+    evidence: No Idempotency-Key header documented or present in the specs.
+  - id: webhooks
+    conforms: true
+    evidence: Websets, Monitors, and Agent runs deliver events via subscribable webhooks (/v0/webhooks, /v0/events).
+  - id: rate-limiting
+    conforms: true
+    evidence: HTTP 429 responses across specs; per-key rate limits/budgets via the Team Management API.
+  - id: openapi
+    conforms: true
+    evidence: Exa publishes OpenAPI at exa.ai/docs/exa-spec.json and team-management-spec.yaml.
+  - id: mcp
+    conforms: true
+    evidence: Official hosted MCP server at mcp.exa.ai/mcp plus exa-mcp-server / websets-mcp-server.
+  - id: soc2-type-ii
+    conforms: true
+    evidence: Exa announced SOC 2 Type II certification (2026); see security/exa-ai-trust-center.yml.

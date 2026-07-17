@@ -1,0 +1,43 @@
+generated: '2026-06-20'
+method: derived
+format: exa-error-object
+source: >-
+  Derived from the 4xx/5xx responses across openapi/*.yml. Exa does NOT use
+  RFC 9457 application/problem+json; errors are returned as a JSON object with a
+  single human-readable "error" string (e.g. {"error": "Unauthorized"},
+  {"error": "Rate limit cannot exceed team's limit of 500 QPS"}).
+envelope:
+  media_type: application/json
+  shape: '{ "error": string }'
+problems:
+  - status: 400
+    title: Bad Request
+    meaning: Invalid or unexpected parameters in the request.
+    example: 'Unexpected parameters: invalidParam. Allowed: name, rateLimit, budgetCents.'
+  - status: 401
+    title: Unauthorized
+    meaning: Invalid or missing API key / service key.
+    example: Unauthorized
+    remediation: Provide a valid key in the x-api-key header (or Authorization Bearer).
+  - status: 403
+    title: Forbidden
+    meaning: The key lacks permission for the requested operation (e.g. admin/team-management scope).
+  - status: 404
+    title: Not Found
+    meaning: The requested resource (webset, item, monitor, run, task, key) does not exist.
+  - status: 409
+    title: Conflict
+    meaning: The request conflicts with current state (e.g. duplicate webset creation).
+    source_operation: openapi/exa-websets-api-openapi.yml#websets-create
+  - status: 422
+    title: Unprocessable Entity
+    meaning: The request was well-formed but semantically invalid (e.g. webset preview validation).
+    source_operation: openapi/exa-websets-api-openapi.yml#websets-preview
+  - status: 429
+    title: Too Many Requests
+    meaning: Rate limit or budget exceeded for the API key.
+    remediation: Back off and retry; raise per-key rate limits/budgets via the Team Management API.
+  - status: 500
+    title: Internal Server Error
+    meaning: An unexpected error occurred on Exa's servers.
+    remediation: Retry with backoff; include the response requestId / X-Request-Id when contacting support.

@@ -1,0 +1,61 @@
+generated: '2026-06-20'
+method: searched
+status: published
+source: https://exa.ai/docs/reference/exa-mcp
+description: >-
+  Exa operates an official remote MCP server at https://mcp.exa.ai/mcp. It runs
+  a free, rate-limited tier with no auth; paid/agent tools authenticate with an
+  Exa API key (x-api-key header) or OAuth. The OAuth protected-resource metadata
+  (well-known/exa-ai-mcp-oauth-protected-resource.json) points at the
+  authorization server https://auth.exa.ai (scope mcp:tools, PKCE S256). A local
+  stdio server ships as npx exa-mcp-server (github.com/exa-labs/exa-mcp-server);
+  a dedicated Websets MCP server is at github.com/exa-labs/websets-mcp-server.
+  Tools captured verbatim from the Exa MCP documentation.
+server:
+  name: exa
+  transport: http
+  url: https://mcp.exa.ai/mcp
+  auth: none-or-apikey
+  free_tier: true
+  protected_resource: well-known/exa-ai-mcp-oauth-protected-resource.json
+  authorization_server: https://auth.exa.ai
+  scopes: [mcp:tools]
+local:
+  - name: exa-mcp-server
+    transport: stdio
+    install: npx -y exa-mcp-server
+    source: https://github.com/exa-labs/exa-mcp-server
+  - name: websets-mcp-server
+    transport: stdio
+    source: https://github.com/exa-labs/websets-mcp-server
+tools:
+  - name: web_search_exa
+    description: Search the web for any topic and get clean, ready-to-use content.
+    default: true
+  - name: web_fetch_exa
+    description: Read a webpage's full content as clean markdown from one or more URLs.
+    default: true
+  - name: get_code_context_exa
+    description: Search for code and technical documentation context.
+  - name: web_search_advanced_exa
+    description: >-
+      Advanced web search with category filters, domain restrictions, date
+      ranges, highlights, summaries, and subpage crawling.
+  - name: crawling_exa
+    description: Crawl and extract content from specific URLs.
+  - name: company_research_exa
+    description: Research companies with structured entity data.
+  - name: linkedin_search_exa
+    description: Search LinkedIn profiles and companies.
+  - name: deep_researcher_start
+    description: Start an asynchronous deep-research task.
+  - name: deep_researcher_check
+    description: Poll a deep-research task for completion and results.
+  - name: agent_create_run
+    description: Start async Agent runs for multi-step research, list-building, enrichment, or structured JSON output.
+  - name: agent_wait_for_run
+    description: Poll a run until terminal status or timeout.
+  - name: agent_get_run_output
+    description: Retrieve completed output with text, structured results, citations, usage, and cost data.
+  - name: agent_cancel_run
+    description: Stop a queued or running operation.
