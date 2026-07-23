@@ -1,13 +1,15 @@
 openapi: 3.1.0
 info:
-  title: Exa Team API
+  title: Exa Agent Teams API
   version: 2.0.0
-  description: Exa Team API - subset of the Exa Public API.
+  description: Exa Agent API - subset of the Exa Public API.
 servers:
 - url: https://api.exa.ai
 security:
 - apiKey: []
 - bearer: []
+tags:
+- name: Teams
 paths:
   /v0/teams/me:
     get:
@@ -22,12 +24,10 @@ paths:
         source: "curl -X GET 'https://api.exa.ai/websets/v0/teams/me' \\\n  -H 'x-api-key: YOUR-EXA-API-KEY'"
       - lang: python
         label: Get team info
-        source: "import requests\n\nheaders = {\n    'x-api-key': 'YOUR-EXA-API-KEY'\n}\n\nresponse = requests.get(\n    'https://api.exa.ai/websets/v0/teams/me',\n\
-          \    headers=headers\n)\n\nprint(response.json())"
+        source: "import requests\n\nheaders = {\n    'x-api-key': 'YOUR-EXA-API-KEY'\n}\n\nresponse = requests.get(\n    'https://api.exa.ai/websets/v0/teams/me',\n    headers=headers\n)\n\nprint(response.json())"
       - lang: javascript
         label: Get team info
-        source: "const response = await fetch('https://api.exa.ai/websets/v0/teams/me', {\n  method: 'GET',\n  headers: {\n\
-          \    'x-api-key': 'YOUR-EXA-API-KEY'\n  }\n});\n\nconst result = await response.json();\nconsole.log(result);"
+        source: "const response = await fetch('https://api.exa.ai/websets/v0/teams/me', {\n  method: 'GET',\n  headers: {\n    'x-api-key': 'YOUR-EXA-API-KEY'\n  }\n});\n\nconst result = await response.json();\nconsole.log(result);"
       responses:
         '200':
           description: Team information retrieved successfully

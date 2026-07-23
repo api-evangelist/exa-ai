@@ -1,0 +1,661 @@
+openapi: 3.1.0
+info:
+  title: Exa Agent Imports API
+  version: 2.0.0
+  description: Exa Agent API - subset of the Exa Public API.
+servers:
+- url: https://api.exa.ai
+security:
+- apiKey: []
+- bearer: []
+tags:
+- name: Imports
+paths:
+  /v0/imports:
+    servers:
+    - url: https://api.exa.ai/websets
+    post:
+      description: 'Creates a new import to upload your data into Websets. Imports can be used to:
+
+
+        - **Enrich**: Enhance your data with additional information using our AI-powered enrichment engine
+
+        - **Search**: Query your data using Websets'' agentic search with natural language filters
+
+        - **Exclude**: Prevent duplicate or already known results from appearing in your searches
+
+
+        Once the import is created, you can upload your data to the returned `uploadUrl` until `uploadValidUntil` (by default 1 hour).'
+      operationId: imports-create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateImportParameters'
+      responses:
+        '201':
+          description: Import created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateImportResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                type: string
+              description: Unique identifier for the request.
+              example: req_N6SsgoiaOQOPqsYKKiw5
+              required: true
+      summary: Create an Import
+      tags:
+      - Imports
+      security:
+      - apiKey: []
+      - bearer: []
+      x-codeSamples:
+      - lang: javascript
+        label: JavaScript
+        source: "// npm install exa-js\nimport Exa from \"exa-js\";\nconst exa = new Exa(\"YOUR_EXA_API_KEY\");\n\nconst importJob = await exa.websets.imports.create(\"webset_id\", {\n  source: {\n    type: \"csv\",\n    url: \"https://example.com/companies.csv\",\n  },\n});\n\nconsole.log(`Created import: ${importJob.id}`);"
+      - lang: python
+        label: Python
+        source: "# pip install exa-py\nfrom exa_py import Exa\n\nexa = Exa(\"YOUR_EXA_API_KEY\")\n\nimport_job = exa.websets.imports.create(\n    \"webset_id\",\n    params={\"source\": {\"type\": \"csv\", \"url\": \"https://example.com/companies.csv\"}},\n)\n\nprint(f\"Created import: {import_job.id}\")"
+    get:
+      description: Lists all imports for the Webset.
+      operationId: imports-list
+      parameters:
+      - name: cursor
+        required: false
+        in: query
+        description: The cursor to paginate through the results
+        schema:
+          minLength: 1
+          type: string
+      - name: limit
+        required: false
+        in: query
+        description: The number of results to return
+        schema:
+          minimum: 1
+          maximum: 200
+          default: 25
+          type: number
+      responses:
+        '200':
+          description: List of imports
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListImportsResponse'
+          headers:
+            X-Request-Id:
+              schema:
+                type: string
+              description: Unique identifier for the request.
+              example: req_N6SsgoiaOQOPqsYKKiw5
+              required: true
+      summary: List Imports
+      tags:
+      - Imports
+      security:
+      - apiKey: []
+      - bearer: []
+      x-codeSamples:
+      - lang: javascript
+        label: JavaScript
+        source: "// npm install exa-js\nimport Exa from \"exa-js\";\nconst exa = new Exa(\"YOUR_EXA_API_KEY\");\n\nconst imports = await exa.websets.imports.list({\n  webset_id: \"webset_id\",\n});\n\nconsole.log(`Found ${imports.data.length} imports`);\nimports.data.forEach((importJob) => {\n  console.log(`- ${importJob.id}: ${importJob.status}`);\n});"
+      - lang: python
+        label: Python
+        source: "# pip install exa-py\nfrom exa_py import Exa\n\nexa = Exa(\"YOUR_EXA_API_KEY\")\n\nimports = exa.websets.imports.list(webset_id=\"webset_id\")\n\nprint(f\"Found {len(imports.data)} imports\")\nfor import_job in imports.data:\n    print(f\"- {import_job.id}: {import_job.status}\")"
+  /v0/imports/{id}:
+    servers:
+    - url: https://api.exa.ai/websets
+    get:
+      description: Gets a specific import.
+      operationId: imports-get
+      parameters:
+      - name: id
+        required: true
+        in: path
+        description: The id of the Import
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Import details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Import'
+          headers:
+            X-Request-Id:
+              schema:
+                type: string
+              description: Unique identifier for the request.
+              example: req_N6SsgoiaOQOPqsYKKiw5
+              required: true
+      summary: Get Import
+      tags:
+      - Imports
+      security:
+      - apiKey: []
+      - bearer: []
+      x-codeSamples:
+      - lang: javascript
+        label: JavaScript
+        source: '// npm install exa-js
+
+          import Exa from "exa-js";
+
+          const exa = new Exa("YOUR_EXA_API_KEY");
+
+
+          const importJob = await exa.websets.imports.get("webset_id", "import_id");
+
+
+          console.log(`Import: ${importJob.id} - ${importJob.status}`);'
+      - lang: python
+        label: Python
+        source: '# pip install exa-py
+
+          from exa_py import Exa
+
+
+          exa = Exa("YOUR_EXA_API_KEY")
+
+
+          import_job = exa.websets.imports.get("webset_id", "import_id")
+
+
+          print(f"Import: {import_job.id} - {import_job.status}")'
+    patch:
+      description: Updates a import configuration.
+      operationId: imports-update
+      parameters:
+      - name: id
+        required: true
+        in: path
+        description: The id of the Import
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateImport'
+      responses:
+        '200':
+          description: Import updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Import'
+          headers:
+            X-Request-Id:
+              schema:
+                type: string
+              description: Unique identifier for the request.
+              example: req_N6SsgoiaOQOPqsYKKiw5
+              required: true
+      summary: Update Import
+      tags:
+      - Imports
+      security:
+      - apiKey: []
+      - bearer: []
+      x-codeSamples:
+      - lang: javascript
+        label: JavaScript
+        source: "// npm install exa-js\nimport Exa from \"exa-js\";\nconst exa = new Exa(\"YOUR_EXA_API_KEY\");\n\nconst importJob = await exa.websets.imports.update(\"webset_id\", \"import_id\", {\n  name: \"Updated Import Name\",\n});\n\nconsole.log(`Updated import: ${importJob.id}`);"
+      - lang: python
+        label: Python
+        source: "# pip install exa-py\nfrom exa_py import Exa\n\nexa = Exa(\"YOUR_EXA_API_KEY\")\n\nimport_job = exa.websets.imports.update(\n    \"webset_id\", \"import_id\", params={\"name\": \"Updated Import Name\"}\n)\n\nprint(f\"Updated import: {import_job.id}\")"
+    delete:
+      description: Deletes a import.
+      operationId: imports-delete
+      parameters:
+      - name: id
+        required: true
+        in: path
+        description: The id of the Import
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Import deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Import'
+          headers:
+            X-Request-Id:
+              schema:
+                type: string
+              description: Unique identifier for the request.
+              example: req_N6SsgoiaOQOPqsYKKiw5
+              required: true
+      summary: Delete Import
+      tags:
+      - Imports
+      security:
+      - apiKey: []
+      - bearer: []
+      x-codeSamples:
+      - lang: javascript
+        label: JavaScript
+        source: '// npm install exa-js
+
+          import Exa from "exa-js";
+
+          const exa = new Exa("YOUR_EXA_API_KEY");
+
+
+          await exa.websets.imports.delete("webset_id", "import_id");
+
+
+          console.log("Import deleted successfully");'
+      - lang: python
+        label: Python
+        source: '# pip install exa-py
+
+          from exa_py import Exa
+
+
+          exa = Exa("YOUR_EXA_API_KEY")
+
+
+          exa.websets.imports.delete("webset_id", "import_id")
+
+
+          print("Import deleted successfully")'
+components:
+  schemas:
+    Entity:
+      oneOf:
+      - type:
+        - object
+        $ref: '#/components/schemas/CompanyEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/PersonEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/ArticleEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/ResearchPaperEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/CustomEntity'
+    CustomEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: custom
+          default: custom
+        description:
+          type:
+          - string
+          minLength: 2
+          maxLength: 200
+      required:
+      - type
+      - description
+      title: Custom
+    UpdateImport:
+      type:
+      - object
+      properties:
+        metadata:
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+        title:
+          type:
+          - string
+    PersonEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: person
+          default: person
+      required:
+      - type
+      title: Person
+    ArticleEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: article
+          default: article
+      required:
+      - type
+      title: Article
+    CompanyEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: company
+          default: company
+      required:
+      - type
+      title: Company
+    Import:
+      type:
+      - object
+      properties:
+        id:
+          type:
+          - string
+          description: The unique identifier for the Import
+        object:
+          type:
+          - string
+          enum:
+          - import
+          description: The type of object
+        status:
+          type:
+          - string
+          enum:
+          - pending
+          - processing
+          - completed
+          - failed
+          - canceled
+          description: The status of the Import
+        format:
+          type:
+          - string
+          enum:
+          - csv
+          - webset
+          description: The format of the import.
+        entity:
+          $ref: '#/components/schemas/Entity'
+          description: The type of entity the import contains.
+          nullable: true
+        title:
+          type:
+          - string
+          description: The title of the import
+        count:
+          type:
+          - number
+          description: The number of entities in the import
+        metadata:
+          description: Set of key-value pairs you want to associate with this object.
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+            maxLength: 1000
+        failedReason:
+          type: string
+          enum:
+          - invalid_format
+          - invalid_file_content
+          - missing_identifier
+          description: The reason the import failed
+          nullable: true
+        failedAt:
+          type: string
+          format: date-time
+          description: When the import failed
+          nullable: true
+        failedMessage:
+          type: string
+          description: A human readable message of the import failure
+          nullable: true
+        createdAt:
+          type:
+          - string
+          format: date-time
+          description: When the import was created
+        updatedAt:
+          type:
+          - string
+          format: date-time
+          description: When the import was last updated
+      required:
+      - id
+      - object
+      - status
+      - format
+      - entity
+      - title
+      - count
+      - metadata
+      - failedReason
+      - failedAt
+      - failedMessage
+      - createdAt
+      - updatedAt
+    CreateImportParameters:
+      discriminator:
+        propertyName: format
+      oneOf:
+      - type:
+        - object
+        properties:
+          size:
+            type:
+            - number
+            maximum: 50000000
+            description: The size of the file in bytes. Maximum size is 50 MB.
+          count:
+            type:
+            - number
+            description: The number of records to import
+          title:
+            type:
+            - string
+            description: The title of the import
+          format:
+            type:
+            - string
+            enum:
+            - csv
+            description: When the import is in CSV format, we expect a column containing the key identifier for the entity - for now URL. If not provided, import will fail to be processed.
+          metadata:
+            description: Set of key-value pairs you want to associate with this object.
+            type:
+            - object
+            additionalProperties:
+              type:
+              - string
+              maxLength: 1000
+          entity:
+            oneOf:
+            - type:
+              - object
+              $ref: '#/components/schemas/CompanyEntity'
+            - type:
+              - object
+              $ref: '#/components/schemas/PersonEntity'
+            - type:
+              - object
+              $ref: '#/components/schemas/ArticleEntity'
+            - type:
+              - object
+              $ref: '#/components/schemas/ResearchPaperEntity'
+            - type:
+              - object
+              $ref: '#/components/schemas/CustomEntity'
+            description: What type of entity the import contains (e.g. People, Companies, etc.), and thus should be attempted to be resolved as.
+          csv:
+            type:
+            - object
+            properties:
+              identifier:
+                type:
+                - integer
+                minimum: 0
+                description: Column containing the key identifier for the entity (e.g. URL, Name, etc.). If not provided, we will try to infer it from the file.
+            description: When format is `csv`, these are the specific import parameters.
+        required:
+        - size
+        - count
+        - format
+        - entity
+    ListImportsResponse:
+      type:
+      - object
+      properties:
+        data:
+          type:
+          - array
+          items:
+            type:
+            - object
+            $ref: '#/components/schemas/Import'
+          description: The list of imports
+        hasMore:
+          type:
+          - boolean
+          description: Whether there are more results to paginate through
+        nextCursor:
+          type: string
+          description: The cursor to paginate through the next set of results
+          nullable: true
+      required:
+      - data
+      - hasMore
+      - nextCursor
+    CreateImportResponse:
+      type:
+      - object
+      properties:
+        id:
+          type:
+          - string
+          description: The unique identifier for the Import
+        object:
+          type:
+          - string
+          enum:
+          - import
+          description: The type of object
+        status:
+          type:
+          - string
+          enum:
+          - pending
+          - processing
+          - completed
+          - failed
+          - canceled
+          description: The status of the Import
+        format:
+          type:
+          - string
+          enum:
+          - csv
+          - webset
+          description: The format of the import.
+        entity:
+          $ref: '#/components/schemas/Entity'
+          description: The type of entity the import contains.
+          nullable: true
+        title:
+          type:
+          - string
+          description: The title of the import
+        count:
+          type:
+          - number
+          description: The number of entities in the import
+        metadata:
+          description: Set of key-value pairs you want to associate with this object.
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+            maxLength: 1000
+        failedReason:
+          type: string
+          enum:
+          - invalid_format
+          - invalid_file_content
+          - missing_identifier
+          description: The reason the import failed
+          nullable: true
+        failedAt:
+          type: string
+          format: date-time
+          description: When the import failed
+          nullable: true
+        failedMessage:
+          type: string
+          description: A human readable message of the import failure
+          nullable: true
+        createdAt:
+          type:
+          - string
+          format: date-time
+          description: When the import was created
+        updatedAt:
+          type:
+          - string
+          format: date-time
+          description: When the import was last updated
+        uploadUrl:
+          type:
+          - string
+          description: The URL to upload the file to
+        uploadValidUntil:
+          type:
+          - string
+          description: The date and time until the upload URL is valid. The upload URL will be valid for 1 hour.
+      required:
+      - id
+      - object
+      - status
+      - format
+      - entity
+      - title
+      - count
+      - metadata
+      - failedReason
+      - failedAt
+      - failedMessage
+      - createdAt
+      - updatedAt
+      - uploadUrl
+      - uploadValidUntil
+      description: The response to a successful import. Includes the upload URL and the upload valid until date.
+    ResearchPaperEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: research_paper
+          default: research_paper
+      required:
+      - type
+      title: Research Paper
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: x-api-key
+      in: header
+      description: 'Pass your Exa API key in the x-api-key header. You can also authenticate with Authorization: Bearer <key>.'
+    bearer:
+      type: http
+      scheme: bearer
+      description: 'Pass your Exa API key in the x-api-key header. You can also authenticate with Authorization: Bearer <key>.'

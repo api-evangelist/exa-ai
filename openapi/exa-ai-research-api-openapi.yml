@@ -1,13 +1,15 @@
 openapi: 3.1.0
 info:
-  title: Exa Research API
+  title: Exa Agent Research API
   version: 2.0.0
-  description: Exa Research API - subset of the Exa Public API.
+  description: Exa Agent API - subset of the Exa Public API.
 servers:
 - url: https://api.exa.ai
 security:
 - apiKey: []
 - bearer: []
+tags:
+- name: Research
 paths:
   /research/v1:
     get:
@@ -90,19 +92,13 @@ paths:
       x-codeSamples:
       - lang: bash
         label: Create research task
-        source: "curl -X POST 'https://api.exa.ai/research/v1' \\\n  -H 'x-api-key: YOUR-EXA-API-KEY' \\\n  -H 'Content-Type:\
-          \ application/json' \\\n  -d '{\n    \"instructions\": \"Summarize the latest developments in AI safety research\"\
-          ,\n    \"model\": \"exa-research\"\n  }'"
+        source: "curl -X POST 'https://api.exa.ai/research/v1' \\\n  -H 'x-api-key: YOUR-EXA-API-KEY' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"instructions\": \"Summarize the latest developments in AI safety research\",\n    \"model\": \"exa-research\"\n  }'"
       - lang: python
         label: Create research task
-        source: "# pip install exa-py\nfrom exa_py import Exa\nexa = Exa(api_key='YOUR_EXA_API_KEY')\n\ntask = exa.research.create_task(\n\
-          \    instructions=\"Summarize the latest developments in AI safety research\",\n    model=\"exa-research\"\n)\n\n\
-          print(task)"
+        source: "# pip install exa-py\nfrom exa_py import Exa\nexa = Exa(api_key='YOUR_EXA_API_KEY')\n\ntask = exa.research.create_task(\n    instructions=\"Summarize the latest developments in AI safety research\",\n    model=\"exa-research\"\n)\n\nprint(task)"
       - lang: javascript
         label: Create research task
-        source: "// npm install exa-js\nimport Exa from 'exa-js';\nconst exa = new Exa('YOUR_EXA_API_KEY');\n\nconst task\
-          \ = await exa.research.createTask({\n  instructions: \"Summarize the latest developments in AI safety research\"\
-          ,\n  model: \"exa-research\"\n});\n\nconsole.log(task);"
+        source: "// npm install exa-js\nimport Exa from 'exa-js';\nconst exa = new Exa('YOUR_EXA_API_KEY');\n\nconst task = await exa.research.createTask({\n  instructions: \"Summarize the latest developments in AI safety research\",\n  model: \"exa-research\"\n});\n\nconsole.log(task);"
   /research/v1/{researchId}:
     get:
       description: Retrieve research by ID. Add ?stream=true for real-time SSE updates.
@@ -142,8 +138,7 @@ paths:
         source: "curl -X GET 'https://api.exa.ai/research/v1/01jszdfs0052sg4jc552sg4jc5' \\\n  -H 'x-api-key: YOUR-EXA-API-KEY'"
       - lang: bash
         label: Get research task with streaming
-        source: "curl -X GET 'https://api.exa.ai/research/v1/01jszdfs0052sg4jc552sg4jc5?stream=true' \\\n  -H 'x-api-key:\
-          \ YOUR-EXA-API-KEY'"
+        source: "curl -X GET 'https://api.exa.ai/research/v1/01jszdfs0052sg4jc552sg4jc5?stream=true' \\\n  -H 'x-api-key: YOUR-EXA-API-KEY'"
       - lang: python
         label: Get research task
         source: '# pip install exa-py
@@ -170,72 +165,6 @@ paths:
           console.log(task);'
 components:
   schemas:
-    ListResearchResponseDto:
-      type:
-      - object
-      properties:
-        data:
-          type:
-          - array
-          items:
-            discriminator:
-              propertyName: status
-            examples:
-            - researchId: 01jszdfs0052sg4jc552sg4jc5
-              model: exa-research
-              instructions: What species of ant are similar to honeypot ants?
-              status: running
-            - researchId: 01jszdfs0052sg4jc552sg4jc5
-              model: exa-research
-              instructions: What species of ant are similar to honeypot ants?
-              status: completed
-              output: Melophorus bagoti
-            $ref: '#/components/schemas/ResearchDtoClass'
-          description: Research requests ordered by creation time (newest first)
-        hasMore:
-          type:
-          - boolean
-          description: If true, use nextCursor to fetch more results
-        nextCursor:
-          type:
-          - string
-          - 'null'
-          description: Pass this value as the cursor parameter to fetch the next page
-      required:
-      - data
-      - hasMore
-      - nextCursor
-    ResearchCreateRequestDtoClass:
-      type:
-      - object
-      properties:
-        model:
-          default: exa-research
-          type:
-          - string
-          enum:
-          - exa-research-fast
-          - exa-research
-          - exa-research-pro
-          description: Research model to use. exa-research is faster and cheaper, while exa-research-pro provides more thorough
-            analysis and stronger reasoning.
-        instructions:
-          type:
-          - string
-          maxLength: 50000
-          description: Instructions for what you would like research on. A good prompt clearly defines what information you
-            want to find, how research should be conducted, and what the output should look like.
-        outputSchema:
-          type:
-          - object
-          additionalProperties: {}
-          description: JSON Schema to enforce structured output. When provided, the research output will be validated against
-            this schema and returned as parsed JSON.
-      required:
-      - instructions
-      examples:
-      - model: exa-research
-        instructions: What species of ant are similar to honeypot ants?
     ResearchDtoClass:
       discriminator:
         propertyName: status
@@ -319,8 +248,7 @@ components:
             - array
             items:
               $ref: '#/components/schemas/ResearchEventDtoClass'
-            description: Real-time log of operations as research progresses. Poll this endpoint or use ?stream=true for live
-              updates.
+            description: Real-time log of operations as research progresses. Poll this endpoint or use ?stream=true for live updates.
         required:
         - researchId
         - createdAt
@@ -366,8 +294,7 @@ components:
             - array
             items:
               $ref: '#/components/schemas/ResearchEventDtoClass'
-            description: Detailed log of all operations performed during research. Use ?events=true to include this field
-              for debugging or monitoring progress.
+            description: Detailed log of all operations performed during research. Use ?events=true to include this field for debugging or monitoring progress.
           output:
             type:
             - object
@@ -380,8 +307,7 @@ components:
                 type:
                 - object
                 additionalProperties: {}
-                description: Structured JSON object matching your outputSchema. Only present when outputSchema was provided
-                  and the output successfully validated.
+                description: Structured JSON object matching your outputSchema. Only present when outputSchema was provided and the output successfully validated.
             required:
             - content
             description: The final research results, containing both raw text and parsed JSON if outputSchema was provided
@@ -4608,8 +4534,7 @@ components:
             - array
             items:
               $ref: '#/components/schemas/ResearchEventDtoClass'
-            description: Detailed log of all operations performed during research. Use ?events=true to include this field
-              for debugging or monitoring progress.
+            description: Detailed log of all operations performed during research. Use ?events=true to include this field for debugging or monitoring progress.
           finishedAt:
             type:
             - number
@@ -4660,8 +4585,7 @@ components:
             - array
             items:
               $ref: '#/components/schemas/ResearchEventDtoClass'
-            description: Detailed log of all operations performed during research. Use ?events=true to include this field
-              for debugging or monitoring progress.
+            description: Detailed log of all operations performed during research. Use ?events=true to include this field for debugging or monitoring progress.
           error:
             type:
             - string
@@ -4688,6 +4612,34 @@ components:
         instructions: What species of ant are similar to honeypot ants?
         status: completed
         output: Melophorus bagoti
+    ResearchCreateRequestDtoClass:
+      type:
+      - object
+      properties:
+        model:
+          default: exa-research
+          type:
+          - string
+          enum:
+          - exa-research-fast
+          - exa-research
+          - exa-research-pro
+          description: Research model to use. exa-research is faster and cheaper, while exa-research-pro provides more thorough analysis and stronger reasoning.
+        instructions:
+          type:
+          - string
+          maxLength: 50000
+          description: Instructions for what you would like research on. A good prompt clearly defines what information you want to find, how research should be conducted, and what the output should look like.
+        outputSchema:
+          type:
+          - object
+          additionalProperties: {}
+          description: JSON Schema to enforce structured output. When provided, the research output will be validated against this schema and returned as parsed JSON.
+      required:
+      - instructions
+      examples:
+      - model: exa-research
+        instructions: What species of ant are similar to honeypot ants?
     ResearchEventDtoClass:
       oneOf:
       - discriminator:
@@ -4759,8 +4711,7 @@ components:
                       numPages:
                         type:
                         - number
-                        description: Count of web pages fully crawled and processed. Only pages that were read in detail are
-                          counted.
+                        description: Count of web pages fully crawled and processed. Only pages that were read in detail are counted.
                       reasoningTokens:
                         type:
                         - number
@@ -4778,8 +4729,7 @@ components:
                     type:
                     - object
                     additionalProperties: {}
-                    description: Structured JSON object matching your outputSchema. Only present when outputSchema was provided
-                      and the output successfully validated.
+                    description: Structured JSON object matching your outputSchema. Only present when outputSchema was provided and the output successfully validated.
                 required:
                 - outputType
                 - costDollars
@@ -5276,6 +5226,41 @@ components:
           - createdAt
           - researchId
           title: Task Output
+    ListResearchResponseDto:
+      type:
+      - object
+      properties:
+        data:
+          type:
+          - array
+          items:
+            discriminator:
+              propertyName: status
+            examples:
+            - researchId: 01jszdfs0052sg4jc552sg4jc5
+              model: exa-research
+              instructions: What species of ant are similar to honeypot ants?
+              status: running
+            - researchId: 01jszdfs0052sg4jc552sg4jc5
+              model: exa-research
+              instructions: What species of ant are similar to honeypot ants?
+              status: completed
+              output: Melophorus bagoti
+            $ref: '#/components/schemas/ResearchDtoClass'
+          description: Research requests ordered by creation time (newest first)
+        hasMore:
+          type:
+          - boolean
+          description: If true, use nextCursor to fetch more results
+        nextCursor:
+          type:
+          - string
+          - 'null'
+          description: Pass this value as the cursor parameter to fetch the next page
+      required:
+      - data
+      - hasMore
+      - nextCursor
   securitySchemes:
     apiKey:
       type: apiKey

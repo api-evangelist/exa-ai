@@ -1,0 +1,364 @@
+openapi: 3.1.0
+info:
+  title: Exa Agent Answer API
+  version: 2.0.0
+  description: Exa Agent API - subset of the Exa Public API.
+servers:
+- url: https://api.exa.ai
+security:
+- apiKey: []
+- bearer: []
+tags:
+- name: Answer
+paths:
+  /answer:
+    post:
+      operationId: answer
+      summary: Answer
+      description: Performs a search based on the query and generates either a direct answer or a detailed summary with citations, depending on the query type.
+      x-codeSamples:
+      - lang: bash
+        label: Simple answer
+        source: "curl -X POST 'https://api.exa.ai/answer' \\\n  -H 'x-api-key: YOUR-EXA-API-KEY' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\n    \"query\": \"What is the latest valuation of SpaceX?\",\n    \"text\": true\n  }'"
+      - lang: python
+        label: Simple answer
+        source: "# pip install exa-py\nfrom exa_py import Exa\nexa = Exa(api_key='YOUR_EXA_API_KEY')\n\nresult = exa.answer(\n    \"What is the latest valuation of SpaceX?\",\n    text=True\n)\n\nprint(result)"
+      - lang: javascript
+        label: Simple answer
+        source: "// npm install exa-js\nimport Exa from 'exa-js';\nconst exa = new Exa('YOUR_EXA_API_KEY');\n\nconst result = await exa.answer(\n    'What is the latest valuation of SpaceX?',\n    { text: true }\n);\n\nconsole.log(result);"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnswerRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                answer: $350 billion.
+                citations:
+                - id: https://www.theguardian.com/science/2024/dec/11/spacex-valued-at-350bn-as-company-agrees-to-buy-shares-from-employees
+                  url: https://www.theguardian.com/science/2024/dec/11/spacex-valued-at-350bn-as-company-agrees-to-buy-shares-from-employees
+                  title: SpaceX valued at $350bn as company agrees to buy shares from ...
+                  author: Dan Milmon
+                  publishedDate: '2023-11-16T01:36:32.547Z'
+                  text: SpaceX valued at $350bn as company agrees to buy shares from ...
+                  image: https://i.guim.co.uk/img/media/7cfee7e84b24b73c97a079c402642a333ad31e77/0_380_6176_3706/master/6176.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=71ebb2fbf458c185229d02d380c01530
+                  favicon: https://assets.guim.co.uk/static/frontend/icons/homescreen/apple-touch-icon.svg
+                costDollars:
+                  total: 0.007
+                  search:
+                    neural: 0.007
+              schema:
+                $ref: '#/components/schemas/AnswerResponse'
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/AnswerStreamChunk'
+      tags:
+      - Answer
+components:
+  schemas:
+    CostDollarsOutput:
+      type: object
+      properties:
+        total:
+          description: Estimated total dollar cost for the completed request. This response value is not an invoice record.
+          example: 0.007
+          format: float
+          type: number
+        search:
+          description: Endpoint-dependent estimated search cost breakdown by retrieval mode. Instant, fast, and auto search responses may include neural search cost. Deep search modes may be reflected only in total.
+          type: object
+          properties:
+            neural:
+              description: Cost of neural search operations.
+              example: 0.007
+              format: float
+              type: number
+          additionalProperties: false
+      additionalProperties: false
+      description: Endpoint-dependent estimated dollar cost breakdown for the completed request. Billing is computed from usage counters rather than this response object.
+    AnswerStreamChunk:
+      description: 'Schema for each JSON payload emitted in an `/answer` server-sent event stream. Each event is emitted as `data: <json>`.'
+      oneOf:
+      - type: object
+        properties:
+          choices:
+            type: array
+            items:
+              type: object
+              properties:
+                index:
+                  type: integer
+                  minimum: 0
+                  description: Index of this streamed choice.
+                delta:
+                  type: object
+                  properties:
+                    role:
+                      type: string
+                      const: assistant
+                    content:
+                      type: string
+                    refusal:
+                      anyOf:
+                      - type: string
+                      - type: 'null'
+                  additionalProperties:
+                    $ref: '#/components/schemas/JsonValue'
+                  description: Incremental answer content emitted by the model.
+                finish_reason:
+                  description: Reason this streamed choice finished, when present.
+                  oneOf:
+                  - type: string
+                  - type: 'null'
+              required:
+              - index
+              - delta
+              additionalProperties:
+                $ref: '#/components/schemas/JsonValue'
+            description: OpenAI-compatible streamed completion choices with internal provider fields removed.
+        required:
+        - choices
+        additionalProperties:
+          $ref: '#/components/schemas/JsonValue'
+      - type: object
+        properties:
+          citations:
+            type: array
+            items:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: The title of the search result.
+                  example: SpaceX valued at $350bn as company agrees to buy shares from ...
+                url:
+                  type: string
+                  description: The URL of the search result.
+                  example: https://www.theguardian.com/science/2024/dec/11/spacex-valued-at-350bn-as-company-agrees-to-buy-shares-from-employees
+                  format: uri
+                publishedDate:
+                  description: An estimate of the creation date, from parsing HTML content. Format is YYYY-MM-DD.
+                  example: '2023-11-16T01:36:32.547Z'
+                  format: date-time
+                  type: string
+                author:
+                  description: If available, the author of the content.
+                  example: Humza Naveed
+                  anyOf:
+                  - type: string
+                  - type: 'null'
+                id:
+                  description: The temporary ID for the document. Useful for the /contents endpoint.
+                  example: https://arxiv.org/abs/2307.06435
+                  type: string
+                image:
+                  description: The URL of an image associated with the search result, if available.
+                  example: https://arxiv.org/pdf/2307.06435.pdf/page_1.png
+                  format: uri
+                  type: string
+                favicon:
+                  description: The URL of the favicon for the search result's domain.
+                  example: https://arxiv.org/favicon.ico
+                  format: uri
+                  type: string
+                text:
+                  description: The full text content of each source. Only present when text contents are requested.
+                  example: SpaceX valued at $350bn as company agrees to buy shares from ...
+                  type: string
+              required:
+              - title
+              - url
+              additionalProperties: false
+            description: Search results cited by the final streamed answer.
+        required:
+        - citations
+        additionalProperties: false
+      - type: object
+        properties:
+          costDollars:
+            $ref: '#/components/schemas/CostDollarsOutput'
+          requestId:
+            type: string
+            description: Unique identifier for the request.
+            example: b5947044c4b78efa9552a7c89b306d95
+        required:
+        - costDollars
+        additionalProperties: false
+      - type: object
+        properties:
+          tag:
+            type: string
+            const: ERROR
+          payload:
+            type: object
+            properties:
+              error:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                required:
+                - code
+                - message
+                additionalProperties: false
+              requestId:
+                type: string
+                description: Unique identifier for the request.
+                example: b5947044c4b78efa9552a7c89b306d95
+            required:
+            - error
+            additionalProperties: false
+        required:
+        - tag
+        - payload
+        additionalProperties: false
+    AnswerRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          minLength: 1
+          description: Natural-language question or instructions for the request.
+          example: What is the latest valuation of SpaceX?
+        stream:
+          type: boolean
+          description: If true, the response is returned as a server-sent events (SSE) stream.
+          default: false
+        text:
+          type: boolean
+          title: Simple text retrieval
+          description: If true, returns full page text with default settings. If false, disables text return.
+          default: false
+        outputSchema:
+          type: object
+          properties:
+            type:
+              type: string
+              description: The root schema type (typically "object").
+              example: object
+            properties:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                $ref: '#/components/schemas/JsonValue'
+              description: An object where each key is a property name and each value is a JSON Schema describing that property (with `type`, `description`, etc).
+            required:
+              type: array
+              items:
+                type: string
+              description: List of required property names.
+            description:
+              type: string
+              description: A description of the schema.
+            additionalProperties:
+              type: boolean
+              description: Whether to allow properties not listed in `properties`.
+              default: false
+          additionalProperties:
+            $ref: '#/components/schemas/JsonValue'
+          description: A [JSON Schema Draft 7](https://json-schema.org/draft-07) specification for the desired answer structure. When provided, the answer is returned as a structured object matching the schema instead of a plain string.
+      required:
+      - query
+    AnswerResponse:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique identifier for the request.
+          example: b5947044c4b78efa9552a7c89b306d95
+        answer:
+          description: The generated answer based on search results. Returns a string by default, or a structured object matching the provided outputSchema.
+          example: $350 billion.
+          oneOf:
+          - type: string
+          - type: object
+            propertyNames:
+              type: string
+            additionalProperties:
+              $ref: '#/components/schemas/JsonValue'
+        citations:
+          description: Search results used to generate the answer.
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+                description: The title of the search result.
+                example: SpaceX valued at $350bn as company agrees to buy shares from ...
+              url:
+                type: string
+                description: The URL of the search result.
+                example: https://www.theguardian.com/science/2024/dec/11/spacex-valued-at-350bn-as-company-agrees-to-buy-shares-from-employees
+                format: uri
+              publishedDate:
+                description: An estimate of the creation date, from parsing HTML content. Format is YYYY-MM-DD.
+                example: '2023-11-16T01:36:32.547Z'
+                format: date-time
+                type: string
+              author:
+                description: If available, the author of the content.
+                example: Humza Naveed
+                anyOf:
+                - type: string
+                - type: 'null'
+              id:
+                description: The temporary ID for the document. Useful for the /contents endpoint.
+                example: https://arxiv.org/abs/2307.06435
+                type: string
+              image:
+                description: The URL of an image associated with the search result, if available.
+                example: https://arxiv.org/pdf/2307.06435.pdf/page_1.png
+                format: uri
+                type: string
+              favicon:
+                description: The URL of the favicon for the search result's domain.
+                example: https://arxiv.org/favicon.ico
+                format: uri
+                type: string
+              text:
+                description: The full text content of each source. Only present when text contents are requested.
+                example: SpaceX valued at $350bn as company agrees to buy shares from ...
+                type: string
+            required:
+            - title
+            - url
+            additionalProperties: false
+        costDollars:
+          $ref: '#/components/schemas/CostDollarsOutput'
+      required:
+      - answer
+      additionalProperties: false
+    JsonValue:
+      description: Any JSON value.
+      oneOf:
+      - type: 'null'
+      - type: boolean
+      - type: number
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/JsonValue'
+      - type: object
+        propertyNames:
+          type: string
+        additionalProperties:
+          $ref: '#/components/schemas/JsonValue'
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: x-api-key
+      in: header
+      description: 'Pass your Exa API key in the x-api-key header. You can also authenticate with Authorization: Bearer <key>.'
+    bearer:
+      type: http
+      scheme: bearer
+      description: 'Pass your Exa API key in the x-api-key header. You can also authenticate with Authorization: Bearer <key>.'

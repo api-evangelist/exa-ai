@@ -1,0 +1,515 @@
+openapi: 3.1.0
+info:
+  title: Exa Agent Enrichments API
+  version: 2.0.0
+  description: Exa Agent API - subset of the Exa Public API.
+servers:
+- url: https://api.exa.ai
+security:
+- apiKey: []
+- bearer: []
+tags:
+- name: Enrichments
+paths:
+  /v0/websets/{webset}/enrichments:
+    servers:
+    - url: https://api.exa.ai/websets
+    post:
+      description: Create an Enrichment for a Webset.
+      operationId: websets-enrichments-create
+      parameters:
+      - name: webset
+        required: true
+        in: path
+        description: The id or externalId of the Webset
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEnrichmentParameters'
+      responses:
+        '200':
+          description: Enrichment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsetEnrichment'
+          headers:
+            X-Request-Id:
+              schema:
+                type: string
+              description: Unique identifier for the request.
+              example: req_N6SsgoiaOQOPqsYKKiw5
+              required: true
+      summary: Create an Enrichment
+      tags:
+      - Enrichments
+      security:
+      - apiKey: []
+      - bearer: []
+      x-codeSamples:
+      - lang: javascript
+        label: JavaScript
+        source: "// npm install exa-js\nimport Exa from \"exa-js\";\nconst exa = new Exa(\"YOUR_EXA_API_KEY\");\n\nconst enrichment = await exa.websets.enrichments.create(\"webset_id\", {\n  description: \"Company revenue information\",\n  format: \"text\",\n});\n\nconsole.log(`Created enrichment: ${enrichment.id}`);"
+      - lang: python
+        label: Python
+        source: "# pip install exa-py\nfrom exa_py import Exa\n\nexa = Exa(\"YOUR_EXA_API_KEY\")\n\nenrichment = exa.websets.enrichments.create(\n    \"webset_id\", params={\"description\": \"Company revenue information\", \"format\": \"text\"}\n)\n\nprint(f\"Created enrichment: {enrichment.id}\")"
+  /v0/websets/{webset}/enrichments/{id}:
+    servers:
+    - url: https://api.exa.ai/websets
+    patch:
+      description: Update an Enrichment configuration for a Webset.
+      operationId: websets-enrichments-update
+      parameters:
+      - name: webset
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEnrichmentParameters'
+      responses:
+        '200':
+          description: ''
+          headers:
+            X-Request-Id:
+              schema:
+                type: string
+              description: Unique identifier for the request.
+              example: req_N6SsgoiaOQOPqsYKKiw5
+              required: true
+      summary: Update an Enrichment
+      tags:
+      - Enrichments
+      security:
+      - apiKey: []
+      - bearer: []
+      x-codeSamples:
+      - lang: javascript
+        label: JavaScript
+        source: "// npm install exa-js\nimport Exa from \"exa-js\";\nconst exa = new Exa(\"YOUR_EXA_API_KEY\");\n\nconst enrichment = await exa.websets.enrichments.update(\"webset_id\", \"enrichment_id\", {\n  description: \"Updated company revenue and growth metrics\",\n  format: \"number\",\n});\n\nconsole.log(`Updated enrichment: ${enrichment.id}`);"
+      - lang: python
+        label: Python
+        source: "# pip install exa-py\nfrom exa_py import Exa\n\nexa = Exa(\"YOUR_EXA_API_KEY\")\n\nenrichment = exa.websets.enrichments.update(\n    \"webset_id\",\n    \"enrichment_id\",\n    params={\n        \"description\": \"Updated company revenue and growth metrics\",\n        \"format\": \"number\",\n    },\n)\n\nprint(f\"Updated enrichment: {enrichment.id}\")"
+    get:
+      operationId: websets-enrichments-get
+      parameters:
+      - name: webset
+        required: true
+        in: path
+        description: The id or externalId of the Webset
+        schema:
+          type: string
+      - name: id
+        required: true
+        in: path
+        description: The id of the Enrichment
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Enrichment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsetEnrichment'
+          headers:
+            X-Request-Id:
+              schema:
+                type: string
+              description: Unique identifier for the request.
+              example: req_N6SsgoiaOQOPqsYKKiw5
+              required: true
+      summary: Get an Enrichment
+      tags:
+      - Enrichments
+      security:
+      - apiKey: []
+      - bearer: []
+      x-codeSamples:
+      - lang: javascript
+        label: JavaScript
+        source: '// npm install exa-js
+
+          import Exa from "exa-js";
+
+          const exa = new Exa("YOUR_EXA_API_KEY");
+
+
+          const enrichment = await exa.websets.enrichments.get("webset_id", "enrichment_id");
+
+
+          console.log(`Enrichment: ${enrichment.id} - ${enrichment.status}`);'
+      - lang: python
+        label: Python
+        source: '# pip install exa-py
+
+          from exa_py import Exa
+
+
+          exa = Exa("YOUR_EXA_API_KEY")
+
+
+          enrichment = exa.websets.enrichments.get("webset_id", "enrichment_id")
+
+
+          print(f"Enrichment: {enrichment.id} - {enrichment.status}")'
+    delete:
+      description: When deleting an Enrichment, any running enrichments will be canceled and all existing `enrichment_result` generated by this Enrichment will no longer be available.
+      operationId: websets-enrichments-delete
+      parameters:
+      - name: webset
+        required: true
+        in: path
+        description: The id or externalId of the Webset
+        schema:
+          type: string
+      - name: id
+        required: true
+        in: path
+        description: The id of the Enrichment
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Enrichment deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsetEnrichment'
+          headers:
+            X-Request-Id:
+              schema:
+                type: string
+              description: Unique identifier for the request.
+              example: req_N6SsgoiaOQOPqsYKKiw5
+              required: true
+      summary: Delete an Enrichment
+      tags:
+      - Enrichments
+      security:
+      - apiKey: []
+      - bearer: []
+      x-codeSamples:
+      - lang: javascript
+        label: JavaScript
+        source: '// npm install exa-js
+
+          import Exa from "exa-js";
+
+          const exa = new Exa("YOUR_EXA_API_KEY");
+
+
+          await exa.websets.enrichments.delete("webset_id", "enrichment_id");
+
+
+          console.log("Enrichment deleted successfully");'
+      - lang: python
+        label: Python
+        source: '# pip install exa-py
+
+          from exa_py import Exa
+
+
+          exa = Exa("YOUR_EXA_API_KEY")
+
+
+          exa.websets.enrichments.delete("webset_id", "enrichment_id")
+
+
+          print("Enrichment deleted successfully")'
+  /v0/websets/{webset}/enrichments/{id}/cancel:
+    servers:
+    - url: https://api.exa.ai/websets
+    post:
+      description: All running enrichments will be canceled. You can not resume an Enrichment after it has been canceled.
+      operationId: websets-enrichments-cancel
+      parameters:
+      - name: webset
+        required: true
+        in: path
+        description: The id or externalId of the Webset
+        schema:
+          type: string
+      - name: id
+        required: true
+        in: path
+        description: The id of the Enrichment
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Enrichment cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebsetEnrichment'
+          headers:
+            X-Request-Id:
+              schema:
+                type: string
+              description: Unique identifier for the request.
+              example: req_N6SsgoiaOQOPqsYKKiw5
+              required: true
+      summary: Cancel a running Enrichment
+      tags:
+      - Enrichments
+      security:
+      - apiKey: []
+      - bearer: []
+      x-codeSamples:
+      - lang: javascript
+        label: JavaScript
+        source: '// npm install exa-js
+
+          import Exa from "exa-js";
+
+          const exa = new Exa("YOUR_EXA_API_KEY");
+
+
+          const enrichment = await exa.websets.enrichments.cancel("webset_id", "enrichment_id");
+
+
+          console.log(`Cancelled enrichment: ${enrichment.id}`);'
+      - lang: python
+        label: Python
+        source: '# pip install exa-py
+
+          from exa_py import Exa
+
+
+          exa = Exa("YOUR_EXA_API_KEY")
+
+
+          enrichment = exa.websets.enrichments.cancel("webset_id", "enrichment_id")
+
+
+          print(f"Cancelled enrichment: {enrichment.id}")'
+components:
+  schemas:
+    WebsetEnrichment:
+      type:
+      - object
+      properties:
+        id:
+          type:
+          - string
+          description: The unique identifier for the enrichment
+        object:
+          type: string
+          const: webset_enrichment
+          default: webset_enrichment
+        status:
+          type:
+          - string
+          enum:
+          - pending
+          - canceled
+          - completed
+          description: The status of the enrichment
+          title: WebsetEnrichmentStatus
+        websetId:
+          type:
+          - string
+          description: The unique identifier for the Webset this enrichment belongs to.
+        title:
+          type: string
+          description: 'The title of the enrichment.
+
+
+            This will be automatically generated based on the description and format.'
+          nullable: true
+        description:
+          type:
+          - string
+          description: The description of the enrichment task provided during the creation of the enrichment.
+        format:
+          type: string
+          $ref: '#/components/schemas/WebsetEnrichmentFormat'
+          description: The format of the enrichment response.
+          nullable: true
+        options:
+          type: array
+          items:
+            type:
+            - object
+            properties:
+              label:
+                type:
+                - string
+                description: The label of the option
+            required:
+            - label
+          description: When the format is options, the different options for the enrichment agent to choose from.
+          title: WebsetEnrichmentOptions
+          nullable: true
+        instructions:
+          type: string
+          description: 'The instructions for the enrichment Agent.
+
+
+            This will be automatically generated based on the description and format.'
+          nullable: true
+        metadata:
+          default: {}
+          description: The metadata of the enrichment
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+            maxLength: 1000
+        createdAt:
+          type:
+          - string
+          format: date-time
+          description: The date and time the enrichment was created
+        updatedAt:
+          type:
+          - string
+          format: date-time
+          description: The date and time the enrichment was updated
+      required:
+      - id
+      - object
+      - status
+      - websetId
+      - title
+      - description
+      - format
+      - options
+      - instructions
+      - createdAt
+      - updatedAt
+    CreateEnrichmentParameters:
+      type:
+      - object
+      properties:
+        description:
+          type:
+          - string
+          minLength: 1
+          maxLength: 5000
+          description: Provide a description of the enrichment task you want to perform to each Webset Item.
+        format:
+          type:
+          - string
+          enum:
+          - text
+          - date
+          - number
+          - options
+          - email
+          - phone
+          - url
+          description: 'Format of the enrichment response.
+
+
+            We automatically select the best format based on the description. If you want to explicitly specify the format, you can do so here.'
+        options:
+          type:
+          - array
+          items:
+            type:
+            - object
+            properties:
+              label:
+                type:
+                - string
+                description: The label of the option
+            required:
+            - label
+          minItems: 1
+          maxItems: 150
+          description: When the format is options, the different options for the enrichment agent to choose from.
+        metadata:
+          description: Set of key-value pairs you want to associate with this object.
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+            maxLength: 1000
+      required:
+      - description
+    WebsetEnrichmentFormat:
+      type: string
+      enum:
+      - text
+      - date
+      - number
+      - options
+      - email
+      - phone
+      - url
+    UpdateEnrichmentParameters:
+      type:
+      - object
+      properties:
+        description:
+          type:
+          - string
+          minLength: 1
+          maxLength: 5000
+          description: Provide a description of the enrichment task you want to perform to each Webset Item.
+        format:
+          type:
+          - string
+          enum:
+          - text
+          - date
+          - number
+          - options
+          - email
+          - phone
+          - url
+          description: 'Format of the enrichment response.
+
+
+            We automatically select the best format based on the description. If you want to explicitly specify the format, you can do so here.'
+        options:
+          type:
+          - array
+          items:
+            type:
+            - object
+            properties:
+              label:
+                type:
+                - string
+                description: The label of the option
+            required:
+            - label
+          minItems: 1
+          maxItems: 150
+          description: When the format is options, the different options for the enrichment agent to choose from.
+        metadata:
+          description: Set of key-value pairs you want to associate with this object.
+          type: object
+          additionalProperties:
+            type:
+            - string
+            maxLength: 1000
+          nullable: true
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: x-api-key
+      in: header
+      description: 'Pass your Exa API key in the x-api-key header. You can also authenticate with Authorization: Bearer <key>.'
+    bearer:
+      type: http
+      scheme: bearer
+      description: 'Pass your Exa API key in the x-api-key header. You can also authenticate with Authorization: Bearer <key>.'
