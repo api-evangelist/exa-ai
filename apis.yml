@@ -1,170 +1,994 @@
 aid: exa-ai
 url: https://raw.githubusercontent.com/api-evangelist/exa-ai/refs/heads/main/apis.yml
 apis:
-  - aid: exa-ai:exa-search-api
-    name: Exa Search API
-    tags:
-      - AI
-      - Search
-      - Web Search
-      - Neural Search
-      - LLM
-    humanURL: https://exa.ai/docs/reference/search-api-guide
-    baseURL: https://api.exa.ai
-    properties:
-      - url: https://exa.ai/docs/reference/search-api-guide
-        type: Documentation
-      - url: https://exa.ai/docs/reference/search
-        type: Documentation
-      - url: https://exa.ai/docs/reference/contents-api-guide
-        type: Documentation
-      - url: https://exa.ai/docs/reference/answer
-        type: Documentation
-      - url: openapi/exa-search-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/exa-search-result-schema.json
-        type: JSONSchema
-      - url: json-ld/exa-ai-context.jsonld
-        type: JSONLD
-    description: >-
-      Exa's prompt-engineered Search API performs semantic and keyword web search optimized for LLM and agent
-      consumption. Returns a list of relevant results with URLs, titles, authors, published dates, relevance scores, and
-      optional token-efficient highlights, summaries, or full text via the bundled Contents API. The Answer endpoint
-      returns an LLM-generated answer grounded in web citations. Verticals include Code, Companies, News, People,
-      Research, and Financials. Latency tiers run from fast (180ms) to auto (~1s) to deep (~10s).
-  - aid: exa-ai:exa-research-api
-    name: Exa Research API
-    tags:
-      - AI
-      - Search
-      - Research
-      - Agents
-      - Deep Search
-    humanURL: https://exa.ai/docs/reference/research/overview
-    baseURL: https://api.exa.ai
-    properties:
-      - url: https://exa.ai/docs/reference/research/overview
-        type: Documentation
-      - url: https://exa.ai/docs/reference/research/create-a-task
-        type: Documentation
-      - url: https://exa.ai/docs/reference/research/get-a-task
-        type: Documentation
-      - url: https://exa.ai/docs/reference/research/list-tasks
-        type: Documentation
-      - url: openapi/exa-research-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Asynchronous multi-step deep-research tasks. Submit a research instruction, Exa orchestrates a Deep Search agent
-      across the live web with structured outputs and web-grounded citations, and you poll for the completed report.
-      Lives under /research/v1 with create, get, and list operations.
-  - aid: exa-ai:exa-monitors-api
-    name: Exa Monitors API
-    tags:
-      - AI
-      - Search
-      - Monitors
-      - Webhooks
-      - Scheduled
-    humanURL: https://exa.ai/docs/reference/monitors-api-guide
-    baseURL: https://api.exa.ai
-    properties:
-      - url: https://exa.ai/docs/reference/monitors-api-guide
-        type: Documentation
-      - url: https://exa.ai/docs/reference/monitors/create-a-monitor
-        type: Documentation
-      - url: https://exa.ai/docs/reference/monitors/list-monitors
-        type: Documentation
-      - url: openapi/exa-monitors-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Schedule recurring Exa searches and receive webhook notifications when fresh matching content appears on the web.
-      Supports create, list, get, update, delete, batch actions, manual trigger, and run history. Two API versions are
-      exposed — the original /monitors namespace and the newer /v0/monitors surface aligned with Websets.
-  - aid: exa-ai:exa-agent-api
-    name: Exa Agent API
-    tags:
-      - AI
-      - Agents
-      - Search
-      - LLM
-    humanURL: https://exa.ai/docs/reference/agent-api-guide
-    baseURL: https://api.exa.ai
-    properties:
-      - url: https://exa.ai/docs/reference/agent-api-guide
-        type: Documentation
-      - url: https://exa.ai/docs/reference/agent-api/create-a-run
-        type: Documentation
-      - url: https://exa.ai/docs/reference/agent-api/get-a-run
-        type: Documentation
-      - url: openapi/exa-agent-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Run an Exa-hosted research agent at four effort modes — low ($0.025), medium ($0.10), high ($0.50), and x-high
-      ($2.00) — with built-in web search, content retrieval, structured outputs, and event streaming. Create, list, get,
-      cancel, delete, and stream events from runs under /agent/runs.
-  - aid: exa-ai:exa-websets-api
-    name: Exa Websets API
-    tags:
-      - AI
-      - Search
-      - Websets
-      - Enrichment
-      - Webhooks
-      - Imports
-    humanURL: https://exa.ai/docs/websets/api-guide
-    baseURL: https://api.exa.ai
-    properties:
-      - url: https://exa.ai/docs/websets/api-guide
-        type: Documentation
-      - url: https://exa.ai/docs/websets/api/overview
-        type: Documentation
-      - url: https://exa.ai/docs/websets/api/websets/create-a-webset
-        type: Documentation
-      - url: openapi/exa-websets-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/exa-webset-item-schema.json
-        type: JSONSchema
-    description: >-
-      Curated, enrichable collections of web results scoped to a query, vertical (companies, people, news, research), or
-      imported list. Compose searches, attach LLM-driven enrichments, evaluate items, subscribe to webhooks for
-      asynchronous events, and import seed lists. Endpoints under /v0/websets, /v0/webhooks, /v0/events, and
-      /v0/imports.
-  - aid: exa-ai:exa-team-api
-    name: Exa Team API
-    tags:
-      - AI
-      - Search
-      - Team
-      - Account
-    humanURL: https://exa.ai/docs
-    baseURL: https://api.exa.ai
-    properties:
-      - url: https://exa.ai/docs
-        type: Documentation
-      - url: openapi/exa-team-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Lightweight team-info endpoint at /v0/teams/me — returns the authenticated team identity and metadata for the API
-      key.
-  - aid: exa-ai:exa-team-management-api
-    name: Exa Team Management API
-    tags:
-      - AI
-      - Search
-      - Administration
-      - API Keys
-      - Team Management
-    humanURL: https://admin-api.exa.ai/team-management
-    baseURL: https://admin-api.exa.ai/team-management
-    properties:
-      - url: https://exa.ai/docs
-        type: Documentation
-      - url: openapi/exa-team-management-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Admin API for managing API keys within a team — create, list, get, update, delete keys with optional per-key rate
-      limits and budgets, plus a per-key usage endpoint at GET /api-keys/{id}/usage. The foundation for per-workload
-      cost allocation and FinOps reporting against Exa.
+- aid: exa-ai:exa-ai-agent-api
+  name: Exa Agent API
+  description: The Agent API from Exa — 4 operation(s) for agent.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Agent
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-agent-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-answer-api
+  name: Exa Answer API
+  description: The Answer API from Exa — 1 operation(s) for answer.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Answer
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-answer-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-contents-api
+  name: Exa Contents API
+  description: The Contents API from Exa — 1 operation(s) for contents.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Contents
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-contents-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-enrichments-api
+  name: Exa Enrichments API
+  description: The Enrichments API from Exa — 3 operation(s) for enrichments.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Enrichments
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-enrichments-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-events-api
+  name: Exa Events API
+  description: The Events API from Exa — 2 operation(s) for events.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-events-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-imports-api
+  name: Exa Imports API
+  description: The Imports API from Exa — 2 operation(s) for imports.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Imports
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-imports-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-items-api
+  name: Exa Items API
+  description: The Items API from Exa — 2 operation(s) for items.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Items
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-items-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-monitors-api
+  name: Exa Monitors API
+  description: The Monitors API from Exa — 6 operation(s) for monitors.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Monitors
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-monitors-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-monitors-runs-api
+  name: Exa Monitors Runs API
+  description: The Monitors Runs API from Exa — 2 operation(s) for monitors runs.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Monitors Runs
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-monitors-runs-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-research-api
+  name: Exa Research API
+  description: The Research API from Exa — 2 operation(s) for research.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Research
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-research-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-runs-api
+  name: Exa Runs API
+  description: The Runs API from Exa — 2 operation(s) for runs.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Runs
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-runs-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-search-api
+  name: Exa Search API
+  description: The Search API from Exa — 1 operation(s) for search.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-search-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-searches-api
+  name: Exa Searches API
+  description: The Searches API from Exa — 3 operation(s) for searches.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Searches
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-searches-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-team-management-api
+  name: Exa Team Management API
+  description: The Team Management API from Exa — 3 operation(s) for team management.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Team Management
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-team-management-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-teams-api
+  name: Exa Teams API
+  description: The Teams API from Exa — 1 operation(s) for teams.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-teams-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-webhooks-api
+  name: Exa Webhooks API
+  description: The Webhooks API from Exa — 2 operation(s) for webhooks.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-webhooks-attempts-api
+  name: Exa Webhooks Attempts API
+  description: The Webhooks Attempts API from Exa — 1 operation(s) for webhooks attempts.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Webhooks Attempts
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-webhooks-attempts-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-websets-api
+  name: Exa Websets API
+  description: The Websets API from Exa — 3 operation(s) for websets.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Websets
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-websets-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
+- aid: exa-ai:exa-ai-websets-preview-api
+  name: Exa Websets Preview API
+  description: The Websets Preview API from Exa — 1 operation(s) for websets preview.
+  humanURL: https://exa.ai/docs/reference/search-api-guide
+  baseURL: https://api.exa.ai
+  tags:
+  - Websets Preview
+  properties:
+  - type: OpenAPI
+    url: openapi/exa-ai-websets-preview-api-openapi.yml
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/search
+  - type: Documentation
+    url: https://exa.ai/docs/reference/contents-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/answer
+  - type: JSONSchema
+    url: json-schema/exa-search-result-schema.json
+  - type: JSONLD
+    url: json-ld/exa-ai-context.jsonld
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/overview
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/create-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/get-a-task
+  - type: Documentation
+    url: https://exa.ai/docs/reference/research/list-tasks
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/create-a-monitor
+  - type: Documentation
+    url: https://exa.ai/docs/reference/monitors/list-monitors
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/create-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/reference/agent-api/get-a-run
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api-guide
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/overview
+  - type: Documentation
+    url: https://exa.ai/docs/websets/api/websets/create-a-webset
+  - type: JSONSchema
+    url: json-schema/exa-webset-item-schema.json
+  - type: Documentation
+    url: https://exa.ai/docs
 name: Exa
 tags:
   - AI
@@ -176,7 +1000,20 @@ tags:
   - Research
   - Websets
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/exa-ai.png
 access: 3rd-Party
 common:
   - type: AgenticAccess
