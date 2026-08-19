@@ -1,0 +1,319 @@
+{
+  "item": [
+    {
+      "id": "ae0759e0-527d-4020-b36d-324561aefed9",
+      "name": "Monitors Runs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "15f7331a-c7c5-4beb-a243-359b6b6ff3ef",
+          "name": "List Monitor Runs",
+          "request": {
+            "name": "List Monitor Runs",
+            "description": {
+              "content": "Lists all runs for the Monitor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "monitors",
+                ":monitor",
+                "runs"
+              ],
+              "host": [
+                "{{v0-monitors-monitor-runs-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "monitor",
+                  "description": "(Required) The id of the Monitor to list runs for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "19ecf0dd-e9b3-4a8c-927c-d1ee455095b4",
+              "name": "List of monitor runs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "monitors",
+                    ":monitor",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{v0-monitors-monitor-runs-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor",
+                      "description": "(Required) The id of the Monitor to list runs for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor_run\",\n      \"monitorId\": \"string\",\n      \"status\": \"failed\",\n      \"type\": \"search\",\n      \"completedAt\": \"2023-09-06T16:46:44.390Z\",\n      \"failedAt\": \"1976-01-18T09:37:00.950Z\",\n      \"failedReason\": \"string\",\n      \"canceledAt\": \"2025-12-14T04:34:43.429Z\",\n      \"createdAt\": \"1950-05-29T04:40:12.459Z\",\n      \"updatedAt\": \"1988-08-19T04:34:05.094Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor_run\",\n      \"monitorId\": \"string\",\n      \"status\": \"created\",\n      \"type\": \"refresh\",\n      \"completedAt\": \"1954-05-26T08:46:33.433Z\",\n      \"failedAt\": \"1991-07-10T00:18:20.765Z\",\n      \"failedReason\": \"string\",\n      \"canceledAt\": \"2009-04-09T23:23:23.766Z\",\n      \"createdAt\": \"1979-11-17T09:11:16.071Z\",\n      \"updatedAt\": \"2006-01-15T18:39:44.942Z\"\n    }\n  ],\n  \"hasMore\": false,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c819263-9c22-42d4-a3c2-b33a9313fd31",
+          "name": "Get Monitor Run",
+          "request": {
+            "name": "Get Monitor Run",
+            "description": {
+              "content": "Gets a specific monitor run.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "monitors",
+                ":monitor",
+                "runs",
+                ":id"
+              ],
+              "host": [
+                "{{v0-monitors-monitor-runs-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "monitor",
+                  "description": "(Required) The id of the Monitor to get the run for"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "27e6bbd2-60d9-4179-acaa-c545df3b6b76",
+              "name": "Monitor run details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "monitors",
+                    ":monitor",
+                    "runs",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-monitors-monitor-runs-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "monitor",
+                      "description": "(Required) The id of the Monitor to get the run for"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"monitor_run\",\n  \"monitorId\": \"string\",\n  \"status\": \"completed\",\n  \"type\": \"search\",\n  \"completedAt\": \"2013-09-09T23:45:18.397Z\",\n  \"failedAt\": \"1993-03-07T18:51:24.091Z\",\n  \"failedReason\": \"string\",\n  \"canceledAt\": \"1999-02-01T19:25:45.310Z\",\n  \"createdAt\": \"1968-03-23T10:44:39.877Z\",\n  \"updatedAt\": \"1975-09-28T12:50:42.281Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.exa.ai",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-monitors-monitor-runs-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-monitors-monitor-runs-id-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3996000a-8d4d-4741-aa7b-7bbf3ea43395",
+    "name": "Exa Agent Monitors Runs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Exa Agent API - subset of the Exa Public API.",
+      "type": "text/plain"
+    }
+  }
+}

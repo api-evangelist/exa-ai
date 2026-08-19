@@ -1,0 +1,770 @@
+{
+  "item": [
+    {
+      "id": "90321004-906c-4ead-bc2c-eb28a225e852",
+      "name": "Enrichments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eb6a9f95-6b91-47d6-aa24-b612d9389c44",
+          "name": "Create an Enrichment",
+          "request": {
+            "name": "Create an Enrichment",
+            "description": {
+              "content": "Create an Enrichment for a Webset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":webset",
+                "enrichments"
+              ],
+              "host": [
+                "{{v0-websets-webset-enrichments-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webset",
+                  "description": "(Required) The id or externalId of the Webset"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"format\": \"<string>\",\n  \"options\": [\n    {\n      \"label\": \"<string>\"\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "42f08d56-62b7-4494-b670-60dae2aa5792",
+              "name": "Enrichment created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":webset",
+                    "enrichments"
+                  ],
+                  "host": [
+                    "{{v0-websets-webset-enrichments-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webset",
+                      "description": "(Required) The id or externalId of the Webset"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"format\": \"<string>\",\n  \"options\": [\n    {\n      \"label\": \"<string>\"\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"webset_enrichment\",\n  \"status\": \"completed\",\n  \"websetId\": \"string\",\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"format\": \"text\",\n  \"options\": [\n    {\n      \"label\": \"string\"\n    },\n    {\n      \"label\": \"string\"\n    }\n  ],\n  \"instructions\": \"string\",\n  \"createdAt\": \"1947-06-26T15:21:27.666Z\",\n  \"updatedAt\": \"1968-10-02T19:11:42.733Z\",\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eca577f7-e4d4-4783-9f9b-eb28cab0da07",
+          "name": "Update an Enrichment",
+          "request": {
+            "name": "Update an Enrichment",
+            "description": {
+              "content": "Update an Enrichment configuration for a Webset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":webset",
+                "enrichments",
+                ":id"
+              ],
+              "host": [
+                "{{v0-websets-webset-enrichments-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webset",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"format\": \"<string>\",\n  \"options\": [\n    {\n      \"label\": \"<string>\"\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53312e7e-ec31-4ecf-89a1-cb295bd0837d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":webset",
+                    "enrichments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-websets-webset-enrichments-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webset",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"format\": \"<string>\",\n  \"options\": [\n    {\n      \"label\": \"<string>\"\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f95a1fd9-fcde-4766-a670-5d72dd0bdccc",
+          "name": "Get an Enrichment",
+          "request": {
+            "name": "Get an Enrichment",
+            "description": {},
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":webset",
+                "enrichments",
+                ":id"
+              ],
+              "host": [
+                "{{v0-websets-webset-enrichments-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webset",
+                  "description": "(Required) The id or externalId of the Webset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the Enrichment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "44fbca0f-f2b8-4f7c-a57d-14bcfca192e4",
+              "name": "Enrichment",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":webset",
+                    "enrichments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-websets-webset-enrichments-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webset",
+                      "description": "(Required) The id or externalId of the Webset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Enrichment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"webset_enrichment\",\n  \"status\": \"completed\",\n  \"websetId\": \"string\",\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"format\": \"text\",\n  \"options\": [\n    {\n      \"label\": \"string\"\n    },\n    {\n      \"label\": \"string\"\n    }\n  ],\n  \"instructions\": \"string\",\n  \"createdAt\": \"1947-06-26T15:21:27.666Z\",\n  \"updatedAt\": \"1968-10-02T19:11:42.733Z\",\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "396843a8-8819-4a48-b731-4504e7cceb45",
+          "name": "Delete an Enrichment",
+          "request": {
+            "name": "Delete an Enrichment",
+            "description": {
+              "content": "When deleting an Enrichment, any running enrichments will be canceled and all existing `enrichment_result` generated by this Enrichment will no longer be available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":webset",
+                "enrichments",
+                ":id"
+              ],
+              "host": [
+                "{{v0-websets-webset-enrichments-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webset",
+                  "description": "(Required) The id or externalId of the Webset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the Enrichment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3d3dc458-6211-4a9c-9fe4-b34fe982c65e",
+              "name": "Enrichment deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":webset",
+                    "enrichments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-websets-webset-enrichments-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webset",
+                      "description": "(Required) The id or externalId of the Webset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Enrichment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"webset_enrichment\",\n  \"status\": \"completed\",\n  \"websetId\": \"string\",\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"format\": \"text\",\n  \"options\": [\n    {\n      \"label\": \"string\"\n    },\n    {\n      \"label\": \"string\"\n    }\n  ],\n  \"instructions\": \"string\",\n  \"createdAt\": \"1947-06-26T15:21:27.666Z\",\n  \"updatedAt\": \"1968-10-02T19:11:42.733Z\",\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "295f73e5-d04c-4350-a0d8-3f8c3600519c",
+          "name": "Cancel a running Enrichment",
+          "request": {
+            "name": "Cancel a running Enrichment",
+            "description": {
+              "content": "All running enrichments will be canceled. You can not resume an Enrichment after it has been canceled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":webset",
+                "enrichments",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{v0-websets-webset-enrichments-id-cancel-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webset",
+                  "description": "(Required) The id or externalId of the Webset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the Enrichment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "95e1e19f-1cb8-4f66-9368-c9c906c46b2b",
+              "name": "Enrichment cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":webset",
+                    "enrichments",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{v0-websets-webset-enrichments-id-cancel-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webset",
+                      "description": "(Required) The id or externalId of the Webset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Enrichment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"webset_enrichment\",\n  \"status\": \"completed\",\n  \"websetId\": \"string\",\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"format\": \"text\",\n  \"options\": [\n    {\n      \"label\": \"string\"\n    },\n    {\n      \"label\": \"string\"\n    }\n  ],\n  \"instructions\": \"string\",\n  \"createdAt\": \"1947-06-26T15:21:27.666Z\",\n  \"updatedAt\": \"1968-10-02T19:11:42.733Z\",\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.exa.ai",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-websets-webset-enrichments-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-websets-webset-enrichments-id-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-websets-webset-enrichments-id-cancel-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6d5b47d7-af63-46d5-8f91-53b3ad3bc6c0",
+    "name": "Exa Agent Enrichments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Exa Agent API - subset of the Exa Public API.",
+      "type": "text/plain"
+    }
+  }
+}

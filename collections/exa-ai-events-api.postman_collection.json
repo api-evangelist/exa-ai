@@ -1,0 +1,397 @@
+{
+  "item": [
+    {
+      "id": "7bba1a46-08e8-4ae0-954a-f86eaee61a36",
+      "name": "Events",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "05edce15-201f-4610-8d6d-fa3587188206",
+          "name": "List all Events",
+          "request": {
+            "name": "List all Events",
+            "description": {
+              "content": "List all events that have occurred in the system.\n\nYou can paginate through the results using the `cursor` parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "events"
+              ],
+              "host": [
+                "{{v0-events-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "The cursor to paginate through the results"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "The types of events to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "The types of events to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdBefore",
+                  "value": "<dateTime>",
+                  "description": "Filter events created before or at this timestamp (inclusive). Must be a valid ISO 8601 datetime string. All times are in UTC."
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAfter",
+                  "value": "<dateTime>",
+                  "description": "Filter events created after or at this timestamp (inclusive). Must be a valid ISO 8601 datetime string. All times are in UTC."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "df110ebc-9aee-4adf-8ae1-8f643fe8a2b4",
+              "name": "List of events",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "events"
+                  ],
+                  "host": [
+                    "{{v0-events-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdAfter",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"event\",\n      \"type\": \"webset.created\",\n      \"data\": {\n        \"id\": \"string\",\n        \"object\": \"webset\",\n        \"status\": \"paused\",\n        \"externalId\": \"string\",\n        \"title\": \"string\",\n        \"searches\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"websetId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"query\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"criteria\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxPeoplePerCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"exclude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scope\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"progress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"recall\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"canceledAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"canceledReason\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"behavior\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"websetId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"query\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"criteria\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxPeoplePerCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"exclude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scope\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"progress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"recall\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"canceledAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"canceledReason\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"behavior\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"imports\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"format\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"failedReason\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"failedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"failedMessage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"format\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"failedReason\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"failedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"failedMessage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"enrichments\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"websetId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"format\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"options\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"instructions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"websetId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"format\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"options\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"instructions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"monitors\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"websetId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cadence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"behavior\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastRun\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"nextRunAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"websetId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cadence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"behavior\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastRun\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"nextRunAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"dashboardUrl\": \"https://AedFZXKRmCgQUJghEBKlotMMuzYCAbti.gxOo\",\n        \"createdAt\": \"1974-09-14T23:56:56.971Z\",\n        \"updatedAt\": \"1960-06-25T01:47:53.523Z\",\n        \"excludes\": [\n          {\n            \"source\": \"import\",\n            \"id\": \"string\"\n          },\n          {\n            \"source\": \"webset\",\n            \"id\": \"string\"\n          }\n        ],\n        \"metadata\": {}\n      },\n      \"createdAt\": \"2017-01-11T16:32:22.138Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"event\",\n      \"type\": \"webset.created\",\n      \"data\": {\n        \"id\": \"string\",\n        \"object\": \"webset\",\n        \"status\": \"paused\",\n        \"externalId\": \"string\",\n        \"title\": \"string\",\n        \"searches\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"websetId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"query\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"criteria\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxPeoplePerCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"exclude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scope\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"progress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"recall\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"canceledAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"canceledReason\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"behavior\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"websetId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"query\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"criteria\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"maxPeoplePerCompany\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"exclude\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"scope\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"progress\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"recall\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"canceledAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"canceledReason\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"behavior\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"imports\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"format\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"failedReason\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"failedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"failedMessage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"format\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"count\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"failedReason\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"failedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"failedMessage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"enrichments\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"websetId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"format\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"options\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"instructions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"websetId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"format\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"options\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"instructions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"monitors\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"websetId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cadence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"behavior\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastRun\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"nextRunAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"websetId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cadence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"behavior\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"lastRun\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"nextRunAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"metadata\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"createdAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updatedAt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"dashboardUrl\": \"http://KQlwnPVlWqkr.yygeTq0VLuiHRDoTmUQ0FfCqfCay2x5qrfzuf2lvqW.2SvCT64l4KNbvkJiSFFF9f\",\n        \"createdAt\": \"1970-01-02T20:02:32.479Z\",\n        \"updatedAt\": \"1963-02-01T12:40:53.342Z\",\n        \"excludes\": [\n          {\n            \"source\": \"webset\",\n            \"id\": \"string\"\n          },\n          {\n            \"source\": \"import\",\n            \"id\": \"string\"\n          }\n        ],\n        \"metadata\": {}\n      },\n      \"createdAt\": \"1951-01-21T20:20:38.156Z\"\n    }\n  ],\n  \"hasMore\": false,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22b9f9c1-c587-4d4d-ac2f-afc5dcefebdf",
+          "name": "Get an Event",
+          "request": {
+            "name": "Get an Event",
+            "description": {
+              "content": "Get a single Event by id.\n\nYou can subscribe to Events by creating a Webhook.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "events",
+                ":id"
+              ],
+              "host": [
+                "{{v0-events-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the event"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3462d8c4-aef2-4c34-a495-b8ec6098c414",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "events",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-events-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"event\",\n  \"type\": \"webset.created\",\n  \"data\": {\n    \"id\": \"string\",\n    \"object\": \"webset\",\n    \"status\": \"idle\",\n    \"externalId\": \"string\",\n    \"title\": \"string\",\n    \"searches\": [\n      {\n        \"id\": \"string\",\n        \"object\": \"webset_search\",\n        \"websetId\": \"string\",\n        \"status\": \"running\",\n        \"query\": \"string\",\n        \"entity\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"criteria\": [\n          {\n            \"description\": \"string\",\n            \"successRate\": 13.113193972362103\n          },\n          {\n            \"description\": \"string\",\n            \"successRate\": 8.892513378879274\n          }\n        ],\n        \"count\": 4278.683157175344,\n        \"maxPeoplePerCompany\": 53,\n        \"exclude\": [\n          {\n            \"source\": \"webset\",\n            \"id\": \"string\"\n          },\n          {\n            \"source\": \"webset\",\n            \"id\": \"string\"\n          }\n        ],\n        \"scope\": [\n          {\n            \"source\": \"webset\",\n            \"id\": \"string\",\n            \"relationship\": {\n              \"definition\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"source\": \"webset\",\n            \"id\": \"string\",\n            \"relationship\": {\n              \"definition\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"progress\": {\n          \"found\": 1451.169742953765,\n          \"analyzed\": 1110.7008818705156,\n          \"completion\": 19.653178239491165,\n          \"timeLeft\": 518.9932665128971\n        },\n        \"recall\": {\n          \"expected\": {\n            \"total\": 213.39612977650523,\n            \"confidence\": \"low\",\n            \"bounds\": {\n              \"min\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"max\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"reasoning\": \"string\"\n        },\n        \"canceledAt\": \"1965-03-26T13:19:16.307Z\",\n        \"canceledReason\": \"webset_canceled\",\n        \"createdAt\": \"1992-10-06T20:58:08.224Z\",\n        \"updatedAt\": \"1968-10-22T04:34:30.367Z\",\n        \"behavior\": \"override\",\n        \"metadata\": {}\n      },\n      {\n        \"id\": \"string\",\n        \"object\": \"webset_search\",\n        \"websetId\": \"string\",\n        \"status\": \"running\",\n        \"query\": \"string\",\n        \"entity\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"criteria\": [\n          {\n            \"description\": \"string\",\n            \"successRate\": 22.65627764594568\n          },\n          {\n            \"description\": \"string\",\n            \"successRate\": 59.50247863040718\n          }\n        ],\n        \"count\": 3937.560290391819,\n        \"maxPeoplePerCompany\": 7348,\n        \"exclude\": [\n          {\n            \"source\": \"webset\",\n            \"id\": \"string\"\n          },\n          {\n            \"source\": \"import\",\n            \"id\": \"string\"\n          }\n        ],\n        \"scope\": [\n          {\n            \"source\": \"import\",\n            \"id\": \"string\",\n            \"relationship\": {\n              \"definition\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"source\": \"webset\",\n            \"id\": \"string\",\n            \"relationship\": {\n              \"definition\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"limit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"progress\": {\n          \"found\": 601.422920646577,\n          \"analyzed\": 6648.800391721674,\n          \"completion\": 24.197907144938046,\n          \"timeLeft\": 2602.3518066221595\n        },\n        \"recall\": {\n          \"expected\": {\n            \"total\": 8729.028041324602,\n            \"confidence\": \"low\",\n            \"bounds\": {\n              \"min\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"max\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"reasoning\": \"string\"\n        },\n        \"canceledAt\": \"2005-09-10T08:14:50.308Z\",\n        \"canceledReason\": \"webset_deleted\",\n        \"createdAt\": \"1965-10-26T03:57:57.225Z\",\n        \"updatedAt\": \"2014-11-22T21:43:57.695Z\",\n        \"behavior\": \"override\",\n        \"metadata\": {}\n      }\n    ],\n    \"imports\": [\n      {\n        \"id\": \"string\",\n        \"object\": \"import\",\n        \"status\": \"pending\",\n        \"format\": \"webset\",\n        \"entity\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"title\": \"string\",\n        \"count\": 5826.606954516022,\n        \"metadata\": {\n          \"key_0\": \"string\"\n        },\n        \"failedReason\": \"invalid_format\",\n        \"failedAt\": \"2016-02-09T12:13:40.088Z\",\n        \"failedMessage\": \"string\",\n        \"createdAt\": \"2007-10-10T00:51:27.207Z\",\n        \"updatedAt\": \"2014-09-15T00:44:25.655Z\"\n      },\n      {\n        \"id\": \"string\",\n        \"object\": \"import\",\n        \"status\": \"processing\",\n        \"format\": \"csv\",\n        \"entity\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"title\": \"string\",\n        \"count\": 3741.699912169826,\n        \"metadata\": {\n          \"key_0\": \"string\"\n        },\n        \"failedReason\": \"invalid_format\",\n        \"failedAt\": \"1951-08-30T02:20:23.581Z\",\n        \"failedMessage\": \"string\",\n        \"createdAt\": \"1972-10-23T23:43:42.075Z\",\n        \"updatedAt\": \"1962-02-07T04:23:12.630Z\"\n      }\n    ],\n    \"enrichments\": [\n      {\n        \"id\": \"string\",\n        \"object\": \"webset_enrichment\",\n        \"status\": \"pending\",\n        \"websetId\": \"string\",\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"format\": \"date\",\n        \"options\": [\n          {\n            \"label\": \"string\"\n          },\n          {\n            \"label\": \"string\"\n          }\n        ],\n        \"instructions\": \"string\",\n        \"createdAt\": \"1970-11-10T19:35:45.310Z\",\n        \"updatedAt\": \"1971-09-09T12:10:50.929Z\",\n        \"metadata\": {}\n      },\n      {\n        \"id\": \"string\",\n        \"object\": \"webset_enrichment\",\n        \"status\": \"canceled\",\n        \"websetId\": \"string\",\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"format\": \"email\",\n        \"options\": [\n          {\n            \"label\": \"string\"\n          },\n          {\n            \"label\": \"string\"\n          }\n        ],\n        \"instructions\": \"string\",\n        \"createdAt\": \"2015-04-01T07:35:31.261Z\",\n        \"updatedAt\": \"1979-03-21T11:56:58.765Z\",\n        \"metadata\": {}\n      }\n    ],\n    \"monitors\": [\n      {\n        \"id\": \"string\",\n        \"object\": \"monitor\",\n        \"status\": \"disabled\",\n        \"websetId\": \"string\",\n        \"cadence\": {\n          \"cron\": \"string\",\n          \"timezone\": \"Etc/UTC\"\n        },\n        \"behavior\": {\n          \"type\": \"search\",\n          \"config\": {\n            \"count\": 3302.051267924012,\n            \"query\": \"string\",\n            \"criteria\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"behavior\": \"append\"\n          }\n        },\n        \"lastRun\": {\n          \"id\": \"string\",\n          \"object\": \"monitor_run\",\n          \"monitorId\": \"string\",\n          \"status\": \"failed\",\n          \"type\": \"refresh\",\n          \"completedAt\": \"1992-06-08T19:41:37.916Z\",\n          \"failedAt\": \"1971-04-21T10:58:42.039Z\",\n          \"failedReason\": \"string\",\n          \"canceledAt\": \"1952-02-16T15:01:44.868Z\",\n          \"createdAt\": \"1963-01-09T00:10:54.859Z\",\n          \"updatedAt\": \"1982-09-09T23:40:56.458Z\"\n        },\n        \"nextRunAt\": \"2000-01-31T11:17:22.199Z\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        },\n        \"createdAt\": \"1979-02-23T12:56:34.158Z\",\n        \"updatedAt\": \"1990-06-22T05:49:55.852Z\"\n      },\n      {\n        \"id\": \"string\",\n        \"object\": \"monitor\",\n        \"status\": \"enabled\",\n        \"websetId\": \"string\",\n        \"cadence\": {\n          \"cron\": \"string\",\n          \"timezone\": \"Etc/UTC\"\n        },\n        \"behavior\": {\n          \"type\": \"search\",\n          \"config\": {\n            \"count\": 4510.599399844791,\n            \"query\": \"string\",\n            \"criteria\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"behavior\": \"append\"\n          }\n        },\n        \"lastRun\": {\n          \"id\": \"string\",\n          \"object\": \"monitor_run\",\n          \"monitorId\": \"string\",\n          \"status\": \"running\",\n          \"type\": \"refresh\",\n          \"completedAt\": \"1957-10-18T19:42:12.281Z\",\n          \"failedAt\": \"2009-04-15T19:07:07.536Z\",\n          \"failedReason\": \"string\",\n          \"canceledAt\": \"1978-11-19T14:55:37.892Z\",\n          \"createdAt\": \"1947-02-17T10:29:28.850Z\",\n          \"updatedAt\": \"2020-05-16T02:41:27.320Z\"\n        },\n        \"nextRunAt\": \"1968-08-19T03:17:24.971Z\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"createdAt\": \"1982-02-23T01:53:28.374Z\",\n        \"updatedAt\": \"1967-04-08T19:07:14.712Z\"\n      }\n    ],\n    \"dashboardUrl\": \"https://VZkOEyEHrhEZUuslSldwLoWNOgnn.jpefB\",\n    \"createdAt\": \"1966-07-26T04:32:11.758Z\",\n    \"updatedAt\": \"1973-01-03T07:57:59.491Z\",\n    \"excludes\": [\n      {\n        \"source\": \"import\",\n        \"id\": \"string\"\n      },\n      {\n        \"source\": \"webset\",\n        \"id\": \"string\"\n      }\n    ],\n    \"metadata\": {}\n  },\n  \"createdAt\": \"1950-09-26T12:32:28.037Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "288c5315-d07e-45c1-ba8e-6ebda7bab3ae",
+              "name": "Event not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "events",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-events-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the event"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.exa.ai",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-events-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-events-id-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f4290543-afec-4b81-bcaa-0bb9b7c1bfe7",
+    "name": "Exa Agent Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Exa Agent API - subset of the Exa Public API.",
+      "type": "text/plain"
+    }
+  }
+}

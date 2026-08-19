@@ -1,0 +1,1076 @@
+{
+  "item": [
+    {
+      "id": "145c5a05-e1a0-483b-939e-361abad68d5d",
+      "name": "Websets",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2d1a01c4-8d64-48a6-af3d-c13df1435297",
+          "name": "Create a Webset",
+          "request": {
+            "name": "Create a Webset",
+            "description": {
+              "content": "Creates a new Webset with optional search, import, and enrichment configurations. The Webset will automatically begin processing once created.\n\nYou can specify an `externalId` to reference the Webset with your own identifiers for easier integration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "websets"
+              ],
+              "host": [
+                "{{v0-websets-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"search\": {\n    \"query\": \"<string>\",\n    \"count\": 10,\n    \"entity\": {\n      \"type\": \"company\"\n    },\n    \"criteria\": [\n      {\n        \"description\": \"<string>\"\n      }\n    ],\n    \"maxPeoplePerCompany\": \"<integer>\",\n    \"recall\": \"<boolean>\",\n    \"exclude\": [\n      {\n        \"source\": \"<string>\",\n        \"id\": \"<string>\"\n      },\n      {\n        \"source\": \"<string>\",\n        \"id\": \"<string>\"\n      }\n    ],\n    \"scope\": [\n      {\n        \"source\": \"<string>\",\n        \"id\": \"<string>\",\n        \"relationship\": {\n          \"definition\": \"<string>\",\n          \"limit\": \"<number>\"\n        }\n      },\n      {\n        \"source\": \"<string>\",\n        \"id\": \"<string>\",\n        \"relationship\": {\n          \"definition\": \"<string>\",\n          \"limit\": \"<number>\"\n        }\n      }\n    ]\n  },\n  \"import\": [\n    {\n      \"source\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"source\": \"<string>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"enrichments\": [\n    {\n      \"description\": \"<string>\",\n      \"format\": \"<string>\",\n      \"options\": [\n        {\n          \"label\": \"<string>\"\n        }\n      ],\n      \"metadata\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    },\n    {\n      \"description\": \"<string>\",\n      \"format\": \"<string>\",\n      \"options\": [\n        {\n          \"label\": \"<string>\"\n        }\n      ],\n      \"metadata\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    }\n  ],\n  \"exclude\": [\n    {\n      \"source\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"source\": \"<string>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"externalId\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "255db277-f02c-47aa-a245-67e16d6df304",
+              "name": "Webset created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets"
+                  ],
+                  "host": [
+                    "{{v0-websets-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search\": {\n    \"query\": \"Marketing agencies based in the US, that focus on consumer products.\",\n    \"count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"webset\",\n  \"status\": \"paused\",\n  \"externalId\": \"string\",\n  \"title\": \"string\",\n  \"searches\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_search\",\n      \"websetId\": \"string\",\n      \"status\": \"completed\",\n      \"query\": \"string\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"criteria\": [\n        {\n          \"description\": \"string\",\n          \"successRate\": 62.73795694309959\n        },\n        {\n          \"description\": \"string\",\n          \"successRate\": 66.17169627689299\n        }\n      ],\n      \"count\": 5306.967859808989,\n      \"maxPeoplePerCompany\": 4360,\n      \"exclude\": [\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        },\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\"\n        }\n      ],\n      \"scope\": [\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 2.8633113782552657\n          }\n        },\n        {\n          \"source\": \"import\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 6.345420513469051\n          }\n        }\n      ],\n      \"progress\": {\n        \"found\": 5812.700913565293,\n        \"analyzed\": 5554.851460497412,\n        \"completion\": 84.91098651110345,\n        \"timeLeft\": 406.82767269225815\n      },\n      \"recall\": {\n        \"expected\": {\n          \"total\": 9194.837018216036,\n          \"confidence\": \"low\",\n          \"bounds\": {\n            \"min\": 1830.5557497536483,\n            \"max\": 1301.3111638686337\n          }\n        },\n        \"reasoning\": \"string\"\n      },\n      \"canceledAt\": \"1986-05-14T04:03:28.122Z\",\n      \"canceledReason\": \"webset_deleted\",\n      \"createdAt\": \"1992-07-16T00:18:06.989Z\",\n      \"updatedAt\": \"2014-05-11T14:48:52.567Z\",\n      \"behavior\": \"override\",\n      \"metadata\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_search\",\n      \"websetId\": \"string\",\n      \"status\": \"completed\",\n      \"query\": \"string\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"criteria\": [\n        {\n          \"description\": \"string\",\n          \"successRate\": 1.7789789094072472\n        },\n        {\n          \"description\": \"string\",\n          \"successRate\": 48.30842893747792\n        }\n      ],\n      \"count\": 3511.120289954134,\n      \"maxPeoplePerCompany\": 3447,\n      \"exclude\": [\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        },\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        }\n      ],\n      \"scope\": [\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 2.350660923046471\n          }\n        },\n        {\n          \"source\": \"import\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 9.413714725056828\n          }\n        }\n      ],\n      \"progress\": {\n        \"found\": 4282.956825098715,\n        \"analyzed\": 5799.1471322727875,\n        \"completion\": 49.936549955866106,\n        \"timeLeft\": 1908.4650596583242\n      },\n      \"recall\": {\n        \"expected\": {\n          \"total\": 689.4229925329287,\n          \"confidence\": \"low\",\n          \"bounds\": {\n            \"min\": 7161.251760449691,\n            \"max\": 9296.676248295136\n          }\n        },\n        \"reasoning\": \"string\"\n      },\n      \"canceledAt\": \"1949-08-09T09:07:42.228Z\",\n      \"canceledReason\": \"webset_canceled\",\n      \"createdAt\": \"1960-09-30T08:30:36.013Z\",\n      \"updatedAt\": \"1988-03-26T10:49:59.797Z\",\n      \"behavior\": \"override\",\n      \"metadata\": {}\n    }\n  ],\n  \"imports\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"import\",\n      \"status\": \"pending\",\n      \"format\": \"webset\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"title\": \"string\",\n      \"count\": 2924.9446873687148,\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"failedReason\": \"invalid_format\",\n      \"failedAt\": \"1966-02-15T08:33:18.940Z\",\n      \"failedMessage\": \"string\",\n      \"createdAt\": \"2007-05-27T00:53:42.566Z\",\n      \"updatedAt\": \"2001-07-01T11:45:34.867Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"import\",\n      \"status\": \"processing\",\n      \"format\": \"webset\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"title\": \"string\",\n      \"count\": 2621.265809872788,\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"failedReason\": \"invalid_format\",\n      \"failedAt\": \"1995-02-20T14:32:23.803Z\",\n      \"failedMessage\": \"string\",\n      \"createdAt\": \"1962-03-22T10:37:28.379Z\",\n      \"updatedAt\": \"1967-11-04T17:50:42.924Z\"\n    }\n  ],\n  \"enrichments\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_enrichment\",\n      \"status\": \"completed\",\n      \"websetId\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"format\": \"email\",\n      \"options\": [\n        {\n          \"label\": \"string\"\n        },\n        {\n          \"label\": \"string\"\n        }\n      ],\n      \"instructions\": \"string\",\n      \"createdAt\": \"2010-07-14T11:34:46.503Z\",\n      \"updatedAt\": \"2010-03-28T04:14:43.261Z\",\n      \"metadata\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_enrichment\",\n      \"status\": \"canceled\",\n      \"websetId\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"format\": \"date\",\n      \"options\": [\n        {\n          \"label\": \"string\"\n        },\n        {\n          \"label\": \"string\"\n        }\n      ],\n      \"instructions\": \"string\",\n      \"createdAt\": \"1983-07-18T12:21:03.169Z\",\n      \"updatedAt\": \"2006-11-09T02:51:24.711Z\",\n      \"metadata\": {}\n    }\n  ],\n  \"monitors\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor\",\n      \"status\": \"enabled\",\n      \"websetId\": \"string\",\n      \"cadence\": {\n        \"cron\": \"string\",\n        \"timezone\": \"Etc/UTC\"\n      },\n      \"behavior\": {\n        \"type\": \"search\",\n        \"config\": {\n          \"count\": 7891.429326853344,\n          \"query\": \"string\",\n          \"criteria\": [\n            {\n              \"description\": \"string\"\n            },\n            {\n              \"description\": \"string\"\n            }\n          ],\n          \"entity\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"behavior\": \"append\"\n        }\n      },\n      \"lastRun\": {\n        \"id\": \"string\",\n        \"object\": \"monitor_run\",\n        \"monitorId\": \"string\",\n        \"status\": \"canceled\",\n        \"type\": \"refresh\",\n        \"completedAt\": \"1973-01-25T21:12:10.527Z\",\n        \"failedAt\": \"2012-08-04T14:44:26.146Z\",\n        \"failedReason\": \"string\",\n        \"canceledAt\": \"2025-11-27T09:04:41.644Z\",\n        \"createdAt\": \"1976-03-28T20:16:02.729Z\",\n        \"updatedAt\": \"1964-03-13T16:49:45.944Z\"\n      },\n      \"nextRunAt\": \"2024-08-13T16:02:22.527Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"createdAt\": \"1970-01-02T08:21:57.017Z\",\n      \"updatedAt\": \"1978-09-15T05:53:09.635Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor\",\n      \"status\": \"enabled\",\n      \"websetId\": \"string\",\n      \"cadence\": {\n        \"cron\": \"string\",\n        \"timezone\": \"Etc/UTC\"\n      },\n      \"behavior\": {\n        \"type\": \"search\",\n        \"config\": {\n          \"count\": 2361.526861321964,\n          \"query\": \"string\",\n          \"criteria\": [\n            {\n              \"description\": \"string\"\n            },\n            {\n              \"description\": \"string\"\n            }\n          ],\n          \"entity\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"behavior\": \"append\"\n        }\n      },\n      \"lastRun\": {\n        \"id\": \"string\",\n        \"object\": \"monitor_run\",\n        \"monitorId\": \"string\",\n        \"status\": \"completed\",\n        \"type\": \"search\",\n        \"completedAt\": \"2017-03-12T07:49:05.262Z\",\n        \"failedAt\": \"1976-03-26T16:01:44.801Z\",\n        \"failedReason\": \"string\",\n        \"canceledAt\": \"2025-06-18T09:50:21.297Z\",\n        \"createdAt\": \"1975-11-11T03:44:48.605Z\",\n        \"updatedAt\": \"1979-04-28T15:22:19.909Z\"\n      },\n      \"nextRunAt\": \"2002-10-15T15:32:01.625Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"createdAt\": \"2022-10-31T07:13:48.331Z\",\n      \"updatedAt\": \"1954-01-08T18:29:07.682Z\"\n    }\n  ],\n  \"dashboardUrl\": \"http://p.ollvbryRAXG-wvSLrLESEmLIHBwSWXp+i3Ku-JpLQ+C3IlzykFRmXw-U2soN8+uOD3gS\",\n  \"createdAt\": \"1963-08-16T09:27:45.953Z\",\n  \"updatedAt\": \"2025-01-15T14:57:55.698Z\",\n  \"excludes\": [\n    {\n      \"source\": \"import\",\n      \"id\": \"string\"\n    },\n    {\n      \"source\": \"import\",\n      \"id\": \"string\"\n    }\n  ],\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "172509a3-0724-4a6b-ae27-170e5070186c",
+              "name": "Webset with this externalId already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets"
+                  ],
+                  "host": [
+                    "{{v0-websets-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"search\": {\n    \"query\": \"Marketing agencies based in the US, that focus on consumer products.\",\n    \"count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d61b3371-943c-4ecd-b521-da33d8866be2",
+          "name": "List all Websets",
+          "request": {
+            "name": "List all Websets",
+            "description": {
+              "content": "Returns a list of Websets.\n\nYou can paginate through the results using the `cursor` parameter.\n\nYou can filter results using the `search` parameter to find Websets by ID, external ID, or title.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "websets"
+              ],
+              "host": [
+                "{{v0-websets-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "The cursor to paginate through the results"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The number of Websets to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search term to filter Websets by ID, external ID, or title"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d6e5309a-1060-4457-b404-b65a7576bfc5",
+              "name": "List of Websets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets"
+                  ],
+                  "host": [
+                    "{{v0-websets-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"webset\",\n      \"status\": \"paused\",\n      \"externalId\": \"string\",\n      \"title\": \"string\",\n      \"searches\": [\n        {\n          \"id\": \"string\",\n          \"object\": \"webset_search\",\n          \"websetId\": \"string\",\n          \"status\": \"completed\",\n          \"query\": \"string\",\n          \"entity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"criteria\": [\n            {\n              \"description\": \"string\",\n              \"successRate\": 64.34660626013181\n            },\n            {\n              \"description\": \"string\",\n              \"successRate\": 65.1256348212693\n            }\n          ],\n          \"count\": 3961.8504516966104,\n          \"maxPeoplePerCompany\": 4634,\n          \"exclude\": [\n            {\n              \"source\": \"webset\",\n              \"id\": \"string\"\n            },\n            {\n              \"source\": \"import\",\n              \"id\": \"string\"\n            }\n          ],\n          \"scope\": [\n            {\n              \"source\": \"import\",\n              \"id\": \"string\",\n              \"relationship\": {\n                \"definition\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"limit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"source\": \"import\",\n              \"id\": \"string\",\n              \"relationship\": {\n                \"definition\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"limit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"progress\": {\n            \"found\": 6361.305134480958,\n            \"analyzed\": 9135.77890004463,\n            \"completion\": 21.545777830666204,\n            \"timeLeft\": 2224.459763964707\n          },\n          \"recall\": {\n            \"expected\": {\n              \"total\": 5465.415130507268,\n              \"confidence\": \"low\",\n              \"bounds\": {\n                \"min\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"max\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            \"reasoning\": \"string\"\n          },\n          \"canceledAt\": \"1971-05-22T10:58:48.329Z\",\n          \"canceledReason\": \"out_of_credits\",\n          \"createdAt\": \"2000-03-11T01:35:36.269Z\",\n          \"updatedAt\": \"1953-02-06T22:19:50.739Z\",\n          \"behavior\": \"override\",\n          \"metadata\": {}\n        },\n        {\n          \"id\": \"string\",\n          \"object\": \"webset_search\",\n          \"websetId\": \"string\",\n          \"status\": \"created\",\n          \"query\": \"string\",\n          \"entity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"criteria\": [\n            {\n              \"description\": \"string\",\n              \"successRate\": 47.40845895414324\n            },\n            {\n              \"description\": \"string\",\n              \"successRate\": 64.10600824193136\n            }\n          ],\n          \"count\": 9019.906798357779,\n          \"maxPeoplePerCompany\": 4387,\n          \"exclude\": [\n            {\n              \"source\": \"webset\",\n              \"id\": \"string\"\n            },\n            {\n              \"source\": \"webset\",\n              \"id\": \"string\"\n            }\n          ],\n          \"scope\": [\n            {\n              \"source\": \"webset\",\n              \"id\": \"string\",\n              \"relationship\": {\n                \"definition\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"limit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"source\": \"import\",\n              \"id\": \"string\",\n              \"relationship\": {\n                \"definition\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"limit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"progress\": {\n            \"found\": 2333.31071773061,\n            \"analyzed\": 3485.5982114492576,\n            \"completion\": 97.1823422819922,\n            \"timeLeft\": 3608.1009363601825\n          },\n          \"recall\": {\n            \"expected\": {\n              \"total\": 1728.5900784988173,\n              \"confidence\": \"high\",\n              \"bounds\": {\n                \"min\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"max\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            \"reasoning\": \"string\"\n          },\n          \"canceledAt\": \"1995-07-31T15:18:13.653Z\",\n          \"canceledReason\": \"out_of_credits\",\n          \"createdAt\": \"2020-09-10T16:55:22.466Z\",\n          \"updatedAt\": \"1968-08-27T00:26:52.357Z\",\n          \"behavior\": \"override\",\n          \"metadata\": {}\n        }\n      ],\n      \"imports\": [\n        {\n          \"id\": \"string\",\n          \"object\": \"import\",\n          \"status\": \"pending\",\n          \"format\": \"csv\",\n          \"entity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"title\": \"string\",\n          \"count\": 9711.718006747595,\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"failedReason\": \"missing_identifier\",\n          \"failedAt\": \"1985-03-11T05:18:23.576Z\",\n          \"failedMessage\": \"string\",\n          \"createdAt\": \"1970-11-21T23:59:21.400Z\",\n          \"updatedAt\": \"1993-03-07T01:09:22.560Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"object\": \"import\",\n          \"status\": \"completed\",\n          \"format\": \"csv\",\n          \"entity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"title\": \"string\",\n          \"count\": 8871.002047763403,\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          },\n          \"failedReason\": \"missing_identifier\",\n          \"failedAt\": \"1950-03-26T00:24:36.323Z\",\n          \"failedMessage\": \"string\",\n          \"createdAt\": \"1982-09-30T21:46:54.554Z\",\n          \"updatedAt\": \"1978-03-28T07:47:57.536Z\"\n        }\n      ],\n      \"enrichments\": [\n        {\n          \"id\": \"string\",\n          \"object\": \"webset_enrichment\",\n          \"status\": \"pending\",\n          \"websetId\": \"string\",\n          \"title\": \"string\",\n          \"description\": \"string\",\n          \"format\": \"phone\",\n          \"options\": [\n            {\n              \"label\": \"string\"\n            },\n            {\n              \"label\": \"string\"\n            }\n          ],\n          \"instructions\": \"string\",\n          \"createdAt\": \"1988-06-04T13:45:06.108Z\",\n          \"updatedAt\": \"1997-11-04T22:08:02.827Z\",\n          \"metadata\": {}\n        },\n        {\n          \"id\": \"string\",\n          \"object\": \"webset_enrichment\",\n          \"status\": \"completed\",\n          \"websetId\": \"string\",\n          \"title\": \"string\",\n          \"description\": \"string\",\n          \"format\": \"phone\",\n          \"options\": [\n            {\n              \"label\": \"string\"\n            },\n            {\n              \"label\": \"string\"\n            }\n          ],\n          \"instructions\": \"string\",\n          \"createdAt\": \"1995-04-29T12:49:14.102Z\",\n          \"updatedAt\": \"2009-04-20T20:29:55.097Z\",\n          \"metadata\": {}\n        }\n      ],\n      \"monitors\": [\n        {\n          \"id\": \"string\",\n          \"object\": \"monitor\",\n          \"status\": \"disabled\",\n          \"websetId\": \"string\",\n          \"cadence\": {\n            \"cron\": \"string\",\n            \"timezone\": \"Etc/UTC\"\n          },\n          \"behavior\": {\n            \"type\": \"search\",\n            \"config\": {\n              \"count\": 896.6114927493794,\n              \"query\": \"string\",\n              \"criteria\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"entity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"behavior\": \"append\"\n            }\n          },\n          \"lastRun\": {\n            \"id\": \"string\",\n            \"object\": \"monitor_run\",\n            \"monitorId\": \"string\",\n            \"status\": \"running\",\n            \"type\": \"search\",\n            \"completedAt\": \"2009-06-26T07:22:16.846Z\",\n            \"failedAt\": \"1994-12-14T15:09:02.678Z\",\n            \"failedReason\": \"string\",\n            \"canceledAt\": \"2010-09-18T14:10:51.193Z\",\n            \"createdAt\": \"1991-09-02T18:02:22.802Z\",\n            \"updatedAt\": \"2005-11-04T01:37:05.932Z\"\n          },\n          \"nextRunAt\": \"1995-01-14T01:44:33.644Z\",\n          \"metadata\": {\n            \"key_0\": \"string\"\n          },\n          \"createdAt\": \"1964-06-18T17:27:33.261Z\",\n          \"updatedAt\": \"1999-11-11T23:23:29.660Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"object\": \"monitor\",\n          \"status\": \"enabled\",\n          \"websetId\": \"string\",\n          \"cadence\": {\n            \"cron\": \"string\",\n            \"timezone\": \"Etc/UTC\"\n          },\n          \"behavior\": {\n            \"type\": \"search\",\n            \"config\": {\n              \"count\": 6254.600045333682,\n              \"query\": \"string\",\n              \"criteria\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"entity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"behavior\": \"append\"\n            }\n          },\n          \"lastRun\": {\n            \"id\": \"string\",\n            \"object\": \"monitor_run\",\n            \"monitorId\": \"string\",\n            \"status\": \"failed\",\n            \"type\": \"search\",\n            \"completedAt\": \"1980-05-07T08:30:46.974Z\",\n            \"failedAt\": \"1964-05-25T07:25:37.552Z\",\n            \"failedReason\": \"string\",\n            \"canceledAt\": \"1989-03-04T04:32:55.242Z\",\n            \"createdAt\": \"1957-11-24T19:14:50.457Z\",\n            \"updatedAt\": \"2017-10-04T13:56:15.645Z\"\n          },\n          \"nextRunAt\": \"1979-10-06T21:45:41.286Z\",\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\",\n            \"key_3\": \"string\"\n          },\n          \"createdAt\": \"2002-04-06T10:30:56.133Z\",\n          \"updatedAt\": \"1985-04-17T00:14:07.944Z\"\n        }\n      ],\n      \"dashboardUrl\": \"https://gRraqZJxUyWYBFgFNqsVhllsjzMxFdNk.zali4dOgOEhi\",\n      \"createdAt\": \"2017-03-28T05:13:57.457Z\",\n      \"updatedAt\": \"2019-04-01T17:29:05.175Z\",\n      \"excludes\": [\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        },\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\"\n        }\n      ],\n      \"metadata\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"webset\",\n      \"status\": \"paused\",\n      \"externalId\": \"string\",\n      \"title\": \"string\",\n      \"searches\": [\n        {\n          \"id\": \"string\",\n          \"object\": \"webset_search\",\n          \"websetId\": \"string\",\n          \"status\": \"completed\",\n          \"query\": \"string\",\n          \"entity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"criteria\": [\n            {\n              \"description\": \"st\",\n              \"successRate\": 42.46849354907032\n            },\n            {\n              \"description\": \"string\",\n              \"successRate\": 18.300752305619795\n            }\n          ],\n          \"count\": 477.37845745837654,\n          \"maxPeoplePerCompany\": 7248,\n          \"exclude\": [\n            {\n              \"source\": \"import\",\n              \"id\": \"string\"\n            },\n            {\n              \"source\": \"import\",\n              \"id\": \"string\"\n            }\n          ],\n          \"scope\": [\n            {\n              \"source\": \"webset\",\n              \"id\": \"string\",\n              \"relationship\": {\n                \"definition\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"limit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"source\": \"webset\",\n              \"id\": \"string\",\n              \"relationship\": {\n                \"definition\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"limit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"progress\": {\n            \"found\": 5292.003366595497,\n            \"analyzed\": 4643.358199660905,\n            \"completion\": 41.5275274031673,\n            \"timeLeft\": 688.0544601590021\n          },\n          \"recall\": {\n            \"expected\": {\n              \"total\": 9422.2880039966,\n              \"confidence\": \"medium\",\n              \"bounds\": {\n                \"min\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"max\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            \"reasoning\": \"string\"\n          },\n          \"canceledAt\": \"1974-04-23T01:27:18.589Z\",\n          \"canceledReason\": \"out_of_credits\",\n          \"createdAt\": \"1948-04-04T11:22:57.375Z\",\n          \"updatedAt\": \"1951-06-07T21:01:30.762Z\",\n          \"behavior\": \"override\",\n          \"metadata\": {}\n        },\n        {\n          \"id\": \"string\",\n          \"object\": \"webset_search\",\n          \"websetId\": \"string\",\n          \"status\": \"created\",\n          \"query\": \"string\",\n          \"entity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"criteria\": [\n            {\n              \"description\": \"string\",\n              \"successRate\": 39.30443412586357\n            },\n            {\n              \"description\": \"string\",\n              \"successRate\": 55.775366603235824\n            }\n          ],\n          \"count\": 3397.6427717120455,\n          \"maxPeoplePerCompany\": 9300,\n          \"exclude\": [\n            {\n              \"source\": \"webset\",\n              \"id\": \"string\"\n            },\n            {\n              \"source\": \"webset\",\n              \"id\": \"string\"\n            }\n          ],\n          \"scope\": [\n            {\n              \"source\": \"webset\",\n              \"id\": \"string\",\n              \"relationship\": {\n                \"definition\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"limit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"source\": \"import\",\n              \"id\": \"string\",\n              \"relationship\": {\n                \"definition\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"limit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"progress\": {\n            \"found\": 3483.1670397141147,\n            \"analyzed\": 7112.618168808358,\n            \"completion\": 28.175797390747746,\n            \"timeLeft\": 724.9586683344122\n          },\n          \"recall\": {\n            \"expected\": {\n              \"total\": 1316.9205786953498,\n              \"confidence\": \"medium\",\n              \"bounds\": {\n                \"min\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"max\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            \"reasoning\": \"string\"\n          },\n          \"canceledAt\": \"1989-03-11T12:46:37.246Z\",\n          \"canceledReason\": \"webset_canceled\",\n          \"createdAt\": \"2013-11-21T02:07:24.967Z\",\n          \"updatedAt\": \"1995-11-09T21:39:46.357Z\",\n          \"behavior\": \"override\",\n          \"metadata\": {}\n        }\n      ],\n      \"imports\": [\n        {\n          \"id\": \"string\",\n          \"object\": \"import\",\n          \"status\": \"processing\",\n          \"format\": \"csv\",\n          \"entity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"title\": \"string\",\n          \"count\": 1543.2379865969392,\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"failedReason\": \"invalid_format\",\n          \"failedAt\": \"1995-11-26T17:27:15.642Z\",\n          \"failedMessage\": \"string\",\n          \"createdAt\": \"1991-08-10T23:48:34.113Z\",\n          \"updatedAt\": \"2010-05-27T02:49:19.640Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"object\": \"import\",\n          \"status\": \"failed\",\n          \"format\": \"csv\",\n          \"entity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"title\": \"string\",\n          \"count\": 3021.772760262584,\n          \"metadata\": {\n            \"key_0\": \"string\"\n          },\n          \"failedReason\": \"invalid_format\",\n          \"failedAt\": \"1978-05-28T08:20:51.838Z\",\n          \"failedMessage\": \"string\",\n          \"createdAt\": \"2017-01-24T19:07:26.551Z\",\n          \"updatedAt\": \"1973-08-27T04:27:17.435Z\"\n        }\n      ],\n      \"enrichments\": [\n        {\n          \"id\": \"string\",\n          \"object\": \"webset_enrichment\",\n          \"status\": \"pending\",\n          \"websetId\": \"string\",\n          \"title\": \"string\",\n          \"description\": \"string\",\n          \"format\": \"options\",\n          \"options\": [\n            {\n              \"label\": \"string\"\n            },\n            {\n              \"label\": \"string\"\n            }\n          ],\n          \"instructions\": \"string\",\n          \"createdAt\": \"1974-12-09T12:07:46.037Z\",\n          \"updatedAt\": \"2004-04-07T15:02:53.372Z\",\n          \"metadata\": {}\n        },\n        {\n          \"id\": \"string\",\n          \"object\": \"webset_enrichment\",\n          \"status\": \"completed\",\n          \"websetId\": \"string\",\n          \"title\": \"string\",\n          \"description\": \"string\",\n          \"format\": \"number\",\n          \"options\": [\n            {\n              \"label\": \"string\"\n            },\n            {\n              \"label\": \"string\"\n            }\n          ],\n          \"instructions\": \"string\",\n          \"createdAt\": \"1963-08-22T09:01:25.760Z\",\n          \"updatedAt\": \"1988-02-17T10:12:02.027Z\",\n          \"metadata\": {}\n        }\n      ],\n      \"monitors\": [\n        {\n          \"id\": \"string\",\n          \"object\": \"monitor\",\n          \"status\": \"enabled\",\n          \"websetId\": \"string\",\n          \"cadence\": {\n            \"cron\": \"string\",\n            \"timezone\": \"Etc/UTC\"\n          },\n          \"behavior\": {\n            \"type\": \"search\",\n            \"config\": {\n              \"count\": 8714.625401766794,\n              \"query\": \"string\",\n              \"criteria\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"entity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"behavior\": \"append\"\n            }\n          },\n          \"lastRun\": {\n            \"id\": \"string\",\n            \"object\": \"monitor_run\",\n            \"monitorId\": \"string\",\n            \"status\": \"failed\",\n            \"type\": \"search\",\n            \"completedAt\": \"1979-09-16T19:19:01.161Z\",\n            \"failedAt\": \"1948-04-11T06:45:58.563Z\",\n            \"failedReason\": \"string\",\n            \"canceledAt\": \"1996-01-23T16:12:29.391Z\",\n            \"createdAt\": \"1966-05-22T18:53:38.552Z\",\n            \"updatedAt\": \"1959-10-14T23:15:09.793Z\"\n          },\n          \"nextRunAt\": \"2026-06-14T16:26:59.025Z\",\n          \"metadata\": {\n            \"key_0\": \"string\"\n          },\n          \"createdAt\": \"2008-01-15T19:37:35.986Z\",\n          \"updatedAt\": \"2026-03-23T10:10:00.940Z\"\n        },\n        {\n          \"id\": \"string\",\n          \"object\": \"monitor\",\n          \"status\": \"disabled\",\n          \"websetId\": \"string\",\n          \"cadence\": {\n            \"cron\": \"string\",\n            \"timezone\": \"Etc/UTC\"\n          },\n          \"behavior\": {\n            \"type\": \"search\",\n            \"config\": {\n              \"count\": 4602.7853932718,\n              \"query\": \"string\",\n              \"criteria\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"entity\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"behavior\": \"append\"\n            }\n          },\n          \"lastRun\": {\n            \"id\": \"string\",\n            \"object\": \"monitor_run\",\n            \"monitorId\": \"string\",\n            \"status\": \"completed\",\n            \"type\": \"search\",\n            \"completedAt\": \"1978-12-12T04:19:40.149Z\",\n            \"failedAt\": \"2026-01-01T11:39:21.269Z\",\n            \"failedReason\": \"string\",\n            \"canceledAt\": \"1979-12-29T01:08:19.909Z\",\n            \"createdAt\": \"1955-08-21T20:10:25.745Z\",\n            \"updatedAt\": \"2023-11-16T03:05:19.636Z\"\n          },\n          \"nextRunAt\": \"2005-11-27T09:25:04.520Z\",\n          \"metadata\": {\n            \"key_0\": \"string\"\n          },\n          \"createdAt\": \"1999-05-14T22:41:59.072Z\",\n          \"updatedAt\": \"1960-09-29T03:37:03.590Z\"\n        }\n      ],\n      \"dashboardUrl\": \"http://piAbWcrStuWRs.yvA\",\n      \"createdAt\": \"1994-02-27T08:47:07.209Z\",\n      \"updatedAt\": \"2015-05-05T21:29:45.327Z\",\n      \"excludes\": [\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\"\n        },\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\"\n        }\n      ],\n      \"metadata\": {}\n    }\n  ],\n  \"hasMore\": true,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1cbac8e3-2c84-48a2-9f3f-0187350d8810",
+          "name": "Get a Webset",
+          "request": {
+            "name": "Get a Webset",
+            "description": {},
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":id"
+              ],
+              "host": [
+                "{{v0-websets-id-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "Expand the response with the specified resources"
+                },
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "Expand the response with the specified resources"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id or externalId of the Webset."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "22c286e6-cd4d-4ee2-91ff-40500eb84147",
+              "name": "Webset",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-websets-id-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id or externalId of the Webset."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"webset\",\n  \"status\": \"idle\",\n  \"externalId\": \"string\",\n  \"title\": \"string\",\n  \"searches\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_search\",\n      \"websetId\": \"string\",\n      \"status\": \"completed\",\n      \"query\": \"string\",\n      \"entity\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"criteria\": [\n        {\n          \"description\": \"string\",\n          \"successRate\": 16.47612664243514\n        },\n        {\n          \"description\": \"string\",\n          \"successRate\": 71.03804096807465\n        }\n      ],\n      \"count\": 9527.104874504506,\n      \"maxPeoplePerCompany\": 2832,\n      \"exclude\": [\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\"\n        },\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\"\n        }\n      ],\n      \"scope\": [\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 2.1137665386041893\n          }\n        },\n        {\n          \"source\": \"import\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 8.640058488444968\n          }\n        }\n      ],\n      \"progress\": {\n        \"found\": 8569.820058878064,\n        \"analyzed\": 8632.052364644107,\n        \"completion\": 36.27508278572649,\n        \"timeLeft\": 6883.016515634539\n      },\n      \"recall\": {\n        \"expected\": {\n          \"total\": 212.3560235452393,\n          \"confidence\": \"low\",\n          \"bounds\": {\n            \"min\": 4154.4723477380685,\n            \"max\": 8907.921548277638\n          }\n        },\n        \"reasoning\": \"string\"\n      },\n      \"canceledAt\": \"1978-11-04T15:05:19.830Z\",\n      \"canceledReason\": \"out_of_credits\",\n      \"createdAt\": \"2015-10-29T00:46:04.075Z\",\n      \"updatedAt\": \"1999-06-01T17:51:08.177Z\",\n      \"behavior\": \"override\",\n      \"metadata\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_search\",\n      \"websetId\": \"string\",\n      \"status\": \"pending\",\n      \"query\": \"string\",\n      \"entity\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"criteria\": [\n        {\n          \"description\": \"string\",\n          \"successRate\": 90.50445673925772\n        },\n        {\n          \"description\": \"string\",\n          \"successRate\": 42.53739470935103\n        }\n      ],\n      \"count\": 6490.911183117751,\n      \"maxPeoplePerCompany\": 4337,\n      \"exclude\": [\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        },\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        }\n      ],\n      \"scope\": [\n        {\n          \"source\": \"import\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 5.819105658350356\n          }\n        },\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 9.848830958012742\n          }\n        }\n      ],\n      \"progress\": {\n        \"found\": 3823.0730401294677,\n        \"analyzed\": 7486.673207657511,\n        \"completion\": 74.5501607698199,\n        \"timeLeft\": 1351.7828594332805\n      },\n      \"recall\": {\n        \"expected\": {\n          \"total\": 356.06772733228655,\n          \"confidence\": \"low\",\n          \"bounds\": {\n            \"min\": 905.3718541280487,\n            \"max\": 7708.04366037492\n          }\n        },\n        \"reasoning\": \"string\"\n      },\n      \"canceledAt\": \"1952-09-04T08:00:12.701Z\",\n      \"canceledReason\": \"webset_canceled\",\n      \"createdAt\": \"1971-10-12T10:24:23.427Z\",\n      \"updatedAt\": \"2019-11-23T03:40:07.703Z\",\n      \"behavior\": \"override\",\n      \"metadata\": {}\n    }\n  ],\n  \"imports\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"import\",\n      \"status\": \"processing\",\n      \"format\": \"webset\",\n      \"entity\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"title\": \"string\",\n      \"count\": 4532.282690696891,\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"failedReason\": \"missing_identifier\",\n      \"failedAt\": \"2019-04-22T16:58:06.805Z\",\n      \"failedMessage\": \"string\",\n      \"createdAt\": \"1966-06-20T06:33:25.452Z\",\n      \"updatedAt\": \"1984-12-30T01:58:51.118Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"import\",\n      \"status\": \"failed\",\n      \"format\": \"csv\",\n      \"entity\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"title\": \"string\",\n      \"count\": 8658.737767723655,\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"failedReason\": \"missing_identifier\",\n      \"failedAt\": \"1972-07-11T20:14:39.196Z\",\n      \"failedMessage\": \"string\",\n      \"createdAt\": \"1960-10-31T06:59:59.174Z\",\n      \"updatedAt\": \"1988-10-08T15:55:23.859Z\"\n    }\n  ],\n  \"enrichments\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_enrichment\",\n      \"status\": \"canceled\",\n      \"websetId\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"format\": \"url\",\n      \"options\": [\n        {\n          \"label\": \"string\"\n        },\n        {\n          \"label\": \"string\"\n        }\n      ],\n      \"instructions\": \"string\",\n      \"createdAt\": \"2009-08-28T18:41:13.134Z\",\n      \"updatedAt\": \"1952-06-21T06:57:41.034Z\",\n      \"metadata\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_enrichment\",\n      \"status\": \"completed\",\n      \"websetId\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"format\": \"date\",\n      \"options\": [\n        {\n          \"label\": \"string\"\n        },\n        {\n          \"label\": \"string\"\n        }\n      ],\n      \"instructions\": \"string\",\n      \"createdAt\": \"1986-04-18T08:13:40.965Z\",\n      \"updatedAt\": \"2015-01-15T14:30:14.356Z\",\n      \"metadata\": {}\n    }\n  ],\n  \"monitors\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor\",\n      \"status\": \"disabled\",\n      \"websetId\": \"string\",\n      \"cadence\": {\n        \"cron\": \"string\",\n        \"timezone\": \"Etc/UTC\"\n      },\n      \"behavior\": {\n        \"type\": \"search\",\n        \"config\": {\n          \"count\": 8908.634013877281,\n          \"query\": \"string\",\n          \"criteria\": [\n            {\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"entity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"behavior\": \"append\"\n        }\n      },\n      \"lastRun\": {\n        \"id\": \"string\",\n        \"object\": \"monitor_run\",\n        \"monitorId\": \"string\",\n        \"status\": \"canceled\",\n        \"type\": \"refresh\",\n        \"completedAt\": \"1991-12-14T23:04:47.550Z\",\n        \"failedAt\": \"2011-02-20T18:56:13.295Z\",\n        \"failedReason\": \"string\",\n        \"canceledAt\": \"1952-07-13T11:55:24.285Z\",\n        \"createdAt\": \"1975-05-07T15:18:22.752Z\",\n        \"updatedAt\": \"2012-01-11T01:29:03.814Z\"\n      },\n      \"nextRunAt\": \"2013-05-28T08:10:37.917Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"createdAt\": \"2013-07-22T02:17:23.318Z\",\n      \"updatedAt\": \"2018-05-31T09:19:40.211Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor\",\n      \"status\": \"enabled\",\n      \"websetId\": \"string\",\n      \"cadence\": {\n        \"cron\": \"string\",\n        \"timezone\": \"Etc/UTC\"\n      },\n      \"behavior\": {\n        \"type\": \"search\",\n        \"config\": {\n          \"count\": 4949.981651471795,\n          \"query\": \"string\",\n          \"criteria\": [\n            {\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"description\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"entity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"behavior\": \"append\"\n        }\n      },\n      \"lastRun\": {\n        \"id\": \"string\",\n        \"object\": \"monitor_run\",\n        \"monitorId\": \"string\",\n        \"status\": \"running\",\n        \"type\": \"search\",\n        \"completedAt\": \"2019-02-25T15:21:38.159Z\",\n        \"failedAt\": \"1977-09-30T17:35:07.018Z\",\n        \"failedReason\": \"string\",\n        \"canceledAt\": \"1968-06-11T05:52:12.729Z\",\n        \"createdAt\": \"2002-10-10T12:20:25.658Z\",\n        \"updatedAt\": \"1950-10-16T21:27:54.596Z\"\n      },\n      \"nextRunAt\": \"2012-07-16T13:18:47.210Z\",\n      \"metadata\": {\n        \"key_0\": \"string\"\n      },\n      \"createdAt\": \"1978-12-09T13:53:53.023Z\",\n      \"updatedAt\": \"1967-09-26T03:25:30.517Z\"\n    }\n  ],\n  \"dashboardUrl\": \"https://acbpPskEIMVKbLrYtnlZeQTFKfP.ptfiQOY3Jo4+teW\",\n  \"createdAt\": \"1997-01-25T03:23:30.661Z\",\n  \"updatedAt\": \"1967-03-10T07:39:55.181Z\",\n  \"excludes\": [\n    {\n      \"source\": \"webset\",\n      \"id\": \"string\"\n    },\n    {\n      \"source\": \"webset\",\n      \"id\": \"string\"\n    }\n  ],\n  \"metadata\": {},\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_item\",\n      \"source\": \"import\",\n      \"sourceId\": \"string\",\n      \"websetId\": \"string\",\n      \"properties\": {\n        \"type\": \"person\",\n        \"url\": \"http://gAQlXRGPemthPNdcTMl.tfqrVmwS7eZl1MkkPc0wKtNPbGOWN9yBtqbx4elRLp\",\n        \"description\": \"string\",\n        \"person\": {\n          \"name\": \"string\",\n          \"location\": \"string\",\n          \"position\": \"string\",\n          \"company\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"location\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"pictureUrl\": \"http://xOSiDCxrtlknobGEXGUfGMlA.tcqdaCyP8O9Y50OuyEvAiSxyx.kokYMW9bP6487GbieQuPRFUE4Xt3ugisvZeVKp\"\n        }\n      },\n      \"evaluations\": [\n        {\n          \"criterion\": \"string\",\n          \"reasoning\": \"string\",\n          \"satisfied\": \"no\"\n        },\n        {\n          \"criterion\": \"string\",\n          \"reasoning\": \"string\",\n          \"satisfied\": \"unclear\"\n        }\n      ],\n      \"enrichments\": [\n        {\n          \"object\": \"enrichment_result\",\n          \"status\": \"canceled\",\n          \"format\": \"url\",\n          \"result\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reasoning\": \"string\",\n          \"references\": [\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"enrichmentId\": \"string\"\n        },\n        {\n          \"object\": \"enrichment_result\",\n          \"status\": \"pending\",\n          \"format\": \"url\",\n          \"result\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reasoning\": \"string\",\n          \"references\": [\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"enrichmentId\": \"string\"\n        }\n      ],\n      \"createdAt\": \"2017-05-02T03:57:07.911Z\",\n      \"updatedAt\": \"1967-04-16T14:18:26.496Z\",\n      \"sourceEntityId\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_item\",\n      \"source\": \"search\",\n      \"sourceId\": \"string\",\n      \"websetId\": \"string\",\n      \"properties\": {\n        \"type\": \"person\",\n        \"url\": \"http://rBU.uhprSfwviDjKJ9nuxpQviTKrZ0su\",\n        \"description\": \"string\",\n        \"person\": {\n          \"name\": \"string\",\n          \"location\": \"string\",\n          \"position\": \"string\",\n          \"company\": {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"location\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"pictureUrl\": \"http://rtChZwGnDbS.mkndp9HHmJbVbGEG6ODXVXcY0W3UBAEv6XqxfzjpB.fr3MmLKdBYpedLm4FVLwCBFTVWwu33+ClLE0yWu4b5i\"\n        }\n      },\n      \"evaluations\": [\n        {\n          \"criterion\": \"string\",\n          \"reasoning\": \"string\",\n          \"satisfied\": \"unclear\"\n        },\n        {\n          \"criterion\": \"string\",\n          \"reasoning\": \"string\",\n          \"satisfied\": \"yes\"\n        }\n      ],\n      \"enrichments\": [\n        {\n          \"object\": \"enrichment_result\",\n          \"status\": \"canceled\",\n          \"format\": \"url\",\n          \"result\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reasoning\": \"string\",\n          \"references\": [\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"enrichmentId\": \"string\"\n        },\n        {\n          \"object\": \"enrichment_result\",\n          \"status\": \"canceled\",\n          \"format\": \"options\",\n          \"result\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reasoning\": \"string\",\n          \"references\": [\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"title\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"snippet\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"enrichmentId\": \"string\"\n        }\n      ],\n      \"createdAt\": \"1993-09-18T09:11:32.603Z\",\n      \"updatedAt\": \"2016-12-23T09:32:30.897Z\",\n      \"sourceEntityId\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "beca3950-e77f-4cbf-8ca4-afae89ed9c83",
+              "name": "Webset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-websets-id-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id or externalId of the Webset."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "406085d9-a294-482e-9c88-fc340b1069f4",
+          "name": "Update a Webset",
+          "request": {
+            "name": "Update a Webset",
+            "description": {},
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":id"
+              ],
+              "host": [
+                "{{v0-websets-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id or externalId of the Webset"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"title\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6322168d-84be-45c8-9f00-b10bcbb8c484",
+              "name": "Webset updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-websets-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id or externalId of the Webset"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"title\": \"Leading climate tech startups\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"webset\",\n  \"status\": \"paused\",\n  \"externalId\": \"string\",\n  \"title\": \"string\",\n  \"searches\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_search\",\n      \"websetId\": \"string\",\n      \"status\": \"completed\",\n      \"query\": \"string\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"criteria\": [\n        {\n          \"description\": \"string\",\n          \"successRate\": 62.73795694309959\n        },\n        {\n          \"description\": \"string\",\n          \"successRate\": 66.17169627689299\n        }\n      ],\n      \"count\": 5306.967859808989,\n      \"maxPeoplePerCompany\": 4360,\n      \"exclude\": [\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        },\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\"\n        }\n      ],\n      \"scope\": [\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 2.8633113782552657\n          }\n        },\n        {\n          \"source\": \"import\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 6.345420513469051\n          }\n        }\n      ],\n      \"progress\": {\n        \"found\": 5812.700913565293,\n        \"analyzed\": 5554.851460497412,\n        \"completion\": 84.91098651110345,\n        \"timeLeft\": 406.82767269225815\n      },\n      \"recall\": {\n        \"expected\": {\n          \"total\": 9194.837018216036,\n          \"confidence\": \"low\",\n          \"bounds\": {\n            \"min\": 1830.5557497536483,\n            \"max\": 1301.3111638686337\n          }\n        },\n        \"reasoning\": \"string\"\n      },\n      \"canceledAt\": \"1986-05-14T04:03:28.122Z\",\n      \"canceledReason\": \"webset_deleted\",\n      \"createdAt\": \"1992-07-16T00:18:06.989Z\",\n      \"updatedAt\": \"2014-05-11T14:48:52.567Z\",\n      \"behavior\": \"override\",\n      \"metadata\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_search\",\n      \"websetId\": \"string\",\n      \"status\": \"completed\",\n      \"query\": \"string\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"criteria\": [\n        {\n          \"description\": \"string\",\n          \"successRate\": 1.7789789094072472\n        },\n        {\n          \"description\": \"string\",\n          \"successRate\": 48.30842893747792\n        }\n      ],\n      \"count\": 3511.120289954134,\n      \"maxPeoplePerCompany\": 3447,\n      \"exclude\": [\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        },\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        }\n      ],\n      \"scope\": [\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 2.350660923046471\n          }\n        },\n        {\n          \"source\": \"import\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 9.413714725056828\n          }\n        }\n      ],\n      \"progress\": {\n        \"found\": 4282.956825098715,\n        \"analyzed\": 5799.1471322727875,\n        \"completion\": 49.936549955866106,\n        \"timeLeft\": 1908.4650596583242\n      },\n      \"recall\": {\n        \"expected\": {\n          \"total\": 689.4229925329287,\n          \"confidence\": \"low\",\n          \"bounds\": {\n            \"min\": 7161.251760449691,\n            \"max\": 9296.676248295136\n          }\n        },\n        \"reasoning\": \"string\"\n      },\n      \"canceledAt\": \"1949-08-09T09:07:42.228Z\",\n      \"canceledReason\": \"webset_canceled\",\n      \"createdAt\": \"1960-09-30T08:30:36.013Z\",\n      \"updatedAt\": \"1988-03-26T10:49:59.797Z\",\n      \"behavior\": \"override\",\n      \"metadata\": {}\n    }\n  ],\n  \"imports\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"import\",\n      \"status\": \"pending\",\n      \"format\": \"webset\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"title\": \"string\",\n      \"count\": 2924.9446873687148,\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"failedReason\": \"invalid_format\",\n      \"failedAt\": \"1966-02-15T08:33:18.940Z\",\n      \"failedMessage\": \"string\",\n      \"createdAt\": \"2007-05-27T00:53:42.566Z\",\n      \"updatedAt\": \"2001-07-01T11:45:34.867Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"import\",\n      \"status\": \"processing\",\n      \"format\": \"webset\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"title\": \"string\",\n      \"count\": 2621.265809872788,\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"failedReason\": \"invalid_format\",\n      \"failedAt\": \"1995-02-20T14:32:23.803Z\",\n      \"failedMessage\": \"string\",\n      \"createdAt\": \"1962-03-22T10:37:28.379Z\",\n      \"updatedAt\": \"1967-11-04T17:50:42.924Z\"\n    }\n  ],\n  \"enrichments\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_enrichment\",\n      \"status\": \"completed\",\n      \"websetId\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"format\": \"email\",\n      \"options\": [\n        {\n          \"label\": \"string\"\n        },\n        {\n          \"label\": \"string\"\n        }\n      ],\n      \"instructions\": \"string\",\n      \"createdAt\": \"2010-07-14T11:34:46.503Z\",\n      \"updatedAt\": \"2010-03-28T04:14:43.261Z\",\n      \"metadata\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_enrichment\",\n      \"status\": \"canceled\",\n      \"websetId\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"format\": \"date\",\n      \"options\": [\n        {\n          \"label\": \"string\"\n        },\n        {\n          \"label\": \"string\"\n        }\n      ],\n      \"instructions\": \"string\",\n      \"createdAt\": \"1983-07-18T12:21:03.169Z\",\n      \"updatedAt\": \"2006-11-09T02:51:24.711Z\",\n      \"metadata\": {}\n    }\n  ],\n  \"monitors\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor\",\n      \"status\": \"enabled\",\n      \"websetId\": \"string\",\n      \"cadence\": {\n        \"cron\": \"string\",\n        \"timezone\": \"Etc/UTC\"\n      },\n      \"behavior\": {\n        \"type\": \"search\",\n        \"config\": {\n          \"count\": 7891.429326853344,\n          \"query\": \"string\",\n          \"criteria\": [\n            {\n              \"description\": \"string\"\n            },\n            {\n              \"description\": \"string\"\n            }\n          ],\n          \"entity\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"behavior\": \"append\"\n        }\n      },\n      \"lastRun\": {\n        \"id\": \"string\",\n        \"object\": \"monitor_run\",\n        \"monitorId\": \"string\",\n        \"status\": \"canceled\",\n        \"type\": \"refresh\",\n        \"completedAt\": \"1973-01-25T21:12:10.527Z\",\n        \"failedAt\": \"2012-08-04T14:44:26.146Z\",\n        \"failedReason\": \"string\",\n        \"canceledAt\": \"2025-11-27T09:04:41.644Z\",\n        \"createdAt\": \"1976-03-28T20:16:02.729Z\",\n        \"updatedAt\": \"1964-03-13T16:49:45.944Z\"\n      },\n      \"nextRunAt\": \"2024-08-13T16:02:22.527Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"createdAt\": \"1970-01-02T08:21:57.017Z\",\n      \"updatedAt\": \"1978-09-15T05:53:09.635Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor\",\n      \"status\": \"enabled\",\n      \"websetId\": \"string\",\n      \"cadence\": {\n        \"cron\": \"string\",\n        \"timezone\": \"Etc/UTC\"\n      },\n      \"behavior\": {\n        \"type\": \"search\",\n        \"config\": {\n          \"count\": 2361.526861321964,\n          \"query\": \"string\",\n          \"criteria\": [\n            {\n              \"description\": \"string\"\n            },\n            {\n              \"description\": \"string\"\n            }\n          ],\n          \"entity\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"behavior\": \"append\"\n        }\n      },\n      \"lastRun\": {\n        \"id\": \"string\",\n        \"object\": \"monitor_run\",\n        \"monitorId\": \"string\",\n        \"status\": \"completed\",\n        \"type\": \"search\",\n        \"completedAt\": \"2017-03-12T07:49:05.262Z\",\n        \"failedAt\": \"1976-03-26T16:01:44.801Z\",\n        \"failedReason\": \"string\",\n        \"canceledAt\": \"2025-06-18T09:50:21.297Z\",\n        \"createdAt\": \"1975-11-11T03:44:48.605Z\",\n        \"updatedAt\": \"1979-04-28T15:22:19.909Z\"\n      },\n      \"nextRunAt\": \"2002-10-15T15:32:01.625Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"createdAt\": \"2022-10-31T07:13:48.331Z\",\n      \"updatedAt\": \"1954-01-08T18:29:07.682Z\"\n    }\n  ],\n  \"dashboardUrl\": \"http://p.ollvbryRAXG-wvSLrLESEmLIHBwSWXp+i3Ku-JpLQ+C3IlzykFRmXw-U2soN8+uOD3gS\",\n  \"createdAt\": \"1963-08-16T09:27:45.953Z\",\n  \"updatedAt\": \"2025-01-15T14:57:55.698Z\",\n  \"excludes\": [\n    {\n      \"source\": \"import\",\n      \"id\": \"string\"\n    },\n    {\n      \"source\": \"import\",\n      \"id\": \"string\"\n    }\n  ],\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c92338f4-ba22-439b-aa5b-95187d631e17",
+              "name": "Webset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-websets-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id or externalId of the Webset"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"title\": \"Leading climate tech startups\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "364a82e1-c597-4e7a-af8e-12802c884cba",
+          "name": "Delete a Webset",
+          "request": {
+            "name": "Delete a Webset",
+            "description": {
+              "content": "Deletes a Webset.\n\nOnce deleted, the Webset and all its Items will no longer be available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":id"
+              ],
+              "host": [
+                "{{v0-websets-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id or externalId of the Webset"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "20f7793d-3abe-4b42-a728-ae2a634513e5",
+              "name": "Webset deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-websets-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id or externalId of the Webset"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"webset\",\n  \"status\": \"paused\",\n  \"externalId\": \"string\",\n  \"title\": \"string\",\n  \"searches\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_search\",\n      \"websetId\": \"string\",\n      \"status\": \"completed\",\n      \"query\": \"string\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"criteria\": [\n        {\n          \"description\": \"string\",\n          \"successRate\": 62.73795694309959\n        },\n        {\n          \"description\": \"string\",\n          \"successRate\": 66.17169627689299\n        }\n      ],\n      \"count\": 5306.967859808989,\n      \"maxPeoplePerCompany\": 4360,\n      \"exclude\": [\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        },\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\"\n        }\n      ],\n      \"scope\": [\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 2.8633113782552657\n          }\n        },\n        {\n          \"source\": \"import\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 6.345420513469051\n          }\n        }\n      ],\n      \"progress\": {\n        \"found\": 5812.700913565293,\n        \"analyzed\": 5554.851460497412,\n        \"completion\": 84.91098651110345,\n        \"timeLeft\": 406.82767269225815\n      },\n      \"recall\": {\n        \"expected\": {\n          \"total\": 9194.837018216036,\n          \"confidence\": \"low\",\n          \"bounds\": {\n            \"min\": 1830.5557497536483,\n            \"max\": 1301.3111638686337\n          }\n        },\n        \"reasoning\": \"string\"\n      },\n      \"canceledAt\": \"1986-05-14T04:03:28.122Z\",\n      \"canceledReason\": \"webset_deleted\",\n      \"createdAt\": \"1992-07-16T00:18:06.989Z\",\n      \"updatedAt\": \"2014-05-11T14:48:52.567Z\",\n      \"behavior\": \"override\",\n      \"metadata\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_search\",\n      \"websetId\": \"string\",\n      \"status\": \"completed\",\n      \"query\": \"string\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"criteria\": [\n        {\n          \"description\": \"string\",\n          \"successRate\": 1.7789789094072472\n        },\n        {\n          \"description\": \"string\",\n          \"successRate\": 48.30842893747792\n        }\n      ],\n      \"count\": 3511.120289954134,\n      \"maxPeoplePerCompany\": 3447,\n      \"exclude\": [\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        },\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        }\n      ],\n      \"scope\": [\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 2.350660923046471\n          }\n        },\n        {\n          \"source\": \"import\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 9.413714725056828\n          }\n        }\n      ],\n      \"progress\": {\n        \"found\": 4282.956825098715,\n        \"analyzed\": 5799.1471322727875,\n        \"completion\": 49.936549955866106,\n        \"timeLeft\": 1908.4650596583242\n      },\n      \"recall\": {\n        \"expected\": {\n          \"total\": 689.4229925329287,\n          \"confidence\": \"low\",\n          \"bounds\": {\n            \"min\": 7161.251760449691,\n            \"max\": 9296.676248295136\n          }\n        },\n        \"reasoning\": \"string\"\n      },\n      \"canceledAt\": \"1949-08-09T09:07:42.228Z\",\n      \"canceledReason\": \"webset_canceled\",\n      \"createdAt\": \"1960-09-30T08:30:36.013Z\",\n      \"updatedAt\": \"1988-03-26T10:49:59.797Z\",\n      \"behavior\": \"override\",\n      \"metadata\": {}\n    }\n  ],\n  \"imports\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"import\",\n      \"status\": \"pending\",\n      \"format\": \"webset\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"title\": \"string\",\n      \"count\": 2924.9446873687148,\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"failedReason\": \"invalid_format\",\n      \"failedAt\": \"1966-02-15T08:33:18.940Z\",\n      \"failedMessage\": \"string\",\n      \"createdAt\": \"2007-05-27T00:53:42.566Z\",\n      \"updatedAt\": \"2001-07-01T11:45:34.867Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"import\",\n      \"status\": \"processing\",\n      \"format\": \"webset\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"title\": \"string\",\n      \"count\": 2621.265809872788,\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"failedReason\": \"invalid_format\",\n      \"failedAt\": \"1995-02-20T14:32:23.803Z\",\n      \"failedMessage\": \"string\",\n      \"createdAt\": \"1962-03-22T10:37:28.379Z\",\n      \"updatedAt\": \"1967-11-04T17:50:42.924Z\"\n    }\n  ],\n  \"enrichments\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_enrichment\",\n      \"status\": \"completed\",\n      \"websetId\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"format\": \"email\",\n      \"options\": [\n        {\n          \"label\": \"string\"\n        },\n        {\n          \"label\": \"string\"\n        }\n      ],\n      \"instructions\": \"string\",\n      \"createdAt\": \"2010-07-14T11:34:46.503Z\",\n      \"updatedAt\": \"2010-03-28T04:14:43.261Z\",\n      \"metadata\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_enrichment\",\n      \"status\": \"canceled\",\n      \"websetId\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"format\": \"date\",\n      \"options\": [\n        {\n          \"label\": \"string\"\n        },\n        {\n          \"label\": \"string\"\n        }\n      ],\n      \"instructions\": \"string\",\n      \"createdAt\": \"1983-07-18T12:21:03.169Z\",\n      \"updatedAt\": \"2006-11-09T02:51:24.711Z\",\n      \"metadata\": {}\n    }\n  ],\n  \"monitors\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor\",\n      \"status\": \"enabled\",\n      \"websetId\": \"string\",\n      \"cadence\": {\n        \"cron\": \"string\",\n        \"timezone\": \"Etc/UTC\"\n      },\n      \"behavior\": {\n        \"type\": \"search\",\n        \"config\": {\n          \"count\": 7891.429326853344,\n          \"query\": \"string\",\n          \"criteria\": [\n            {\n              \"description\": \"string\"\n            },\n            {\n              \"description\": \"string\"\n            }\n          ],\n          \"entity\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"behavior\": \"append\"\n        }\n      },\n      \"lastRun\": {\n        \"id\": \"string\",\n        \"object\": \"monitor_run\",\n        \"monitorId\": \"string\",\n        \"status\": \"canceled\",\n        \"type\": \"refresh\",\n        \"completedAt\": \"1973-01-25T21:12:10.527Z\",\n        \"failedAt\": \"2012-08-04T14:44:26.146Z\",\n        \"failedReason\": \"string\",\n        \"canceledAt\": \"2025-11-27T09:04:41.644Z\",\n        \"createdAt\": \"1976-03-28T20:16:02.729Z\",\n        \"updatedAt\": \"1964-03-13T16:49:45.944Z\"\n      },\n      \"nextRunAt\": \"2024-08-13T16:02:22.527Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"createdAt\": \"1970-01-02T08:21:57.017Z\",\n      \"updatedAt\": \"1978-09-15T05:53:09.635Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor\",\n      \"status\": \"enabled\",\n      \"websetId\": \"string\",\n      \"cadence\": {\n        \"cron\": \"string\",\n        \"timezone\": \"Etc/UTC\"\n      },\n      \"behavior\": {\n        \"type\": \"search\",\n        \"config\": {\n          \"count\": 2361.526861321964,\n          \"query\": \"string\",\n          \"criteria\": [\n            {\n              \"description\": \"string\"\n            },\n            {\n              \"description\": \"string\"\n            }\n          ],\n          \"entity\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"behavior\": \"append\"\n        }\n      },\n      \"lastRun\": {\n        \"id\": \"string\",\n        \"object\": \"monitor_run\",\n        \"monitorId\": \"string\",\n        \"status\": \"completed\",\n        \"type\": \"search\",\n        \"completedAt\": \"2017-03-12T07:49:05.262Z\",\n        \"failedAt\": \"1976-03-26T16:01:44.801Z\",\n        \"failedReason\": \"string\",\n        \"canceledAt\": \"2025-06-18T09:50:21.297Z\",\n        \"createdAt\": \"1975-11-11T03:44:48.605Z\",\n        \"updatedAt\": \"1979-04-28T15:22:19.909Z\"\n      },\n      \"nextRunAt\": \"2002-10-15T15:32:01.625Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"createdAt\": \"2022-10-31T07:13:48.331Z\",\n      \"updatedAt\": \"1954-01-08T18:29:07.682Z\"\n    }\n  ],\n  \"dashboardUrl\": \"http://p.ollvbryRAXG-wvSLrLESEmLIHBwSWXp+i3Ku-JpLQ+C3IlzykFRmXw-U2soN8+uOD3gS\",\n  \"createdAt\": \"1963-08-16T09:27:45.953Z\",\n  \"updatedAt\": \"2025-01-15T14:57:55.698Z\",\n  \"excludes\": [\n    {\n      \"source\": \"import\",\n      \"id\": \"string\"\n    },\n    {\n      \"source\": \"import\",\n      \"id\": \"string\"\n    }\n  ],\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "add0a95c-a0df-4f03-948c-f5922e9de839",
+              "name": "Webset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-websets-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id or externalId of the Webset"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4886f12a-a362-4d6d-92eb-453a2cddfe0d",
+          "name": "Cancel a running Webset",
+          "request": {
+            "name": "Cancel a running Webset",
+            "description": {
+              "content": "Cancels all operations being performed on a Webset.\n\nAny enrichment or search will be stopped and the Webset will be marked as `idle`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{v0-websets-id-cancel-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id or externalId of the Webset"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "74a16577-1d9e-4417-a272-dba268b31839",
+              "name": "Webset canceled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{v0-websets-id-cancel-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id or externalId of the Webset"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"webset\",\n  \"status\": \"paused\",\n  \"externalId\": \"string\",\n  \"title\": \"string\",\n  \"searches\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_search\",\n      \"websetId\": \"string\",\n      \"status\": \"completed\",\n      \"query\": \"string\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"criteria\": [\n        {\n          \"description\": \"string\",\n          \"successRate\": 62.73795694309959\n        },\n        {\n          \"description\": \"string\",\n          \"successRate\": 66.17169627689299\n        }\n      ],\n      \"count\": 5306.967859808989,\n      \"maxPeoplePerCompany\": 4360,\n      \"exclude\": [\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        },\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\"\n        }\n      ],\n      \"scope\": [\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 2.8633113782552657\n          }\n        },\n        {\n          \"source\": \"import\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 6.345420513469051\n          }\n        }\n      ],\n      \"progress\": {\n        \"found\": 5812.700913565293,\n        \"analyzed\": 5554.851460497412,\n        \"completion\": 84.91098651110345,\n        \"timeLeft\": 406.82767269225815\n      },\n      \"recall\": {\n        \"expected\": {\n          \"total\": 9194.837018216036,\n          \"confidence\": \"low\",\n          \"bounds\": {\n            \"min\": 1830.5557497536483,\n            \"max\": 1301.3111638686337\n          }\n        },\n        \"reasoning\": \"string\"\n      },\n      \"canceledAt\": \"1986-05-14T04:03:28.122Z\",\n      \"canceledReason\": \"webset_deleted\",\n      \"createdAt\": \"1992-07-16T00:18:06.989Z\",\n      \"updatedAt\": \"2014-05-11T14:48:52.567Z\",\n      \"behavior\": \"override\",\n      \"metadata\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_search\",\n      \"websetId\": \"string\",\n      \"status\": \"completed\",\n      \"query\": \"string\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"criteria\": [\n        {\n          \"description\": \"string\",\n          \"successRate\": 1.7789789094072472\n        },\n        {\n          \"description\": \"string\",\n          \"successRate\": 48.30842893747792\n        }\n      ],\n      \"count\": 3511.120289954134,\n      \"maxPeoplePerCompany\": 3447,\n      \"exclude\": [\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        },\n        {\n          \"source\": \"import\",\n          \"id\": \"string\"\n        }\n      ],\n      \"scope\": [\n        {\n          \"source\": \"webset\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 2.350660923046471\n          }\n        },\n        {\n          \"source\": \"import\",\n          \"id\": \"string\",\n          \"relationship\": {\n            \"definition\": \"string\",\n            \"limit\": 9.413714725056828\n          }\n        }\n      ],\n      \"progress\": {\n        \"found\": 4282.956825098715,\n        \"analyzed\": 5799.1471322727875,\n        \"completion\": 49.936549955866106,\n        \"timeLeft\": 1908.4650596583242\n      },\n      \"recall\": {\n        \"expected\": {\n          \"total\": 689.4229925329287,\n          \"confidence\": \"low\",\n          \"bounds\": {\n            \"min\": 7161.251760449691,\n            \"max\": 9296.676248295136\n          }\n        },\n        \"reasoning\": \"string\"\n      },\n      \"canceledAt\": \"1949-08-09T09:07:42.228Z\",\n      \"canceledReason\": \"webset_canceled\",\n      \"createdAt\": \"1960-09-30T08:30:36.013Z\",\n      \"updatedAt\": \"1988-03-26T10:49:59.797Z\",\n      \"behavior\": \"override\",\n      \"metadata\": {}\n    }\n  ],\n  \"imports\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"import\",\n      \"status\": \"pending\",\n      \"format\": \"webset\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"title\": \"string\",\n      \"count\": 2924.9446873687148,\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"failedReason\": \"invalid_format\",\n      \"failedAt\": \"1966-02-15T08:33:18.940Z\",\n      \"failedMessage\": \"string\",\n      \"createdAt\": \"2007-05-27T00:53:42.566Z\",\n      \"updatedAt\": \"2001-07-01T11:45:34.867Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"import\",\n      \"status\": \"processing\",\n      \"format\": \"webset\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"title\": \"string\",\n      \"count\": 2621.265809872788,\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"failedReason\": \"invalid_format\",\n      \"failedAt\": \"1995-02-20T14:32:23.803Z\",\n      \"failedMessage\": \"string\",\n      \"createdAt\": \"1962-03-22T10:37:28.379Z\",\n      \"updatedAt\": \"1967-11-04T17:50:42.924Z\"\n    }\n  ],\n  \"enrichments\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_enrichment\",\n      \"status\": \"completed\",\n      \"websetId\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"format\": \"email\",\n      \"options\": [\n        {\n          \"label\": \"string\"\n        },\n        {\n          \"label\": \"string\"\n        }\n      ],\n      \"instructions\": \"string\",\n      \"createdAt\": \"2010-07-14T11:34:46.503Z\",\n      \"updatedAt\": \"2010-03-28T04:14:43.261Z\",\n      \"metadata\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_enrichment\",\n      \"status\": \"canceled\",\n      \"websetId\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"format\": \"date\",\n      \"options\": [\n        {\n          \"label\": \"string\"\n        },\n        {\n          \"label\": \"string\"\n        }\n      ],\n      \"instructions\": \"string\",\n      \"createdAt\": \"1983-07-18T12:21:03.169Z\",\n      \"updatedAt\": \"2006-11-09T02:51:24.711Z\",\n      \"metadata\": {}\n    }\n  ],\n  \"monitors\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor\",\n      \"status\": \"enabled\",\n      \"websetId\": \"string\",\n      \"cadence\": {\n        \"cron\": \"string\",\n        \"timezone\": \"Etc/UTC\"\n      },\n      \"behavior\": {\n        \"type\": \"search\",\n        \"config\": {\n          \"count\": 7891.429326853344,\n          \"query\": \"string\",\n          \"criteria\": [\n            {\n              \"description\": \"string\"\n            },\n            {\n              \"description\": \"string\"\n            }\n          ],\n          \"entity\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"behavior\": \"append\"\n        }\n      },\n      \"lastRun\": {\n        \"id\": \"string\",\n        \"object\": \"monitor_run\",\n        \"monitorId\": \"string\",\n        \"status\": \"canceled\",\n        \"type\": \"refresh\",\n        \"completedAt\": \"1973-01-25T21:12:10.527Z\",\n        \"failedAt\": \"2012-08-04T14:44:26.146Z\",\n        \"failedReason\": \"string\",\n        \"canceledAt\": \"2025-11-27T09:04:41.644Z\",\n        \"createdAt\": \"1976-03-28T20:16:02.729Z\",\n        \"updatedAt\": \"1964-03-13T16:49:45.944Z\"\n      },\n      \"nextRunAt\": \"2024-08-13T16:02:22.527Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"createdAt\": \"1970-01-02T08:21:57.017Z\",\n      \"updatedAt\": \"1978-09-15T05:53:09.635Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"monitor\",\n      \"status\": \"enabled\",\n      \"websetId\": \"string\",\n      \"cadence\": {\n        \"cron\": \"string\",\n        \"timezone\": \"Etc/UTC\"\n      },\n      \"behavior\": {\n        \"type\": \"search\",\n        \"config\": {\n          \"count\": 2361.526861321964,\n          \"query\": \"string\",\n          \"criteria\": [\n            {\n              \"description\": \"string\"\n            },\n            {\n              \"description\": \"string\"\n            }\n          ],\n          \"entity\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"behavior\": \"append\"\n        }\n      },\n      \"lastRun\": {\n        \"id\": \"string\",\n        \"object\": \"monitor_run\",\n        \"monitorId\": \"string\",\n        \"status\": \"completed\",\n        \"type\": \"search\",\n        \"completedAt\": \"2017-03-12T07:49:05.262Z\",\n        \"failedAt\": \"1976-03-26T16:01:44.801Z\",\n        \"failedReason\": \"string\",\n        \"canceledAt\": \"2025-06-18T09:50:21.297Z\",\n        \"createdAt\": \"1975-11-11T03:44:48.605Z\",\n        \"updatedAt\": \"1979-04-28T15:22:19.909Z\"\n      },\n      \"nextRunAt\": \"2002-10-15T15:32:01.625Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"createdAt\": \"2022-10-31T07:13:48.331Z\",\n      \"updatedAt\": \"1954-01-08T18:29:07.682Z\"\n    }\n  ],\n  \"dashboardUrl\": \"http://p.ollvbryRAXG-wvSLrLESEmLIHBwSWXp+i3Ku-JpLQ+C3IlzykFRmXw-U2soN8+uOD3gS\",\n  \"createdAt\": \"1963-08-16T09:27:45.953Z\",\n  \"updatedAt\": \"2025-01-15T14:57:55.698Z\",\n  \"excludes\": [\n    {\n      \"source\": \"import\",\n      \"id\": \"string\"\n    },\n    {\n      \"source\": \"import\",\n      \"id\": \"string\"\n    }\n  ],\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.exa.ai",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-websets-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-websets-id-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-websets-id-cancel-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "af64621e-b2b5-4d05-9b32-ce67e5528e8b",
+    "name": "Exa Agent Websets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Exa Agent API - subset of the Exa Public API.",
+      "type": "text/plain"
+    }
+  }
+}

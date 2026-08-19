@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Exa Agent Searches API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Searches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/v0/websets/:webset/searches",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Webset"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new Search for the Webset.\n\nThe default behavior is to reuse the previous Search results and evaluate them against the new criteria."
+        },
+        {
+          "info": {
+            "name": "Get a Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/websets/:webset/searches/:id",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Webset"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Search"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Gets a Search by id"
+        },
+        {
+          "info": {
+            "name": "Cancel a running Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/v0/websets/:webset/searches/:id/cancel",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Webset"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Search"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Cancels a currently running Search.\n\nYou can cancel all searches at once by using the `websets/:webset/cancel` endpoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

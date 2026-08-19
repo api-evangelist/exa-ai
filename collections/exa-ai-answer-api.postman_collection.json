@@ -1,0 +1,148 @@
+{
+  "item": [
+    {
+      "id": "d337fea3-8390-4cde-bbae-c9da9feb5ce0",
+      "name": "Answer",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "39293a85-8fd7-4cdd-86e3-30b0c2c1d8dd",
+          "name": "Answer",
+          "request": {
+            "name": "Answer",
+            "description": {
+              "content": "Performs a search based on the query and generates either a direct answer or a detailed summary with citations, depending on the query type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "answer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"stream\": false,\n  \"text\": false,\n  \"outputSchema\": {\n    \"type\": \"<string>\",\n    \"properties\": {\n      \"key_0\": \"<null>\",\n      \"key_1\": \"<null>\"\n    },\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"description\": \"<string>\",\n    \"additionalProperties\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e1dc6de8-8954-4f5e-8116-3be4994a9860",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "answer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"What is the latest valuation of SpaceX?\",\n  \"stream\": false,\n  \"text\": false,\n  \"outputSchema\": {\n    \"type\": \"object\",\n    \"properties\": {\n      \"key_0\": null\n    },\n    \"required\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"description\": \"<string>\",\n    \"additionalProperties\": false,\n    \"key_0\": null\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"answer\": \"$350 billion.\",\n  \"citations\": [\n    {\n      \"id\": \"https://www.theguardian.com/science/2024/dec/11/spacex-valued-at-350bn-as-company-agrees-to-buy-shares-from-employees\",\n      \"url\": \"https://www.theguardian.com/science/2024/dec/11/spacex-valued-at-350bn-as-company-agrees-to-buy-shares-from-employees\",\n      \"title\": \"SpaceX valued at $350bn as company agrees to buy shares from ...\",\n      \"author\": \"Dan Milmon\",\n      \"publishedDate\": \"2023-11-16T01:36:32.547Z\",\n      \"text\": \"SpaceX valued at $350bn as company agrees to buy shares from ...\",\n      \"image\": \"https://i.guim.co.uk/img/media/7cfee7e84b24b73c97a079c402642a333ad31e77/0_380_6176_3706/master/6176.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=71ebb2fbf458c185229d02d380c01530\",\n      \"favicon\": \"https://assets.guim.co.uk/static/frontend/icons/homescreen/apple-touch-icon.svg\"\n    }\n  ],\n  \"costDollars\": {\n    \"total\": 0.007,\n    \"search\": {\n      \"neural\": 0.007\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.exa.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "18deaa3f-a9d0-42f7-937b-7c930b2fcf6a",
+    "name": "Exa Agent Answer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Exa Agent API - subset of the Exa Public API.",
+      "type": "text/plain"
+    }
+  }
+}

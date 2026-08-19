@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Exa Agent Webhooks Attempts API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks Attempts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhook attempts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/webhooks/:id/attempts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the webhook"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor to paginate through the results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return"
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "query",
+                "description": "The type of event to filter by"
+              },
+              {
+                "name": "successful",
+                "value": "",
+                "type": "query",
+                "description": "Filter attempts by their success status"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all attempts made by a Webhook ordered in descending order."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

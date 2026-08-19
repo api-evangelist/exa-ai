@@ -1,0 +1,145 @@
+{
+  "item": [
+    {
+      "id": "2605a592-89d6-46e9-9785-7f5585fbc76e",
+      "name": "Contents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "53b7dd63-da6f-4706-bb15-ac3934052b33",
+          "name": "Contents",
+          "request": {
+            "name": "Contents",
+            "description": {},
+            "url": {
+              "path": [
+                "contents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"urls\": [\n    \"<string>\"\n  ],\n  \"ids\": [\n    \"<string>\"\n  ],\n  \"compliance\": \"<string>\",\n  \"text\": false,\n  \"highlights\": false,\n  \"summary\": {\n    \"query\": \"<string>\",\n    \"schema\": {\n      \"key_0\": \"<null>\"\n    }\n  },\n  \"extras\": {\n    \"links\": 0,\n    \"imageLinks\": 0,\n    \"richImageLinks\": 0,\n    \"richLinks\": 0,\n    \"codeBlocks\": 0\n  },\n  \"context\": \"<boolean>\",\n  \"livecrawl\": \"<string>\",\n  \"livecrawlTimeout\": 10000,\n  \"maxAgeHours\": \"<integer>\",\n  \"subpages\": 0,\n  \"subpageTarget\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "65599e9e-ee78-40e4-853c-299803ac3d67",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"urls\": [\n    \"https://arxiv.org/pdf/2307.06435\"\n  ],\n  \"ids\": [\n    \"https://arxiv.org/pdf/2307.06435\"\n  ],\n  \"compliance\": \"hipaa\",\n  \"text\": false,\n  \"highlights\": false,\n  \"summary\": {\n    \"query\": \"Main developments\",\n    \"schema\": {\n      \"key_0\": null,\n      \"key_1\": null,\n      \"key_2\": null\n    }\n  },\n  \"extras\": {\n    \"links\": 1,\n    \"imageLinks\": 1,\n    \"richImageLinks\": 0,\n    \"richLinks\": 0,\n    \"codeBlocks\": 0\n  },\n  \"context\": true,\n  \"livecrawl\": \"preferred\",\n  \"livecrawlTimeout\": 1000,\n  \"maxAgeHours\": 24,\n  \"subpages\": 1,\n  \"subpageTarget\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"e492118ccdedcba5088bfc4357a8a125\",\n  \"results\": [\n    {\n      \"title\": \"A Comprehensive Overview of Large Language Models\",\n      \"url\": \"https://arxiv.org/pdf/2307.06435.pdf\",\n      \"publishedDate\": \"2023-11-16T01:36:32.547Z\",\n      \"author\": \"Humza  Naveed, University of Engineering and Technology (UET), Lahore, Pakistan\",\n      \"id\": \"https://arxiv.org/abs/2307.06435\",\n      \"image\": \"https://arxiv.org/pdf/2307.06435.pdf/page_1.png\",\n      \"favicon\": \"https://arxiv.org/favicon.ico\",\n      \"text\": \"Abstract Large Language Models (LLMs) have recently demonstrated remarkable capabilities...\",\n      \"highlights\": [\n        \"Such requirements have limited their adoption...\"\n      ],\n      \"highlightScores\": [\n        0.4600165784358978\n      ],\n      \"summary\": \"This overview paper on Large Language Models (LLMs) highlights key developments...\",\n      \"subpages\": [\n        {\n          \"id\": \"https://arxiv.org/abs/2303.17580\",\n          \"url\": \"https://arxiv.org/pdf/2303.17580.pdf\",\n          \"title\": \"HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face\",\n          \"author\": \"Yongliang  Shen, Microsoft Research Asia, Kaitao  Song, Microsoft Research Asia, Xu  Tan, Microsoft Research Asia, Dongsheng  Li, Microsoft Research Asia, Weiming  Lu, Microsoft Research Asia, Yueting  Zhuang, Microsoft Research Asia, yzhuang@zju.edu.cn, Zhejiang  University, Microsoft Research Asia, Microsoft  Research, Microsoft Research Asia\",\n          \"publishedDate\": \"2023-11-16T01:36:20.486Z\",\n          \"text\": \"HuggingGPT: Solving AI Tasks with ChatGPT and its Friends in Hugging Face Date Published: 2023-05-25 Authors: Yongliang Shen, Microsoft Research Asia Kaitao Song, Microsoft Research Asia Xu Tan, Microsoft Research Asia Dongsheng Li, Microsoft Research Asia Weiming Lu, Microsoft Research Asia Yueting Zhuang, Microsoft Research Asia, yzhuang@zju.edu.cn Zhejiang University, Microsoft Research Asia Microsoft Research, Microsoft Research Asia Abstract Solving complicated AI tasks with different domains and modalities is a key step toward artificial general intelligence. While there are abundant AI models available for different domains and modalities, they cannot handle complicated AI tasks. Considering large language models (LLMs) have exhibited exceptional ability in language understanding, generation, interaction, and reasoning, we advocate that LLMs could act as a controller to manage existing AI models to solve complicated AI tasks and language could be a generic interface to empower t\",\n          \"summary\": \"HuggingGPT is a framework using ChatGPT as a central controller to orchestrate various AI models from Hugging Face to solve complex tasks. ChatGPT plans the task, selects appropriate models based on their descriptions, executes subtasks, and summarizes the results. This approach addresses limitations of LLMs by allowing them to handle multimodal data (vision, speech) and coordinate multiple models for complex tasks, paving the way for more advanced AI systems.\",\n          \"highlights\": [\n            \"2) Recently, some researchers started to investigate the integration of using tools or models in LLMs  .\"\n          ],\n          \"highlightScores\": [\n            0.32679107785224915\n          ]\n        }\n      ],\n      \"extras\": {\n        \"links\": []\n      }\n    }\n  ],\n  \"context\": \"<string>\",\n  \"statuses\": [\n    {\n      \"id\": \"https://example.com\",\n      \"status\": \"success\",\n      \"source\": \"cached\"\n    }\n  ],\n  \"costDollars\": {\n    \"total\": 0.007,\n    \"search\": {\n      \"neural\": 0.007\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.exa.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4a04ea78-0c50-4343-acaf-f8995fa7f96d",
+    "name": "Exa Agent Contents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Exa Agent API - subset of the Exa Public API.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,687 @@
+{
+  "item": [
+    {
+      "id": "124dcfb8-ca39-4895-82bb-235069be6f22",
+      "name": "Imports",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0b3348d3-e69d-422d-bc3e-16def2b74707",
+          "name": "Create an Import",
+          "request": {
+            "name": "Create an Import",
+            "description": {
+              "content": "Creates a new import to upload your data into Websets. Imports can be used to:\n\n- **Enrich**: Enhance your data with additional information using our AI-powered enrichment engine\n- **Search**: Query your data using Websets' agentic search with natural language filters\n- **Exclude**: Prevent duplicate or already known results from appearing in your searches\n\nOnce the import is created, you can upload your data to the returned `uploadUrl` until `uploadValidUntil` (by default 1 hour).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "imports"
+              ],
+              "host": [
+                "{{v0-imports-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"size\": \"<number>\",\n  \"count\": \"<number>\",\n  \"format\": \"<string>\",\n  \"entity\": {\n    \"type\": \"company\"\n  },\n  \"title\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  },\n  \"csv\": {\n    \"identifier\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "282b0746-39aa-473e-bb03-79632cca213b",
+              "name": "Import created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "imports"
+                  ],
+                  "host": [
+                    "{{v0-imports-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"size\": \"<number>\",\n  \"count\": \"<number>\",\n  \"format\": \"<string>\",\n  \"entity\": {\n    \"type\": \"company\"\n  },\n  \"title\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"csv\": {\n    \"identifier\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"import\",\n  \"status\": \"pending\",\n  \"format\": \"csv\",\n  \"entity\": {\n    \"type\": \"company\"\n  },\n  \"title\": \"string\",\n  \"count\": 123.24916579346757,\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"failedReason\": \"missing_identifier\",\n  \"failedAt\": \"2004-01-11T01:10:49.854Z\",\n  \"failedMessage\": \"string\",\n  \"createdAt\": \"2012-09-22T19:56:57.532Z\",\n  \"updatedAt\": \"1999-11-06T19:17:35.149Z\",\n  \"uploadUrl\": \"string\",\n  \"uploadValidUntil\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e85a0cd-86e7-48e9-93f6-0125484ab897",
+          "name": "List Imports",
+          "request": {
+            "name": "List Imports",
+            "description": {
+              "content": "Lists all imports for the Webset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "imports"
+              ],
+              "host": [
+                "{{v0-imports-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "The cursor to paginate through the results"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The number of results to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a5be7430-2a5d-4e14-a9ab-afafda600a4a",
+              "name": "List of imports",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "imports"
+                  ],
+                  "host": [
+                    "{{v0-imports-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"import\",\n      \"status\": \"completed\",\n      \"format\": \"csv\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"title\": \"string\",\n      \"count\": 2864.677018996905,\n      \"metadata\": {\n        \"key_0\": \"string\"\n      },\n      \"failedReason\": \"invalid_format\",\n      \"failedAt\": \"2010-10-08T22:11:50.482Z\",\n      \"failedMessage\": \"string\",\n      \"createdAt\": \"1975-10-26T11:42:47.518Z\",\n      \"updatedAt\": \"2023-04-22T11:56:33.413Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"import\",\n      \"status\": \"canceled\",\n      \"format\": \"webset\",\n      \"entity\": {\n        \"type\": \"company\"\n      },\n      \"title\": \"string\",\n      \"count\": 4002.6946974745692,\n      \"metadata\": {\n        \"key_0\": \"string\"\n      },\n      \"failedReason\": \"missing_identifier\",\n      \"failedAt\": \"1956-02-27T18:51:38.841Z\",\n      \"failedMessage\": \"string\",\n      \"createdAt\": \"1954-05-14T08:03:35.849Z\",\n      \"updatedAt\": \"2019-01-17T00:02:41.712Z\"\n    }\n  ],\n  \"hasMore\": true,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b3f5b70-b8bd-4bd9-99a5-0d639921e6fd",
+          "name": "Get Import",
+          "request": {
+            "name": "Get Import",
+            "description": {
+              "content": "Gets a specific import.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "imports",
+                ":id"
+              ],
+              "host": [
+                "{{v0-imports-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the Import"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a79c5a32-4d5c-4c53-8c3c-518db883dc4a",
+              "name": "Import details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "imports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-imports-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Import"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"import\",\n  \"status\": \"canceled\",\n  \"format\": \"csv\",\n  \"entity\": {\n    \"type\": \"company\"\n  },\n  \"title\": \"string\",\n  \"count\": 2410.0917268398894,\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"failedReason\": \"invalid_file_content\",\n  \"failedAt\": \"1961-04-09T08:53:32.318Z\",\n  \"failedMessage\": \"string\",\n  \"createdAt\": \"1971-12-26T21:48:29.851Z\",\n  \"updatedAt\": \"2017-03-30T20:53:06.410Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee75193b-250e-432f-ae23-f88e26e6f9be",
+          "name": "Update Import",
+          "request": {
+            "name": "Update Import",
+            "description": {
+              "content": "Updates a import configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "imports",
+                ":id"
+              ],
+              "host": [
+                "{{v0-imports-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the Import"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"title\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "32486b97-c9f6-40f8-a8c5-5d4f0be40a45",
+              "name": "Import updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "imports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-imports-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Import"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"title\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"import\",\n  \"status\": \"canceled\",\n  \"format\": \"csv\",\n  \"entity\": {\n    \"type\": \"company\"\n  },\n  \"title\": \"string\",\n  \"count\": 2410.0917268398894,\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"failedReason\": \"invalid_file_content\",\n  \"failedAt\": \"1961-04-09T08:53:32.318Z\",\n  \"failedMessage\": \"string\",\n  \"createdAt\": \"1971-12-26T21:48:29.851Z\",\n  \"updatedAt\": \"2017-03-30T20:53:06.410Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81b19f34-2f61-4fb0-b2d1-11e448e65dcd",
+          "name": "Delete Import",
+          "request": {
+            "name": "Delete Import",
+            "description": {
+              "content": "Deletes a import.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "imports",
+                ":id"
+              ],
+              "host": [
+                "{{v0-imports-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the Import"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "64cf6d5a-35ec-4286-99df-66e3db200e08",
+              "name": "Import deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "imports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-imports-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Import"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"import\",\n  \"status\": \"canceled\",\n  \"format\": \"csv\",\n  \"entity\": {\n    \"type\": \"company\"\n  },\n  \"title\": \"string\",\n  \"count\": 2410.0917268398894,\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"failedReason\": \"invalid_file_content\",\n  \"failedAt\": \"1961-04-09T08:53:32.318Z\",\n  \"failedMessage\": \"string\",\n  \"createdAt\": \"1971-12-26T21:48:29.851Z\",\n  \"updatedAt\": \"2017-03-30T20:53:06.410Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.exa.ai",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-imports-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-imports-id-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "87a66e78-1d52-4faf-9374-be6100408dc4",
+    "name": "Exa Agent Imports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Exa Agent API - subset of the Exa Public API.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Exa Agent Items API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get an Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/websets/:webset/items/:id",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id or externalId of the Webset"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Webset item"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a Webset Item."
+        },
+        {
+          "info": {
+            "name": "Delete an Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.exa.ai/v0/websets/:webset/items/:id",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id or externalId of the Webset"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Webset item"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes an Item from the Webset.\n\nThis will cancel any enrichment process for it."
+        },
+        {
+          "info": {
+            "name": "List all Items for a Webset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/websets/:webset/items",
+            "params": [
+              {
+                "name": "webset",
+                "value": "",
+                "type": "path",
+                "description": "The id or externalId of the Webset"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor to paginate through the results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return"
+              },
+              {
+                "name": "sourceId",
+                "value": "",
+                "type": "query",
+                "description": "The id of the source"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a list of Webset Items.\n\nYou can paginate through the Items using the `cursor` parameter."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

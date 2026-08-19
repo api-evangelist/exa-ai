@@ -1,0 +1,281 @@
+{
+  "item": [
+    {
+      "id": "c1c87f0c-2576-4b25-93a5-e4211fd15e4d",
+      "name": "Runs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fc12be0d-c78f-4b72-b2a5-03edf2f5fe9f",
+          "name": "List Runs",
+          "request": {
+            "name": "List Runs",
+            "description": {
+              "content": "Lists all runs for a monitor with cursor-based pagination. Runs are returned in reverse chronological order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "monitors",
+                ":id",
+                "runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The monitor ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97adfafa-5fce-42fe-873d-6ac315e1ba72",
+              "name": "A paginated list of runs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitors",
+                    ":id",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The monitor ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"monitorId\": \"string\",\n      \"status\": \"cancelled\",\n      \"output\": {\n        \"results\": [\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"content\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"grounding\": [\n          {\n            \"field\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"citations\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"field\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"citations\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"failReason\": \"internal_error\",\n      \"startedAt\": \"2010-07-22T12:36:57.946Z\",\n      \"completedAt\": \"1970-12-22T04:38:32.488Z\",\n      \"failedAt\": \"2010-12-22T11:06:27.413Z\",\n      \"cancelledAt\": \"1976-08-30T20:58:36.929Z\",\n      \"durationMs\": 2677,\n      \"createdAt\": \"2007-07-14T20:42:07.555Z\",\n      \"updatedAt\": \"1990-05-25T19:18:27.552Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"monitorId\": \"string\",\n      \"status\": \"failed\",\n      \"output\": {\n        \"results\": [\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"content\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"grounding\": [\n          {\n            \"field\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"citations\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"field\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"citations\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"confidence\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"failReason\": \"search_unavailable\",\n      \"startedAt\": \"1962-11-30T08:47:16.929Z\",\n      \"completedAt\": \"1993-08-25T21:04:40.340Z\",\n      \"failedAt\": \"1951-11-28T04:50:18.212Z\",\n      \"cancelledAt\": \"2003-12-13T06:00:34.734Z\",\n      \"durationMs\": 9341,\n      \"createdAt\": \"1975-12-11T18:18:07.719Z\",\n      \"updatedAt\": \"1951-06-12T14:28:30.333Z\"\n    }\n  ],\n  \"hasMore\": false,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a2cc733-e9f7-4c40-8e43-3eae77db59cf",
+          "name": "Get a Run",
+          "request": {
+            "name": "Get a Run",
+            "description": {
+              "content": "Retrieves a single run by its ID, including the full output if the run is completed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "monitors",
+                ":id",
+                "runs",
+                ":runId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The monitor ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "runId",
+                  "description": "(Required) The run ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "541310d9-e3d7-4c42-96d2-2674df6bc896",
+              "name": "The run",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "monitors",
+                    ":id",
+                    "runs",
+                    ":runId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The monitor ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "runId",
+                      "description": "(Required) The run ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"monitorId\": \"string\",\n  \"status\": \"running\",\n  \"output\": {\n    \"results\": [\n      {\n        \"key_0\": null\n      },\n      {\n        \"key_0\": null,\n        \"key_1\": null,\n        \"key_2\": null\n      }\n    ],\n    \"content\": null,\n    \"grounding\": [\n      {\n        \"field\": \"string\",\n        \"citations\": [\n          {\n            \"url\": \"https://iKKldz.qzWxgqioR5VMA+DkIa\",\n            \"title\": \"string\"\n          },\n          {\n            \"url\": \"https://CxmHoO.zewhGnzgVhd+.WX-XdNr4XNWv8hwon,tWh29\",\n            \"title\": \"string\"\n          }\n        ],\n        \"confidence\": \"low\"\n      },\n      {\n        \"field\": \"string\",\n        \"citations\": [\n          {\n            \"url\": \"http://bwUVVWpyT.jtlp5vzSD5mstZ5YwJqRJAb\",\n            \"title\": \"string\"\n          },\n          {\n            \"url\": \"https://NxvDHzmkgtWilP.pkcumylAWQ7NsvL8Gq4Wzfw7VA0NImfRJQYj6ALPcPNjMalWEkE1e,z41\",\n            \"title\": \"string\"\n          }\n        ],\n        \"confidence\": \"low\"\n      }\n    ]\n  },\n  \"failReason\": \"rate_limited\",\n  \"startedAt\": \"2002-07-28T17:50:04.997Z\",\n  \"completedAt\": \"2000-11-24T02:43:41.089Z\",\n  \"failedAt\": \"2004-01-23T12:19:29.967Z\",\n  \"cancelledAt\": \"1983-12-13T07:29:10.623Z\",\n  \"durationMs\": 983,\n  \"createdAt\": \"2019-05-06T14:33:03.954Z\",\n  \"updatedAt\": \"1956-04-07T03:29:40.374Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.exa.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6a602ee0-5326-49ff-8023-7f32bffcd75b",
+    "name": "Exa Agent Runs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Exa Agent API - subset of the Exa Public API.",
+      "type": "text/plain"
+    }
+  }
+}

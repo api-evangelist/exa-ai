@@ -1,0 +1,485 @@
+{
+  "item": [
+    {
+      "id": "3a48c3ad-a453-4264-ae06-e7658d5aa56c",
+      "name": "Searches",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "53e36326-c8df-4b02-bddd-6318fa3d2d20",
+          "name": "Create a Search",
+          "request": {
+            "name": "Create a Search",
+            "description": {
+              "content": "Creates a new Search for the Webset.\n\nThe default behavior is to reuse the previous Search results and evaluate them against the new criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":webset",
+                "searches"
+              ],
+              "host": [
+                "{{v0-websets-webset-searches-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webset",
+                  "description": "(Required) The id of the Webset"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"count\": \"<number>\",\n  \"query\": \"<string>\",\n  \"entity\": {\n    \"type\": \"company\"\n  },\n  \"criteria\": [\n    {\n      \"description\": \"<string>\"\n    }\n  ],\n  \"maxPeoplePerCompany\": \"<integer>\",\n  \"exclude\": [\n    {\n      \"source\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"source\": \"<string>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"scope\": [\n    {\n      \"source\": \"<string>\",\n      \"id\": \"<string>\",\n      \"relationship\": {\n        \"definition\": \"<string>\",\n        \"limit\": \"<number>\"\n      }\n    },\n    {\n      \"source\": \"<string>\",\n      \"id\": \"<string>\",\n      \"relationship\": {\n        \"definition\": \"<string>\",\n        \"limit\": \"<number>\"\n      }\n    }\n  ],\n  \"recall\": \"<boolean>\",\n  \"behavior\": \"override\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "61e20944-979e-46db-8c57-775eb1d434c2",
+              "name": "Webset Search created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":webset",
+                    "searches"
+                  ],
+                  "host": [
+                    "{{v0-websets-webset-searches-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webset",
+                      "description": "(Required) The id of the Webset"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"count\": \"<number>\",\n  \"query\": \"Marketing agencies based in the US, that focus on consumer products. Get brands worked with and city\",\n  \"entity\": {\n    \"type\": \"company\"\n  },\n  \"criteria\": [\n    {\n      \"description\": \"string\"\n    }\n  ],\n  \"maxPeoplePerCompany\": \"<integer>\",\n  \"exclude\": [\n    {\n      \"source\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"source\": \"<string>\",\n      \"id\": \"<string>\"\n    }\n  ],\n  \"scope\": [\n    {\n      \"source\": \"<string>\",\n      \"id\": \"<string>\",\n      \"relationship\": {\n        \"definition\": \"<string>\",\n        \"limit\": \"<number>\"\n      }\n    },\n    {\n      \"source\": \"<string>\",\n      \"id\": \"<string>\",\n      \"relationship\": {\n        \"definition\": \"<string>\",\n        \"limit\": \"<number>\"\n      }\n    }\n  ],\n  \"recall\": \"<boolean>\",\n  \"behavior\": \"override\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"webset_search\",\n  \"websetId\": \"string\",\n  \"status\": \"created\",\n  \"query\": \"string\",\n  \"entity\": {\n    \"type\": \"company\"\n  },\n  \"criteria\": [\n    {\n      \"description\": \"string\",\n      \"successRate\": 3.7384081532732316\n    },\n    {\n      \"description\": \"string\",\n      \"successRate\": 25.880606579651257\n    }\n  ],\n  \"count\": 9552.803840451425,\n  \"maxPeoplePerCompany\": 1453,\n  \"exclude\": [\n    {\n      \"source\": \"import\",\n      \"id\": \"string\"\n    },\n    {\n      \"source\": \"import\",\n      \"id\": \"string\"\n    }\n  ],\n  \"scope\": [\n    {\n      \"source\": \"webset\",\n      \"id\": \"string\",\n      \"relationship\": {\n        \"definition\": \"string\",\n        \"limit\": 3.568083287609741\n      }\n    },\n    {\n      \"source\": \"webset\",\n      \"id\": \"string\",\n      \"relationship\": {\n        \"definition\": \"string\",\n        \"limit\": 8.977645136110844\n      }\n    }\n  ],\n  \"progress\": {\n    \"found\": 7364.807462676076,\n    \"analyzed\": 9733.693908998748,\n    \"completion\": 85.491031194536,\n    \"timeLeft\": 678.093461843613\n  },\n  \"recall\": {\n    \"expected\": {\n      \"total\": 4774.191038783519,\n      \"confidence\": \"low\",\n      \"bounds\": {\n        \"min\": 6465.642122814544,\n        \"max\": 1343.0147822194037\n      }\n    },\n    \"reasoning\": \"string\"\n  },\n  \"canceledAt\": \"2018-11-28T00:16:05.434Z\",\n  \"canceledReason\": \"webset_deleted\",\n  \"createdAt\": \"1960-04-10T11:05:30.600Z\",\n  \"updatedAt\": \"1954-02-26T17:29:54.449Z\",\n  \"behavior\": \"override\",\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de4b20ac-e595-4db1-bd24-68020c481dbd",
+          "name": "Get a Search",
+          "request": {
+            "name": "Get a Search",
+            "description": {
+              "content": "Gets a Search by id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":webset",
+                "searches",
+                ":id"
+              ],
+              "host": [
+                "{{v0-websets-webset-searches-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webset",
+                  "description": "(Required) The id of the Webset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the Search"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "24a205ec-b905-42a9-be7a-d4db541ec846",
+              "name": "Search retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":webset",
+                    "searches",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-websets-webset-searches-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webset",
+                      "description": "(Required) The id of the Webset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Search"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"webset_search\",\n  \"websetId\": \"string\",\n  \"status\": \"created\",\n  \"query\": \"string\",\n  \"entity\": {\n    \"type\": \"company\"\n  },\n  \"criteria\": [\n    {\n      \"description\": \"string\",\n      \"successRate\": 3.7384081532732316\n    },\n    {\n      \"description\": \"string\",\n      \"successRate\": 25.880606579651257\n    }\n  ],\n  \"count\": 9552.803840451425,\n  \"maxPeoplePerCompany\": 1453,\n  \"exclude\": [\n    {\n      \"source\": \"import\",\n      \"id\": \"string\"\n    },\n    {\n      \"source\": \"import\",\n      \"id\": \"string\"\n    }\n  ],\n  \"scope\": [\n    {\n      \"source\": \"webset\",\n      \"id\": \"string\",\n      \"relationship\": {\n        \"definition\": \"string\",\n        \"limit\": 3.568083287609741\n      }\n    },\n    {\n      \"source\": \"webset\",\n      \"id\": \"string\",\n      \"relationship\": {\n        \"definition\": \"string\",\n        \"limit\": 8.977645136110844\n      }\n    }\n  ],\n  \"progress\": {\n    \"found\": 7364.807462676076,\n    \"analyzed\": 9733.693908998748,\n    \"completion\": 85.491031194536,\n    \"timeLeft\": 678.093461843613\n  },\n  \"recall\": {\n    \"expected\": {\n      \"total\": 4774.191038783519,\n      \"confidence\": \"low\",\n      \"bounds\": {\n        \"min\": 6465.642122814544,\n        \"max\": 1343.0147822194037\n      }\n    },\n    \"reasoning\": \"string\"\n  },\n  \"canceledAt\": \"2018-11-28T00:16:05.434Z\",\n  \"canceledReason\": \"webset_deleted\",\n  \"createdAt\": \"1960-04-10T11:05:30.600Z\",\n  \"updatedAt\": \"1954-02-26T17:29:54.449Z\",\n  \"behavior\": \"override\",\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a630680-6b66-4bf3-81b3-ee4ffc5952ca",
+          "name": "Cancel a running Search",
+          "request": {
+            "name": "Cancel a running Search",
+            "description": {
+              "content": "Cancels a currently running Search.\n\nYou can cancel all searches at once by using the `websets/:webset/cancel` endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":webset",
+                "searches",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{v0-websets-webset-searches-id-cancel-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webset",
+                  "description": "(Required) The id of the Webset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the Search"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a4eb84c7-12e1-4632-9bd1-7c8380738fab",
+              "name": "Search canceled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":webset",
+                    "searches",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{v0-websets-webset-searches-id-cancel-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webset",
+                      "description": "(Required) The id of the Webset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Search"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"webset_search\",\n  \"websetId\": \"string\",\n  \"status\": \"created\",\n  \"query\": \"string\",\n  \"entity\": {\n    \"type\": \"company\"\n  },\n  \"criteria\": [\n    {\n      \"description\": \"string\",\n      \"successRate\": 3.7384081532732316\n    },\n    {\n      \"description\": \"string\",\n      \"successRate\": 25.880606579651257\n    }\n  ],\n  \"count\": 9552.803840451425,\n  \"maxPeoplePerCompany\": 1453,\n  \"exclude\": [\n    {\n      \"source\": \"import\",\n      \"id\": \"string\"\n    },\n    {\n      \"source\": \"import\",\n      \"id\": \"string\"\n    }\n  ],\n  \"scope\": [\n    {\n      \"source\": \"webset\",\n      \"id\": \"string\",\n      \"relationship\": {\n        \"definition\": \"string\",\n        \"limit\": 3.568083287609741\n      }\n    },\n    {\n      \"source\": \"webset\",\n      \"id\": \"string\",\n      \"relationship\": {\n        \"definition\": \"string\",\n        \"limit\": 8.977645136110844\n      }\n    }\n  ],\n  \"progress\": {\n    \"found\": 7364.807462676076,\n    \"analyzed\": 9733.693908998748,\n    \"completion\": 85.491031194536,\n    \"timeLeft\": 678.093461843613\n  },\n  \"recall\": {\n    \"expected\": {\n      \"total\": 4774.191038783519,\n      \"confidence\": \"low\",\n      \"bounds\": {\n        \"min\": 6465.642122814544,\n        \"max\": 1343.0147822194037\n      }\n    },\n    \"reasoning\": \"string\"\n  },\n  \"canceledAt\": \"2018-11-28T00:16:05.434Z\",\n  \"canceledReason\": \"webset_deleted\",\n  \"createdAt\": \"1960-04-10T11:05:30.600Z\",\n  \"updatedAt\": \"1954-02-26T17:29:54.449Z\",\n  \"behavior\": \"override\",\n  \"metadata\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.exa.ai",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-websets-webset-searches-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-websets-webset-searches-id-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-websets-webset-searches-id-cancel-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a72775ff-670c-470e-8306-2a1c6f3abc8d",
+    "name": "Exa Agent Searches API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Exa Agent API - subset of the Exa Public API.",
+      "type": "text/plain"
+    }
+  }
+}

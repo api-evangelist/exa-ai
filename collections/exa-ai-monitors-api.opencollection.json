@@ -1,0 +1,312 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Exa Agent Monitors API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Monitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/monitors",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter monitors by metadata key-value pairs (exact match, AND semantics). Use bracket notation: `metadata[key]=value`."
+              }
+            ]
+          },
+          "docs": "Lists all monitors for the authenticated team. Supports filtering by status and cursor-based pagination."
+        },
+        {
+          "info": {
+            "name": "Create a Monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/monitors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Monitor to run recurring Exa searches on a schedule.\n\nMonitors automatically execute your search query on a recurring schedule and deliver results to your webhook endpoint with automatic deduplication:\n\n- **Date-based filtering** only fetches content since the last run\n\n- **Semantic deduplication** tracks previous outputs to surface only new developments\n\nThe response includes a `webhookSecret` that is only returned once at creation time. Store it securely for webhook signature ver"
+        },
+        {
+          "info": {
+            "name": "Batch Action on Monitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/monitors/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform a batch action on monitors matching the provided filters.\n\nSupported actions:\n- **delete**: Permanently remove matching monitors\n- **pause**: Pause matching monitors\n- **unpause**: Unpause matching monitors\n\nUse `dry_run: true` (the default) to preview which monitors would be affected before performing the action. Results are paginated via the `limit` parameter; loop until `has_more` is `false` to process all matching monitors."
+        },
+        {
+          "info": {
+            "name": "Get a Monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/monitors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The monitor ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a single monitor by its ID."
+        },
+        {
+          "info": {
+            "name": "Update a Monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.exa.ai/monitors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The monitor ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing monitor. All fields are optional. For `search`, you can send a partial object containing only the fields you want to change. Set `trigger` to `null` to remove the schedule."
+        },
+        {
+          "info": {
+            "name": "Delete a Monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.exa.ai/monitors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The monitor ID"
+              }
+            ]
+          },
+          "docs": "Deletes a monitor. This cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Trigger a Monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/monitors/:id/trigger",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The monitor ID"
+              }
+            ]
+          },
+          "docs": "Triggers a run immediately, regardless of the schedule. Works for monitors with status `active` or `paused`."
+        },
+        {
+          "info": {
+            "name": "List Monitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/monitors",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor to paginate through the results"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results to return"
+              },
+              {
+                "name": "websetId",
+                "value": "",
+                "type": "query",
+                "description": "The id of the Webset to list monitors for"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists all monitors for the Webset."
+        },
+        {
+          "info": {
+            "name": "Create a Monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.exa.ai/v0/monitors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new `Monitor` to continuously keep your Websets updated with fresh data.\n\nMonitors automatically run on your defined schedule to ensure your Websets stay current without manual intervention:\n\n- **Find new content**: Execute `search` operations to discover fresh items matching your criteria\n- **Update existing content**: Run `refresh` operations to update items contents and enrichments\n- **Automated scheduling**: Configure `cron` expressions and `timezone` for precise scheduling control"
+        },
+        {
+          "info": {
+            "name": "Get Monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/monitors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Monitor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Gets a specific monitor."
+        },
+        {
+          "info": {
+            "name": "Update Monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.exa.ai/v0/monitors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Monitor"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Updates a monitor configuration."
+        },
+        {
+          "info": {
+            "name": "Delete Monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.exa.ai/v0/monitors/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Monitor"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes a monitor."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,489 @@
+{
+  "item": [
+    {
+      "id": "50f167ea-ab1c-4ef7-9c74-2c4ce33580b9",
+      "name": "Items",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cb222a8c-50c5-4be7-971c-0308df2a7f53",
+          "name": "Get an Item",
+          "request": {
+            "name": "Get an Item",
+            "description": {
+              "content": "Returns a Webset Item.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":webset",
+                "items",
+                ":id"
+              ],
+              "host": [
+                "{{v0-websets-webset-items-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webset",
+                  "description": "(Required) The id or externalId of the Webset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the Webset item"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d950ec3b-428a-4c49-bce7-69fc87aa2354",
+              "name": "Webset Item",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":webset",
+                    "items",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-websets-webset-items-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webset",
+                      "description": "(Required) The id or externalId of the Webset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Webset item"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"webset_item\",\n  \"source\": \"search\",\n  \"sourceId\": \"string\",\n  \"websetId\": \"string\",\n  \"properties\": {\n    \"type\": \"person\",\n    \"url\": \"http://jwQbODSzhXQpIoYupZxOxgxxFfDMxSEy.cdrzaMTghU3ByPcz\",\n    \"description\": \"string\",\n    \"person\": {\n      \"name\": \"string\",\n      \"location\": \"string\",\n      \"position\": \"string\",\n      \"company\": {\n        \"name\": \"string\",\n        \"location\": \"string\"\n      },\n      \"pictureUrl\": \"https://BICpvCHb.cxA3VbPGaUwO+ADSsZv8ALvp76SMUpfbxENokdw\"\n    }\n  },\n  \"evaluations\": [\n    {\n      \"criterion\": \"string\",\n      \"reasoning\": \"string\",\n      \"satisfied\": \"unclear\"\n    },\n    {\n      \"criterion\": \"string\",\n      \"reasoning\": \"string\",\n      \"satisfied\": \"no\"\n    }\n  ],\n  \"enrichments\": [\n    {\n      \"object\": \"enrichment_result\",\n      \"status\": \"pending\",\n      \"format\": \"date\",\n      \"result\": [\n        \"string\",\n        \"string\"\n      ],\n      \"reasoning\": \"string\",\n      \"references\": [\n        {\n          \"title\": \"string\",\n          \"snippet\": \"string\",\n          \"url\": \"https://JzywjSkfDBwfiFuibufeARIeo.ilrasSy9ZNsQSWJRVEAJe7CHe,nScjALdrPk5UI5BZOShwMcR.jTK5Ig\"\n        },\n        {\n          \"title\": \"string\",\n          \"snippet\": \"string\",\n          \"url\": \"https://trVDMNNFVvGGxQWRKNqefEEOKbRj.oxhOjze+FJGW0WXZTyksoy5sEkGST2N\"\n        }\n      ],\n      \"enrichmentId\": \"string\"\n    },\n    {\n      \"object\": \"enrichment_result\",\n      \"status\": \"completed\",\n      \"format\": \"url\",\n      \"result\": [\n        \"string\",\n        \"string\"\n      ],\n      \"reasoning\": \"string\",\n      \"references\": [\n        {\n          \"title\": \"string\",\n          \"snippet\": \"string\",\n          \"url\": \"https://GFVJCOFJqNfci.ysSBNLOhbC271IMETDd4n9nzP8SQI7yX.Q-zYr2ChUPFFbBoP81rRnuEQLdZq88fABDiT\"\n        },\n        {\n          \"title\": \"string\",\n          \"snippet\": \"string\",\n          \"url\": \"https://OzLhvqPqeHLOPpElpWvaZIaVELKW.qsedc3ohNVDAChPGY,e0sc2ia7naRiBx0npk6\"\n        }\n      ],\n      \"enrichmentId\": \"string\"\n    }\n  ],\n  \"createdAt\": \"1948-08-21T05:42:41.537Z\",\n  \"updatedAt\": \"1962-08-18T21:45:24.869Z\",\n  \"sourceEntityId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a2c6a27-499f-4544-880a-02b416f08c9f",
+          "name": "Delete an Item",
+          "request": {
+            "name": "Delete an Item",
+            "description": {
+              "content": "Deletes an Item from the Webset.\n\nThis will cancel any enrichment process for it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":webset",
+                "items",
+                ":id"
+              ],
+              "host": [
+                "{{v0-websets-webset-items-id-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webset",
+                  "description": "(Required) The id or externalId of the Webset"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the Webset item"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "077c168e-3b68-4dcf-8094-a98dac502e20",
+              "name": "Webset Item deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":webset",
+                    "items",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{v0-websets-webset-items-id-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webset",
+                      "description": "(Required) The id or externalId of the Webset"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Webset item"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"object\": \"webset_item\",\n  \"source\": \"search\",\n  \"sourceId\": \"string\",\n  \"websetId\": \"string\",\n  \"properties\": {\n    \"type\": \"person\",\n    \"url\": \"http://jwQbODSzhXQpIoYupZxOxgxxFfDMxSEy.cdrzaMTghU3ByPcz\",\n    \"description\": \"string\",\n    \"person\": {\n      \"name\": \"string\",\n      \"location\": \"string\",\n      \"position\": \"string\",\n      \"company\": {\n        \"name\": \"string\",\n        \"location\": \"string\"\n      },\n      \"pictureUrl\": \"https://BICpvCHb.cxA3VbPGaUwO+ADSsZv8ALvp76SMUpfbxENokdw\"\n    }\n  },\n  \"evaluations\": [\n    {\n      \"criterion\": \"string\",\n      \"reasoning\": \"string\",\n      \"satisfied\": \"unclear\"\n    },\n    {\n      \"criterion\": \"string\",\n      \"reasoning\": \"string\",\n      \"satisfied\": \"no\"\n    }\n  ],\n  \"enrichments\": [\n    {\n      \"object\": \"enrichment_result\",\n      \"status\": \"pending\",\n      \"format\": \"date\",\n      \"result\": [\n        \"string\",\n        \"string\"\n      ],\n      \"reasoning\": \"string\",\n      \"references\": [\n        {\n          \"title\": \"string\",\n          \"snippet\": \"string\",\n          \"url\": \"https://JzywjSkfDBwfiFuibufeARIeo.ilrasSy9ZNsQSWJRVEAJe7CHe,nScjALdrPk5UI5BZOShwMcR.jTK5Ig\"\n        },\n        {\n          \"title\": \"string\",\n          \"snippet\": \"string\",\n          \"url\": \"https://trVDMNNFVvGGxQWRKNqefEEOKbRj.oxhOjze+FJGW0WXZTyksoy5sEkGST2N\"\n        }\n      ],\n      \"enrichmentId\": \"string\"\n    },\n    {\n      \"object\": \"enrichment_result\",\n      \"status\": \"completed\",\n      \"format\": \"url\",\n      \"result\": [\n        \"string\",\n        \"string\"\n      ],\n      \"reasoning\": \"string\",\n      \"references\": [\n        {\n          \"title\": \"string\",\n          \"snippet\": \"string\",\n          \"url\": \"https://GFVJCOFJqNfci.ysSBNLOhbC271IMETDd4n9nzP8SQI7yX.Q-zYr2ChUPFFbBoP81rRnuEQLdZq88fABDiT\"\n        },\n        {\n          \"title\": \"string\",\n          \"snippet\": \"string\",\n          \"url\": \"https://OzLhvqPqeHLOPpElpWvaZIaVELKW.qsedc3ohNVDAChPGY,e0sc2ia7naRiBx0npk6\"\n        }\n      ],\n      \"enrichmentId\": \"string\"\n    }\n  ],\n  \"createdAt\": \"1948-08-21T05:42:41.537Z\",\n  \"updatedAt\": \"1962-08-18T21:45:24.869Z\",\n  \"sourceEntityId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "014e77a3-779c-41de-a75f-3a5a0c68cac5",
+          "name": "List all Items for a Webset",
+          "request": {
+            "name": "List all Items for a Webset",
+            "description": {
+              "content": "Returns a list of Webset Items.\n\nYou can paginate through the Items using the `cursor` parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "websets",
+                ":webset",
+                "items"
+              ],
+              "host": [
+                "{{v0-websets-webset-items-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "The cursor to paginate through the results"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "The number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "sourceId",
+                  "value": "<string>",
+                  "description": "The id of the source"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webset",
+                  "description": "(Required) The id or externalId of the Webset"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3d4d83c3-1a28-49ff-86bc-2d961bfdfe50",
+              "name": "Webset Items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "websets",
+                    ":webset",
+                    "items"
+                  ],
+                  "host": [
+                    "{{v0-websets-webset-items-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "sourceId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webset",
+                      "description": "(Required) The id or externalId of the Webset"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) Unique identifier for the request.",
+                  "key": "X-Request-Id",
+                  "value": "req_N6SsgoiaOQOPqsYKKiw5"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_item\",\n      \"source\": \"import\",\n      \"sourceId\": \"string\",\n      \"websetId\": \"string\",\n      \"properties\": {\n        \"type\": \"person\",\n        \"url\": \"http://NvtMIkPtAWmeIXAHDLNakFTLeQbnaRPC.bbonDyzOIbnj3Qq,TVGCrIzld.hwtyiNRDX91mTFfcsOqMn\",\n        \"description\": \"string\",\n        \"person\": {\n          \"name\": \"string\",\n          \"location\": \"string\",\n          \"position\": \"string\",\n          \"company\": {\n            \"name\": \"string\",\n            \"location\": \"string\"\n          },\n          \"pictureUrl\": \"https://mHtrahEoXtYrqxVeijUNfzIfGsFSo.lvbqn\"\n        }\n      },\n      \"evaluations\": [\n        {\n          \"criterion\": \"string\",\n          \"reasoning\": \"string\",\n          \"satisfied\": \"yes\"\n        },\n        {\n          \"criterion\": \"string\",\n          \"reasoning\": \"string\",\n          \"satisfied\": \"yes\"\n        }\n      ],\n      \"enrichments\": [\n        {\n          \"object\": \"enrichment_result\",\n          \"status\": \"pending\",\n          \"format\": \"text\",\n          \"result\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reasoning\": \"string\",\n          \"references\": [\n            {\n              \"title\": \"string\",\n              \"snippet\": \"string\",\n              \"url\": \"https://enFyAQnnrJpwbyu.vzkQZ2r9MwWc8yPRJ+,8euWu-Cb+MAN7tBFZIDKmCvcicpbjiPBAo+GipJXwq,K\"\n            },\n            {\n              \"title\": \"string\",\n              \"snippet\": \"string\",\n              \"url\": \"http://sjIezjgVHI.kvldOzR8Fy6uwIFJw1S7Ci6itcOIbQvj.Rj1xsyNIowCj7\"\n            }\n          ],\n          \"enrichmentId\": \"string\"\n        },\n        {\n          \"object\": \"enrichment_result\",\n          \"status\": \"completed\",\n          \"format\": \"number\",\n          \"result\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reasoning\": \"string\",\n          \"references\": [\n            {\n              \"title\": \"string\",\n              \"snippet\": \"string\",\n              \"url\": \"https://UJyHnfBGzDZakAXFinXCNkPTZy.duveDtKpckP6To2dYWBy1EmqMYYJa9GnFI8DOYTDftVZJp9Lwe+4nYBv1U\"\n            },\n            {\n              \"title\": \"string\",\n              \"snippet\": \"string\",\n              \"url\": \"http://WimFTjn.zieuN\"\n            }\n          ],\n          \"enrichmentId\": \"string\"\n        }\n      ],\n      \"createdAt\": \"1977-05-15T10:25:26.807Z\",\n      \"updatedAt\": \"1994-10-12T10:29:26.778Z\",\n      \"sourceEntityId\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"object\": \"webset_item\",\n      \"source\": \"search\",\n      \"sourceId\": \"string\",\n      \"websetId\": \"string\",\n      \"properties\": {\n        \"type\": \"person\",\n        \"url\": \"http://OEWEzFDQwCJEjJEuyV.tnRYsJx0\",\n        \"description\": \"string\",\n        \"person\": {\n          \"name\": \"string\",\n          \"location\": \"string\",\n          \"position\": \"string\",\n          \"company\": {\n            \"name\": \"string\",\n            \"location\": \"string\"\n          },\n          \"pictureUrl\": \"https://DBXOHMgaJeJPA.tgQ0LFX.A\"\n        }\n      },\n      \"evaluations\": [\n        {\n          \"criterion\": \"string\",\n          \"reasoning\": \"string\",\n          \"satisfied\": \"yes\"\n        },\n        {\n          \"criterion\": \"string\",\n          \"reasoning\": \"string\",\n          \"satisfied\": \"unclear\"\n        }\n      ],\n      \"enrichments\": [\n        {\n          \"object\": \"enrichment_result\",\n          \"status\": \"pending\",\n          \"format\": \"number\",\n          \"result\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reasoning\": \"string\",\n          \"references\": [\n            {\n              \"title\": \"string\",\n              \"snippet\": \"string\",\n              \"url\": \"https://xDCLQQDFrBMZZOMrLGhdYSjhmmnzgS.nnnm4,,koA+C6c0IISc8csj+jBcCZTjP,mpHOwqBBmJxIomAJ3tBrlud+zJ5eL18KpPDtoV\"\n            },\n            {\n              \"title\": \"string\",\n              \"snippet\": \"string\",\n              \"url\": \"https://C.jjheUItmyeJdETfAcUbIiq4O7dEg6eo\"\n            }\n          ],\n          \"enrichmentId\": \"string\"\n        },\n        {\n          \"object\": \"enrichment_result\",\n          \"status\": \"pending\",\n          \"format\": \"number\",\n          \"result\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reasoning\": \"string\",\n          \"references\": [\n            {\n              \"title\": \"string\",\n              \"snippet\": \"string\",\n              \"url\": \"http://TzwTQf.cilbRGQ+z\"\n            },\n            {\n              \"title\": \"string\",\n              \"snippet\": \"string\",\n              \"url\": \"https://aAwXEWqOelPovCtklCUOBiFUj.hnlbMfG7MQnX7f\"\n            }\n          ],\n          \"enrichmentId\": \"string\"\n        }\n      ],\n      \"createdAt\": \"1950-06-18T20:27:04.611Z\",\n      \"updatedAt\": \"2017-03-10T18:06:24.787Z\",\n      \"sourceEntityId\": \"string\"\n    }\n  ],\n  \"hasMore\": false,\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.exa.ai",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-websets-webset-items-id-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://api.exa.ai/websets",
+      "key": "v0-websets-webset-items-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d49634f8-421e-4f4b-bd02-971262234ebf",
+    "name": "Exa Agent Items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Exa Agent API - subset of the Exa Public API.",
+      "type": "text/plain"
+    }
+  }
+}

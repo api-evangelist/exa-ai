@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Exa Agent Monitors Runs API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitors Runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Monitor Runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/monitors/:monitor/runs",
+            "params": [
+              {
+                "name": "monitor",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Monitor to list runs for"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Lists all runs for the Monitor."
+        },
+        {
+          "info": {
+            "name": "Get Monitor Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.exa.ai/v0/monitors/:monitor/runs/:id",
+            "params": [
+              {
+                "name": "monitor",
+                "value": "",
+                "type": "path",
+                "description": "The id of the Monitor to get the run for"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Gets a specific monitor run."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

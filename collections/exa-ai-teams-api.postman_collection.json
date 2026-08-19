@@ -1,0 +1,131 @@
+{
+  "item": [
+    {
+      "id": "67e04997-7b0b-482a-977a-61aa0550fc92",
+      "name": "Teams",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "57b5361e-a880-48fd-9251-37579d73b7e1",
+          "name": "Get Team Info",
+          "request": {
+            "name": "Get Team Info",
+            "description": {
+              "content": "Returns information about the authenticated team, including current concurrency usage and limits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v0",
+                "teams",
+                "me"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1c7b731-092e-444c-bedb-87d7cab18c30",
+              "name": "Team information retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v0",
+                    "teams",
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object\": \"string\",\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"concurrency\": {\n    \"active\": 1760,\n    \"queued\": 5834\n  },\n  \"limits\": {\n    \"maxConcurrent\": 3537,\n    \"maxQueued\": 9613\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.exa.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1118854e-944d-4daf-9c27-01d9ffd960a7",
+    "name": "Exa Agent Teams API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Exa Agent API - subset of the Exa Public API.",
+      "type": "text/plain"
+    }
+  }
+}
