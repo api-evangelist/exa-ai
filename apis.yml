@@ -7,6 +7,8 @@ apis:
   humanURL: https://exa.ai/docs/reference/search-api-guide
   baseURL: https://api.exa.ai
   tags:
+  - Agents
+  tags_raw:
   - Agent
   properties:
   - type: OpenAPI
@@ -59,6 +61,8 @@ apis:
   humanURL: https://exa.ai/docs/reference/search-api-guide
   baseURL: https://api.exa.ai
   tags:
+  - Answers
+  tags_raw:
   - Answer
   properties:
   - type: OpenAPI
@@ -215,6 +219,8 @@ apis:
   humanURL: https://exa.ai/docs/reference/search-api-guide
   baseURL: https://api.exa.ai
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -319,6 +325,8 @@ apis:
   humanURL: https://exa.ai/docs/reference/search-api-guide
   baseURL: https://api.exa.ai
   tags:
+  - Item
+  tags_raw:
   - Items
   properties:
   - type: OpenAPI
@@ -735,6 +743,8 @@ apis:
   humanURL: https://exa.ai/docs/reference/search-api-guide
   baseURL: https://api.exa.ai
   tags:
+  - Team
+  tags_raw:
   - Teams
   properties:
   - type: OpenAPI
@@ -787,6 +797,8 @@ apis:
   humanURL: https://exa.ai/docs/reference/search-api-guide
   baseURL: https://api.exa.ai
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
@@ -991,6 +1003,15 @@ apis:
     url: https://exa.ai/docs
 name: Exa
 tags:
+  - Artificial Intelligence
+  - Search
+  - Web Search
+  - Neural Search
+  - LLM
+  - Agents
+  - Research
+  - Websets
+tags_raw:
   - AI
   - Search
   - Web Search
