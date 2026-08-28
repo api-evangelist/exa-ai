@@ -13,7 +13,10 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: websetsApi
-  url: ../openapi/exa-websets-api-openapi.yml
+  url: ../openapi/exa-ai-websets-api-openapi.yml
+  type: openapi
+- name: websetsPreviewApi
+  url: ../openapi/exa-ai-websets-preview-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: preview-then-create-webset

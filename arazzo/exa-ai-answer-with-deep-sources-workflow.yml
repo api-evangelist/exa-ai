@@ -12,8 +12,11 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: searchApi
-  url: ../openapi/exa-search-api-openapi.yml
+- name: answerApi
+  url: ../openapi/exa-ai-answer-api-openapi.yml
+  type: openapi
+- name: contentsApi
+  url: ../openapi/exa-ai-contents-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: answer-with-deep-sources

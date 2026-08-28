@@ -13,7 +13,7 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: researchApi
-  url: ../openapi/exa-research-api-openapi.yml
+  url: ../openapi/exa-ai-research-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: resume-latest-research

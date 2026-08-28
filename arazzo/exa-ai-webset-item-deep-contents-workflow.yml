@@ -12,11 +12,14 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: websetsApi
-  url: ../openapi/exa-websets-api-openapi.yml
+- name: contentsApi
+  url: ../openapi/exa-ai-contents-api-openapi.yml
   type: openapi
-- name: searchApi
-  url: ../openapi/exa-search-api-openapi.yml
+- name: itemsApi
+  url: ../openapi/exa-ai-items-api-openapi.yml
+  type: openapi
+- name: websetsApi
+  url: ../openapi/exa-ai-websets-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: webset-item-deep-contents

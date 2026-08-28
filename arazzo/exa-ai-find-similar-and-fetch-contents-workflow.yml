@@ -14,8 +14,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
+- name: contentsApi
+  url: ../openapi/exa-ai-contents-api-openapi.yml
+  type: openapi
 - name: searchApi
-  url: ../openapi/exa-search-api-openapi.yml
+  url: ../openapi/exa-ai-search-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: find-similar-and-fetch-contents

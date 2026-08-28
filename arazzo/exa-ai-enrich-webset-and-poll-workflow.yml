@@ -12,8 +12,11 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
+- name: enrichmentsApi
+  url: ../openapi/exa-ai-enrichments-api-openapi.yml
+  type: openapi
 - name: websetsApi
-  url: ../openapi/exa-websets-api-openapi.yml
+  url: ../openapi/exa-ai-websets-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: enrich-webset-and-poll
