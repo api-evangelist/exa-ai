@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Exa Agent Contents API
+  title: Exa Search Contents API
   version: 2.0.0
-  description: Exa Agent API - subset of the Exa Public API.
+  description: Exa Search API - subset of the Exa Public API.
 servers:
 - url: https://api.exa.ai
 security:
@@ -90,26 +90,6 @@ paths:
       - Contents
 components:
   schemas:
-    CostDollarsOutput:
-      type: object
-      properties:
-        total:
-          description: Estimated total dollar cost for the completed request. This response value is not an invoice record.
-          example: 0.007
-          format: float
-          type: number
-        search:
-          description: Endpoint-dependent estimated search cost breakdown by retrieval mode. Instant, fast, and auto search responses may include neural search cost. Deep search modes may be reflected only in total.
-          type: object
-          properties:
-            neural:
-              description: Cost of neural search operations.
-              example: 0.007
-              format: float
-              type: number
-          additionalProperties: false
-      additionalProperties: false
-      description: Endpoint-dependent estimated dollar cost breakdown for the completed request. Billing is computed from usage counters rather than this response object.
     ContentsResponse:
       type: object
       properties:
@@ -456,6 +436,78 @@ components:
                 minLength: 1
                 maxLength: 100
           - type: 'null'
+    ContentsRequest:
+      allOf:
+      - type: object
+        properties:
+          ids:
+            minItems: 1
+            maxItems: 100
+            type: array
+            items:
+              type: string
+              minLength: 1
+              maxLength: 2048
+            description: Array of document IDs obtained from searches.
+            example:
+            - https://arxiv.org/pdf/2307.06435
+          urls:
+            minItems: 1
+            maxItems: 100
+            type: array
+            items:
+              type: string
+              minLength: 1
+              maxLength: 2048
+            description: Array of URLs to crawl (backwards compatible with 'ids' parameter).
+            example:
+            - https://arxiv.org/pdf/2307.06435
+          compliance:
+            anyOf:
+            - type: string
+              enum:
+              - hipaa
+              description: Enterprise-only compliance mode. Set to `hipaa` to require HIPAA-safe processing. Requests fail closed or restrict features when the requested behavior requires non-HIPAA-safe processors.
+              example: hipaa
+            - type: 'null'
+        required:
+        - urls
+      - $ref: '#/components/schemas/ContentsOptions'
+    CostDollarsOutput:
+      type: object
+      properties:
+        total:
+          description: Estimated total dollar cost for the completed request. This response value is not an invoice record.
+          example: 0.007
+          format: float
+          type: number
+        search:
+          description: Endpoint-dependent estimated search cost breakdown by retrieval mode. Instant, fast, and auto search responses may include neural search cost. Deep search modes may be reflected only in total.
+          type: object
+          properties:
+            neural:
+              description: Cost of neural search operations.
+              example: 0.007
+              format: float
+              type: number
+          additionalProperties: false
+      additionalProperties: false
+      description: Endpoint-dependent estimated dollar cost breakdown for the completed request. Billing is computed from usage counters rather than this response object.
+    JsonValue:
+      description: Any JSON value.
+      oneOf:
+      - type: 'null'
+      - type: boolean
+      - type: number
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/JsonValue'
+      - type: object
+        propertyNames:
+          type: string
+        additionalProperties:
+          $ref: '#/components/schemas/JsonValue'
     SearchResultOutput:
       type: object
       properties:
@@ -939,58 +991,6 @@ components:
       - title
       - url
       additionalProperties: false
-    ContentsRequest:
-      allOf:
-      - type: object
-        properties:
-          ids:
-            minItems: 1
-            maxItems: 100
-            type: array
-            items:
-              type: string
-              minLength: 1
-              maxLength: 2048
-            description: Array of document IDs obtained from searches.
-            example:
-            - https://arxiv.org/pdf/2307.06435
-          urls:
-            minItems: 1
-            maxItems: 100
-            type: array
-            items:
-              type: string
-              minLength: 1
-              maxLength: 2048
-            description: Array of URLs to crawl (backwards compatible with 'ids' parameter).
-            example:
-            - https://arxiv.org/pdf/2307.06435
-          compliance:
-            anyOf:
-            - type: string
-              enum:
-              - hipaa
-              description: Enterprise-only compliance mode. Set to `hipaa` to require HIPAA-safe processing. Requests fail closed or restrict features when the requested behavior requires non-HIPAA-safe processors.
-              example: hipaa
-            - type: 'null'
-        required:
-        - urls
-      - $ref: '#/components/schemas/ContentsOptions'
-    JsonValue:
-      description: Any JSON value.
-      oneOf:
-      - type: 'null'
-      - type: boolean
-      - type: number
-      - type: string
-      - type: array
-        items:
-          $ref: '#/components/schemas/JsonValue'
-      - type: object
-        propertyNames:
-          type: string
-        additionalProperties:
-          $ref: '#/components/schemas/JsonValue'
   securitySchemes:
     apiKey:
       type: apiKey

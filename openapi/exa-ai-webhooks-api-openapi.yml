@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Exa Agent Webhooks API
+  title: Exa Websets Webhooks API
   version: 2.0.0
-  description: Exa Agent API - subset of the Exa Public API.
+  description: Exa Websets API - subset of the Exa Public API.
 servers:
 - url: https://api.exa.ai
 security:
@@ -284,6 +284,60 @@ paths:
           print("Webhook deleted successfully")'
 components:
   schemas:
+    ListWebhooksResponse:
+      type:
+      - object
+      properties:
+        data:
+          type:
+          - array
+          items:
+            type:
+            - object
+            $ref: '#/components/schemas/Webhook'
+          description: The list of webhooks
+        hasMore:
+          type:
+          - boolean
+          description: Whether there are more results to paginate through
+        nextCursor:
+          type: string
+          description: The cursor to paginate through the next set of results
+          nullable: true
+      required:
+      - data
+      - hasMore
+      - nextCursor
+    CreateWebhookParameters:
+      type:
+      - object
+      properties:
+        events:
+          type:
+          - array
+          items:
+            type:
+            - string
+            $ref: '#/components/schemas/EventType'
+          minItems: 1
+          maxItems: 19
+          description: The events to trigger the webhook
+        url:
+          type:
+          - string
+          format: uri
+          description: The URL to send the webhook to
+        metadata:
+          description: Set of key-value pairs you want to associate with this object.
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+            maxLength: 1000
+      required:
+      - events
+      - url
     Webhook:
       type:
       - object
@@ -350,82 +404,6 @@ components:
       - secret
       - createdAt
       - updatedAt
-    ListWebhooksResponse:
-      type:
-      - object
-      properties:
-        data:
-          type:
-          - array
-          items:
-            type:
-            - object
-            $ref: '#/components/schemas/Webhook'
-          description: The list of webhooks
-        hasMore:
-          type:
-          - boolean
-          description: Whether there are more results to paginate through
-        nextCursor:
-          type: string
-          description: The cursor to paginate through the next set of results
-          nullable: true
-      required:
-      - data
-      - hasMore
-      - nextCursor
-    CreateWebhookParameters:
-      type:
-      - object
-      properties:
-        events:
-          type:
-          - array
-          items:
-            type:
-            - string
-            $ref: '#/components/schemas/EventType'
-          minItems: 1
-          maxItems: 19
-          description: The events to trigger the webhook
-        url:
-          type:
-          - string
-          format: uri
-          description: The URL to send the webhook to
-        metadata:
-          description: Set of key-value pairs you want to associate with this object.
-          type:
-          - object
-          additionalProperties:
-            type:
-            - string
-            maxLength: 1000
-      required:
-      - events
-      - url
-    EventType:
-      type: string
-      enum:
-      - webset.created
-      - webset.deleted
-      - webset.paused
-      - webset.idle
-      - webset.search.created
-      - webset.search.canceled
-      - webset.search.completed
-      - webset.search.updated
-      - import.created
-      - import.completed
-      - webset.item.created
-      - webset.item.enriched
-      - monitor.created
-      - monitor.updated
-      - monitor.deleted
-      - monitor.run.created
-      - monitor.run.completed
-      - webset.export.created
-      - webset.export.completed
     UpdateWebhookParameters:
       type:
       - object
@@ -453,6 +431,28 @@ components:
             type:
             - string
             maxLength: 1000
+    EventType:
+      type: string
+      enum:
+      - webset.created
+      - webset.deleted
+      - webset.paused
+      - webset.idle
+      - webset.search.created
+      - webset.search.canceled
+      - webset.search.completed
+      - webset.search.updated
+      - import.created
+      - import.completed
+      - webset.item.created
+      - webset.item.enriched
+      - monitor.created
+      - monitor.updated
+      - monitor.deleted
+      - monitor.run.created
+      - monitor.run.completed
+      - webset.export.created
+      - webset.export.completed
   securitySchemes:
     apiKey:
       type: apiKey

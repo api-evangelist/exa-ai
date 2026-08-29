@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Exa Agent Imports API
+  title: Exa Websets Imports API
   version: 2.0.0
-  description: Exa Agent API - subset of the Exa Public API.
+  description: Exa Websets API - subset of the Exa Public API.
 servers:
 - url: https://api.exa.ai
 security:
@@ -272,23 +272,6 @@ paths:
           print("Import deleted successfully")'
 components:
   schemas:
-    Entity:
-      oneOf:
-      - type:
-        - object
-        $ref: '#/components/schemas/CompanyEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/PersonEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/ArticleEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/ResearchPaperEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/CustomEntity'
     CustomEntity:
       type:
       - object
@@ -306,30 +289,30 @@ components:
       - type
       - description
       title: Custom
-    UpdateImport:
+    ListImportsResponse:
       type:
       - object
       properties:
-        metadata:
+        data:
           type:
-          - object
-          additionalProperties:
+          - array
+          items:
             type:
-            - string
-        title:
+            - object
+            $ref: '#/components/schemas/Import'
+          description: The list of imports
+        hasMore:
           type:
-          - string
-    PersonEntity:
-      type:
-      - object
-      properties:
-        type:
+          - boolean
+          description: Whether there are more results to paginate through
+        nextCursor:
           type: string
-          const: person
-          default: person
+          description: The cursor to paginate through the next set of results
+          nullable: true
       required:
-      - type
-      title: Person
+      - data
+      - hasMore
+      - nextCursor
     ArticleEntity:
       type:
       - object
@@ -341,17 +324,101 @@ components:
       required:
       - type
       title: Article
-    CompanyEntity:
+    ResearchPaperEntity:
       type:
       - object
       properties:
         type:
           type: string
-          const: company
-          default: company
+          const: research_paper
+          default: research_paper
       required:
       - type
-      title: Company
+      title: Research Paper
+    Entity:
+      oneOf:
+      - type:
+        - object
+        $ref: '#/components/schemas/CompanyEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/PersonEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/ArticleEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/ResearchPaperEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/CustomEntity'
+    CreateImportParameters:
+      discriminator:
+        propertyName: format
+      oneOf:
+      - type:
+        - object
+        properties:
+          size:
+            type:
+            - number
+            maximum: 50000000
+            description: The size of the file in bytes. Maximum size is 50 MB.
+          count:
+            type:
+            - number
+            description: The number of records to import
+          title:
+            type:
+            - string
+            description: The title of the import
+          format:
+            type:
+            - string
+            enum:
+            - csv
+            description: When the import is in CSV format, we expect a column containing the key identifier for the entity - for now URL. If not provided, import will fail to be processed.
+          metadata:
+            description: Set of key-value pairs you want to associate with this object.
+            type:
+            - object
+            additionalProperties:
+              type:
+              - string
+              maxLength: 1000
+          entity:
+            oneOf:
+            - type:
+              - object
+              $ref: '#/components/schemas/CompanyEntity'
+            - type:
+              - object
+              $ref: '#/components/schemas/PersonEntity'
+            - type:
+              - object
+              $ref: '#/components/schemas/ArticleEntity'
+            - type:
+              - object
+              $ref: '#/components/schemas/ResearchPaperEntity'
+            - type:
+              - object
+              $ref: '#/components/schemas/CustomEntity'
+            description: What type of entity the import contains (e.g. People, Companies, etc.), and thus should be attempted to be resolved as.
+          csv:
+            type:
+            - object
+            properties:
+              identifier:
+                type:
+                - integer
+                minimum: 0
+                description: Column containing the key identifier for the entity (e.g. URL, Name, etc.). If not provided, we will try to infer it from the file.
+            description: When format is `csv`, these are the specific import parameters.
+        required:
+        - size
+        - count
+        - format
+        - entity
     Import:
       type:
       - object
@@ -444,97 +511,28 @@ components:
       - failedMessage
       - createdAt
       - updatedAt
-    CreateImportParameters:
-      discriminator:
-        propertyName: format
-      oneOf:
-      - type:
-        - object
-        properties:
-          size:
-            type:
-            - number
-            maximum: 50000000
-            description: The size of the file in bytes. Maximum size is 50 MB.
-          count:
-            type:
-            - number
-            description: The number of records to import
-          title:
-            type:
-            - string
-            description: The title of the import
-          format:
-            type:
-            - string
-            enum:
-            - csv
-            description: When the import is in CSV format, we expect a column containing the key identifier for the entity - for now URL. If not provided, import will fail to be processed.
-          metadata:
-            description: Set of key-value pairs you want to associate with this object.
-            type:
-            - object
-            additionalProperties:
-              type:
-              - string
-              maxLength: 1000
-          entity:
-            oneOf:
-            - type:
-              - object
-              $ref: '#/components/schemas/CompanyEntity'
-            - type:
-              - object
-              $ref: '#/components/schemas/PersonEntity'
-            - type:
-              - object
-              $ref: '#/components/schemas/ArticleEntity'
-            - type:
-              - object
-              $ref: '#/components/schemas/ResearchPaperEntity'
-            - type:
-              - object
-              $ref: '#/components/schemas/CustomEntity'
-            description: What type of entity the import contains (e.g. People, Companies, etc.), and thus should be attempted to be resolved as.
-          csv:
-            type:
-            - object
-            properties:
-              identifier:
-                type:
-                - integer
-                minimum: 0
-                description: Column containing the key identifier for the entity (e.g. URL, Name, etc.). If not provided, we will try to infer it from the file.
-            description: When format is `csv`, these are the specific import parameters.
-        required:
-        - size
-        - count
-        - format
-        - entity
-    ListImportsResponse:
+    PersonEntity:
       type:
       - object
       properties:
-        data:
-          type:
-          - array
-          items:
-            type:
-            - object
-            $ref: '#/components/schemas/Import'
-          description: The list of imports
-        hasMore:
-          type:
-          - boolean
-          description: Whether there are more results to paginate through
-        nextCursor:
+        type:
           type: string
-          description: The cursor to paginate through the next set of results
-          nullable: true
+          const: person
+          default: person
       required:
-      - data
-      - hasMore
-      - nextCursor
+      - type
+      title: Person
+    CompanyEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: company
+          default: company
+      required:
+      - type
+      title: Company
     CreateImportResponse:
       type:
       - object
@@ -638,17 +636,19 @@ components:
       - uploadUrl
       - uploadValidUntil
       description: The response to a successful import. Includes the upload URL and the upload valid until date.
-    ResearchPaperEntity:
+    UpdateImport:
       type:
       - object
       properties:
-        type:
-          type: string
-          const: research_paper
-          default: research_paper
-      required:
-      - type
-      title: Research Paper
+        metadata:
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+        title:
+          type:
+          - string
   securitySchemes:
     apiKey:
       type: apiKey

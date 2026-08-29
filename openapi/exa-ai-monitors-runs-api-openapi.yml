@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Exa Agent Monitors Runs API
+  title: Exa Monitors Monitors Runs API
   version: 2.0.0
-  description: Exa Agent API - subset of the Exa Public API.
+  description: Exa Monitors API - subset of the Exa Public API.
 servers:
 - url: https://api.exa.ai
 security:
@@ -119,30 +119,6 @@ paths:
           print(f"Monitor run: {run.id} - {run.status}")'
 components:
   schemas:
-    ListMonitorRunsResponse:
-      type:
-      - object
-      properties:
-        data:
-          type:
-          - array
-          items:
-            type:
-            - object
-            $ref: '#/components/schemas/MonitorRun'
-          description: The list of monitor runs
-        hasMore:
-          type:
-          - boolean
-          description: Whether there are more results to paginate through
-        nextCursor:
-          type: string
-          description: The cursor to paginate through the next set of results
-          nullable: true
-      required:
-      - data
-      - hasMore
-      - nextCursor
     MonitorRun:
       type:
       - object
@@ -219,6 +195,30 @@ components:
       - canceledAt
       - createdAt
       - updatedAt
+    ListMonitorRunsResponse:
+      type:
+      - object
+      properties:
+        data:
+          type:
+          - array
+          items:
+            type:
+            - object
+            $ref: '#/components/schemas/MonitorRun'
+          description: The list of monitor runs
+        hasMore:
+          type:
+          - boolean
+          description: Whether there are more results to paginate through
+        nextCursor:
+          type: string
+          description: The cursor to paginate through the next set of results
+          nullable: true
+      required:
+      - data
+      - hasMore
+      - nextCursor
   securitySchemes:
     apiKey:
       type: apiKey

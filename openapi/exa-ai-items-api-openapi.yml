@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Exa Agent Items API
+  title: Exa Websets Items API
   version: 2.0.0
-  description: Exa Agent API - subset of the Exa Public API.
+  description: Exa Websets API - subset of the Exa Public API.
 servers:
 - url: https://api.exa.ai
 security:
@@ -212,6 +212,368 @@ paths:
         source: "# pip install exa-py\nfrom exa_py import Exa\n\nexa = Exa(\"YOUR_EXA_API_KEY\")\n\nitems = exa.websets.items.list(\"webset_id\", limit=20)\n\nprint(f\"Found {len(items.data)} items\")\nfor item in items.data:\n    print(f\"- {item.id}: {item.properties.name}\")"
 components:
   schemas:
+    ListWebsetItemResponse:
+      type:
+      - object
+      properties:
+        data:
+          type:
+          - array
+          items:
+            type:
+            - object
+            $ref: '#/components/schemas/WebsetItem'
+          description: The list of webset items
+        hasMore:
+          type:
+          - boolean
+          description: Whether there are more Items to paginate through
+        nextCursor:
+          type: string
+          description: The cursor to paginate through the next set of Items
+          nullable: true
+      required:
+      - data
+      - hasMore
+      - nextCursor
+    WebsetEnrichmentFormat:
+      type: string
+      enum:
+      - text
+      - date
+      - number
+      - options
+      - email
+      - phone
+      - url
+    WebsetItemEvaluation:
+      type:
+      - object
+      properties:
+        criterion:
+          type:
+          - string
+          description: The description of the criterion
+        reasoning:
+          type:
+          - string
+          description: The reasoning for the result of the evaluation
+        satisfied:
+          type:
+          - string
+          enum:
+          - 'yes'
+          - 'no'
+          - unclear
+          description: The satisfaction of the criterion
+        references:
+          default: []
+          type:
+          - array
+          items:
+            type:
+            - object
+            properties:
+              title:
+                type: string
+                description: The title of the reference
+                nullable: true
+              snippet:
+                type: string
+                description: The relevant snippet of the reference content
+                nullable: true
+              url:
+                type:
+                - string
+                format: uri
+                description: The URL of the reference
+            required:
+            - title
+            - snippet
+            - url
+          description: The references used to generate the result.
+      required:
+      - criterion
+      - reasoning
+      - satisfied
+    WebsetItemResearchPaperProperties:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: research_paper
+          default: research_paper
+        url:
+          type:
+          - string
+          format: uri
+          description: The URL of the research paper
+        description:
+          type:
+          - string
+          description: Short description of the relevance of the research paper
+        content:
+          type: string
+          description: The text content of the research paper
+          nullable: true
+        researchPaper:
+          type:
+          - object
+          properties:
+            title:
+              type: string
+              description: The title of the research paper
+              nullable: true
+            author:
+              type: string
+              description: The author(s) of the research paper
+              nullable: true
+            publishedAt:
+              type: string
+              description: The date and time the research paper was published
+              nullable: true
+          required:
+          - title
+          - author
+          - publishedAt
+          title: WebsetItemResearchPaperPropertiesFields
+      required:
+      - type
+      - url
+      - description
+      - content
+      - researchPaper
+    WebsetItemPersonProperties:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: person
+          default: person
+        url:
+          type:
+          - string
+          format: uri
+          description: The URL of the person profile
+        description:
+          type:
+          - string
+          description: Short description of the relevance of the person
+        person:
+          type:
+          - object
+          properties:
+            name:
+              type:
+              - string
+              description: The name of the person
+            location:
+              type: string
+              description: The location of the person
+              nullable: true
+            position:
+              type: string
+              description: The current work position of the person
+              nullable: true
+            company:
+              type: object
+              properties:
+                name:
+                  type:
+                  - string
+                  description: The name of the company
+                location:
+                  type: string
+                  description: The location the person is working at the company
+                  nullable: true
+              required:
+              - name
+              - location
+              title: WebsetItemPersonCompanyPropertiesFields
+              nullable: true
+            pictureUrl:
+              type: string
+              format: uri
+              description: The image URL of the person
+              nullable: true
+          required:
+          - name
+          - location
+          - position
+          - company
+          - pictureUrl
+          title: WebsetItemPersonPropertiesFields
+      required:
+      - type
+      - url
+      - description
+      - person
+    WebsetItemCustomProperties:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: custom
+          default: custom
+        url:
+          type:
+          - string
+          format: uri
+          description: The URL of the Item
+        description:
+          type:
+          - string
+          description: Short description of the Item
+        content:
+          type: string
+          description: The text content of the Item
+          nullable: true
+        custom:
+          type:
+          - object
+          properties:
+            title:
+              type: string
+              description: The title of the website
+              nullable: true
+            author:
+              type: string
+              description: The author(s) of the website
+              nullable: true
+            publishedAt:
+              type: string
+              description: The date and time the website was published
+              nullable: true
+          required:
+          - title
+          - author
+          - publishedAt
+          title: WebsetItemCustomPropertiesFields
+      required:
+      - type
+      - url
+      - description
+      - content
+      - custom
+    EnrichmentResult:
+      type:
+      - object
+      properties:
+        object:
+          type: string
+          const: enrichment_result
+          default: enrichment_result
+        status:
+          type:
+          - string
+          enum:
+          - pending
+          - completed
+          - canceled
+          description: The status of the enrichment result.
+        format:
+          type:
+          - string
+          $ref: '#/components/schemas/WebsetEnrichmentFormat'
+        result:
+          type: array
+          items:
+            type:
+            - string
+          description: The result of the enrichment.
+          nullable: true
+        reasoning:
+          type: string
+          description: The reasoning for the result when an Agent is used.
+          nullable: true
+        references:
+          type:
+          - array
+          items:
+            type:
+            - object
+            properties:
+              title:
+                type: string
+                description: The title of the reference
+                nullable: true
+              snippet:
+                type: string
+                description: The relevant snippet of the reference content
+                nullable: true
+              url:
+                type:
+                - string
+                format: uri
+                description: The URL of the reference
+            required:
+            - title
+            - snippet
+            - url
+          description: The references used to generate the result.
+        enrichmentId:
+          type:
+          - string
+          description: The id of the Enrichment that generated the result
+      required:
+      - object
+      - status
+      - format
+      - result
+      - reasoning
+      - references
+      - enrichmentId
+    WebsetItemArticleProperties:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: article
+          default: article
+        url:
+          type:
+          - string
+          format: uri
+          description: The URL of the article
+        description:
+          type:
+          - string
+          description: Short description of the relevance of the article
+        content:
+          type: string
+          description: The text content for the article
+          nullable: true
+        article:
+          type:
+          - object
+          properties:
+            title:
+              type: string
+              description: The title of the article
+              nullable: true
+            author:
+              type: string
+              description: The author(s) of the article
+              nullable: true
+            publishedAt:
+              type: string
+              description: The date and time the article was published
+              nullable: true
+          required:
+          - title
+          - author
+          - publishedAt
+          title: WebsetItemArticlePropertiesFields
+      required:
+      - type
+      - url
+      - description
+      - content
+      - article
     WebsetItemCompanyProperties:
       type:
       - object
@@ -378,162 +740,6 @@ components:
       - description
       - content
       - company
-    WebsetEnrichmentFormat:
-      type: string
-      enum:
-      - text
-      - date
-      - number
-      - options
-      - email
-      - phone
-      - url
-    WebsetItemArticleProperties:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: article
-          default: article
-        url:
-          type:
-          - string
-          format: uri
-          description: The URL of the article
-        description:
-          type:
-          - string
-          description: Short description of the relevance of the article
-        content:
-          type: string
-          description: The text content for the article
-          nullable: true
-        article:
-          type:
-          - object
-          properties:
-            title:
-              type: string
-              description: The title of the article
-              nullable: true
-            author:
-              type: string
-              description: The author(s) of the article
-              nullable: true
-            publishedAt:
-              type: string
-              description: The date and time the article was published
-              nullable: true
-          required:
-          - title
-          - author
-          - publishedAt
-          title: WebsetItemArticlePropertiesFields
-      required:
-      - type
-      - url
-      - description
-      - content
-      - article
-    WebsetItemEvaluation:
-      type:
-      - object
-      properties:
-        criterion:
-          type:
-          - string
-          description: The description of the criterion
-        reasoning:
-          type:
-          - string
-          description: The reasoning for the result of the evaluation
-        satisfied:
-          type:
-          - string
-          enum:
-          - 'yes'
-          - 'no'
-          - unclear
-          description: The satisfaction of the criterion
-        references:
-          default: []
-          type:
-          - array
-          items:
-            type:
-            - object
-            properties:
-              title:
-                type: string
-                description: The title of the reference
-                nullable: true
-              snippet:
-                type: string
-                description: The relevant snippet of the reference content
-                nullable: true
-              url:
-                type:
-                - string
-                format: uri
-                description: The URL of the reference
-            required:
-            - title
-            - snippet
-            - url
-          description: The references used to generate the result.
-      required:
-      - criterion
-      - reasoning
-      - satisfied
-    WebsetItemCustomProperties:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: custom
-          default: custom
-        url:
-          type:
-          - string
-          format: uri
-          description: The URL of the Item
-        description:
-          type:
-          - string
-          description: Short description of the Item
-        content:
-          type: string
-          description: The text content of the Item
-          nullable: true
-        custom:
-          type:
-          - object
-          properties:
-            title:
-              type: string
-              description: The title of the website
-              nullable: true
-            author:
-              type: string
-              description: The author(s) of the website
-              nullable: true
-            publishedAt:
-              type: string
-              description: The date and time the website was published
-              nullable: true
-          required:
-          - title
-          - author
-          - publishedAt
-          title: WebsetItemCustomPropertiesFields
-      required:
-      - type
-      - url
-      - description
-      - content
-      - custom
     WebsetItem:
       type:
       - object
@@ -625,212 +831,6 @@ components:
       - enrichments
       - createdAt
       - updatedAt
-    WebsetItemPersonProperties:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: person
-          default: person
-        url:
-          type:
-          - string
-          format: uri
-          description: The URL of the person profile
-        description:
-          type:
-          - string
-          description: Short description of the relevance of the person
-        person:
-          type:
-          - object
-          properties:
-            name:
-              type:
-              - string
-              description: The name of the person
-            location:
-              type: string
-              description: The location of the person
-              nullable: true
-            position:
-              type: string
-              description: The current work position of the person
-              nullable: true
-            company:
-              type: object
-              properties:
-                name:
-                  type:
-                  - string
-                  description: The name of the company
-                location:
-                  type: string
-                  description: The location the person is working at the company
-                  nullable: true
-              required:
-              - name
-              - location
-              title: WebsetItemPersonCompanyPropertiesFields
-              nullable: true
-            pictureUrl:
-              type: string
-              format: uri
-              description: The image URL of the person
-              nullable: true
-          required:
-          - name
-          - location
-          - position
-          - company
-          - pictureUrl
-          title: WebsetItemPersonPropertiesFields
-      required:
-      - type
-      - url
-      - description
-      - person
-    EnrichmentResult:
-      type:
-      - object
-      properties:
-        object:
-          type: string
-          const: enrichment_result
-          default: enrichment_result
-        status:
-          type:
-          - string
-          enum:
-          - pending
-          - completed
-          - canceled
-          description: The status of the enrichment result.
-        format:
-          type:
-          - string
-          $ref: '#/components/schemas/WebsetEnrichmentFormat'
-        result:
-          type: array
-          items:
-            type:
-            - string
-          description: The result of the enrichment.
-          nullable: true
-        reasoning:
-          type: string
-          description: The reasoning for the result when an Agent is used.
-          nullable: true
-        references:
-          type:
-          - array
-          items:
-            type:
-            - object
-            properties:
-              title:
-                type: string
-                description: The title of the reference
-                nullable: true
-              snippet:
-                type: string
-                description: The relevant snippet of the reference content
-                nullable: true
-              url:
-                type:
-                - string
-                format: uri
-                description: The URL of the reference
-            required:
-            - title
-            - snippet
-            - url
-          description: The references used to generate the result.
-        enrichmentId:
-          type:
-          - string
-          description: The id of the Enrichment that generated the result
-      required:
-      - object
-      - status
-      - format
-      - result
-      - reasoning
-      - references
-      - enrichmentId
-    WebsetItemResearchPaperProperties:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: research_paper
-          default: research_paper
-        url:
-          type:
-          - string
-          format: uri
-          description: The URL of the research paper
-        description:
-          type:
-          - string
-          description: Short description of the relevance of the research paper
-        content:
-          type: string
-          description: The text content of the research paper
-          nullable: true
-        researchPaper:
-          type:
-          - object
-          properties:
-            title:
-              type: string
-              description: The title of the research paper
-              nullable: true
-            author:
-              type: string
-              description: The author(s) of the research paper
-              nullable: true
-            publishedAt:
-              type: string
-              description: The date and time the research paper was published
-              nullable: true
-          required:
-          - title
-          - author
-          - publishedAt
-          title: WebsetItemResearchPaperPropertiesFields
-      required:
-      - type
-      - url
-      - description
-      - content
-      - researchPaper
-    ListWebsetItemResponse:
-      type:
-      - object
-      properties:
-        data:
-          type:
-          - array
-          items:
-            type:
-            - object
-            $ref: '#/components/schemas/WebsetItem'
-          description: The list of webset items
-        hasMore:
-          type:
-          - boolean
-          description: Whether there are more Items to paginate through
-        nextCursor:
-          type: string
-          description: The cursor to paginate through the next set of Items
-          nullable: true
-      required:
-      - data
-      - hasMore
-      - nextCursor
   securitySchemes:
     apiKey:
       type: apiKey

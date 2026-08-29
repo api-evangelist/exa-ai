@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Exa Agent Webhooks Attempts API
+  title: Exa Websets Webhooks Attempts API
   version: 2.0.0
-  description: Exa Agent API - subset of the Exa Public API.
+  description: Exa Websets API - subset of the Exa Public API.
 servers:
 - url: https://api.exa.ai
 security:
@@ -101,6 +101,30 @@ paths:
         source: "# pip install exa-py\nfrom exa_py import Exa\n\nexa = Exa(\"YOUR_EXA_API_KEY\")\n\nattempts = exa.websets.webhooks.attempts.list(\"webhook_id\")\n\nprint(f\"Found {len(attempts.data)} webhook attempts\")\nfor attempt in attempts.data:\n    print(f\"- {attempt.id}: {attempt.status}\")"
 components:
   schemas:
+    ListWebhookAttemptsResponse:
+      type:
+      - object
+      properties:
+        data:
+          type:
+          - array
+          items:
+            type:
+            - object
+            $ref: '#/components/schemas/WebhookAttempt'
+          description: The list of webhook attempts
+        hasMore:
+          type:
+          - boolean
+          description: Whether there are more results to paginate through
+        nextCursor:
+          type: string
+          description: The cursor to paginate through the next set of results
+          nullable: true
+      required:
+      - data
+      - hasMore
+      - nextCursor
     WebhookAttempt:
       type:
       - object
@@ -190,30 +214,6 @@ components:
       - responseStatusCode
       - attempt
       - attemptedAt
-    ListWebhookAttemptsResponse:
-      type:
-      - object
-      properties:
-        data:
-          type:
-          - array
-          items:
-            type:
-            - object
-            $ref: '#/components/schemas/WebhookAttempt'
-          description: The list of webhook attempts
-        hasMore:
-          type:
-          - boolean
-          description: Whether there are more results to paginate through
-        nextCursor:
-          type: string
-          description: The cursor to paginate through the next set of results
-          nullable: true
-      required:
-      - data
-      - hasMore
-      - nextCursor
   securitySchemes:
     apiKey:
       type: apiKey

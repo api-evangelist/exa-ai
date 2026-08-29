@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Exa Agent Search API
+  title: Exa Search API
   version: 2.0.0
-  description: Exa Agent API - subset of the Exa Public API.
+  description: Exa Search API - subset of the Exa Public API.
 servers:
 - url: https://api.exa.ai
 security:
@@ -120,136 +120,6 @@ paths:
       - Search
 components:
   schemas:
-    CostDollarsOutput:
-      type: object
-      properties:
-        total:
-          description: Estimated total dollar cost for the completed request. This response value is not an invoice record.
-          example: 0.007
-          format: float
-          type: number
-        search:
-          description: Endpoint-dependent estimated search cost breakdown by retrieval mode. Instant, fast, and auto search responses may include neural search cost. Deep search modes may be reflected only in total.
-          type: object
-          properties:
-            neural:
-              description: Cost of neural search operations.
-              example: 0.007
-              format: float
-              type: number
-          additionalProperties: false
-      additionalProperties: false
-      description: Endpoint-dependent estimated dollar cost breakdown for the completed request. Billing is computed from usage counters rather than this response object.
-    SearchResponse:
-      oneOf:
-      - type: object
-        properties:
-          requestId:
-            type: string
-            description: Unique identifier for the request.
-            example: b5947044c4b78efa9552a7c89b306d95
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/SearchResultOutput'
-            description: A list of search results containing title, URL, published date, and author.
-          resolvedSearchType:
-            description: Deprecated legacy field. Current production responses may return an empty string; clients should not branch on this value.
-            example: ''
-            deprecated: true
-            type: string
-          context:
-            type: string
-            description: Deprecated. Combined context string from search results. Use highlights or text instead.
-            deprecated: true
-          costDollars:
-            $ref: '#/components/schemas/CostDollarsOutput'
-          output:
-            $ref: '#/components/schemas/SearchSynthesisOutputOutput'
-        required:
-        - results
-        - output
-        additionalProperties: false
-      - type: object
-        properties:
-          requestId:
-            type: string
-            description: Unique identifier for the request.
-            example: b5947044c4b78efa9552a7c89b306d95
-          results:
-            type: array
-            items:
-              $ref: '#/components/schemas/SearchResultOutput'
-            description: A list of search results containing title, URL, published date, and author.
-          resolvedSearchType:
-            description: Deprecated legacy field. Current production responses may return an empty string; clients should not branch on this value.
-            example: ''
-            deprecated: true
-            type: string
-          context:
-            type: string
-            description: Deprecated. Combined context string from search results. Use highlights or text instead.
-            deprecated: true
-          costDollars:
-            $ref: '#/components/schemas/CostDollarsOutput'
-        required:
-        - results
-        additionalProperties: false
-    SearchSynthesisOutputOutput:
-      type: object
-      properties:
-        content:
-          description: Synthesized content. String by default, or object when outputSchema is provided.
-          oneOf:
-          - type: string
-          - type: object
-            propertyNames:
-              type: string
-            additionalProperties:
-              $ref: '#/components/schemas/JsonValue'
-        grounding:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-                description: Field path in output.content, for example content or companies[0].funding.
-              citations:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    url:
-                      type: string
-                      format: uri
-                      description: Source URL.
-                    title:
-                      type: string
-                      description: Source title.
-                  required:
-                  - url
-                  - title
-                  additionalProperties: false
-                description: Sources supporting this output field.
-              confidence:
-                type: string
-                enum:
-                - low
-                - medium
-                - high
-                description: Model-reported reliability for this field.
-            required:
-            - field
-            - citations
-            - confidence
-            additionalProperties: false
-          description: Field-level grounding for synthesized output.
-      required:
-      - content
-      - grounding
-      additionalProperties: false
-      description: Synthesized output. Returned when outputSchema is provided.
     ContentsOptions:
       type: object
       properties:
@@ -532,207 +402,6 @@ components:
                 minLength: 1
                 maxLength: 100
           - type: 'null'
-    SearchRequest:
-      type: object
-      properties:
-        includeDomains:
-          anyOf:
-          - maxItems: 1200
-            type: array
-            items:
-              type: string
-            description: List of domains to include in the search. If specified, results will only come from these domains.
-            example:
-            - arxiv.org
-            - paperswithcode.com
-          - type: 'null'
-        excludeDomains:
-          anyOf:
-          - maxItems: 1200
-            type: array
-            items:
-              type: string
-            description: List of domains to exclude from search results. If specified, no results will be returned from these domains.
-          - type: 'null'
-        startCrawlDate:
-          anyOf:
-          - type: string
-            description: Crawl date refers to the date that Exa discovered a link. Results will include links that were crawled after this date. Must be specified in ISO 8601 format.
-            example: '2023-01-01T00:00:00.000Z'
-            format: date-time
-          - type: 'null'
-        endCrawlDate:
-          anyOf:
-          - type: string
-            description: Crawl date refers to the date that Exa discovered a link. Results will include links that were crawled before this date. Must be specified in ISO 8601 format.
-            example: '2023-12-31T00:00:00.000Z'
-            format: date-time
-          - type: 'null'
-        startPublishedDate:
-          anyOf:
-          - type: string
-            description: Only links with a published date after this will be returned. Must be specified in ISO 8601 format.
-            example: '2023-01-01T00:00:00.000Z'
-            format: date-time
-          - type: 'null'
-        endPublishedDate:
-          anyOf:
-          - type: string
-            description: Only links with a published date before this will be returned. Must be specified in ISO 8601 format.
-            example: '2023-12-31T00:00:00.000Z'
-            format: date-time
-          - type: 'null'
-        numResults:
-          anyOf:
-          - type: integer
-            minimum: 1
-            maximum: 100
-            description: Number of results to return. Limits vary by search type. The maximum public limit is 100 results. Contact sales (hello@exa.ai) to discuss higher limits.
-            example: 10
-            default: 10
-          - type: 'null'
-        context:
-          anyOf:
-          - description: 'Deprecated: Use highlights or text instead. Returns page contents as a combined context string.'
-            deprecated: true
-            oneOf:
-            - type: boolean
-              description: 'Deprecated: Use highlights or text instead. Returns page contents as a combined context string.'
-              example: true
-              deprecated: true
-            - type: object
-              properties:
-                maxCharacters:
-                  type: integer
-                  minimum: 1
-                  maximum: 10000
-                  description: Deprecated. Maximum character limit for the context string. Maximum supported value is 10000.
-                  example: 10000
-              description: 'Deprecated: Use highlights or text instead. Returns page contents as a combined context string.'
-              deprecated: true
-          - type: 'null'
-        moderation:
-          anyOf:
-          - type: boolean
-            description: Enable content moderation to filter unsafe content from search results.
-            example: true
-            default: false
-          - type: 'null'
-        contents:
-          anyOf:
-          - description: Content options for text, highlights, summary, extras, and freshness controls.
-            $ref: '#/components/schemas/ContentsOptions'
-          - type: 'null'
-        query:
-          type: string
-          minLength: 1
-          description: The query string for the search.
-          example: Latest developments in LLM capabilities
-        additionalQueries:
-          anyOf:
-          - minItems: 1
-            maxItems: 10
-            type: array
-            items:
-              type: string
-            description: Additional query variations for deep-search variants. Only works with a deep-search type. When provided, these queries are used alongside the main query for broader results.
-            example:
-            - LLM advancements
-            - large language model progress
-          - type: 'null'
-        type:
-          anyOf:
-          - type: string
-            enum:
-            - instant
-            - fast
-            - auto
-            - deep-lite
-            - deep
-            - deep-reasoning
-            description: The type of search. auto is the default and intelligently selects the best search mode, instant provides the lowest latency for real-time applications, fast uses lower-latency search models, deep-lite is lightweight synthesis, deep performs in-depth research with synthesis, and deep-reasoning adds more reasoning.
-            example: auto
-            default: auto
-          - type: 'null'
-        category:
-          anyOf:
-          - type: string
-            enum:
-            - company
-            - research paper
-            - news
-            - personal site
-            - financial report
-            - people
-            description: 'A data category to focus on. Known categories include `company`, `research paper`, `news`, `personal site`, `financial report`, and `people`. Other strings are accepted and used as category hints for search. The `people` and `company` categories have improved quality for finding people profiles and company pages. Note: The `company` and `people` categories only support a limited set of filters. The following parameters are NOT supported for these categories: `startPublishedDate`, `endPublishedDate`, `startCrawlDate`, `endCrawlDate`, `excludeDomains`. For `people` category, `includeDomains` only accepts supported profile domains. Using unsupported parameters will result in a 400 error.'
-            example: research paper
-          - type: 'null'
-        userLocation:
-          anyOf:
-          - type: string
-            description: The two-letter ISO country code of the user, e.g. US.
-            example: US
-          - type: 'null'
-        compliance:
-          anyOf:
-          - type: string
-            enum:
-            - hipaa
-            description: Enterprise-only compliance mode. Set to `hipaa` to require HIPAA-safe processing. Requests fail closed or restrict features when the requested behavior requires non-HIPAA-safe processors.
-            example: hipaa
-          - type: 'null'
-        outputSchema:
-          anyOf:
-          - oneOf:
-            - type: object
-              properties:
-                type:
-                  type: string
-                  const: text
-                description:
-                  type: string
-              required:
-              - type
-            - type: object
-              properties:
-                type:
-                  type: string
-                  const: object
-                description:
-                  type: string
-                properties:
-                  type: object
-                  propertyNames:
-                    type: string
-                  additionalProperties:
-                    $ref: '#/components/schemas/JsonValue'
-                required:
-                  type: array
-                  items:
-                    type: string
-                additionalProperties:
-                  type: boolean
-              required:
-              - type
-              additionalProperties:
-                $ref: '#/components/schemas/JsonValue'
-            description: JSON schema for synthesized output. Supported root types are "text" and "object". When provided, the response includes an output object whose content matches this schema. Works with every search type and adds about 2 seconds of synthesis latency on top of the selected search type.
-            type: object
-          - type: 'null'
-        systemPrompt:
-          anyOf:
-          - type: string
-            description: Additional instructions that guide generated output or agent behavior. Use this for source preferences, novelty constraints, duplication constraints, or other behavior guidance.
-            example: Prefer official sources and avoid duplicate results.
-          - type: 'null'
-        stream:
-          anyOf:
-          - type: boolean
-            description: Requests server-sent events for synthesized output streaming. Streaming is currently used only when outputSchema is provided; otherwise the endpoint returns the normal JSON search response.
-            default: false
-          - type: 'null'
-      required:
-      - query
     SearchStreamChunk:
       oneOf:
       - type: object
@@ -1036,6 +705,96 @@ components:
         additionalProperties: false
       description: 'Schema for each JSON payload emitted in a `/search` server-sent event stream. Each event is emitted as `data: <json>` and the stream terminates with `data: [DONE]`, which is not represented by this JSON schema.'
       type: object
+    CostDollarsOutput:
+      type: object
+      properties:
+        total:
+          description: Estimated total dollar cost for the completed request. This response value is not an invoice record.
+          example: 0.007
+          format: float
+          type: number
+        search:
+          description: Endpoint-dependent estimated search cost breakdown by retrieval mode. Instant, fast, and auto search responses may include neural search cost. Deep search modes may be reflected only in total.
+          type: object
+          properties:
+            neural:
+              description: Cost of neural search operations.
+              example: 0.007
+              format: float
+              type: number
+          additionalProperties: false
+      additionalProperties: false
+      description: Endpoint-dependent estimated dollar cost breakdown for the completed request. Billing is computed from usage counters rather than this response object.
+    JsonValue:
+      description: Any JSON value.
+      oneOf:
+      - type: 'null'
+      - type: boolean
+      - type: number
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/JsonValue'
+      - type: object
+        propertyNames:
+          type: string
+        additionalProperties:
+          $ref: '#/components/schemas/JsonValue'
+    SearchResponse:
+      oneOf:
+      - type: object
+        properties:
+          requestId:
+            type: string
+            description: Unique identifier for the request.
+            example: b5947044c4b78efa9552a7c89b306d95
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/SearchResultOutput'
+            description: A list of search results containing title, URL, published date, and author.
+          resolvedSearchType:
+            description: Deprecated legacy field. Current production responses may return an empty string; clients should not branch on this value.
+            example: ''
+            deprecated: true
+            type: string
+          context:
+            type: string
+            description: Deprecated. Combined context string from search results. Use highlights or text instead.
+            deprecated: true
+          costDollars:
+            $ref: '#/components/schemas/CostDollarsOutput'
+          output:
+            $ref: '#/components/schemas/SearchSynthesisOutputOutput'
+        required:
+        - results
+        - output
+        additionalProperties: false
+      - type: object
+        properties:
+          requestId:
+            type: string
+            description: Unique identifier for the request.
+            example: b5947044c4b78efa9552a7c89b306d95
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/SearchResultOutput'
+            description: A list of search results containing title, URL, published date, and author.
+          resolvedSearchType:
+            description: Deprecated legacy field. Current production responses may return an empty string; clients should not branch on this value.
+            example: ''
+            deprecated: true
+            type: string
+          context:
+            type: string
+            description: Deprecated. Combined context string from search results. Use highlights or text instead.
+            deprecated: true
+          costDollars:
+            $ref: '#/components/schemas/CostDollarsOutput'
+        required:
+        - results
+        additionalProperties: false
     SearchResultOutput:
       type: object
       properties:
@@ -1519,21 +1278,262 @@ components:
       - title
       - url
       additionalProperties: false
-    JsonValue:
-      description: Any JSON value.
-      oneOf:
-      - type: 'null'
-      - type: boolean
-      - type: number
-      - type: string
-      - type: array
-        items:
-          $ref: '#/components/schemas/JsonValue'
-      - type: object
-        propertyNames:
+    SearchRequest:
+      type: object
+      properties:
+        includeDomains:
+          anyOf:
+          - maxItems: 1200
+            type: array
+            items:
+              type: string
+            description: List of domains to include in the search. If specified, results will only come from these domains.
+            example:
+            - arxiv.org
+            - paperswithcode.com
+          - type: 'null'
+        excludeDomains:
+          anyOf:
+          - maxItems: 1200
+            type: array
+            items:
+              type: string
+            description: List of domains to exclude from search results. If specified, no results will be returned from these domains.
+          - type: 'null'
+        startCrawlDate:
+          anyOf:
+          - type: string
+            description: Crawl date refers to the date that Exa discovered a link. Results will include links that were crawled after this date. Must be specified in ISO 8601 format.
+            example: '2023-01-01T00:00:00.000Z'
+            format: date-time
+          - type: 'null'
+        endCrawlDate:
+          anyOf:
+          - type: string
+            description: Crawl date refers to the date that Exa discovered a link. Results will include links that were crawled before this date. Must be specified in ISO 8601 format.
+            example: '2023-12-31T00:00:00.000Z'
+            format: date-time
+          - type: 'null'
+        startPublishedDate:
+          anyOf:
+          - type: string
+            description: Only links with a published date after this will be returned. Must be specified in ISO 8601 format.
+            example: '2023-01-01T00:00:00.000Z'
+            format: date-time
+          - type: 'null'
+        endPublishedDate:
+          anyOf:
+          - type: string
+            description: Only links with a published date before this will be returned. Must be specified in ISO 8601 format.
+            example: '2023-12-31T00:00:00.000Z'
+            format: date-time
+          - type: 'null'
+        numResults:
+          anyOf:
+          - type: integer
+            minimum: 1
+            maximum: 100
+            description: Number of results to return. Limits vary by search type. The maximum public limit is 100 results. Contact sales (hello@exa.ai) to discuss higher limits.
+            example: 10
+            default: 10
+          - type: 'null'
+        context:
+          anyOf:
+          - description: 'Deprecated: Use highlights or text instead. Returns page contents as a combined context string.'
+            deprecated: true
+            oneOf:
+            - type: boolean
+              description: 'Deprecated: Use highlights or text instead. Returns page contents as a combined context string.'
+              example: true
+              deprecated: true
+            - type: object
+              properties:
+                maxCharacters:
+                  type: integer
+                  minimum: 1
+                  maximum: 10000
+                  description: Deprecated. Maximum character limit for the context string. Maximum supported value is 10000.
+                  example: 10000
+              description: 'Deprecated: Use highlights or text instead. Returns page contents as a combined context string.'
+              deprecated: true
+          - type: 'null'
+        moderation:
+          anyOf:
+          - type: boolean
+            description: Enable content moderation to filter unsafe content from search results.
+            example: true
+            default: false
+          - type: 'null'
+        contents:
+          anyOf:
+          - description: Content options for text, highlights, summary, extras, and freshness controls.
+            $ref: '#/components/schemas/ContentsOptions'
+          - type: 'null'
+        query:
           type: string
-        additionalProperties:
-          $ref: '#/components/schemas/JsonValue'
+          minLength: 1
+          description: The query string for the search.
+          example: Latest developments in LLM capabilities
+        additionalQueries:
+          anyOf:
+          - minItems: 1
+            maxItems: 10
+            type: array
+            items:
+              type: string
+            description: Additional query variations for deep-search variants. Only works with a deep-search type. When provided, these queries are used alongside the main query for broader results.
+            example:
+            - LLM advancements
+            - large language model progress
+          - type: 'null'
+        type:
+          anyOf:
+          - type: string
+            enum:
+            - instant
+            - fast
+            - auto
+            - deep-lite
+            - deep
+            - deep-reasoning
+            description: The type of search. auto is the default and intelligently selects the best search mode, instant provides the lowest latency for real-time applications, fast uses lower-latency search models, deep-lite is lightweight synthesis, deep performs in-depth research with synthesis, and deep-reasoning adds more reasoning.
+            example: auto
+            default: auto
+          - type: 'null'
+        category:
+          anyOf:
+          - type: string
+            enum:
+            - company
+            - research paper
+            - news
+            - personal site
+            - financial report
+            - people
+            description: 'A data category to focus on. Known categories include `company`, `research paper`, `news`, `personal site`, `financial report`, and `people`. Other strings are accepted and used as category hints for search. The `people` and `company` categories have improved quality for finding people profiles and company pages. Note: The `company` and `people` categories only support a limited set of filters. The following parameters are NOT supported for these categories: `startPublishedDate`, `endPublishedDate`, `startCrawlDate`, `endCrawlDate`, `excludeDomains`. For `people` category, `includeDomains` only accepts supported profile domains. Using unsupported parameters will result in a 400 error.'
+            example: research paper
+          - type: 'null'
+        userLocation:
+          anyOf:
+          - type: string
+            description: The two-letter ISO country code of the user, e.g. US.
+            example: US
+          - type: 'null'
+        compliance:
+          anyOf:
+          - type: string
+            enum:
+            - hipaa
+            description: Enterprise-only compliance mode. Set to `hipaa` to require HIPAA-safe processing. Requests fail closed or restrict features when the requested behavior requires non-HIPAA-safe processors.
+            example: hipaa
+          - type: 'null'
+        outputSchema:
+          anyOf:
+          - oneOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  const: text
+                description:
+                  type: string
+              required:
+              - type
+            - type: object
+              properties:
+                type:
+                  type: string
+                  const: object
+                description:
+                  type: string
+                properties:
+                  type: object
+                  propertyNames:
+                    type: string
+                  additionalProperties:
+                    $ref: '#/components/schemas/JsonValue'
+                required:
+                  type: array
+                  items:
+                    type: string
+                additionalProperties:
+                  type: boolean
+              required:
+              - type
+              additionalProperties:
+                $ref: '#/components/schemas/JsonValue'
+            description: JSON schema for synthesized output. Supported root types are "text" and "object". When provided, the response includes an output object whose content matches this schema. Works with every search type and adds about 2 seconds of synthesis latency on top of the selected search type.
+            type: object
+          - type: 'null'
+        systemPrompt:
+          anyOf:
+          - type: string
+            description: Additional instructions that guide generated output or agent behavior. Use this for source preferences, novelty constraints, duplication constraints, or other behavior guidance.
+            example: Prefer official sources and avoid duplicate results.
+          - type: 'null'
+        stream:
+          anyOf:
+          - type: boolean
+            description: Requests server-sent events for synthesized output streaming. Streaming is currently used only when outputSchema is provided; otherwise the endpoint returns the normal JSON search response.
+            default: false
+          - type: 'null'
+      required:
+      - query
+    SearchSynthesisOutputOutput:
+      type: object
+      properties:
+        content:
+          description: Synthesized content. String by default, or object when outputSchema is provided.
+          oneOf:
+          - type: string
+          - type: object
+            propertyNames:
+              type: string
+            additionalProperties:
+              $ref: '#/components/schemas/JsonValue'
+        grounding:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+                description: Field path in output.content, for example content or companies[0].funding.
+              citations:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    url:
+                      type: string
+                      format: uri
+                      description: Source URL.
+                    title:
+                      type: string
+                      description: Source title.
+                  required:
+                  - url
+                  - title
+                  additionalProperties: false
+                description: Sources supporting this output field.
+              confidence:
+                type: string
+                enum:
+                - low
+                - medium
+                - high
+                description: Model-reported reliability for this field.
+            required:
+            - field
+            - citations
+            - confidence
+            additionalProperties: false
+          description: Field-level grounding for synthesized output.
+      required:
+      - content
+      - grounding
+      additionalProperties: false
+      description: Synthesized output. Returned when outputSchema is provided.
   securitySchemes:
     apiKey:
       type: apiKey
