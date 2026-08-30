@@ -61,7 +61,7 @@ apis:
   humanURL: https://exa.ai/docs/reference/search-api-guide
   baseURL: https://api.exa.ai
   tags:
-  - Answers
+  - Answer
   tags_raw:
   - Answer
   properties:
