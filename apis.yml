@@ -1050,6 +1050,8 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/exa-ai.png
 access: 3rd-Party
 common:
+  - type: Website
+    url: https://www.exa.ai/
   - type: AgenticAccess
     url: agentic-access/exa-ai-agentic-access.yml
   - type: VulnerabilityDisclosure
