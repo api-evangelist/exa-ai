@@ -273,6 +273,8 @@ apis:
   humanURL: https://exa.ai/docs/reference/search-api-guide
   baseURL: https://api.exa.ai
   tags:
+  - Import
+  tags_raw:
   - Imports
   properties:
   - type: OpenAPI
