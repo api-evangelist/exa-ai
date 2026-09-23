@@ -67,7 +67,8 @@
     "exa-websets-api-openapi.yml: declared missing tag: Webhooks",
     "exa-websets-api-openapi.yml: declared missing tag: Webhooks Attempts",
     "exa-websets-api-openapi.yml: declared missing tag: Websets",
-    "exa-websets-api-openapi.yml: declared missing tag: Websets Preview"
+    "exa-websets-api-openapi.yml: declared missing tag: Websets Preview",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "exa-ai-agent-api-openapi.yml: previously refined output, superseded by openapi/_original/",

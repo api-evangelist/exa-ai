@@ -77,65 +77,6 @@ paths:
                 $ref: '#/components/schemas/SearchMonitorRun'
 components:
   schemas:
-    SearchMonitorRunOutput:
-      type: object
-      properties:
-        results:
-          anyOf:
-          - type: array
-            items:
-              type: object
-              propertyNames:
-                type: string
-              additionalProperties:
-                $ref: '#/components/schemas/JsonValue'
-          - type: 'null'
-          description: The search results
-        content:
-          description: Synthesized content from the search results. Shape depends on `outputSchema.type`.
-          oneOf:
-          - $ref: '#/components/schemas/JsonValue'
-          - type: 'null'
-        grounding:
-          anyOf:
-          - type: array
-            items:
-              type: object
-              properties:
-                field:
-                  type: string
-                  description: The output field this citation applies to
-                citations:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      url:
-                        type: string
-                        format: uri
-                        description: Source URL.
-                      title:
-                        type: string
-                        description: Source title.
-                    required:
-                    - url
-                    - title
-                    additionalProperties: false
-                confidence:
-                  type: string
-                  enum:
-                  - low
-                  - medium
-                  - high
-                  description: Model-reported reliability for this field.
-              required:
-              - field
-              - citations
-              - confidence
-              additionalProperties: false
-          - type: 'null'
-          description: Field-level citations with confidence levels
-      additionalProperties: false
     JsonValue:
       description: Any JSON value.
       oneOf:
@@ -261,6 +202,65 @@ components:
       required:
       - data
       - hasMore
+      additionalProperties: false
+    SearchMonitorRunOutput:
+      type: object
+      properties:
+        results:
+          anyOf:
+          - type: array
+            items:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                $ref: '#/components/schemas/JsonValue'
+          - type: 'null'
+          description: The search results
+        content:
+          description: Synthesized content from the search results. Shape depends on `outputSchema.type`.
+          oneOf:
+          - $ref: '#/components/schemas/JsonValue'
+          - type: 'null'
+        grounding:
+          anyOf:
+          - type: array
+            items:
+              type: object
+              properties:
+                field:
+                  type: string
+                  description: The output field this citation applies to
+                citations:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                        format: uri
+                        description: Source URL.
+                      title:
+                        type: string
+                        description: Source title.
+                    required:
+                    - url
+                    - title
+                    additionalProperties: false
+                confidence:
+                  type: string
+                  enum:
+                  - low
+                  - medium
+                  - high
+                  description: Model-reported reliability for this field.
+              required:
+              - field
+              - citations
+              - confidence
+              additionalProperties: false
+          - type: 'null'
+          description: Field-level citations with confidence levels
       additionalProperties: false
   securitySchemes:
     apiKey:

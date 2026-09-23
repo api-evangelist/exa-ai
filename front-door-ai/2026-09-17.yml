@@ -1,0 +1,30 @@
+# Front Door AI Index — exa-ai — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: exa-ai
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.exa.ai
+  final_host: exa.ai
+  ownership: inherited
+  owner: exa-ai
+  shares_host_with: null
+  inherited_from: exa.ai
+  verdict: scored
+  score: null
+  host_score: 10
+  density: null
+  words: 664
+  tiers:
+    agentic: 5
+    core: 5
+    model: 0
+  ambiguous: 12
+  top_terms:
+    agent: 10
+    AI: 5
+    AI agent: 2
+    agentic: 2
+    smart: 2
+    embedding: 1

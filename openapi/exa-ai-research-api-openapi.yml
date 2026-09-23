@@ -165,41 +165,6 @@ paths:
           console.log(task);'
 components:
   schemas:
-    ListResearchResponseDto:
-      type:
-      - object
-      properties:
-        data:
-          type:
-          - array
-          items:
-            discriminator:
-              propertyName: status
-            examples:
-            - researchId: 01jszdfs0052sg4jc552sg4jc5
-              model: exa-research
-              instructions: What species of ant are similar to honeypot ants?
-              status: running
-            - researchId: 01jszdfs0052sg4jc552sg4jc5
-              model: exa-research
-              instructions: What species of ant are similar to honeypot ants?
-              status: completed
-              output: Melophorus bagoti
-            $ref: '#/components/schemas/ResearchDtoClass'
-          description: Research requests ordered by creation time (newest first)
-        hasMore:
-          type:
-          - boolean
-          description: If true, use nextCursor to fetch more results
-        nextCursor:
-          type:
-          - string
-          - 'null'
-          description: Pass this value as the cursor parameter to fetch the next page
-      required:
-      - data
-      - hasMore
-      - nextCursor
     ResearchEventDtoClass:
       oneOf:
       - discriminator:
@@ -786,6 +751,41 @@ components:
           - createdAt
           - researchId
           title: Task Output
+    ListResearchResponseDto:
+      type:
+      - object
+      properties:
+        data:
+          type:
+          - array
+          items:
+            discriminator:
+              propertyName: status
+            examples:
+            - researchId: 01jszdfs0052sg4jc552sg4jc5
+              model: exa-research
+              instructions: What species of ant are similar to honeypot ants?
+              status: running
+            - researchId: 01jszdfs0052sg4jc552sg4jc5
+              model: exa-research
+              instructions: What species of ant are similar to honeypot ants?
+              status: completed
+              output: Melophorus bagoti
+            $ref: '#/components/schemas/ResearchDtoClass'
+          description: Research requests ordered by creation time (newest first)
+        hasMore:
+          type:
+          - boolean
+          description: If true, use nextCursor to fetch more results
+        nextCursor:
+          type:
+          - string
+          - 'null'
+          description: Pass this value as the cursor parameter to fetch the next page
+      required:
+      - data
+      - hasMore
+      - nextCursor
     ResearchDtoClass:
       discriminator:
         propertyName: status

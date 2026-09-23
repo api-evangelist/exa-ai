@@ -272,58 +272,6 @@ paths:
           print("Import deleted successfully")'
 components:
   schemas:
-    CustomEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: custom
-          default: custom
-        description:
-          type:
-          - string
-          minLength: 2
-          maxLength: 200
-      required:
-      - type
-      - description
-      title: Custom
-    ListImportsResponse:
-      type:
-      - object
-      properties:
-        data:
-          type:
-          - array
-          items:
-            type:
-            - object
-            $ref: '#/components/schemas/Import'
-          description: The list of imports
-        hasMore:
-          type:
-          - boolean
-          description: Whether there are more results to paginate through
-        nextCursor:
-          type: string
-          description: The cursor to paginate through the next set of results
-          nullable: true
-      required:
-      - data
-      - hasMore
-      - nextCursor
-    ArticleEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: article
-          default: article
-      required:
-      - type
-      title: Article
     ResearchPaperEntity:
       type:
       - object
@@ -335,23 +283,6 @@ components:
       required:
       - type
       title: Research Paper
-    Entity:
-      oneOf:
-      - type:
-        - object
-        $ref: '#/components/schemas/CompanyEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/PersonEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/ArticleEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/ResearchPaperEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/CustomEntity'
     CreateImportParameters:
       discriminator:
         propertyName: format
@@ -522,17 +453,6 @@ components:
       required:
       - type
       title: Person
-    CompanyEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: company
-          default: company
-      required:
-      - type
-      title: Company
     CreateImportResponse:
       type:
       - object
@@ -636,6 +556,86 @@ components:
       - uploadUrl
       - uploadValidUntil
       description: The response to a successful import. Includes the upload URL and the upload valid until date.
+    CompanyEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: company
+          default: company
+      required:
+      - type
+      title: Company
+    ArticleEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: article
+          default: article
+      required:
+      - type
+      title: Article
+    CustomEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: custom
+          default: custom
+        description:
+          type:
+          - string
+          minLength: 2
+          maxLength: 200
+      required:
+      - type
+      - description
+      title: Custom
+    Entity:
+      oneOf:
+      - type:
+        - object
+        $ref: '#/components/schemas/CompanyEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/PersonEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/ArticleEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/ResearchPaperEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/CustomEntity'
+    ListImportsResponse:
+      type:
+      - object
+      properties:
+        data:
+          type:
+          - array
+          items:
+            type:
+            - object
+            $ref: '#/components/schemas/Import'
+          description: The list of imports
+        hasMore:
+          type:
+          - boolean
+          description: Whether there are more results to paginate through
+        nextCursor:
+          type: string
+          description: The cursor to paginate through the next set of results
+          nullable: true
+      required:
+      - data
+      - hasMore
+      - nextCursor
     UpdateImport:
       type:
       - object

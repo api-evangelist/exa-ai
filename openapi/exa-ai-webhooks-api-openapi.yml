@@ -308,36 +308,28 @@ components:
       - data
       - hasMore
       - nextCursor
-    CreateWebhookParameters:
-      type:
-      - object
-      properties:
-        events:
-          type:
-          - array
-          items:
-            type:
-            - string
-            $ref: '#/components/schemas/EventType'
-          minItems: 1
-          maxItems: 19
-          description: The events to trigger the webhook
-        url:
-          type:
-          - string
-          format: uri
-          description: The URL to send the webhook to
-        metadata:
-          description: Set of key-value pairs you want to associate with this object.
-          type:
-          - object
-          additionalProperties:
-            type:
-            - string
-            maxLength: 1000
-      required:
-      - events
-      - url
+    EventType:
+      type: string
+      enum:
+      - webset.created
+      - webset.deleted
+      - webset.paused
+      - webset.idle
+      - webset.search.created
+      - webset.search.canceled
+      - webset.search.completed
+      - webset.search.updated
+      - import.created
+      - import.completed
+      - webset.item.created
+      - webset.item.enriched
+      - monitor.created
+      - monitor.updated
+      - monitor.deleted
+      - monitor.run.created
+      - monitor.run.completed
+      - webset.export.created
+      - webset.export.completed
     Webhook:
       type:
       - object
@@ -404,6 +396,36 @@ components:
       - secret
       - createdAt
       - updatedAt
+    CreateWebhookParameters:
+      type:
+      - object
+      properties:
+        events:
+          type:
+          - array
+          items:
+            type:
+            - string
+            $ref: '#/components/schemas/EventType'
+          minItems: 1
+          maxItems: 19
+          description: The events to trigger the webhook
+        url:
+          type:
+          - string
+          format: uri
+          description: The URL to send the webhook to
+        metadata:
+          description: Set of key-value pairs you want to associate with this object.
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+            maxLength: 1000
+      required:
+      - events
+      - url
     UpdateWebhookParameters:
       type:
       - object
@@ -431,28 +453,6 @@ components:
             type:
             - string
             maxLength: 1000
-    EventType:
-      type: string
-      enum:
-      - webset.created
-      - webset.deleted
-      - webset.paused
-      - webset.idle
-      - webset.search.created
-      - webset.search.canceled
-      - webset.search.completed
-      - webset.search.updated
-      - import.created
-      - import.completed
-      - webset.item.created
-      - webset.item.enriched
-      - monitor.created
-      - monitor.updated
-      - monitor.deleted
-      - monitor.run.created
-      - monitor.run.completed
-      - webset.export.created
-      - webset.export.completed
   securitySchemes:
     apiKey:
       type: apiKey

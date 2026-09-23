@@ -299,6 +299,55 @@ paths:
           print(f"Cancelled enrichment: {enrichment.id}")'
 components:
   schemas:
+    UpdateEnrichmentParameters:
+      type:
+      - object
+      properties:
+        description:
+          type:
+          - string
+          minLength: 1
+          maxLength: 5000
+          description: Provide a description of the enrichment task you want to perform to each Webset Item.
+        format:
+          type:
+          - string
+          enum:
+          - text
+          - date
+          - number
+          - options
+          - email
+          - phone
+          - url
+          description: 'Format of the enrichment response.
+
+
+            We automatically select the best format based on the description. If you want to explicitly specify the format, you can do so here.'
+        options:
+          type:
+          - array
+          items:
+            type:
+            - object
+            properties:
+              label:
+                type:
+                - string
+                description: The label of the option
+            required:
+            - label
+          minItems: 1
+          maxItems: 150
+          description: When the format is options, the different options for the enrichment agent to choose from.
+        metadata:
+          description: Set of key-value pairs you want to associate with this object.
+          type: object
+          additionalProperties:
+            type:
+            - string
+            maxLength: 1000
+          nullable: true
     WebsetEnrichment:
       type:
       - object
@@ -454,55 +503,6 @@ components:
       - email
       - phone
       - url
-    UpdateEnrichmentParameters:
-      type:
-      - object
-      properties:
-        description:
-          type:
-          - string
-          minLength: 1
-          maxLength: 5000
-          description: Provide a description of the enrichment task you want to perform to each Webset Item.
-        format:
-          type:
-          - string
-          enum:
-          - text
-          - date
-          - number
-          - options
-          - email
-          - phone
-          - url
-          description: 'Format of the enrichment response.
-
-
-            We automatically select the best format based on the description. If you want to explicitly specify the format, you can do so here.'
-        options:
-          type:
-          - array
-          items:
-            type:
-            - object
-            properties:
-              label:
-                type:
-                - string
-                description: The label of the option
-            required:
-            - label
-          minItems: 1
-          maxItems: 150
-          description: When the format is options, the different options for the enrichment agent to choose from.
-        metadata:
-          description: Set of key-value pairs you want to associate with this object.
-          type: object
-          additionalProperties:
-            type:
-            - string
-            maxLength: 1000
-          nullable: true
   securitySchemes:
     apiKey:
       type: apiKey

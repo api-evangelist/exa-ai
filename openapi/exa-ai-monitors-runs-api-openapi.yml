@@ -119,6 +119,30 @@ paths:
           print(f"Monitor run: {run.id} - {run.status}")'
 components:
   schemas:
+    ListMonitorRunsResponse:
+      type:
+      - object
+      properties:
+        data:
+          type:
+          - array
+          items:
+            type:
+            - object
+            $ref: '#/components/schemas/MonitorRun'
+          description: The list of monitor runs
+        hasMore:
+          type:
+          - boolean
+          description: Whether there are more results to paginate through
+        nextCursor:
+          type: string
+          description: The cursor to paginate through the next set of results
+          nullable: true
+      required:
+      - data
+      - hasMore
+      - nextCursor
     MonitorRun:
       type:
       - object
@@ -195,30 +219,6 @@ components:
       - canceledAt
       - createdAt
       - updatedAt
-    ListMonitorRunsResponse:
-      type:
-      - object
-      properties:
-        data:
-          type:
-          - array
-          items:
-            type:
-            - object
-            $ref: '#/components/schemas/MonitorRun'
-          description: The list of monitor runs
-        hasMore:
-          type:
-          - boolean
-          description: Whether there are more results to paginate through
-        nextCursor:
-          type: string
-          description: The cursor to paginate through the next set of results
-          nullable: true
-      required:
-      - data
-      - hasMore
-      - nextCursor
   securitySchemes:
     apiKey:
       type: apiKey

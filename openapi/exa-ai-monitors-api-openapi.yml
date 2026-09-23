@@ -488,251 +488,6 @@ paths:
           print("Monitor deleted successfully")'
 components:
   schemas:
-    MonitorRun:
-      type:
-      - object
-      properties:
-        id:
-          type:
-          - string
-          description: The unique identifier for the Monitor Run
-        object:
-          type:
-          - string
-          enum:
-          - monitor_run
-          description: The type of object
-        status:
-          type:
-          - string
-          enum:
-          - created
-          - running
-          - completed
-          - canceled
-          - failed
-          description: The status of the Monitor Run
-        monitorId:
-          type:
-          - string
-          description: The monitor that the run is associated with
-        type:
-          type:
-          - string
-          enum:
-          - search
-          - refresh
-          description: The type of the Monitor Run
-        completedAt:
-          type: string
-          format: date-time
-          description: When the run completed
-          nullable: true
-        failedAt:
-          type: string
-          format: date-time
-          description: When the run failed
-          nullable: true
-        failedReason:
-          type: string
-          description: The reason the run failed
-          nullable: true
-        canceledAt:
-          type: string
-          format: date-time
-          description: When the run was canceled
-          nullable: true
-        createdAt:
-          type:
-          - string
-          format: date-time
-          description: When the run was created
-        updatedAt:
-          type:
-          - string
-          format: date-time
-          description: When the run was last updated
-      required:
-      - id
-      - object
-      - monitorId
-      - status
-      - type
-      - completedAt
-      - failedAt
-      - failedReason
-      - canceledAt
-      - createdAt
-      - updatedAt
-    SearchMonitorWebhookOutput:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          description: The HTTPS URL to receive webhook events. Must not point to localhost or private IP ranges.
-        events:
-          type: array
-          items:
-            type: string
-            enum:
-            - monitor.created
-            - monitor.updated
-            - monitor.deleted
-            - monitor.run.created
-            - monitor.run.completed
-          description: Which events to subscribe to. Defaults to all events if not specified.
-      required:
-      - url
-      additionalProperties: false
-    JsonValue:
-      description: Any JSON value.
-      oneOf:
-      - type: 'null'
-      - type: boolean
-      - type: number
-      - type: string
-      - type: array
-        items:
-          $ref: '#/components/schemas/JsonValue'
-      - type: object
-        propertyNames:
-          type: string
-        additionalProperties:
-          $ref: '#/components/schemas/JsonValue'
-    ListSearchMonitorsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchMonitor'
-          description: The list of monitors
-        hasMore:
-          type: boolean
-          description: Whether there are more results
-        nextCursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Cursor for the next page
-      required:
-      - data
-      - hasMore
-      additionalProperties: false
-    TriggerSearchMonitorResponse:
-      type: object
-      properties:
-        triggered:
-          type: boolean
-          description: Whether the monitor was successfully triggered
-      required:
-      - triggered
-      additionalProperties: false
-    CreateSearchMonitorResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the monitor
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: An optional display name
-        status:
-          type: string
-          enum:
-          - active
-          - paused
-          - disabled
-          description: The status of the monitor. `active` monitors run on schedule and can be triggered manually. `paused` monitors can only be triggered manually. `disabled` monitors are auto-disabled after 10 consecutive authentication failures.
-        search:
-          $ref: '#/components/schemas/SearchMonitorSearchOutput'
-        trigger:
-          anyOf:
-          - $ref: '#/components/schemas/SearchMonitorTriggerOutput'
-          - type: 'null'
-          description: The interval-based schedule for automatic runs. Null if no schedule is set.
-        outputSchema:
-          $ref: '#/components/schemas/SearchMonitorOutputSchemaOutput'
-        metadata:
-          anyOf:
-          - type: object
-            propertyNames:
-              type: string
-            additionalProperties:
-              type: string
-            description: Caller-provided key-value metadata for your own tracking.
-            example:
-              slack_channel_id: C123ABC
-              slack_thread_id: '1745444400.123456'
-              user_id: U123ABC
-          - type: 'null'
-          description: Optional key-value metadata for your own tracking. Echoed back in webhook deliveries so you can route updates to systems like Slack.
-          example:
-            slack_channel_id: C123ABC
-            slack_thread_id: '1745444400.123456'
-            user_id: U123ABC
-        webhook:
-          $ref: '#/components/schemas/SearchMonitorWebhookOutput'
-        nextRunAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          description: When the next scheduled run will occur. Null if no trigger is set.
-          format: date-time
-        createdAt:
-          type: string
-          format: date-time
-          description: When the monitor was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: When the monitor was last updated
-        webhookSecret:
-          type: string
-          description: The secret used to verify webhook signatures. This is only returned once at creation time. Store it securely.
-      required:
-      - id
-      - name
-      - status
-      - search
-      - trigger
-      - outputSchema
-      - metadata
-      - webhook
-      - nextRunAt
-      - createdAt
-      - updatedAt
-      - webhookSecret
-      additionalProperties: false
-    UpdateMonitor:
-      type:
-      - object
-      properties:
-        status:
-          type:
-          - string
-          enum:
-          - enabled
-          - disabled
-          description: The status of the monitor.
-        metadata:
-          type:
-          - object
-          additionalProperties:
-            type:
-            - string
-        cadence:
-          type:
-          - object
-          $ref: '#/components/schemas/MonitorCadence'
-        behavior:
-          type:
-          - object
-          $ref: '#/components/schemas/MonitorBehavior'
     SearchMonitorTrigger:
       type: object
       properties:
@@ -748,346 +503,17 @@ components:
       required:
       - type
       - period
-    CustomEntity:
+    PersonEntity:
       type:
       - object
       properties:
         type:
           type: string
-          const: custom
-          default: custom
-        description:
-          type:
-          - string
-          minLength: 2
-          maxLength: 200
+          const: person
+          default: person
       required:
       - type
-      - description
-      title: Custom
-    UpdateSearchMonitorParameters:
-      type: object
-      properties:
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Update the monitor name
-        status:
-          type: string
-          enum:
-          - active
-          - paused
-          description: Update the monitor status (can only set to `active` or `paused`)
-        search:
-          type: object
-          properties:
-            query:
-              type: string
-              minLength: 1
-              description: The query string for the search.
-              example: Latest developments in LLM capabilities
-            numResults:
-              type: integer
-              minimum: 1
-              maximum: 100
-              description: Number of results to return. Limits vary by search type. The maximum public limit is 100 results. Contact sales (hello@exa.ai) to discuss higher limits.
-              example: 10
-              default: 10
-            contents:
-              $ref: '#/components/schemas/SearchMonitorContents'
-          description: Partial search params to merge. All fields are optional for updates.
-        trigger:
-          anyOf:
-          - type: object
-            properties:
-              type:
-                type: string
-                const: interval
-                description: The type of trigger. Currently only `interval` is supported.
-                default: interval
-              period:
-                type: string
-                description: A duration string specifying how often the monitor runs (e.g., "1h", "6h", "1d", "7d"). Single-unit only. Minimum interval is 1 hour.
-          - type: 'null'
-          description: Update the schedule. Set to null to remove the schedule.
-        outputSchema:
-          $ref: '#/components/schemas/SearchMonitorOutputSchema'
-        metadata:
-          anyOf:
-          - type: object
-            propertyNames:
-              type: string
-            additionalProperties:
-              type: string
-            description: Caller-provided key-value metadata for your own tracking.
-            example:
-              slack_channel_id: C123ABC
-              slack_thread_id: '1745444400.123456'
-              user_id: U123ABC
-          - type: 'null'
-          description: Update metadata. Set to null to remove. Echoed back in webhook deliveries so you can route updates to systems like Slack.
-          example:
-            slack_channel_id: C123ABC
-            slack_thread_id: '1745444400.123456'
-            user_id: U123ABC
-        webhook:
-          type: object
-          properties:
-            url:
-              type: string
-              format: uri
-              description: The HTTPS URL to receive webhook events. Must not point to localhost or private IP ranges.
-            events:
-              type: array
-              items:
-                type: string
-                enum:
-                - monitor.created
-                - monitor.updated
-                - monitor.deleted
-                - monitor.run.created
-                - monitor.run.completed
-              description: Which events to subscribe to. Defaults to all events if not specified.
-          description: Partial webhook params to merge. All fields are optional for updates.
-    CreateMonitorParameters:
-      type:
-      - object
-      properties:
-        websetId:
-          type:
-          - string
-          description: The id of the Webset
-        cadence:
-          type:
-          - object
-          properties:
-            cron:
-              description: Cron expression for monitor cadence (must be a valid Unix cron with 5 fields). The schedule must trigger at most once per day.
-              type:
-              - string
-            timezone:
-              description: IANA timezone (e.g., "America/New_York")
-              default: Etc/UTC
-              type:
-              - string
-          required:
-          - cron
-          description: How often the monitor will run
-        behavior:
-          type:
-          - object
-          properties:
-            type:
-              type: string
-              const: search
-              default: search
-            config:
-              type:
-              - object
-              properties:
-                query:
-                  type:
-                  - string
-                  minLength: 2
-                  maxLength: 10000
-                  description: The query to search for. By default, the query from the last search is used.
-                criteria:
-                  type:
-                  - array
-                  items:
-                    type:
-                    - object
-                    properties:
-                      description:
-                        type:
-                        - string
-                        minLength: 2
-                        maxLength: 1000
-                    required:
-                    - description
-                  maxItems: 5
-                  description: The criteria to search for. By default, the criteria from the last search is used.
-                entity:
-                  $ref: '#/components/schemas/Entity'
-                  title: Entity
-                  description: The entity to search for. By default, the entity from the last search/import is used.
-                count:
-                  type:
-                  - number
-                  exclusiveMinimum: 0
-                  description: The maximum number of results to find
-                behavior:
-                  default: append
-                  type:
-                  - string
-                  enum:
-                  - override
-                  - append
-                  description: The behaviour of the Search when it is added to a Webset.
-              required:
-              - count
-              description: 'Specify the search parameters for the Monitor.
-
-
-                By default, the search parameters (query, entity and criteria) from the last search are used when no parameters are provided.'
-          required:
-          - type
-          - config
-          description: Behavior to perform when monitor runs
-        metadata:
-          type:
-          - object
-          additionalProperties:
-            type:
-            - string
-      required:
-      - websetId
-      - cadence
-      - behavior
-    Monitor:
-      type:
-      - object
-      properties:
-        id:
-          type:
-          - string
-          description: The unique identifier for the Monitor
-        object:
-          type:
-          - string
-          enum:
-          - monitor
-          description: The type of object
-        status:
-          type:
-          - string
-          enum:
-          - enabled
-          - disabled
-          description: The status of the Monitor
-        websetId:
-          type:
-          - string
-          description: The id of the Webset the Monitor belongs to
-        cadence:
-          type:
-          - object
-          properties:
-            cron:
-              description: Cron expression for monitor cadence (must be a valid Unix cron with 5 fields). The schedule must trigger at most once per day.
-              type:
-              - string
-            timezone:
-              description: IANA timezone (e.g., "America/New_York")
-              default: Etc/UTC
-              type:
-              - string
-          required:
-          - cron
-          description: How often the monitor will run
-        behavior:
-          type:
-          - object
-          properties:
-            type:
-              type: string
-              const: search
-              default: search
-            config:
-              type:
-              - object
-              properties:
-                query:
-                  type:
-                  - string
-                  minLength: 2
-                  maxLength: 10000
-                  description: The query to search for. By default, the query from the last search is used.
-                criteria:
-                  type:
-                  - array
-                  items:
-                    type:
-                    - object
-                    properties:
-                      description:
-                        type:
-                        - string
-                        minLength: 2
-                        maxLength: 1000
-                    required:
-                    - description
-                  maxItems: 5
-                  description: The criteria to search for. By default, the criteria from the last search is used.
-                entity:
-                  $ref: '#/components/schemas/Entity'
-                  title: Entity
-                  description: The entity to search for. By default, the entity from the last search/import is used.
-                count:
-                  type:
-                  - number
-                  exclusiveMinimum: 0
-                  description: The maximum number of results to find
-                behavior:
-                  default: append
-                  type:
-                  - string
-                  enum:
-                  - override
-                  - append
-                  description: The behaviour of the Search when it is added to a Webset.
-              required:
-              - count
-              description: 'Specify the search parameters for the Monitor.
-
-
-                By default, the search parameters (query, entity and criteria) from the last search are used when no parameters are provided.'
-          required:
-          - type
-          - config
-          description: Behavior to perform when monitor runs
-        lastRun:
-          type: object
-          $ref: '#/components/schemas/MonitorRun'
-          title: MonitorRun
-          description: The last run of the monitor
-          nullable: true
-        nextRunAt:
-          type: string
-          format: date-time
-          description: Date and time when the next run will occur in
-          nullable: true
-        metadata:
-          description: Set of key-value pairs you want to associate with this object.
-          type:
-          - object
-          additionalProperties:
-            type:
-            - string
-            maxLength: 1000
-        createdAt:
-          type:
-          - string
-          format: date-time
-          description: When the monitor was created
-        updatedAt:
-          type:
-          - string
-          format: date-time
-          description: When the monitor was last updated
-      required:
-      - id
-      - object
-      - status
-      - websetId
-      - cadence
-      - behavior
-      - lastRun
-      - nextRunAt
-      - metadata
-      - createdAt
-      - updatedAt
+      title: Person
     SearchMonitorSearch:
       type: object
       properties:
@@ -1107,22 +533,127 @@ components:
           $ref: '#/components/schemas/SearchMonitorContents'
       required:
       - query
-    SearchMonitorTriggerOutput:
-      type: object
+    MonitorCadence:
+      type:
+      - object
+      properties:
+        cron:
+          description: Cron expression for monitor cadence (must be a valid Unix cron with 5 fields). The schedule must trigger at most once per day.
+          type:
+          - string
+        timezone:
+          description: IANA timezone (e.g., "America/New_York")
+          default: Etc/UTC
+          type:
+          - string
+      required:
+      - cron
+    MonitorBehavior:
+      type:
+      - object
       properties:
         type:
           type: string
-          const: interval
-          description: The type of trigger. Currently only `interval` is supported.
-          default: interval
-        period:
-          type: string
-          description: A duration string specifying how often the monitor runs (e.g., "1h", "6h", "1d", "7d"). Single-unit only. Minimum interval is 1 hour. The schedule is anchored to the monitor's creation time (e.g., a daily monitor created at 2:30 PM runs daily around 2:30 PM).
-          example: 6h
+          const: search
+          default: search
+        config:
+          type:
+          - object
+          properties:
+            query:
+              type:
+              - string
+              minLength: 2
+              maxLength: 10000
+              description: The query to search for. By default, the query from the last search is used.
+            criteria:
+              type:
+              - array
+              items:
+                type:
+                - object
+                properties:
+                  description:
+                    type:
+                    - string
+                    minLength: 2
+                    maxLength: 1000
+                required:
+                - description
+              maxItems: 5
+              description: The criteria to search for. By default, the criteria from the last search is used.
+            entity:
+              $ref: '#/components/schemas/Entity'
+              title: Entity
+              description: The entity to search for. By default, the entity from the last search/import is used.
+            count:
+              type:
+              - number
+              exclusiveMinimum: 0
+              description: The maximum number of results to find
+            behavior:
+              default: append
+              type:
+              - string
+              enum:
+              - override
+              - append
+              description: The behaviour of the Search when it is added to a Webset.
+          required:
+          - count
+          description: 'Specify the search parameters for the Monitor.
+
+
+            By default, the search parameters (query, entity and criteria) from the last search are used when no parameters are provided.'
       required:
       - type
-      - period
-      additionalProperties: false
+      - config
+    BatchMonitorsRequest:
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - delete
+          - pause
+          - unpause
+          description: The action to perform on matching monitors. `delete` permanently removes them, `pause` sets their status to paused, and `unpause` sets their status to active.
+        filter:
+          type: object
+          properties:
+            name:
+              type: string
+              maxLength: 250
+              description: Filter by name (case-insensitive substring match)
+            status:
+              type: string
+              enum:
+              - active
+              - paused
+              - disabled
+              description: Filter by monitor status
+            metadata:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type: string
+                maxLength: 1000
+              description: Filter by metadata key-value pairs (exact match, AND semantics)
+          description: At least one filter field must be provided to prevent accidental bulk operations.
+        dry_run:
+          type: boolean
+          description: When `true`, returns the monitors that would be affected without performing the action. Defaults to `true`.
+          default: true
+        limit:
+          type: integer
+          minimum: 1
+          maximum: 500
+          description: Maximum number of monitors to process in a single request. Defaults to 50, maximum 500.
+          default: 50
+      required:
+      - action
+      - filter
     SearchMonitor:
       type: object
       properties:
@@ -1198,132 +729,54 @@ components:
       - createdAt
       - updatedAt
       additionalProperties: false
-    SearchMonitorWebhook:
+    SearchMonitorTriggerOutput:
       type: object
       properties:
-        url:
-          type: string
-          format: uri
-          description: The HTTPS URL to receive webhook events. Must not point to localhost or private IP ranges.
-        events:
-          type: array
-          items:
-            type: string
-            enum:
-            - monitor.created
-            - monitor.updated
-            - monitor.deleted
-            - monitor.run.created
-            - monitor.run.completed
-          description: Which events to subscribe to. Defaults to all events if not specified.
-      required:
-      - url
-    MonitorBehavior:
-      type:
-      - object
-      properties:
         type:
           type: string
-          const: search
-          default: search
-        config:
-          type:
-          - object
-          properties:
-            query:
-              type:
-              - string
-              minLength: 2
-              maxLength: 10000
-              description: The query to search for. By default, the query from the last search is used.
-            criteria:
-              type:
-              - array
-              items:
-                type:
-                - object
-                properties:
-                  description:
-                    type:
-                    - string
-                    minLength: 2
-                    maxLength: 1000
-                required:
-                - description
-              maxItems: 5
-              description: The criteria to search for. By default, the criteria from the last search is used.
-            entity:
-              $ref: '#/components/schemas/Entity'
-              title: Entity
-              description: The entity to search for. By default, the entity from the last search/import is used.
-            count:
-              type:
-              - number
-              exclusiveMinimum: 0
-              description: The maximum number of results to find
-            behavior:
-              default: append
-              type:
-              - string
-              enum:
-              - override
-              - append
-              description: The behaviour of the Search when it is added to a Webset.
-          required:
-          - count
-          description: 'Specify the search parameters for the Monitor.
-
-
-            By default, the search parameters (query, entity and criteria) from the last search are used when no parameters are provided.'
+          const: interval
+          description: The type of trigger. Currently only `interval` is supported.
+          default: interval
+        period:
+          type: string
+          description: A duration string specifying how often the monitor runs (e.g., "1h", "6h", "1d", "7d"). Single-unit only. Minimum interval is 1 hour. The schedule is anchored to the monitor's creation time (e.g., a daily monitor created at 2:30 PM runs daily around 2:30 PM).
+          example: 6h
       required:
       - type
-      - config
-    CompanyEntity:
-      type:
-      - object
-      properties:
-        type:
+      - period
+      additionalProperties: false
+    Entity:
+      oneOf:
+      - type:
+        - object
+        $ref: '#/components/schemas/CompanyEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/PersonEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/ArticleEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/ResearchPaperEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/CustomEntity'
+    JsonValue:
+      description: Any JSON value.
+      oneOf:
+      - type: 'null'
+      - type: boolean
+      - type: number
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/JsonValue'
+      - type: object
+        propertyNames:
           type: string
-          const: company
-          default: company
-      required:
-      - type
-      title: Company
-    ListMonitorsResponse:
-      type:
-      - object
-      properties:
-        data:
-          type:
-          - array
-          items:
-            type:
-            - object
-            $ref: '#/components/schemas/Monitor'
-          description: The list of monitors
-        hasMore:
-          type:
-          - boolean
-          description: Whether there are more results to paginate through
-        nextCursor:
-          type: string
-          description: The cursor to paginate through the next set of results
-          nullable: true
-      required:
-      - data
-      - hasMore
-      - nextCursor
-    ArticleEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: article
-          default: article
-      required:
-      - type
-      title: Article
+        additionalProperties:
+          $ref: '#/components/schemas/JsonValue'
     BatchMonitorsResponse:
       type: object
       properties:
@@ -1355,205 +808,6 @@ components:
       - dry_run
       - has_more
       additionalProperties: false
-    ResearchPaperEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: research_paper
-          default: research_paper
-      required:
-      - type
-      title: Research Paper
-    SearchMonitorOutputSchemaOutput:
-      anyOf:
-      - oneOf:
-        - type: object
-          properties:
-            type:
-              type: string
-              const: text
-            description:
-              type: string
-          required:
-          - type
-          additionalProperties: false
-        - type: object
-          properties:
-            type:
-              type: string
-              const: object
-            description:
-              type: string
-            properties:
-              type: object
-              propertyNames:
-                type: string
-              additionalProperties:
-                $ref: '#/components/schemas/JsonValue'
-            required:
-              type: array
-              items:
-                type: string
-            additionalProperties:
-              type: boolean
-          required:
-          - type
-          additionalProperties:
-            $ref: '#/components/schemas/JsonValue'
-        description: JSON schema for synthesized output. Supported root types are "text" and "object". When provided, the response includes an output object whose content matches this schema. Works with every search type and adds about 2 seconds of synthesis latency on top of the selected search type.
-        type: object
-      - type: 'null'
-      description: 'Controls the format of the run output. Defaults to `{ "type": "text" }` if not specified. When `type` is `"text"`, the output is a plain text summary. When `type` is `"object"`, the output is structured JSON. If no `properties` are specified with `"object"` type, a schema is inferred automatically; otherwise the output adheres to the provided schema.'
-    PersonEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: person
-          default: person
-      required:
-      - type
-      title: Person
-    SearchMonitorOutputSchema:
-      anyOf:
-      - oneOf:
-        - type: object
-          properties:
-            type:
-              type: string
-              const: text
-            description:
-              type: string
-          required:
-          - type
-        - type: object
-          properties:
-            type:
-              type: string
-              const: object
-            description:
-              type: string
-            properties:
-              type: object
-              propertyNames:
-                type: string
-              additionalProperties:
-                $ref: '#/components/schemas/JsonValue'
-            required:
-              type: array
-              items:
-                type: string
-            additionalProperties:
-              type: boolean
-          required:
-          - type
-          additionalProperties:
-            $ref: '#/components/schemas/JsonValue'
-        description: JSON schema for synthesized output. Supported root types are "text" and "object". When provided, the response includes an output object whose content matches this schema. Works with every search type and adds about 2 seconds of synthesis latency on top of the selected search type.
-        type: object
-      - type: 'null'
-      description: 'Controls the format of the run output. Defaults to `{ "type": "text" }` if not specified. When `type` is `"text"`, the output is a plain text summary. When `type` is `"object"`, the output is structured JSON. If no `properties` are specified with `"object"` type, a schema is inferred automatically; otherwise the output adheres to the provided schema.'
-    MonitorCadence:
-      type:
-      - object
-      properties:
-        cron:
-          description: Cron expression for monitor cadence (must be a valid Unix cron with 5 fields). The schedule must trigger at most once per day.
-          type:
-          - string
-        timezone:
-          description: IANA timezone (e.g., "America/New_York")
-          default: Etc/UTC
-          type:
-          - string
-      required:
-      - cron
-    SearchMonitorSearchOutput:
-      type: object
-      properties:
-        query:
-          type: string
-          minLength: 1
-          description: The query string for the search.
-          example: Latest developments in LLM capabilities
-        numResults:
-          type: integer
-          minimum: 1
-          maximum: 100
-          description: Number of results to return. Limits vary by search type. The maximum public limit is 100 results. Contact sales (hello@exa.ai) to discuss higher limits.
-          example: 10
-          default: 10
-        contents:
-          $ref: '#/components/schemas/SearchMonitorContentsOutput'
-      required:
-      - query
-      additionalProperties: false
-    BatchMonitorsRequest:
-      type: object
-      properties:
-        action:
-          type: string
-          enum:
-          - delete
-          - pause
-          - unpause
-          description: The action to perform on matching monitors. `delete` permanently removes them, `pause` sets their status to paused, and `unpause` sets their status to active.
-        filter:
-          type: object
-          properties:
-            name:
-              type: string
-              maxLength: 250
-              description: Filter by name (case-insensitive substring match)
-            status:
-              type: string
-              enum:
-              - active
-              - paused
-              - disabled
-              description: Filter by monitor status
-            metadata:
-              type: object
-              propertyNames:
-                type: string
-              additionalProperties:
-                type: string
-                maxLength: 1000
-              description: Filter by metadata key-value pairs (exact match, AND semantics)
-          description: At least one filter field must be provided to prevent accidental bulk operations.
-        dry_run:
-          type: boolean
-          description: When `true`, returns the monitors that would be affected without performing the action. Defaults to `true`.
-          default: true
-        limit:
-          type: integer
-          minimum: 1
-          maximum: 500
-          description: Maximum number of monitors to process in a single request. Defaults to 50, maximum 500.
-          default: 50
-      required:
-      - action
-      - filter
-    Entity:
-      oneOf:
-      - type:
-        - object
-        $ref: '#/components/schemas/CompanyEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/PersonEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/ArticleEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/ResearchPaperEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/CustomEntity'
     SearchMonitorContents:
       type: object
       properties:
@@ -1801,34 +1055,260 @@ components:
               minLength: 1
               maxLength: 100
       description: Content extraction options applied to each search result. All fields are optional.
-    CreateSearchMonitorParameters:
+    SearchMonitorWebhookOutput:
       type: object
       properties:
-        name:
+        url:
           type: string
-          description: An optional name for the monitor
+          format: uri
+          description: The HTTPS URL to receive webhook events. Must not point to localhost or private IP ranges.
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+            - monitor.created
+            - monitor.updated
+            - monitor.deleted
+            - monitor.run.created
+            - monitor.run.completed
+          description: Which events to subscribe to. Defaults to all events if not specified.
+      required:
+      - url
+      additionalProperties: false
+    MonitorRun:
+      type:
+      - object
+      properties:
+        id:
+          type:
+          - string
+          description: The unique identifier for the Monitor Run
+        object:
+          type:
+          - string
+          enum:
+          - monitor_run
+          description: The type of object
+        status:
+          type:
+          - string
+          enum:
+          - created
+          - running
+          - completed
+          - canceled
+          - failed
+          description: The status of the Monitor Run
+        monitorId:
+          type:
+          - string
+          description: The monitor that the run is associated with
+        type:
+          type:
+          - string
+          enum:
+          - search
+          - refresh
+          description: The type of the Monitor Run
+        completedAt:
+          type: string
+          format: date-time
+          description: When the run completed
+          nullable: true
+        failedAt:
+          type: string
+          format: date-time
+          description: When the run failed
+          nullable: true
+        failedReason:
+          type: string
+          description: The reason the run failed
+          nullable: true
+        canceledAt:
+          type: string
+          format: date-time
+          description: When the run was canceled
+          nullable: true
+        createdAt:
+          type:
+          - string
+          format: date-time
+          description: When the run was created
+        updatedAt:
+          type:
+          - string
+          format: date-time
+          description: When the run was last updated
+      required:
+      - id
+      - object
+      - monitorId
+      - status
+      - type
+      - completedAt
+      - failedAt
+      - failedReason
+      - canceledAt
+      - createdAt
+      - updatedAt
+    ResearchPaperEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: research_paper
+          default: research_paper
+      required:
+      - type
+      title: Research Paper
+    CreateSearchMonitorResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the monitor
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: An optional display name
+        status:
+          type: string
+          enum:
+          - active
+          - paused
+          - disabled
+          description: The status of the monitor. `active` monitors run on schedule and can be triggered manually. `paused` monitors can only be triggered manually. `disabled` monitors are auto-disabled after 10 consecutive authentication failures.
         search:
-          $ref: '#/components/schemas/SearchMonitorSearch'
+          $ref: '#/components/schemas/SearchMonitorSearchOutput'
         trigger:
-          $ref: '#/components/schemas/SearchMonitorTrigger'
+          anyOf:
+          - $ref: '#/components/schemas/SearchMonitorTriggerOutput'
+          - type: 'null'
+          description: The interval-based schedule for automatic runs. Null if no schedule is set.
         outputSchema:
-          $ref: '#/components/schemas/SearchMonitorOutputSchema'
+          $ref: '#/components/schemas/SearchMonitorOutputSchemaOutput'
         metadata:
-          type: object
-          propertyNames:
-            type: string
-          additionalProperties:
-            type: string
-          description: Optional key-value metadata. Echoed back in webhook deliveries so you can route updates to systems like Slack.
+          anyOf:
+          - type: object
+            propertyNames:
+              type: string
+            additionalProperties:
+              type: string
+            description: Caller-provided key-value metadata for your own tracking.
+            example:
+              slack_channel_id: C123ABC
+              slack_thread_id: '1745444400.123456'
+              user_id: U123ABC
+          - type: 'null'
+          description: Optional key-value metadata for your own tracking. Echoed back in webhook deliveries so you can route updates to systems like Slack.
           example:
             slack_channel_id: C123ABC
             slack_thread_id: '1745444400.123456'
             user_id: U123ABC
         webhook:
-          $ref: '#/components/schemas/SearchMonitorWebhook'
+          $ref: '#/components/schemas/SearchMonitorWebhookOutput'
+        nextRunAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: When the next scheduled run will occur. Null if no trigger is set.
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+          description: When the monitor was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the monitor was last updated
+        webhookSecret:
+          type: string
+          description: The secret used to verify webhook signatures. This is only returned once at creation time. Store it securely.
       required:
+      - id
+      - name
+      - status
       - search
+      - trigger
+      - outputSchema
+      - metadata
       - webhook
+      - nextRunAt
+      - createdAt
+      - updatedAt
+      - webhookSecret
+      additionalProperties: false
+    SearchMonitorSearchOutput:
+      type: object
+      properties:
+        query:
+          type: string
+          minLength: 1
+          description: The query string for the search.
+          example: Latest developments in LLM capabilities
+        numResults:
+          type: integer
+          minimum: 1
+          maximum: 100
+          description: Number of results to return. Limits vary by search type. The maximum public limit is 100 results. Contact sales (hello@exa.ai) to discuss higher limits.
+          example: 10
+          default: 10
+        contents:
+          $ref: '#/components/schemas/SearchMonitorContentsOutput'
+      required:
+      - query
+      additionalProperties: false
+    CompanyEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: company
+          default: company
+      required:
+      - type
+      title: Company
+    ArticleEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: article
+          default: article
+      required:
+      - type
+      title: Article
+    UpdateMonitor:
+      type:
+      - object
+      properties:
+        status:
+          type:
+          - string
+          enum:
+          - enabled
+          - disabled
+          description: The status of the monitor.
+        metadata:
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+        cadence:
+          type:
+          - object
+          $ref: '#/components/schemas/MonitorCadence'
+        behavior:
+          type:
+          - object
+          $ref: '#/components/schemas/MonitorBehavior'
     SearchMonitorContentsOutput:
       type: object
       properties:
@@ -2082,6 +1562,526 @@ components:
               maxLength: 100
       additionalProperties: false
       description: Content extraction options applied to each search result. All fields are optional.
+    UpdateSearchMonitorParameters:
+      type: object
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Update the monitor name
+        status:
+          type: string
+          enum:
+          - active
+          - paused
+          description: Update the monitor status (can only set to `active` or `paused`)
+        search:
+          type: object
+          properties:
+            query:
+              type: string
+              minLength: 1
+              description: The query string for the search.
+              example: Latest developments in LLM capabilities
+            numResults:
+              type: integer
+              minimum: 1
+              maximum: 100
+              description: Number of results to return. Limits vary by search type. The maximum public limit is 100 results. Contact sales (hello@exa.ai) to discuss higher limits.
+              example: 10
+              default: 10
+            contents:
+              $ref: '#/components/schemas/SearchMonitorContents'
+          description: Partial search params to merge. All fields are optional for updates.
+        trigger:
+          anyOf:
+          - type: object
+            properties:
+              type:
+                type: string
+                const: interval
+                description: The type of trigger. Currently only `interval` is supported.
+                default: interval
+              period:
+                type: string
+                description: A duration string specifying how often the monitor runs (e.g., "1h", "6h", "1d", "7d"). Single-unit only. Minimum interval is 1 hour.
+          - type: 'null'
+          description: Update the schedule. Set to null to remove the schedule.
+        outputSchema:
+          $ref: '#/components/schemas/SearchMonitorOutputSchema'
+        metadata:
+          anyOf:
+          - type: object
+            propertyNames:
+              type: string
+            additionalProperties:
+              type: string
+            description: Caller-provided key-value metadata for your own tracking.
+            example:
+              slack_channel_id: C123ABC
+              slack_thread_id: '1745444400.123456'
+              user_id: U123ABC
+          - type: 'null'
+          description: Update metadata. Set to null to remove. Echoed back in webhook deliveries so you can route updates to systems like Slack.
+          example:
+            slack_channel_id: C123ABC
+            slack_thread_id: '1745444400.123456'
+            user_id: U123ABC
+        webhook:
+          type: object
+          properties:
+            url:
+              type: string
+              format: uri
+              description: The HTTPS URL to receive webhook events. Must not point to localhost or private IP ranges.
+            events:
+              type: array
+              items:
+                type: string
+                enum:
+                - monitor.created
+                - monitor.updated
+                - monitor.deleted
+                - monitor.run.created
+                - monitor.run.completed
+              description: Which events to subscribe to. Defaults to all events if not specified.
+          description: Partial webhook params to merge. All fields are optional for updates.
+    SearchMonitorOutputSchemaOutput:
+      anyOf:
+      - oneOf:
+        - type: object
+          properties:
+            type:
+              type: string
+              const: text
+            description:
+              type: string
+          required:
+          - type
+          additionalProperties: false
+        - type: object
+          properties:
+            type:
+              type: string
+              const: object
+            description:
+              type: string
+            properties:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                $ref: '#/components/schemas/JsonValue'
+            required:
+              type: array
+              items:
+                type: string
+            additionalProperties:
+              type: boolean
+          required:
+          - type
+          additionalProperties:
+            $ref: '#/components/schemas/JsonValue'
+        description: JSON schema for synthesized output. Supported root types are "text" and "object". When provided, the response includes an output object whose content matches this schema. Works with every search type and adds about 2 seconds of synthesis latency on top of the selected search type.
+        type: object
+      - type: 'null'
+      description: 'Controls the format of the run output. Defaults to `{ "type": "text" }` if not specified. When `type` is `"text"`, the output is a plain text summary. When `type` is `"object"`, the output is structured JSON. If no `properties` are specified with `"object"` type, a schema is inferred automatically; otherwise the output adheres to the provided schema.'
+    ListMonitorsResponse:
+      type:
+      - object
+      properties:
+        data:
+          type:
+          - array
+          items:
+            type:
+            - object
+            $ref: '#/components/schemas/Monitor'
+          description: The list of monitors
+        hasMore:
+          type:
+          - boolean
+          description: Whether there are more results to paginate through
+        nextCursor:
+          type: string
+          description: The cursor to paginate through the next set of results
+          nullable: true
+      required:
+      - data
+      - hasMore
+      - nextCursor
+    CreateSearchMonitorParameters:
+      type: object
+      properties:
+        name:
+          type: string
+          description: An optional name for the monitor
+        search:
+          $ref: '#/components/schemas/SearchMonitorSearch'
+        trigger:
+          $ref: '#/components/schemas/SearchMonitorTrigger'
+        outputSchema:
+          $ref: '#/components/schemas/SearchMonitorOutputSchema'
+        metadata:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties:
+            type: string
+          description: Optional key-value metadata. Echoed back in webhook deliveries so you can route updates to systems like Slack.
+          example:
+            slack_channel_id: C123ABC
+            slack_thread_id: '1745444400.123456'
+            user_id: U123ABC
+        webhook:
+          $ref: '#/components/schemas/SearchMonitorWebhook'
+      required:
+      - search
+      - webhook
+    ListSearchMonitorsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchMonitor'
+          description: The list of monitors
+        hasMore:
+          type: boolean
+          description: Whether there are more results
+        nextCursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cursor for the next page
+      required:
+      - data
+      - hasMore
+      additionalProperties: false
+    Monitor:
+      type:
+      - object
+      properties:
+        id:
+          type:
+          - string
+          description: The unique identifier for the Monitor
+        object:
+          type:
+          - string
+          enum:
+          - monitor
+          description: The type of object
+        status:
+          type:
+          - string
+          enum:
+          - enabled
+          - disabled
+          description: The status of the Monitor
+        websetId:
+          type:
+          - string
+          description: The id of the Webset the Monitor belongs to
+        cadence:
+          type:
+          - object
+          properties:
+            cron:
+              description: Cron expression for monitor cadence (must be a valid Unix cron with 5 fields). The schedule must trigger at most once per day.
+              type:
+              - string
+            timezone:
+              description: IANA timezone (e.g., "America/New_York")
+              default: Etc/UTC
+              type:
+              - string
+          required:
+          - cron
+          description: How often the monitor will run
+        behavior:
+          type:
+          - object
+          properties:
+            type:
+              type: string
+              const: search
+              default: search
+            config:
+              type:
+              - object
+              properties:
+                query:
+                  type:
+                  - string
+                  minLength: 2
+                  maxLength: 10000
+                  description: The query to search for. By default, the query from the last search is used.
+                criteria:
+                  type:
+                  - array
+                  items:
+                    type:
+                    - object
+                    properties:
+                      description:
+                        type:
+                        - string
+                        minLength: 2
+                        maxLength: 1000
+                    required:
+                    - description
+                  maxItems: 5
+                  description: The criteria to search for. By default, the criteria from the last search is used.
+                entity:
+                  $ref: '#/components/schemas/Entity'
+                  title: Entity
+                  description: The entity to search for. By default, the entity from the last search/import is used.
+                count:
+                  type:
+                  - number
+                  exclusiveMinimum: 0
+                  description: The maximum number of results to find
+                behavior:
+                  default: append
+                  type:
+                  - string
+                  enum:
+                  - override
+                  - append
+                  description: The behaviour of the Search when it is added to a Webset.
+              required:
+              - count
+              description: 'Specify the search parameters for the Monitor.
+
+
+                By default, the search parameters (query, entity and criteria) from the last search are used when no parameters are provided.'
+          required:
+          - type
+          - config
+          description: Behavior to perform when monitor runs
+        lastRun:
+          type: object
+          $ref: '#/components/schemas/MonitorRun'
+          title: MonitorRun
+          description: The last run of the monitor
+          nullable: true
+        nextRunAt:
+          type: string
+          format: date-time
+          description: Date and time when the next run will occur in
+          nullable: true
+        metadata:
+          description: Set of key-value pairs you want to associate with this object.
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+            maxLength: 1000
+        createdAt:
+          type:
+          - string
+          format: date-time
+          description: When the monitor was created
+        updatedAt:
+          type:
+          - string
+          format: date-time
+          description: When the monitor was last updated
+      required:
+      - id
+      - object
+      - status
+      - websetId
+      - cadence
+      - behavior
+      - lastRun
+      - nextRunAt
+      - metadata
+      - createdAt
+      - updatedAt
+    SearchMonitorWebhook:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The HTTPS URL to receive webhook events. Must not point to localhost or private IP ranges.
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+            - monitor.created
+            - monitor.updated
+            - monitor.deleted
+            - monitor.run.created
+            - monitor.run.completed
+          description: Which events to subscribe to. Defaults to all events if not specified.
+      required:
+      - url
+    CustomEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: custom
+          default: custom
+        description:
+          type:
+          - string
+          minLength: 2
+          maxLength: 200
+      required:
+      - type
+      - description
+      title: Custom
+    TriggerSearchMonitorResponse:
+      type: object
+      properties:
+        triggered:
+          type: boolean
+          description: Whether the monitor was successfully triggered
+      required:
+      - triggered
+      additionalProperties: false
+    SearchMonitorOutputSchema:
+      anyOf:
+      - oneOf:
+        - type: object
+          properties:
+            type:
+              type: string
+              const: text
+            description:
+              type: string
+          required:
+          - type
+        - type: object
+          properties:
+            type:
+              type: string
+              const: object
+            description:
+              type: string
+            properties:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                $ref: '#/components/schemas/JsonValue'
+            required:
+              type: array
+              items:
+                type: string
+            additionalProperties:
+              type: boolean
+          required:
+          - type
+          additionalProperties:
+            $ref: '#/components/schemas/JsonValue'
+        description: JSON schema for synthesized output. Supported root types are "text" and "object". When provided, the response includes an output object whose content matches this schema. Works with every search type and adds about 2 seconds of synthesis latency on top of the selected search type.
+        type: object
+      - type: 'null'
+      description: 'Controls the format of the run output. Defaults to `{ "type": "text" }` if not specified. When `type` is `"text"`, the output is a plain text summary. When `type` is `"object"`, the output is structured JSON. If no `properties` are specified with `"object"` type, a schema is inferred automatically; otherwise the output adheres to the provided schema.'
+    CreateMonitorParameters:
+      type:
+      - object
+      properties:
+        websetId:
+          type:
+          - string
+          description: The id of the Webset
+        cadence:
+          type:
+          - object
+          properties:
+            cron:
+              description: Cron expression for monitor cadence (must be a valid Unix cron with 5 fields). The schedule must trigger at most once per day.
+              type:
+              - string
+            timezone:
+              description: IANA timezone (e.g., "America/New_York")
+              default: Etc/UTC
+              type:
+              - string
+          required:
+          - cron
+          description: How often the monitor will run
+        behavior:
+          type:
+          - object
+          properties:
+            type:
+              type: string
+              const: search
+              default: search
+            config:
+              type:
+              - object
+              properties:
+                query:
+                  type:
+                  - string
+                  minLength: 2
+                  maxLength: 10000
+                  description: The query to search for. By default, the query from the last search is used.
+                criteria:
+                  type:
+                  - array
+                  items:
+                    type:
+                    - object
+                    properties:
+                      description:
+                        type:
+                        - string
+                        minLength: 2
+                        maxLength: 1000
+                    required:
+                    - description
+                  maxItems: 5
+                  description: The criteria to search for. By default, the criteria from the last search is used.
+                entity:
+                  $ref: '#/components/schemas/Entity'
+                  title: Entity
+                  description: The entity to search for. By default, the entity from the last search/import is used.
+                count:
+                  type:
+                  - number
+                  exclusiveMinimum: 0
+                  description: The maximum number of results to find
+                behavior:
+                  default: append
+                  type:
+                  - string
+                  enum:
+                  - override
+                  - append
+                  description: The behaviour of the Search when it is added to a Webset.
+              required:
+              - count
+              description: 'Specify the search parameters for the Monitor.
+
+
+                By default, the search parameters (query, entity and criteria) from the last search are used when no parameters are provided.'
+          required:
+          - type
+          - config
+          description: Behavior to perform when monitor runs
+        metadata:
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+      required:
+      - websetId
+      - cadence
+      - behavior
   securitySchemes:
     apiKey:
       type: apiKey
