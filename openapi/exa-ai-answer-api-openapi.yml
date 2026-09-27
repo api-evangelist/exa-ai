@@ -61,6 +61,21 @@ paths:
       - Answer
 components:
   schemas:
+    JsonValue:
+      description: Any JSON value.
+      oneOf:
+      - type: 'null'
+      - type: boolean
+      - type: number
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/JsonValue'
+      - type: object
+        propertyNames:
+          type: string
+        additionalProperties:
+          $ref: '#/components/schemas/JsonValue'
     AnswerStreamChunk:
       description: 'Schema for each JSON payload emitted in an `/answer` server-sent event stream. Each event is emitted as `data: <json>`.'
       oneOf:
@@ -269,6 +284,26 @@ components:
       required:
       - answer
       additionalProperties: false
+    CostDollarsOutput:
+      type: object
+      properties:
+        total:
+          description: Estimated total dollar cost for the completed request. This response value is not an invoice record.
+          example: 0.007
+          format: float
+          type: number
+        search:
+          description: Endpoint-dependent estimated search cost breakdown by retrieval mode. Instant, fast, and auto search responses may include neural search cost. Deep search modes may be reflected only in total.
+          type: object
+          properties:
+            neural:
+              description: Cost of neural search operations.
+              example: 0.007
+              format: float
+              type: number
+          additionalProperties: false
+      additionalProperties: false
+      description: Endpoint-dependent estimated dollar cost breakdown for the completed request. Billing is computed from usage counters rather than this response object.
     AnswerRequest:
       type: object
       properties:
@@ -317,41 +352,6 @@ components:
           description: A [JSON Schema Draft 7](https://json-schema.org/draft-07) specification for the desired answer structure. When provided, the answer is returned as a structured object matching the schema instead of a plain string.
       required:
       - query
-    JsonValue:
-      description: Any JSON value.
-      oneOf:
-      - type: 'null'
-      - type: boolean
-      - type: number
-      - type: string
-      - type: array
-        items:
-          $ref: '#/components/schemas/JsonValue'
-      - type: object
-        propertyNames:
-          type: string
-        additionalProperties:
-          $ref: '#/components/schemas/JsonValue'
-    CostDollarsOutput:
-      type: object
-      properties:
-        total:
-          description: Estimated total dollar cost for the completed request. This response value is not an invoice record.
-          example: 0.007
-          format: float
-          type: number
-        search:
-          description: Endpoint-dependent estimated search cost breakdown by retrieval mode. Instant, fast, and auto search responses may include neural search cost. Deep search modes may be reflected only in total.
-          type: object
-          properties:
-            neural:
-              description: Cost of neural search operations.
-              example: 0.007
-              format: float
-              type: number
-          additionalProperties: false
-      additionalProperties: false
-      description: Endpoint-dependent estimated dollar cost breakdown for the completed request. Billing is computed from usage counters rather than this response object.
   securitySchemes:
     apiKey:
       type: apiKey
