@@ -168,6 +168,26 @@ components:
       - createdAt
       - updatedAt
       additionalProperties: false
+    ListSearchMonitorRunsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchMonitorRun'
+          description: The list of runs
+        hasMore:
+          type: boolean
+          description: Whether there are more results
+        nextCursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Cursor for the next page
+      required:
+      - data
+      - hasMore
+      additionalProperties: false
     JsonValue:
       description: Any JSON value.
       oneOf:
@@ -241,26 +261,6 @@ components:
               additionalProperties: false
           - type: 'null'
           description: Field-level citations with confidence levels
-      additionalProperties: false
-    ListSearchMonitorRunsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchMonitorRun'
-          description: The list of runs
-        hasMore:
-          type: boolean
-          description: Whether there are more results
-        nextCursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Cursor for the next page
-      required:
-      - data
-      - hasMore
       additionalProperties: false
   securitySchemes:
     apiKey:

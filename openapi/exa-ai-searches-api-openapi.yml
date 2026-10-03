@@ -199,107 +199,6 @@ paths:
           print(f"Cancelled search: {search.id}")'
 components:
   schemas:
-    WebsetSearchCanceledReason:
-      type: string
-      enum:
-      - webset_deleted
-      - webset_canceled
-      - out_of_credits
-    CreateCriterionParameters:
-      type:
-      - object
-      properties:
-        description:
-          type:
-          - string
-          minLength: 1
-          maxLength: 1000
-          description: The description of the criterion
-      required:
-      - description
-    ResearchPaperEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: research_paper
-          default: research_paper
-      required:
-      - type
-      title: Research Paper
-    Entity:
-      oneOf:
-      - type:
-        - object
-        $ref: '#/components/schemas/CompanyEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/PersonEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/ArticleEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/ResearchPaperEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/CustomEntity'
-    PersonEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: person
-          default: person
-      required:
-      - type
-      title: Person
-    WebsetSearchBehavior:
-      type: string
-      enum:
-      - override
-      - append
-    ArticleEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: article
-          default: article
-      required:
-      - type
-      title: Article
-    CompanyEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: company
-          default: company
-      required:
-      - type
-      title: Company
-    CustomEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: custom
-          default: custom
-        description:
-          type:
-          - string
-          minLength: 2
-          maxLength: 200
-      required:
-      - type
-      - description
-      title: Custom
     WebsetSearch:
       type:
       - object
@@ -706,6 +605,107 @@ components:
       required:
       - count
       - query
+    WebsetSearchCanceledReason:
+      type: string
+      enum:
+      - webset_deleted
+      - webset_canceled
+      - out_of_credits
+    CompanyEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: company
+          default: company
+      required:
+      - type
+      title: Company
+    Entity:
+      oneOf:
+      - type:
+        - object
+        $ref: '#/components/schemas/CompanyEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/PersonEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/ArticleEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/ResearchPaperEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/CustomEntity'
+    WebsetSearchBehavior:
+      type: string
+      enum:
+      - override
+      - append
+    ResearchPaperEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: research_paper
+          default: research_paper
+      required:
+      - type
+      title: Research Paper
+    CreateCriterionParameters:
+      type:
+      - object
+      properties:
+        description:
+          type:
+          - string
+          minLength: 1
+          maxLength: 1000
+          description: The description of the criterion
+      required:
+      - description
+    ArticleEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: article
+          default: article
+      required:
+      - type
+      title: Article
+    PersonEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: person
+          default: person
+      required:
+      - type
+      title: Person
+    CustomEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: custom
+          default: custom
+        description:
+          type:
+          - string
+          minLength: 2
+          maxLength: 200
+      required:
+      - type
+      - description
+      title: Custom
   securitySchemes:
     apiKey:
       type: apiKey

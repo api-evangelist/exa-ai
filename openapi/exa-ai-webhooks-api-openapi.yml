@@ -284,30 +284,6 @@ paths:
           print("Webhook deleted successfully")'
 components:
   schemas:
-    ListWebhooksResponse:
-      type:
-      - object
-      properties:
-        data:
-          type:
-          - array
-          items:
-            type:
-            - object
-            $ref: '#/components/schemas/Webhook'
-          description: The list of webhooks
-        hasMore:
-          type:
-          - boolean
-          description: Whether there are more results to paginate through
-        nextCursor:
-          type: string
-          description: The cursor to paginate through the next set of results
-          nullable: true
-      required:
-      - data
-      - hasMore
-      - nextCursor
     CreateWebhookParameters:
       type:
       - object
@@ -338,6 +314,33 @@ components:
       required:
       - events
       - url
+    UpdateWebhookParameters:
+      type:
+      - object
+      properties:
+        events:
+          type:
+          - array
+          items:
+            type:
+            - string
+            $ref: '#/components/schemas/EventType'
+          minItems: 1
+          maxItems: 19
+          description: The events to trigger the webhook
+        url:
+          type:
+          - string
+          format: uri
+          description: The URL to send the webhook to
+        metadata:
+          description: Set of key-value pairs you want to associate with this object.
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+            maxLength: 1000
     Webhook:
       type:
       - object
@@ -426,33 +429,30 @@ components:
       - monitor.run.completed
       - webset.export.created
       - webset.export.completed
-    UpdateWebhookParameters:
+    ListWebhooksResponse:
       type:
       - object
       properties:
-        events:
+        data:
           type:
           - array
           items:
             type:
-            - string
-            $ref: '#/components/schemas/EventType'
-          minItems: 1
-          maxItems: 19
-          description: The events to trigger the webhook
-        url:
+            - object
+            $ref: '#/components/schemas/Webhook'
+          description: The list of webhooks
+        hasMore:
           type:
-          - string
-          format: uri
-          description: The URL to send the webhook to
-        metadata:
-          description: Set of key-value pairs you want to associate with this object.
-          type:
-          - object
-          additionalProperties:
-            type:
-            - string
-            maxLength: 1000
+          - boolean
+          description: Whether there are more results to paginate through
+        nextCursor:
+          type: string
+          description: The cursor to paginate through the next set of results
+          nullable: true
+      required:
+      - data
+      - hasMore
+      - nextCursor
   securitySchemes:
     apiKey:
       type: apiKey
