@@ -181,7 +181,98 @@ paths:
           print(f"Event: {event.id} - {event.type}")'
 components:
   schemas:
-    WebsetItemArticleProperties:
+    WebsetItem:
+      type:
+      - object
+      properties:
+        id:
+          type:
+          - string
+          description: The unique identifier for the Webset Item
+        object:
+          type: string
+          const: webset_item
+          default: webset_item
+        source:
+          type:
+          - string
+          enum:
+          - search
+          - import
+          description: The source of the Item
+        sourceId:
+          type:
+          - string
+          description: The unique identifier for the source
+        sourceEntityId:
+          type:
+          - string
+          description: The original identifier used to resolve this item (e.g., email, name, or URL). Only relevant when the source is import.
+        websetId:
+          type:
+          - string
+          description: The unique identifier for the Webset this Item belongs to.
+        properties:
+          oneOf:
+          - type:
+            - object
+            $ref: '#/components/schemas/WebsetItemPersonProperties'
+            title: Person
+          - type:
+            - object
+            $ref: '#/components/schemas/WebsetItemCompanyProperties'
+            title: Company
+          - type:
+            - object
+            $ref: '#/components/schemas/WebsetItemArticleProperties'
+            title: Article
+          - type:
+            - object
+            $ref: '#/components/schemas/WebsetItemResearchPaperProperties'
+            title: Research Paper
+          - type:
+            - object
+            $ref: '#/components/schemas/WebsetItemCustomProperties'
+            title: Custom
+          description: The properties of the Item
+        evaluations:
+          type:
+          - array
+          items:
+            type:
+            - object
+            $ref: '#/components/schemas/WebsetItemEvaluation'
+          description: The criteria evaluations of the item
+        enrichments:
+          type: array
+          items:
+            type:
+            - object
+            $ref: '#/components/schemas/EnrichmentResult'
+          description: The enrichments results of the Webset item
+          nullable: true
+        createdAt:
+          type:
+          - string
+          format: date-time
+          description: The date and time the item was created
+        updatedAt:
+          type:
+          - string
+          format: date-time
+          description: The date and time the item was last updated
+      required:
+      - id
+      - object
+      - source
+      - sourceId
+      - websetId
+      - properties
+      - evaluations
+      - enrichments
+      - createdAt
+      - updatedAt
+    ArticleEntity:
       type:
       - object
       properties:
@@ -189,46 +280,57 @@ components:
           type: string
           const: article
           default: article
+      required:
+      - type
+      title: Article
+    WebsetItemCustomProperties:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: custom
+          default: custom
         url:
           type:
           - string
           format: uri
-          description: The URL of the article
+          description: The URL of the Item
         description:
           type:
           - string
-          description: Short description of the relevance of the article
+          description: Short description of the Item
         content:
           type: string
-          description: The text content for the article
+          description: The text content of the Item
           nullable: true
-        article:
+        custom:
           type:
           - object
           properties:
             title:
               type: string
-              description: The title of the article
+              description: The title of the website
               nullable: true
             author:
               type: string
-              description: The author(s) of the article
+              description: The author(s) of the website
               nullable: true
             publishedAt:
               type: string
-              description: The date and time the article was published
+              description: The date and time the website was published
               nullable: true
           required:
           - title
           - author
           - publishedAt
-          title: WebsetItemArticlePropertiesFields
+          title: WebsetItemCustomPropertiesFields
       required:
       - type
       - url
       - description
       - content
-      - article
+      - custom
     Import:
       type:
       - object
@@ -321,256 +423,282 @@ components:
       - failedMessage
       - createdAt
       - updatedAt
-    WebsetSearchBehavior:
-      type: string
-      enum:
-      - override
-      - append
-    WebsetItemCompanyProperties:
+    ResearchPaperEntity:
       type:
       - object
       properties:
         type:
           type: string
-          const: company
-          default: company
-        url:
-          type:
-          - string
-          format: uri
-          description: The URL of the company website
-        description:
-          type:
-          - string
-          description: Short description of the relevance of the company
-        content:
-          type: string
-          description: The text content of the company website
-          nullable: true
-        company:
-          type:
-          - object
-          properties:
-            name:
-              type:
-              - string
-              description: The name of the company
-            location:
-              type: string
-              description: The main location of the company
-              nullable: true
-            employees:
-              type: number
-              description: The number of employees of the company
-              nullable: true
-            industry:
-              type: string
-              description: The industry of the company
-              nullable: true
-            about:
-              type: string
-              description: A short description of the company
-              nullable: true
-            logoUrl:
-              type: string
-              format: uri
-              description: The logo URL of the company
-              nullable: true
-            foundedYear:
-              type: number
-              description: The year the company was founded
-              nullable: true
-            headquarters:
-              type: object
-              nullable: true
-              description: The structured headquarters address of the company
-              properties:
-                address:
-                  type: string
-                  description: The street address of the headquarters
-                  nullable: true
-                city:
-                  type: string
-                  description: The city of the headquarters
-                  nullable: true
-                state:
-                  type: string
-                  description: The state or region of the headquarters
-                  nullable: true
-                postalCode:
-                  type: string
-                  description: The postal code of the headquarters
-                  nullable: true
-                country:
-                  type: string
-                  description: The country of the headquarters
-                  nullable: true
-                countryCode:
-                  type: string
-                  description: The ISO country code of the headquarters
-                  nullable: true
-              required:
-              - address
-              - city
-              - state
-              - postalCode
-              - country
-              - countryCode
-              title: WebsetItemCompanyHeadquarters
-            financials:
-              type: object
-              nullable: true
-              description: Financial information about the company
-              properties:
-                revenueAnnual:
-                  type: number
-                  description: The annual revenue of the company (USD)
-                  nullable: true
-                fundingTotal:
-                  type: number
-                  description: The total funding raised by the company (USD)
-                  nullable: true
-                fundingLatestRound:
-                  type: object
-                  nullable: true
-                  description: The latest funding round
-                  properties:
-                    name:
-                      type: string
-                      description: The name of the funding round (e.g. Series A)
-                      nullable: true
-                    date:
-                      type: string
-                      description: The date of the funding round
-                      nullable: true
-                    amount:
-                      type: number
-                      description: The amount raised in the funding round (USD)
-                      nullable: true
-                  required:
-                  - name
-                  - date
-                  - amount
-                  title: WebsetItemCompanyFundingRound
-              required:
-              - revenueAnnual
-              - fundingTotal
-              - fundingLatestRound
-              title: WebsetItemCompanyFinancials
-            webTraffic:
-              type: object
-              nullable: true
-              description: Web traffic metrics for the company
-              properties:
-                visitsMonthly:
-                  type: number
-                  description: The estimated monthly website visits
-                  nullable: true
-                uniqueVisitors:
-                  type: number
-                  description: The estimated monthly unique visitors
-                  nullable: true
-              required:
-              - visitsMonthly
-              - uniqueVisitors
-              title: WebsetItemCompanyWebTraffic
-          required:
-          - name
-          - location
-          - employees
-          - industry
-          - about
-          - logoUrl
-          - foundedYear
-          - headquarters
-          - financials
-          - webTraffic
-          title: WebsetItemCompanyPropertiesFields
+          const: research_paper
+          default: research_paper
       required:
       - type
-      - url
-      - description
-      - content
-      - company
-    EnrichmentResult:
+      title: Research Paper
+    WebsetSearch:
       type:
       - object
       properties:
+        id:
+          type:
+          - string
+          description: The unique identifier for the search
         object:
           type: string
-          const: enrichment_result
-          default: enrichment_result
+          const: webset_search
+          default: webset_search
         status:
           type:
           - string
           enum:
+          - created
           - pending
+          - running
           - completed
           - canceled
-          description: The status of the enrichment result.
-        format:
+          description: The status of the search
+          title: WebsetSearchStatus
+        websetId:
           type:
           - string
-          $ref: '#/components/schemas/WebsetEnrichmentFormat'
-        result:
-          type: array
-          items:
-            type:
-            - string
-          description: The result of the enrichment.
+          description: The unique identifier for the Webset this search belongs to
+        query:
+          description: The query used to create the search.
+          type:
+          - string
+          minLength: 1
+          maxLength: 5000
+        entity:
+          $ref: '#/components/schemas/Entity'
+          description: 'The entity the search will return results for.
+
+
+            When no entity is provided during creation, we will automatically select the best entity based on the query.'
           nullable: true
-        reasoning:
-          type: string
-          description: The reasoning for the result when an Agent is used.
-          nullable: true
-        references:
+        criteria:
           type:
           - array
           items:
             type:
             - object
             properties:
-              title:
-                type: string
-                description: The title of the reference
-                nullable: true
-              snippet:
-                type: string
-                description: The relevant snippet of the reference content
-                nullable: true
-              url:
+              description:
+                description: The description of the criterion
                 type:
                 - string
-                format: uri
-                description: The URL of the reference
+                minLength: 1
+                maxLength: 1000
+              successRate:
+                type:
+                - number
+                minimum: 0
+                maximum: 100
+                description: Value between 0 and 100 representing the percentage of results that meet the criterion.
             required:
-            - title
-            - snippet
-            - url
-          description: The references used to generate the result.
-        enrichmentId:
+            - description
+            - successRate
+          description: The criteria the search will use to evaluate the results. If not provided, we will automatically generate them for you.
+        count:
+          type:
+          - number
+          minimum: 1
+          description: The number of results the search will attempt to find. The actual number of results may be less than this number depending on the search complexity.
+        maxPeoplePerCompany:
+          type: integer
+          minimum: 1
+          description: The soft cap requested for matching people from the same current employer company, or null when no cap was requested.
+          nullable: true
+        behavior:
+          default: override
           type:
           - string
-          description: The id of the Enrichment that generated the result
-      required:
-      - object
-      - status
-      - format
-      - result
-      - reasoning
-      - references
-      - enrichmentId
-    ArticleEntity:
-      type:
-      - object
-      properties:
-        type:
+          $ref: '#/components/schemas/WebsetSearchBehavior'
+          description: 'The behavior of the search when it is added to a Webset.
+
+
+            - `override`: the search will replace the existing Items found in the Webset and evaluate them against the new criteria. Any Items that don''t match the new criteria will be discarded.
+
+            - `append`: the search will add the new Items found to the existing Webset. Any Items that don''t match the new criteria will be discarded.'
+        exclude:
+          type:
+          - array
+          items:
+            type:
+            - object
+            properties:
+              source:
+                type:
+                - string
+                enum:
+                - import
+                - webset
+              id:
+                type:
+                - string
+            required:
+            - source
+            - id
+          description: Sources (existing imports or websets) used to omit certain results to be found during the search.
+        scope:
+          type:
+          - array
+          items:
+            type:
+            - object
+            properties:
+              source:
+                type:
+                - string
+                enum:
+                - import
+                - webset
+              id:
+                type:
+                - string
+              relationship:
+                type:
+                - object
+                properties:
+                  definition:
+                    type:
+                    - string
+                    description: What the relationship of the entities you hope to find is relative to the entities contained in the provided source.
+                  limit:
+                    type:
+                    - number
+                    minimum: 1
+                    maximum: 10
+                required:
+                - definition
+                - limit
+            required:
+            - source
+            - id
+          description: 'The scope of the search. By default, there is no scope - thus searching the web.
+
+
+            If provided during creation, the search will only be performed on the sources provided.'
+        progress:
+          type:
+          - object
+          properties:
+            found:
+              type:
+              - number
+              description: The number of results found so far
+            analyzed:
+              type:
+              - number
+              description: The number of results analyzed so far
+            completion:
+              type:
+              - number
+              minimum: 0
+              maximum: 100
+              description: The completion percentage of the search
+            timeLeft:
+              type: number
+              description: The estimated time remaining in seconds, null if unknown
+              nullable: true
+          required:
+          - found
+          - analyzed
+          - completion
+          - timeLeft
+          description: The progress of the search
+        recall:
+          type: object
+          properties:
+            expected:
+              type:
+              - object
+              properties:
+                total:
+                  type:
+                  - number
+                  description: The estimated total number of potential matches
+                confidence:
+                  type:
+                  - string
+                  enum:
+                  - high
+                  - medium
+                  - low
+                  description: The confidence in the estimate
+                bounds:
+                  type:
+                  - object
+                  properties:
+                    min:
+                      type:
+                      - number
+                      description: The minimum estimated total number of potential matches
+                    max:
+                      type:
+                      - number
+                      description: The maximum estimated total number of potential matches
+                  required:
+                  - min
+                  - max
+              required:
+              - total
+              - confidence
+              - bounds
+            reasoning:
+              type:
+              - string
+              description: The reasoning for the estimate
+          required:
+          - expected
+          - reasoning
+          description: Recall metrics for the search, null if not yet computed or requested.
+          nullable: true
+        metadata:
+          default: {}
+          description: Set of key-value pairs you want to associate with this object.
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+            maxLength: 1000
+        canceledAt:
           type: string
-          const: article
-          default: article
+          format: date-time
+          description: The date and time the search was canceled
+          nullable: true
+        canceledReason:
+          type: string
+          $ref: '#/components/schemas/WebsetSearchCanceledReason'
+          description: The reason the search was canceled
+          nullable: true
+        createdAt:
+          type:
+          - string
+          format: date-time
+          description: The date and time the search was created
+        updatedAt:
+          type:
+          - string
+          format: date-time
+          description: The date and time the search was updated
       required:
-      - type
-      title: Article
+      - id
+      - object
+      - websetId
+      - status
+      - query
+      - entity
+      - criteria
+      - count
+      - maxPeoplePerCompany
+      - exclude
+      - scope
+      - progress
+      - recall
+      - canceledAt
+      - canceledReason
+      - createdAt
+      - updatedAt
     Monitor:
       type:
       - object
@@ -714,6 +842,407 @@ components:
       - metadata
       - createdAt
       - updatedAt
+    WebsetSearchCanceledReason:
+      type: string
+      enum:
+      - webset_deleted
+      - webset_canceled
+      - out_of_credits
+    WebsetSearchBehavior:
+      type: string
+      enum:
+      - override
+      - append
+    WebsetEnrichmentFormat:
+      type: string
+      enum:
+      - text
+      - date
+      - number
+      - options
+      - email
+      - phone
+      - url
+    WebsetItemResearchPaperProperties:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: research_paper
+          default: research_paper
+        url:
+          type:
+          - string
+          format: uri
+          description: The URL of the research paper
+        description:
+          type:
+          - string
+          description: Short description of the relevance of the research paper
+        content:
+          type: string
+          description: The text content of the research paper
+          nullable: true
+        researchPaper:
+          type:
+          - object
+          properties:
+            title:
+              type: string
+              description: The title of the research paper
+              nullable: true
+            author:
+              type: string
+              description: The author(s) of the research paper
+              nullable: true
+            publishedAt:
+              type: string
+              description: The date and time the research paper was published
+              nullable: true
+          required:
+          - title
+          - author
+          - publishedAt
+          title: WebsetItemResearchPaperPropertiesFields
+      required:
+      - type
+      - url
+      - description
+      - content
+      - researchPaper
+    PersonEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: person
+          default: person
+      required:
+      - type
+      title: Person
+    CompanyEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: company
+          default: company
+      required:
+      - type
+      title: Company
+    ListEventsResponse:
+      type:
+      - object
+      properties:
+        data:
+          type:
+          - array
+          items:
+            discriminator:
+              propertyName: type
+            $ref: '#/components/schemas/Event'
+          description: The list of events
+        hasMore:
+          type:
+          - boolean
+          description: Whether there are more results to paginate through
+        nextCursor:
+          type: string
+          description: The cursor to paginate through the next set of results
+          nullable: true
+      required:
+      - data
+      - hasMore
+      - nextCursor
+    WebsetEnrichment:
+      type:
+      - object
+      properties:
+        id:
+          type:
+          - string
+          description: The unique identifier for the enrichment
+        object:
+          type: string
+          const: webset_enrichment
+          default: webset_enrichment
+        status:
+          type:
+          - string
+          enum:
+          - pending
+          - canceled
+          - completed
+          description: The status of the enrichment
+          title: WebsetEnrichmentStatus
+        websetId:
+          type:
+          - string
+          description: The unique identifier for the Webset this enrichment belongs to.
+        title:
+          type: string
+          description: 'The title of the enrichment.
+
+
+            This will be automatically generated based on the description and format.'
+          nullable: true
+        description:
+          type:
+          - string
+          description: The description of the enrichment task provided during the creation of the enrichment.
+        format:
+          type: string
+          $ref: '#/components/schemas/WebsetEnrichmentFormat'
+          description: The format of the enrichment response.
+          nullable: true
+        options:
+          type: array
+          items:
+            type:
+            - object
+            properties:
+              label:
+                type:
+                - string
+                description: The label of the option
+            required:
+            - label
+          description: When the format is options, the different options for the enrichment agent to choose from.
+          title: WebsetEnrichmentOptions
+          nullable: true
+        instructions:
+          type: string
+          description: 'The instructions for the enrichment Agent.
+
+
+            This will be automatically generated based on the description and format.'
+          nullable: true
+        metadata:
+          default: {}
+          description: The metadata of the enrichment
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+            maxLength: 1000
+        createdAt:
+          type:
+          - string
+          format: date-time
+          description: The date and time the enrichment was created
+        updatedAt:
+          type:
+          - string
+          format: date-time
+          description: The date and time the enrichment was updated
+      required:
+      - id
+      - object
+      - status
+      - websetId
+      - title
+      - description
+      - format
+      - options
+      - instructions
+      - createdAt
+      - updatedAt
+    MonitorRun:
+      type:
+      - object
+      properties:
+        id:
+          type:
+          - string
+          description: The unique identifier for the Monitor Run
+        object:
+          type:
+          - string
+          enum:
+          - monitor_run
+          description: The type of object
+        status:
+          type:
+          - string
+          enum:
+          - created
+          - running
+          - completed
+          - canceled
+          - failed
+          description: The status of the Monitor Run
+        monitorId:
+          type:
+          - string
+          description: The monitor that the run is associated with
+        type:
+          type:
+          - string
+          enum:
+          - search
+          - refresh
+          description: The type of the Monitor Run
+        completedAt:
+          type: string
+          format: date-time
+          description: When the run completed
+          nullable: true
+        failedAt:
+          type: string
+          format: date-time
+          description: When the run failed
+          nullable: true
+        failedReason:
+          type: string
+          description: The reason the run failed
+          nullable: true
+        canceledAt:
+          type: string
+          format: date-time
+          description: When the run was canceled
+          nullable: true
+        createdAt:
+          type:
+          - string
+          format: date-time
+          description: When the run was created
+        updatedAt:
+          type:
+          - string
+          format: date-time
+          description: When the run was last updated
+      required:
+      - id
+      - object
+      - monitorId
+      - status
+      - type
+      - completedAt
+      - failedAt
+      - failedReason
+      - canceledAt
+      - createdAt
+      - updatedAt
+    WebsetItemEvaluation:
+      type:
+      - object
+      properties:
+        criterion:
+          type:
+          - string
+          description: The description of the criterion
+        reasoning:
+          type:
+          - string
+          description: The reasoning for the result of the evaluation
+        satisfied:
+          type:
+          - string
+          enum:
+          - 'yes'
+          - 'no'
+          - unclear
+          description: The satisfaction of the criterion
+        references:
+          default: []
+          type:
+          - array
+          items:
+            type:
+            - object
+            properties:
+              title:
+                type: string
+                description: The title of the reference
+                nullable: true
+              snippet:
+                type: string
+                description: The relevant snippet of the reference content
+                nullable: true
+              url:
+                type:
+                - string
+                format: uri
+                description: The URL of the reference
+            required:
+            - title
+            - snippet
+            - url
+          description: The references used to generate the result.
+      required:
+      - criterion
+      - reasoning
+      - satisfied
+    WebsetItemPersonProperties:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: person
+          default: person
+        url:
+          type:
+          - string
+          format: uri
+          description: The URL of the person profile
+        description:
+          type:
+          - string
+          description: Short description of the relevance of the person
+        person:
+          type:
+          - object
+          properties:
+            name:
+              type:
+              - string
+              description: The name of the person
+            location:
+              type: string
+              description: The location of the person
+              nullable: true
+            position:
+              type: string
+              description: The current work position of the person
+              nullable: true
+            company:
+              type: object
+              properties:
+                name:
+                  type:
+                  - string
+                  description: The name of the company
+                location:
+                  type: string
+                  description: The location the person is working at the company
+                  nullable: true
+              required:
+              - name
+              - location
+              title: WebsetItemPersonCompanyPropertiesFields
+              nullable: true
+            pictureUrl:
+              type: string
+              format: uri
+              description: The image URL of the person
+              nullable: true
+          required:
+          - name
+          - location
+          - position
+          - company
+          - pictureUrl
+          title: WebsetItemPersonPropertiesFields
+      required:
+      - type
+      - url
+      - description
+      - person
     Event:
       discriminator:
         propertyName: type
@@ -1246,94 +1775,6 @@ components:
         - createdAt
         title: MonitorRunCompletedEvent
       title: Event
-    WebsetSearchCanceledReason:
-      type: string
-      enum:
-      - webset_deleted
-      - webset_canceled
-      - out_of_credits
-    WebsetEnrichmentFormat:
-      type: string
-      enum:
-      - text
-      - date
-      - number
-      - options
-      - email
-      - phone
-      - url
-    WebsetItemResearchPaperProperties:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: research_paper
-          default: research_paper
-        url:
-          type:
-          - string
-          format: uri
-          description: The URL of the research paper
-        description:
-          type:
-          - string
-          description: Short description of the relevance of the research paper
-        content:
-          type: string
-          description: The text content of the research paper
-          nullable: true
-        researchPaper:
-          type:
-          - object
-          properties:
-            title:
-              type: string
-              description: The title of the research paper
-              nullable: true
-            author:
-              type: string
-              description: The author(s) of the research paper
-              nullable: true
-            publishedAt:
-              type: string
-              description: The date and time the research paper was published
-              nullable: true
-          required:
-          - title
-          - author
-          - publishedAt
-          title: WebsetItemResearchPaperPropertiesFields
-      required:
-      - type
-      - url
-      - description
-      - content
-      - researchPaper
-    ListEventsResponse:
-      type:
-      - object
-      properties:
-        data:
-          type:
-          - array
-          items:
-            discriminator:
-              propertyName: type
-            $ref: '#/components/schemas/Event'
-          description: The list of events
-        hasMore:
-          type:
-          - boolean
-          description: Whether there are more results to paginate through
-        nextCursor:
-          type: string
-          description: The cursor to paginate through the next set of results
-          nullable: true
-      required:
-      - data
-      - hasMore
-      - nextCursor
     CustomEntity:
       type:
       - object
@@ -1351,187 +1792,86 @@ components:
       - type
       - description
       title: Custom
-    WebsetItemPersonProperties:
+    WebsetItemArticleProperties:
       type:
       - object
       properties:
         type:
           type: string
-          const: person
-          default: person
+          const: article
+          default: article
         url:
           type:
           - string
           format: uri
-          description: The URL of the person profile
+          description: The URL of the article
         description:
           type:
           - string
-          description: Short description of the relevance of the person
-        person:
+          description: Short description of the relevance of the article
+        content:
+          type: string
+          description: The text content for the article
+          nullable: true
+        article:
           type:
           - object
           properties:
-            name:
-              type:
-              - string
-              description: The name of the person
-            location:
+            title:
               type: string
-              description: The location of the person
+              description: The title of the article
               nullable: true
-            position:
+            author:
               type: string
-              description: The current work position of the person
+              description: The author(s) of the article
               nullable: true
-            company:
-              type: object
-              properties:
-                name:
-                  type:
-                  - string
-                  description: The name of the company
-                location:
-                  type: string
-                  description: The location the person is working at the company
-                  nullable: true
-              required:
-              - name
-              - location
-              title: WebsetItemPersonCompanyPropertiesFields
-              nullable: true
-            pictureUrl:
+            publishedAt:
               type: string
-              format: uri
-              description: The image URL of the person
+              description: The date and time the article was published
               nullable: true
           required:
-          - name
-          - location
-          - position
-          - company
-          - pictureUrl
-          title: WebsetItemPersonPropertiesFields
+          - title
+          - author
+          - publishedAt
+          title: WebsetItemArticlePropertiesFields
       required:
       - type
       - url
       - description
-      - person
-    MonitorRun:
+      - content
+      - article
+    EnrichmentResult:
       type:
       - object
       properties:
-        id:
-          type:
-          - string
-          description: The unique identifier for the Monitor Run
         object:
-          type:
-          - string
-          enum:
-          - monitor_run
-          description: The type of object
+          type: string
+          const: enrichment_result
+          default: enrichment_result
         status:
           type:
           - string
           enum:
-          - created
-          - running
+          - pending
           - completed
           - canceled
-          - failed
-          description: The status of the Monitor Run
-        monitorId:
+          description: The status of the enrichment result.
+        format:
           type:
           - string
-          description: The monitor that the run is associated with
-        type:
-          type:
-          - string
-          enum:
-          - search
-          - refresh
-          description: The type of the Monitor Run
-        completedAt:
-          type: string
-          format: date-time
-          description: When the run completed
+          $ref: '#/components/schemas/WebsetEnrichmentFormat'
+        result:
+          type: array
+          items:
+            type:
+            - string
+          description: The result of the enrichment.
           nullable: true
-        failedAt:
-          type: string
-          format: date-time
-          description: When the run failed
-          nullable: true
-        failedReason:
-          type: string
-          description: The reason the run failed
-          nullable: true
-        canceledAt:
-          type: string
-          format: date-time
-          description: When the run was canceled
-          nullable: true
-        createdAt:
-          type:
-          - string
-          format: date-time
-          description: When the run was created
-        updatedAt:
-          type:
-          - string
-          format: date-time
-          description: When the run was last updated
-      required:
-      - id
-      - object
-      - monitorId
-      - status
-      - type
-      - completedAt
-      - failedAt
-      - failedReason
-      - canceledAt
-      - createdAt
-      - updatedAt
-    Entity:
-      oneOf:
-      - type:
-        - object
-        $ref: '#/components/schemas/CompanyEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/PersonEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/ArticleEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/ResearchPaperEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/CustomEntity'
-    WebsetItemEvaluation:
-      type:
-      - object
-      properties:
-        criterion:
-          type:
-          - string
-          description: The description of the criterion
         reasoning:
-          type:
-          - string
-          description: The reasoning for the result of the evaluation
-        satisfied:
-          type:
-          - string
-          enum:
-          - 'yes'
-          - 'no'
-          - unclear
-          description: The satisfaction of the criterion
+          type: string
+          description: The reasoning for the result when an Agent is used.
+          nullable: true
         references:
-          default: []
           type:
           - array
           items:
@@ -1556,112 +1896,18 @@ components:
             - snippet
             - url
           description: The references used to generate the result.
+        enrichmentId:
+          type:
+          - string
+          description: The id of the Enrichment that generated the result
       required:
-      - criterion
+      - object
+      - status
+      - format
+      - result
       - reasoning
-      - satisfied
-    PersonEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: person
-          default: person
-      required:
-      - type
-      title: Person
-    WebsetItem:
-      type:
-      - object
-      properties:
-        id:
-          type:
-          - string
-          description: The unique identifier for the Webset Item
-        object:
-          type: string
-          const: webset_item
-          default: webset_item
-        source:
-          type:
-          - string
-          enum:
-          - search
-          - import
-          description: The source of the Item
-        sourceId:
-          type:
-          - string
-          description: The unique identifier for the source
-        sourceEntityId:
-          type:
-          - string
-          description: The original identifier used to resolve this item (e.g., email, name, or URL). Only relevant when the source is import.
-        websetId:
-          type:
-          - string
-          description: The unique identifier for the Webset this Item belongs to.
-        properties:
-          oneOf:
-          - type:
-            - object
-            $ref: '#/components/schemas/WebsetItemPersonProperties'
-            title: Person
-          - type:
-            - object
-            $ref: '#/components/schemas/WebsetItemCompanyProperties'
-            title: Company
-          - type:
-            - object
-            $ref: '#/components/schemas/WebsetItemArticleProperties'
-            title: Article
-          - type:
-            - object
-            $ref: '#/components/schemas/WebsetItemResearchPaperProperties'
-            title: Research Paper
-          - type:
-            - object
-            $ref: '#/components/schemas/WebsetItemCustomProperties'
-            title: Custom
-          description: The properties of the Item
-        evaluations:
-          type:
-          - array
-          items:
-            type:
-            - object
-            $ref: '#/components/schemas/WebsetItemEvaluation'
-          description: The criteria evaluations of the item
-        enrichments:
-          type: array
-          items:
-            type:
-            - object
-            $ref: '#/components/schemas/EnrichmentResult'
-          description: The enrichments results of the Webset item
-          nullable: true
-        createdAt:
-          type:
-          - string
-          format: date-time
-          description: The date and time the item was created
-        updatedAt:
-          type:
-          - string
-          format: date-time
-          description: The date and time the item was last updated
-      required:
-      - id
-      - object
-      - source
-      - sourceId
-      - websetId
-      - properties
-      - evaluations
-      - enrichments
-      - createdAt
-      - updatedAt
+      - references
+      - enrichmentId
     Webset:
       type:
       - object
@@ -1781,272 +2027,24 @@ components:
       - dashboardUrl
       - createdAt
       - updatedAt
-    WebsetSearch:
-      type:
-      - object
-      properties:
-        id:
-          type:
-          - string
-          description: The unique identifier for the search
-        object:
-          type: string
-          const: webset_search
-          default: webset_search
-        status:
-          type:
-          - string
-          enum:
-          - created
-          - pending
-          - running
-          - completed
-          - canceled
-          description: The status of the search
-          title: WebsetSearchStatus
-        websetId:
-          type:
-          - string
-          description: The unique identifier for the Webset this search belongs to
-        query:
-          description: The query used to create the search.
-          type:
-          - string
-          minLength: 1
-          maxLength: 5000
-        entity:
-          $ref: '#/components/schemas/Entity'
-          description: 'The entity the search will return results for.
-
-
-            When no entity is provided during creation, we will automatically select the best entity based on the query.'
-          nullable: true
-        criteria:
-          type:
-          - array
-          items:
-            type:
-            - object
-            properties:
-              description:
-                description: The description of the criterion
-                type:
-                - string
-                minLength: 1
-                maxLength: 1000
-              successRate:
-                type:
-                - number
-                minimum: 0
-                maximum: 100
-                description: Value between 0 and 100 representing the percentage of results that meet the criterion.
-            required:
-            - description
-            - successRate
-          description: The criteria the search will use to evaluate the results. If not provided, we will automatically generate them for you.
-        count:
-          type:
-          - number
-          minimum: 1
-          description: The number of results the search will attempt to find. The actual number of results may be less than this number depending on the search complexity.
-        maxPeoplePerCompany:
-          type: integer
-          minimum: 1
-          description: The soft cap requested for matching people from the same current employer company, or null when no cap was requested.
-          nullable: true
-        behavior:
-          default: override
-          type:
-          - string
-          $ref: '#/components/schemas/WebsetSearchBehavior'
-          description: 'The behavior of the search when it is added to a Webset.
-
-
-            - `override`: the search will replace the existing Items found in the Webset and evaluate them against the new criteria. Any Items that don''t match the new criteria will be discarded.
-
-            - `append`: the search will add the new Items found to the existing Webset. Any Items that don''t match the new criteria will be discarded.'
-        exclude:
-          type:
-          - array
-          items:
-            type:
-            - object
-            properties:
-              source:
-                type:
-                - string
-                enum:
-                - import
-                - webset
-              id:
-                type:
-                - string
-            required:
-            - source
-            - id
-          description: Sources (existing imports or websets) used to omit certain results to be found during the search.
-        scope:
-          type:
-          - array
-          items:
-            type:
-            - object
-            properties:
-              source:
-                type:
-                - string
-                enum:
-                - import
-                - webset
-              id:
-                type:
-                - string
-              relationship:
-                type:
-                - object
-                properties:
-                  definition:
-                    type:
-                    - string
-                    description: What the relationship of the entities you hope to find is relative to the entities contained in the provided source.
-                  limit:
-                    type:
-                    - number
-                    minimum: 1
-                    maximum: 10
-                required:
-                - definition
-                - limit
-            required:
-            - source
-            - id
-          description: 'The scope of the search. By default, there is no scope - thus searching the web.
-
-
-            If provided during creation, the search will only be performed on the sources provided.'
-        progress:
-          type:
-          - object
-          properties:
-            found:
-              type:
-              - number
-              description: The number of results found so far
-            analyzed:
-              type:
-              - number
-              description: The number of results analyzed so far
-            completion:
-              type:
-              - number
-              minimum: 0
-              maximum: 100
-              description: The completion percentage of the search
-            timeLeft:
-              type: number
-              description: The estimated time remaining in seconds, null if unknown
-              nullable: true
-          required:
-          - found
-          - analyzed
-          - completion
-          - timeLeft
-          description: The progress of the search
-        recall:
-          type: object
-          properties:
-            expected:
-              type:
-              - object
-              properties:
-                total:
-                  type:
-                  - number
-                  description: The estimated total number of potential matches
-                confidence:
-                  type:
-                  - string
-                  enum:
-                  - high
-                  - medium
-                  - low
-                  description: The confidence in the estimate
-                bounds:
-                  type:
-                  - object
-                  properties:
-                    min:
-                      type:
-                      - number
-                      description: The minimum estimated total number of potential matches
-                    max:
-                      type:
-                      - number
-                      description: The maximum estimated total number of potential matches
-                  required:
-                  - min
-                  - max
-              required:
-              - total
-              - confidence
-              - bounds
-            reasoning:
-              type:
-              - string
-              description: The reasoning for the estimate
-          required:
-          - expected
-          - reasoning
-          description: Recall metrics for the search, null if not yet computed or requested.
-          nullable: true
-        metadata:
-          default: {}
-          description: Set of key-value pairs you want to associate with this object.
-          type:
-          - object
-          additionalProperties:
-            type:
-            - string
-            maxLength: 1000
-        canceledAt:
-          type: string
-          format: date-time
-          description: The date and time the search was canceled
-          nullable: true
-        canceledReason:
-          type: string
-          $ref: '#/components/schemas/WebsetSearchCanceledReason'
-          description: The reason the search was canceled
-          nullable: true
-        createdAt:
-          type:
-          - string
-          format: date-time
-          description: The date and time the search was created
-        updatedAt:
-          type:
-          - string
-          format: date-time
-          description: The date and time the search was updated
-      required:
-      - id
-      - object
-      - websetId
-      - status
-      - query
-      - entity
-      - criteria
-      - count
-      - maxPeoplePerCompany
-      - exclude
-      - scope
-      - progress
-      - recall
-      - canceledAt
-      - canceledReason
-      - createdAt
-      - updatedAt
-    CompanyEntity:
+    Entity:
+      oneOf:
+      - type:
+        - object
+        $ref: '#/components/schemas/CompanyEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/PersonEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/ArticleEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/ResearchPaperEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/CustomEntity'
+    WebsetItemCompanyProperties:
       type:
       - object
       properties:
@@ -2054,162 +2052,164 @@ components:
           type: string
           const: company
           default: company
-      required:
-      - type
-      title: Company
-    ResearchPaperEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: research_paper
-          default: research_paper
-      required:
-      - type
-      title: Research Paper
-    WebsetEnrichment:
-      type:
-      - object
-      properties:
-        id:
-          type:
-          - string
-          description: The unique identifier for the enrichment
-        object:
-          type: string
-          const: webset_enrichment
-          default: webset_enrichment
-        status:
-          type:
-          - string
-          enum:
-          - pending
-          - canceled
-          - completed
-          description: The status of the enrichment
-          title: WebsetEnrichmentStatus
-        websetId:
-          type:
-          - string
-          description: The unique identifier for the Webset this enrichment belongs to.
-        title:
-          type: string
-          description: 'The title of the enrichment.
-
-
-            This will be automatically generated based on the description and format.'
-          nullable: true
-        description:
-          type:
-          - string
-          description: The description of the enrichment task provided during the creation of the enrichment.
-        format:
-          type: string
-          $ref: '#/components/schemas/WebsetEnrichmentFormat'
-          description: The format of the enrichment response.
-          nullable: true
-        options:
-          type: array
-          items:
-            type:
-            - object
-            properties:
-              label:
-                type:
-                - string
-                description: The label of the option
-            required:
-            - label
-          description: When the format is options, the different options for the enrichment agent to choose from.
-          title: WebsetEnrichmentOptions
-          nullable: true
-        instructions:
-          type: string
-          description: 'The instructions for the enrichment Agent.
-
-
-            This will be automatically generated based on the description and format.'
-          nullable: true
-        metadata:
-          default: {}
-          description: The metadata of the enrichment
-          type:
-          - object
-          additionalProperties:
-            type:
-            - string
-            maxLength: 1000
-        createdAt:
-          type:
-          - string
-          format: date-time
-          description: The date and time the enrichment was created
-        updatedAt:
-          type:
-          - string
-          format: date-time
-          description: The date and time the enrichment was updated
-      required:
-      - id
-      - object
-      - status
-      - websetId
-      - title
-      - description
-      - format
-      - options
-      - instructions
-      - createdAt
-      - updatedAt
-    WebsetItemCustomProperties:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: custom
-          default: custom
         url:
           type:
           - string
           format: uri
-          description: The URL of the Item
+          description: The URL of the company website
         description:
           type:
           - string
-          description: Short description of the Item
+          description: Short description of the relevance of the company
         content:
           type: string
-          description: The text content of the Item
+          description: The text content of the company website
           nullable: true
-        custom:
+        company:
           type:
           - object
           properties:
-            title:
+            name:
+              type:
+              - string
+              description: The name of the company
+            location:
               type: string
-              description: The title of the website
+              description: The main location of the company
               nullable: true
-            author:
+            employees:
+              type: number
+              description: The number of employees of the company
+              nullable: true
+            industry:
               type: string
-              description: The author(s) of the website
+              description: The industry of the company
               nullable: true
-            publishedAt:
+            about:
               type: string
-              description: The date and time the website was published
+              description: A short description of the company
               nullable: true
+            logoUrl:
+              type: string
+              format: uri
+              description: The logo URL of the company
+              nullable: true
+            foundedYear:
+              type: number
+              description: The year the company was founded
+              nullable: true
+            headquarters:
+              type: object
+              nullable: true
+              description: The structured headquarters address of the company
+              properties:
+                address:
+                  type: string
+                  description: The street address of the headquarters
+                  nullable: true
+                city:
+                  type: string
+                  description: The city of the headquarters
+                  nullable: true
+                state:
+                  type: string
+                  description: The state or region of the headquarters
+                  nullable: true
+                postalCode:
+                  type: string
+                  description: The postal code of the headquarters
+                  nullable: true
+                country:
+                  type: string
+                  description: The country of the headquarters
+                  nullable: true
+                countryCode:
+                  type: string
+                  description: The ISO country code of the headquarters
+                  nullable: true
+              required:
+              - address
+              - city
+              - state
+              - postalCode
+              - country
+              - countryCode
+              title: WebsetItemCompanyHeadquarters
+            financials:
+              type: object
+              nullable: true
+              description: Financial information about the company
+              properties:
+                revenueAnnual:
+                  type: number
+                  description: The annual revenue of the company (USD)
+                  nullable: true
+                fundingTotal:
+                  type: number
+                  description: The total funding raised by the company (USD)
+                  nullable: true
+                fundingLatestRound:
+                  type: object
+                  nullable: true
+                  description: The latest funding round
+                  properties:
+                    name:
+                      type: string
+                      description: The name of the funding round (e.g. Series A)
+                      nullable: true
+                    date:
+                      type: string
+                      description: The date of the funding round
+                      nullable: true
+                    amount:
+                      type: number
+                      description: The amount raised in the funding round (USD)
+                      nullable: true
+                  required:
+                  - name
+                  - date
+                  - amount
+                  title: WebsetItemCompanyFundingRound
+              required:
+              - revenueAnnual
+              - fundingTotal
+              - fundingLatestRound
+              title: WebsetItemCompanyFinancials
+            webTraffic:
+              type: object
+              nullable: true
+              description: Web traffic metrics for the company
+              properties:
+                visitsMonthly:
+                  type: number
+                  description: The estimated monthly website visits
+                  nullable: true
+                uniqueVisitors:
+                  type: number
+                  description: The estimated monthly unique visitors
+                  nullable: true
+              required:
+              - visitsMonthly
+              - uniqueVisitors
+              title: WebsetItemCompanyWebTraffic
           required:
-          - title
-          - author
-          - publishedAt
-          title: WebsetItemCustomPropertiesFields
+          - name
+          - location
+          - employees
+          - industry
+          - about
+          - logoUrl
+          - foundedYear
+          - headquarters
+          - financials
+          - webTraffic
+          title: WebsetItemCompanyPropertiesFields
       required:
       - type
       - url
       - description
       - content
-      - custom
+      - company
   securitySchemes:
     apiKey:
       type: apiKey

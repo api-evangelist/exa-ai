@@ -77,6 +77,21 @@ paths:
                 $ref: '#/components/schemas/SearchMonitorRun'
 components:
   schemas:
+    JsonValue:
+      description: Any JSON value.
+      oneOf:
+      - type: 'null'
+      - type: boolean
+      - type: number
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/JsonValue'
+      - type: object
+        propertyNames:
+          type: string
+        additionalProperties:
+          $ref: '#/components/schemas/JsonValue'
     SearchMonitorRun:
       type: object
       properties:
@@ -188,21 +203,6 @@ components:
       - data
       - hasMore
       additionalProperties: false
-    JsonValue:
-      description: Any JSON value.
-      oneOf:
-      - type: 'null'
-      - type: boolean
-      - type: number
-      - type: string
-      - type: array
-        items:
-          $ref: '#/components/schemas/JsonValue'
-      - type: object
-        propertyNames:
-          type: string
-        additionalProperties:
-          $ref: '#/components/schemas/JsonValue'
     SearchMonitorRunOutput:
       type: object
       properties:

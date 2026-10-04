@@ -272,30 +272,17 @@ paths:
           print("Import deleted successfully")'
 components:
   schemas:
-    UpdateImport:
-      type:
-      - object
-      properties:
-        metadata:
-          type:
-          - object
-          additionalProperties:
-            type:
-            - string
-        title:
-          type:
-          - string
-    CompanyEntity:
+    ArticleEntity:
       type:
       - object
       properties:
         type:
           type: string
-          const: company
-          default: company
+          const: article
+          default: article
       required:
       - type
-      title: Company
+      title: Article
     ListImportsResponse:
       type:
       - object
@@ -429,6 +416,17 @@ components:
       - type:
         - object
         $ref: '#/components/schemas/CustomEntity'
+    PersonEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: person
+          default: person
+      required:
+      - type
+      title: Person
     ResearchPaperEntity:
       type:
       - object
@@ -507,28 +505,30 @@ components:
         - count
         - format
         - entity
-    ArticleEntity:
+    CompanyEntity:
       type:
       - object
       properties:
         type:
           type: string
-          const: article
-          default: article
+          const: company
+          default: company
       required:
       - type
-      title: Article
-    PersonEntity:
+      title: Company
+    UpdateImport:
       type:
       - object
       properties:
-        type:
-          type: string
-          const: person
-          default: person
-      required:
-      - type
-      title: Person
+        metadata:
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+        title:
+          type:
+          - string
     CustomEntity:
       type:
       - object

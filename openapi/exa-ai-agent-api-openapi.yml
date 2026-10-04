@@ -544,174 +544,46 @@ paths:
                 $ref: '#/components/schemas/AgentErrorResponse'
 components:
   schemas:
-    JsonValue:
-      description: Any JSON value.
-      oneOf:
-      - type: 'null'
-      - type: boolean
-      - type: number
-      - type: string
-      - type: array
-        items:
-          $ref: '#/components/schemas/JsonValue'
-      - type: object
-        propertyNames:
-          type: string
-        additionalProperties:
-          $ref: '#/components/schemas/JsonValue'
-    AgentRun:
+    DeleteAgentRunResponse:
       type: object
       properties:
         id:
           $ref: '#/components/schemas/AgentRunId'
         object:
           type: string
-          const: agent_run
-        status:
-          $ref: '#/components/schemas/AgentRunStatus'
-        stopReason:
-          anyOf:
-          - $ref: '#/components/schemas/AgentStopReason'
-          - type: 'null'
-          description: Why the run stopped. `null` while the run is queued or running.
-        createdAt:
-          type: string
-          format: date-time
-          description: When the run was created
-        completedAt:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          format: date-time
-        request:
-          anyOf:
-          - $ref: '#/components/schemas/AgentRunRequest'
-          - type: 'null'
-        output:
-          $ref: '#/components/schemas/AgentRunOutput'
-        usage:
-          $ref: '#/components/schemas/AgentUsage'
-        costDollars:
-          $ref: '#/components/schemas/AgentCostDollars'
+          const: agent_run.deleted
+        deleted:
+          type: boolean
+          const: true
       required:
       - id
       - object
-      - status
-      - stopReason
-      - createdAt
-      - completedAt
-      - request
-      - output
-      - usage
-      - costDollars
+      - deleted
       additionalProperties: false
-    AgentError:
+    AgentCostDollars:
       type: object
       properties:
-        type:
-          type: string
-          enum:
-          - INVALID_REQUEST
-          - AUTHENTICATION_ERROR
-          - RATE_LIMIT_ERROR
-          - NOT_FOUND
-          - SERVER_ERROR
-        code:
-          type: string
-          enum:
-          - INVALID_REQUEST
-          - MISSING_BETA_HEADER
-          - INVALID_BETA_HEADER
-          - TEAM_NOT_FOUND
-          - RUN_NOT_FOUND
-          - PREVIOUS_RUN_NOT_FOUND
-          - PREVIOUS_RUN_NOT_COMPLETED
-          - CONCURRENCY_LIMIT_REACHED
-          - INVALID_OUTPUT_SCHEMA
-          - TIMEOUT
-          - SERVER_ERROR
-        message:
-          type: string
+        total:
+          type: number
+          minimum: 0
+        agentCompute:
+          type: number
+          minimum: 0
+        search:
+          type: number
+          minimum: 0
+        emails:
+          type: number
+          minimum: 0
+        phoneNumbers:
+          type: number
+          minimum: 0
       required:
-      - type
-      - code
-      - message
-      additionalProperties:
-        $ref: '#/components/schemas/JsonValue'
-    AgentCitation:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          description: Source URL.
-        title:
-          type: string
-          description: Source title.
-      required:
-      - url
-      additionalProperties: false
-    AgentRunEventList:
-      type: object
-      properties:
-        object:
-          type: string
-          const: list
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentRunEvent'
-        hasMore:
-          type: boolean
-          description: Whether there are more results
-        nextCursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-      required:
-      - object
-      - data
-      - hasMore
-      - nextCursor
-      additionalProperties: false
-    AgentErrorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/AgentError'
-      required:
-      - error
-      additionalProperties: false
-    AgentGrounding:
-      type: object
-      properties:
-        field:
-          type: string
-          description: Output field the citations support.
-          example: structured.companies[0].sourceUrl
-        citations:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentCitation'
-        score:
-          anyOf:
-          - type: number
-            minimum: 0
-            maximum: 1
-          - type: 'null'
-        confidence:
-          anyOf:
-          - type: string
-            enum:
-            - low
-            - medium
-            - high
-            description: Model-reported reliability for this field.
-          - type: 'null'
-      required:
-      - field
-      - citations
+      - total
+      - agentCompute
+      - search
+      - emails
+      - phoneNumbers
       additionalProperties: false
     CreateAgentRunRequest:
       type: object
@@ -785,14 +657,77 @@ components:
           deprecated: true
       required:
       - query
-    AgentRunStatus:
-      type: string
-      enum:
-      - queued
-      - running
-      - completed
-      - failed
-      - cancelled
+    AgentGrounding:
+      type: object
+      properties:
+        field:
+          type: string
+          description: Output field the citations support.
+          example: structured.companies[0].sourceUrl
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentCitation'
+        score:
+          anyOf:
+          - type: number
+            minimum: 0
+            maximum: 1
+          - type: 'null'
+        confidence:
+          anyOf:
+          - type: string
+            enum:
+            - low
+            - medium
+            - high
+            description: Model-reported reliability for this field.
+          - type: 'null'
+      required:
+      - field
+      - citations
+      additionalProperties: false
+    AgentErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/AgentError'
+      required:
+      - error
+      additionalProperties: false
+    AgentError:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - INVALID_REQUEST
+          - AUTHENTICATION_ERROR
+          - RATE_LIMIT_ERROR
+          - NOT_FOUND
+          - SERVER_ERROR
+        code:
+          type: string
+          enum:
+          - INVALID_REQUEST
+          - MISSING_BETA_HEADER
+          - INVALID_BETA_HEADER
+          - TEAM_NOT_FOUND
+          - RUN_NOT_FOUND
+          - PREVIOUS_RUN_NOT_FOUND
+          - PREVIOUS_RUN_NOT_COMPLETED
+          - CONCURRENCY_LIMIT_REACHED
+          - INVALID_OUTPUT_SCHEMA
+          - TIMEOUT
+          - SERVER_ERROR
+        message:
+          type: string
+      required:
+      - type
+      - code
+      - message
+      additionalProperties:
+        $ref: '#/components/schemas/JsonValue'
     AgentUsage:
       type: object
       properties:
@@ -814,23 +749,6 @@ components:
       - emails
       - phoneNumbers
       additionalProperties: false
-    AgentEffort:
-      type: string
-      enum:
-      - low
-      - medium
-      - high
-      - xhigh
-      - auto
-      description: Cost and reasoning effort preference for the run. `auto` lets Exa choose the appropriate effort.
-      default: auto
-    AgentStopReason:
-      type: string
-      enum:
-      - schema_satisfied
-      - budget_reached
-      - error
-      - cancelled
     AgentRunEvent:
       type: object
       properties:
@@ -857,6 +775,74 @@ components:
       - data
       - createdAt
       additionalProperties: false
+    AgentRunOutput:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Natural-language answer or summary.
+        structured:
+          anyOf:
+          - $ref: '#/components/schemas/JsonValue'
+          - type: 'null'
+          description: Validated JSON matching `outputSchema`, or `null` when no schema was provided.
+        grounding:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentGrounding'
+          description: Field-level citations emitted by the run.
+      required:
+      - text
+      - structured
+      - grounding
+      additionalProperties: false
+    AgentRunStatus:
+      type: string
+      enum:
+      - queued
+      - running
+      - completed
+      - failed
+      - cancelled
+    JsonValue:
+      description: Any JSON value.
+      oneOf:
+      - type: 'null'
+      - type: boolean
+      - type: number
+      - type: string
+      - type: array
+        items:
+          $ref: '#/components/schemas/JsonValue'
+      - type: object
+        propertyNames:
+          type: string
+        additionalProperties:
+          $ref: '#/components/schemas/JsonValue'
+    AgentEffort:
+      type: string
+      enum:
+      - low
+      - medium
+      - high
+      - xhigh
+      - auto
+      description: Cost and reasoning effort preference for the run. `auto` lets Exa choose the appropriate effort.
+      default: auto
+    AgentStopReason:
+      type: string
+      enum:
+      - schema_satisfied
+      - budget_reached
+      - error
+      - cancelled
+    AgentRunId:
+      type: string
+      minLength: 1
+      maxLength: 200
+      pattern: ^[A-Za-z0-9_.:-]+$
+      description: Agent run ID. New run IDs are returned with the `agent_run_` prefix.
+      example: agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8
     AgentRunRequest:
       type: object
       properties:
@@ -920,30 +906,41 @@ components:
       additionalProperties:
         $ref: '#/components/schemas/JsonValue'
       description: Canonicalized request fields stored with the run.
-    AgentCostDollars:
+    AgentRunEventList:
       type: object
       properties:
-        total:
-          type: number
-          minimum: 0
-        agentCompute:
-          type: number
-          minimum: 0
-        search:
-          type: number
-          minimum: 0
-        emails:
-          type: number
-          minimum: 0
-        phoneNumbers:
-          type: number
-          minimum: 0
+        object:
+          type: string
+          const: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentRunEvent'
+        hasMore:
+          type: boolean
+          description: Whether there are more results
+        nextCursor:
+          anyOf:
+          - type: string
+          - type: 'null'
       required:
-      - total
-      - agentCompute
-      - search
-      - emails
-      - phoneNumbers
+      - object
+      - data
+      - hasMore
+      - nextCursor
+      additionalProperties: false
+    AgentCitation:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: Source URL.
+        title:
+          type: string
+          description: Source title.
+      required:
+      - url
       additionalProperties: false
     AgentRunList:
       type: object
@@ -968,49 +965,52 @@ components:
       - hasMore
       - nextCursor
       additionalProperties: false
-    AgentRunId:
-      type: string
-      minLength: 1
-      maxLength: 200
-      pattern: ^[A-Za-z0-9_.:-]+$
-      description: Agent run ID. New run IDs are returned with the `agent_run_` prefix.
-      example: agent_run_01j7x9v0m2n4p6q8r0s2t4v6w8
-    AgentRunOutput:
-      type: object
-      properties:
-        text:
-          type: string
-          description: Natural-language answer or summary.
-        structured:
-          anyOf:
-          - $ref: '#/components/schemas/JsonValue'
-          - type: 'null'
-          description: Validated JSON matching `outputSchema`, or `null` when no schema was provided.
-        grounding:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentGrounding'
-          description: Field-level citations emitted by the run.
-      required:
-      - text
-      - structured
-      - grounding
-      additionalProperties: false
-    DeleteAgentRunResponse:
+    AgentRun:
       type: object
       properties:
         id:
           $ref: '#/components/schemas/AgentRunId'
         object:
           type: string
-          const: agent_run.deleted
-        deleted:
-          type: boolean
-          const: true
+          const: agent_run
+        status:
+          $ref: '#/components/schemas/AgentRunStatus'
+        stopReason:
+          anyOf:
+          - $ref: '#/components/schemas/AgentStopReason'
+          - type: 'null'
+          description: Why the run stopped. `null` while the run is queued or running.
+        createdAt:
+          type: string
+          format: date-time
+          description: When the run was created
+        completedAt:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          format: date-time
+        request:
+          anyOf:
+          - $ref: '#/components/schemas/AgentRunRequest'
+          - type: 'null'
+        output:
+          $ref: '#/components/schemas/AgentRunOutput'
+        usage:
+          $ref: '#/components/schemas/AgentUsage'
+        costDollars:
+          $ref: '#/components/schemas/AgentCostDollars'
       required:
       - id
       - object
-      - deleted
+      - status
+      - stopReason
+      - createdAt
+      - completedAt
+      - request
+      - output
+      - usage
+      - costDollars
       additionalProperties: false
   securitySchemes:
     apiKey:

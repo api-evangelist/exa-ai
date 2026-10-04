@@ -393,16 +393,6 @@ components:
       - instructions
       - createdAt
       - updatedAt
-    WebsetEnrichmentFormat:
-      type: string
-      enum:
-      - text
-      - date
-      - number
-      - options
-      - email
-      - phone
-      - url
     UpdateEnrichmentParameters:
       type:
       - object
@@ -503,6 +493,16 @@ components:
             maxLength: 1000
       required:
       - description
+    WebsetEnrichmentFormat:
+      type: string
+      enum:
+      - text
+      - date
+      - number
+      - options
+      - email
+      - phone
+      - url
   securitySchemes:
     apiKey:
       type: apiKey

@@ -284,63 +284,6 @@ paths:
           print("Webhook deleted successfully")'
 components:
   schemas:
-    CreateWebhookParameters:
-      type:
-      - object
-      properties:
-        events:
-          type:
-          - array
-          items:
-            type:
-            - string
-            $ref: '#/components/schemas/EventType'
-          minItems: 1
-          maxItems: 19
-          description: The events to trigger the webhook
-        url:
-          type:
-          - string
-          format: uri
-          description: The URL to send the webhook to
-        metadata:
-          description: Set of key-value pairs you want to associate with this object.
-          type:
-          - object
-          additionalProperties:
-            type:
-            - string
-            maxLength: 1000
-      required:
-      - events
-      - url
-    UpdateWebhookParameters:
-      type:
-      - object
-      properties:
-        events:
-          type:
-          - array
-          items:
-            type:
-            - string
-            $ref: '#/components/schemas/EventType'
-          minItems: 1
-          maxItems: 19
-          description: The events to trigger the webhook
-        url:
-          type:
-          - string
-          format: uri
-          description: The URL to send the webhook to
-        metadata:
-          description: Set of key-value pairs you want to associate with this object.
-          type:
-          - object
-          additionalProperties:
-            type:
-            - string
-            maxLength: 1000
     Webhook:
       type:
       - object
@@ -429,6 +372,33 @@ components:
       - monitor.run.completed
       - webset.export.created
       - webset.export.completed
+    UpdateWebhookParameters:
+      type:
+      - object
+      properties:
+        events:
+          type:
+          - array
+          items:
+            type:
+            - string
+            $ref: '#/components/schemas/EventType'
+          minItems: 1
+          maxItems: 19
+          description: The events to trigger the webhook
+        url:
+          type:
+          - string
+          format: uri
+          description: The URL to send the webhook to
+        metadata:
+          description: Set of key-value pairs you want to associate with this object.
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+            maxLength: 1000
     ListWebhooksResponse:
       type:
       - object
@@ -453,6 +423,36 @@ components:
       - data
       - hasMore
       - nextCursor
+    CreateWebhookParameters:
+      type:
+      - object
+      properties:
+        events:
+          type:
+          - array
+          items:
+            type:
+            - string
+            $ref: '#/components/schemas/EventType'
+          minItems: 1
+          maxItems: 19
+          description: The events to trigger the webhook
+        url:
+          type:
+          - string
+          format: uri
+          description: The URL to send the webhook to
+        metadata:
+          description: Set of key-value pairs you want to associate with this object.
+          type:
+          - object
+          additionalProperties:
+            type:
+            - string
+            maxLength: 1000
+      required:
+      - events
+      - url
   securitySchemes:
     apiKey:
       type: apiKey
