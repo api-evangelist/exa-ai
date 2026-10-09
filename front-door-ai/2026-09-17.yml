@@ -7,14 +7,17 @@ front_door_ai:
   probed_at: '2026-09-17'
   host: www.exa.ai
   final_host: exa.ai
-  ownership: inherited
+  ownership: own
   owner: exa-ai
   shares_host_with: null
-  inherited_from: exa.ai
+  inherited_from: null
+  alias_of: exa.ai
   verdict: scored
-  score: null
+  score: 10
+  band: 4
+  band_label: moderate
   host_score: 10
-  density: null
+  density: 15.06
   words: 664
   tiers:
     agentic: 5

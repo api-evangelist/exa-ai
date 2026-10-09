@@ -1,3 +1,8 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (dated 2026-05-25 by the file itself), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
+generated: '2026-05-25'
 specification: API Commons Plans
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
@@ -217,3 +222,82 @@ plans:
         unit: 1
         price: '0.00'
         userMultiplied: false
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  - negotiated
+  units:
+  - money
+  - negotiated
+  - object
+  - request
+  plans:
+  - name: Free
+    access: free
+    model: free
+    model_how: derived
+    units:
+    - request
+    periods:
+    - month
+  - name: Search
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - other
+    - request
+    periods:
+    - per-use
+  - name: Deep Search
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - request
+    periods:
+    - per-use
+  - name: Contents
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - object
+    periods:
+    - per-use
+  - name: Monitors
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - request
+    periods:
+    - per-use
+  - name: Agent
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - other
+    - request
+    periods:
+    - per-use
+  - name: Enterprise
+    access: negotiated
+    model: negotiated
+    model_how: stated
+    units:
+    - negotiated
+    periods:
+    - term
+  - name: Startup/Education Grant
+    access: other
+    model: free
+    model_how: derived
+    units:
+    - money
+    periods:
+    - term
