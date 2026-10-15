@@ -71,7 +71,7 @@
     builder: unknown (not in the directory record)
     other_apps:
     - exa-ai
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: exa-ai-pipedream
   label: Pipedream
@@ -97,5 +97,5 @@
     actions: true
     sources: false
     builder: Pipedream repo (component)
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
