@@ -30,7 +30,27 @@ edges:
   - namespace-domain
   detected_by: sweep-agent-tools.py
   first_seen: '2026-10-14'
+- partner_name: LangChain
+  partner: langchain
+  partner_match: framework
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://github.com/langchain-ai/langchain/tree/master/libs/partners/exa
+  coverage_role:
+  - retriever
+  framework_signals:
+    packages:
+    - langchain-exa
+    roles:
+    - retriever
+    vendor_domain: exa.ai
+  matched_by: verified-domain-table
+  detected_by: sweep-rag-vector.py
+  first_seen: '2026-10-15'
 generated: '2026-10-14'
 method: searched
 checked:
+- https://github.com/langchain-ai/langchain/tree/master/libs/partners
 - https://registry.modelcontextprotocol.io/v0/servers
