@@ -1,4 +1,21 @@
 edges:
+- partner_name: Stripe (own)
+  partner: stripe
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.stripe.com/apps/exa
+  mirror_of: stripe/integrations/stripe-integration-edges.yml
+  apps:
+  - Exa
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: developer_tools
 - partner_name: MCP Registry
   partner: mcp
   partner_match: register
@@ -14,7 +31,7 @@ edges:
     registered_name: ai.exa/exa
     register_id: ai.exa/exa
     detected_by: sweep-agent-tools.py
-    detected: '2026-10-14'
+    detected: '2026-10-15'
   mcp_registry:
     servers:
     - ai.exa/exa
@@ -49,28 +66,66 @@ edges:
   matched_by: verified-domain-table
   detected_by: sweep-rag-vector.py
   first_seen: '2026-10-15'
-- partner_name: Stripe (own)
-  partner: stripe
-  partner_match: mirror
-  mirror_match: domain
+- partner_name: Zapier
+  partner: zapier
+  partner_match: aggregator
   type: marketplace
-  relationship: platform-app
+  marketplace: zapier-directory
+  channel: ipaas-listing
+  relationship: ipaas-bridge
   direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://marketplace.stripe.com/apps/exa
-  mirror_of: stripe/integrations/stripe-integration-edges.yml
-  apps:
-  - Exa
-  listing_count: 1
-  detected: '2026-10-15'
-  detected_by: mirror-platform-listings.py
-  category: developer_tools
+  evidence: https://zapier.com/apps/exa/integrations
+  category: null
+  contract_reference:
+    register: Zapier app directory (zapier.com/api/v4/apps)
+    spec_file: null
+    role: ipaas-connector:zapier
+    registered_name: Exa
+    matched_domain: exa.ai
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: exa
+    beta: false
+    builder: unknown (not in the directory record)
+    other_apps:
+    - exa-ai
+  detected_by: sweep-workflow-automation.py
+  first_seen: '2026-10-15'
+- partner_name: Pipedream
+  partner: pipedream
+  partner_match: aggregator
+  type: marketplace
+  marketplace: pipedream-components
+  channel: open-source-node
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/exa
+  category: null
+  contract_reference:
+    register: Pipedream components (PipedreamHQ/pipedream components/)
+    spec_file: null
+    role: ipaas-connector:pipedream
+    registered_name: exa
+    matched_domain: exa.ai
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: exa
+    actions: true
+    sources: false
+    builder: Pipedream repo (component)
+  detected_by: sweep-workflow-automation.py
+  first_seen: '2026-10-15'
 generated: '2026-10-14'
 method: searched
 checked:
+- https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
 - https://github.com/langchain-ai/langchain/tree/master/libs/partners
 - https://registry.modelcontextprotocol.io/v0/servers
+- https://zapier.com/api/v4/apps/
 - stripe/integrations/stripe-integration-edges.yml
 source:
 - stripe/integrations/stripe-integration-edges.yml
