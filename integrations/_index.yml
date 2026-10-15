@@ -33,3 +33,16 @@
   relationship: system-coverage
   status: not-a-workflow
   arazzo: null
+- slug: exa-ai-stripe-own
+  label: Stripe (own)
+  partner: stripe
+  partner_name: Stripe (own)
+  category: developer_tools
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.stripe.com/apps/exa
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
