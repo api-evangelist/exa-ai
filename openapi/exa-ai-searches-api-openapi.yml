@@ -199,28 +199,6 @@ paths:
           print(f"Cancelled search: {search.id}")'
 components:
   schemas:
-    WebsetSearchCanceledReason:
-      type: string
-      enum:
-      - webset_deleted
-      - webset_canceled
-      - out_of_credits
-    ArticleEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: article
-          default: article
-      required:
-      - type
-      title: Article
-    WebsetSearchBehavior:
-      type: string
-      enum:
-      - override
-      - append
     CreateWebsetSearchParameters:
       type:
       - object
@@ -362,18 +340,61 @@ components:
       required:
       - count
       - query
-    CreateCriterionParameters:
+    PersonEntity:
       type:
       - object
       properties:
+        type:
+          type: string
+          const: person
+          default: person
+      required:
+      - type
+      title: Person
+    WebsetSearchBehavior:
+      type: string
+      enum:
+      - override
+      - append
+    CompanyEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: company
+          default: company
+      required:
+      - type
+      title: Company
+    CustomEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: custom
+          default: custom
         description:
           type:
           - string
-          minLength: 1
-          maxLength: 1000
-          description: The description of the criterion
+          minLength: 2
+          maxLength: 200
       required:
+      - type
       - description
+      title: Custom
+    ResearchPaperEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: research_paper
+          default: research_paper
+      required:
+      - type
+      title: Research Paper
     Entity:
       oneOf:
       - type:
@@ -391,28 +412,6 @@ components:
       - type:
         - object
         $ref: '#/components/schemas/CustomEntity'
-    PersonEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: person
-          default: person
-      required:
-      - type
-      title: Person
-    ResearchPaperEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: research_paper
-          default: research_paper
-      required:
-      - type
-      title: Research Paper
     WebsetSearch:
       type:
       - object
@@ -678,34 +677,35 @@ components:
       - canceledReason
       - createdAt
       - updatedAt
-    CompanyEntity:
+    CreateCriterionParameters:
       type:
       - object
       properties:
-        type:
-          type: string
-          const: company
-          default: company
-      required:
-      - type
-      title: Company
-    CustomEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: custom
-          default: custom
         description:
           type:
           - string
-          minLength: 2
-          maxLength: 200
+          minLength: 1
+          maxLength: 1000
+          description: The description of the criterion
+      required:
+      - description
+    WebsetSearchCanceledReason:
+      type: string
+      enum:
+      - webset_deleted
+      - webset_canceled
+      - out_of_credits
+    ArticleEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: article
+          default: article
       required:
       - type
-      - description
-      title: Custom
+      title: Article
   securitySchemes:
     apiKey:
       type: apiKey

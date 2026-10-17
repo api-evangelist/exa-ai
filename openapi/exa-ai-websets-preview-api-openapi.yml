@@ -72,103 +72,6 @@ paths:
         source: "# pip install exa-py\nfrom exa_py import Exa\n\nexa = Exa(\"YOUR_EXA_API_KEY\")\n\npreview = exa.websets.preview(\n    params={\n        \"query\": \"Marketing agencies based in the US, that focus on consumer products. Get brands worked with and city\"\n    }\n)\n\nprint(\"Search criteria:\", preview.search.criteria)\nprint(\"Available enrichments:\", len(preview.enrichments))"
 components:
   schemas:
-    ArticleEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: article
-          default: article
-      required:
-      - type
-      title: Article
-    PreviewWebsetParameters:
-      type:
-      - object
-      properties:
-        search:
-          type:
-          - object
-          properties:
-            query:
-              type:
-              - string
-              minLength: 1
-              maxLength: 5000
-              description: 'Natural language search query describing what you are looking for.
-
-
-                Be specific and descriptive about your requirements, characteristics, and any constraints that help narrow down the results.'
-              examples:
-              - Marketing agencies based in the US, that focus on consumer products. Get brands worked with and city
-              - AI startups in Europe that raised Series A funding in 2024
-              - SaaS companies with 50-200 employees in the fintech space
-            entity:
-              $ref: '#/components/schemas/Entity'
-              description: 'Entity used to inform the decomposition.
-
-
-                It is not required to provide it, we automatically detect the entity from all the information provided in the query. Only use this when you need more fine control.'
-            count:
-              default: 10
-              type:
-              - number
-              minimum: 1
-              maximum: 10
-              description: When query parameter search=true, the number of preview items to return.
-          required:
-          - query
-      required:
-      - search
-    WebsetItemArticleProperties:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: article
-          default: article
-        url:
-          type:
-          - string
-          format: uri
-          description: The URL of the article
-        description:
-          type:
-          - string
-          description: Short description of the relevance of the article
-        content:
-          type: string
-          description: The text content for the article
-          nullable: true
-        article:
-          type:
-          - object
-          properties:
-            title:
-              type: string
-              description: The title of the article
-              nullable: true
-            author:
-              type: string
-              description: The author(s) of the article
-              nullable: true
-            publishedAt:
-              type: string
-              description: The date and time the article was published
-              nullable: true
-          required:
-          - title
-          - author
-          - publishedAt
-          title: WebsetItemArticlePropertiesFields
-      required:
-      - type
-      - url
-      - description
-      - content
-      - article
     WebsetItemCustomProperties:
       type:
       - object
@@ -217,46 +120,55 @@ components:
       - description
       - content
       - custom
-    WebsetItemPreview:
+    PersonEntity:
       type:
       - object
       properties:
-        id:
-          type:
-          - string
-          description: The unique identifier for the preview item
-        properties:
-          oneOf:
-          - type:
-            - object
-            $ref: '#/components/schemas/WebsetItemPersonProperties'
-            title: Person
-          - type:
-            - object
-            $ref: '#/components/schemas/WebsetItemCompanyProperties'
-            title: Company
-          - type:
-            - object
-            $ref: '#/components/schemas/WebsetItemArticleProperties'
-            title: Article
-          - type:
-            - object
-            $ref: '#/components/schemas/WebsetItemResearchPaperProperties'
-            title: Research Paper
-          - type:
-            - object
-            $ref: '#/components/schemas/WebsetItemCustomProperties'
-            title: Custom
-          description: The properties of the preview item
-        createdAt:
-          type:
-          - string
-          format: date-time
-          description: The date and time the preview was created
+        type:
+          type: string
+          const: person
+          default: person
       required:
-      - id
-      - properties
-      - createdAt
+      - type
+      title: Person
+    PreviewWebsetParameters:
+      type:
+      - object
+      properties:
+        search:
+          type:
+          - object
+          properties:
+            query:
+              type:
+              - string
+              minLength: 1
+              maxLength: 5000
+              description: 'Natural language search query describing what you are looking for.
+
+
+                Be specific and descriptive about your requirements, characteristics, and any constraints that help narrow down the results.'
+              examples:
+              - Marketing agencies based in the US, that focus on consumer products. Get brands worked with and city
+              - AI startups in Europe that raised Series A funding in 2024
+              - SaaS companies with 50-200 employees in the fintech space
+            entity:
+              $ref: '#/components/schemas/Entity'
+              description: 'Entity used to inform the decomposition.
+
+
+                It is not required to provide it, we automatically detect the entity from all the information provided in the query. Only use this when you need more fine control.'
+            count:
+              default: 10
+              type:
+              - number
+              minimum: 1
+              maximum: 10
+              description: When query parameter search=true, the number of preview items to return.
+          required:
+          - query
+      required:
+      - search
     WebsetItemPersonProperties:
       type:
       - object
@@ -323,82 +235,82 @@ components:
       - url
       - description
       - person
-    WebsetItemResearchPaperProperties:
+    CompanyEntity:
       type:
       - object
       properties:
         type:
           type: string
-          const: research_paper
-          default: research_paper
+          const: company
+          default: company
+      required:
+      - type
+      title: Company
+    CustomEntity:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: custom
+          default: custom
+        description:
+          type:
+          - string
+          minLength: 2
+          maxLength: 200
+      required:
+      - type
+      - description
+      title: Custom
+    WebsetItemArticleProperties:
+      type:
+      - object
+      properties:
+        type:
+          type: string
+          const: article
+          default: article
         url:
           type:
           - string
           format: uri
-          description: The URL of the research paper
+          description: The URL of the article
         description:
           type:
           - string
-          description: Short description of the relevance of the research paper
+          description: Short description of the relevance of the article
         content:
           type: string
-          description: The text content of the research paper
+          description: The text content for the article
           nullable: true
-        researchPaper:
+        article:
           type:
           - object
           properties:
             title:
               type: string
-              description: The title of the research paper
+              description: The title of the article
               nullable: true
             author:
               type: string
-              description: The author(s) of the research paper
+              description: The author(s) of the article
               nullable: true
             publishedAt:
               type: string
-              description: The date and time the research paper was published
+              description: The date and time the article was published
               nullable: true
           required:
           - title
           - author
           - publishedAt
-          title: WebsetItemResearchPaperPropertiesFields
+          title: WebsetItemArticlePropertiesFields
       required:
       - type
       - url
       - description
       - content
-      - researchPaper
-    Entity:
-      oneOf:
-      - type:
-        - object
-        $ref: '#/components/schemas/CompanyEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/PersonEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/ArticleEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/ResearchPaperEntity'
-      - type:
-        - object
-        $ref: '#/components/schemas/CustomEntity'
-    PersonEntity:
-      type:
-      - object
-      properties:
-        type:
-          type: string
-          const: person
-          default: person
-      required:
-      - type
-      title: Person
+      - article
     ResearchPaperEntity:
       type:
       - object
@@ -576,17 +488,111 @@ components:
       - description
       - content
       - company
-    CompanyEntity:
+    WebsetItemPreview:
+      type:
+      - object
+      properties:
+        id:
+          type:
+          - string
+          description: The unique identifier for the preview item
+        properties:
+          oneOf:
+          - type:
+            - object
+            $ref: '#/components/schemas/WebsetItemPersonProperties'
+            title: Person
+          - type:
+            - object
+            $ref: '#/components/schemas/WebsetItemCompanyProperties'
+            title: Company
+          - type:
+            - object
+            $ref: '#/components/schemas/WebsetItemArticleProperties'
+            title: Article
+          - type:
+            - object
+            $ref: '#/components/schemas/WebsetItemResearchPaperProperties'
+            title: Research Paper
+          - type:
+            - object
+            $ref: '#/components/schemas/WebsetItemCustomProperties'
+            title: Custom
+          description: The properties of the preview item
+        createdAt:
+          type:
+          - string
+          format: date-time
+          description: The date and time the preview was created
+      required:
+      - id
+      - properties
+      - createdAt
+    Entity:
+      oneOf:
+      - type:
+        - object
+        $ref: '#/components/schemas/CompanyEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/PersonEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/ArticleEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/ResearchPaperEntity'
+      - type:
+        - object
+        $ref: '#/components/schemas/CustomEntity'
+    WebsetItemResearchPaperProperties:
       type:
       - object
       properties:
         type:
           type: string
-          const: company
-          default: company
+          const: research_paper
+          default: research_paper
+        url:
+          type:
+          - string
+          format: uri
+          description: The URL of the research paper
+        description:
+          type:
+          - string
+          description: Short description of the relevance of the research paper
+        content:
+          type: string
+          description: The text content of the research paper
+          nullable: true
+        researchPaper:
+          type:
+          - object
+          properties:
+            title:
+              type: string
+              description: The title of the research paper
+              nullable: true
+            author:
+              type: string
+              description: The author(s) of the research paper
+              nullable: true
+            publishedAt:
+              type: string
+              description: The date and time the research paper was published
+              nullable: true
+          required:
+          - title
+          - author
+          - publishedAt
+          title: WebsetItemResearchPaperPropertiesFields
       required:
       - type
-      title: Company
+      - url
+      - description
+      - content
+      - researchPaper
     PreviewWebsetResponse:
       type:
       - object
@@ -682,23 +688,17 @@ components:
       - search
       - enrichments
       - items
-    CustomEntity:
+    ArticleEntity:
       type:
       - object
       properties:
         type:
           type: string
-          const: custom
-          default: custom
-        description:
-          type:
-          - string
-          minLength: 2
-          maxLength: 200
+          const: article
+          default: article
       required:
       - type
-      - description
-      title: Custom
+      title: Article
   securitySchemes:
     apiKey:
       type: apiKey
