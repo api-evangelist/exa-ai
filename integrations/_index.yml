@@ -16,6 +16,17 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: exa-ai-langchain
+  label: LangChain
+  partner: langchain
+  partner_name: LangChain
+  type: coverage
+  channel: partner-built
+  evidence: https://github.com/langchain-ai/langchain/tree/master/libs/partners/exa
+  source: edge
+  relationship: system-coverage
+  status: not-a-workflow
+  arazzo: null
 - slug: exa-ai-mcp-registry
   label: MCP Registry
   partner: mcp
@@ -32,18 +43,7 @@
     registered_name: ai.exa/exa
     register_id: ai.exa/exa
     detected_by: sweep-agent-tools.py
-    detected: '2026-10-15'
-  status: not-a-workflow
-  arazzo: null
-- slug: exa-ai-langchain
-  label: LangChain
-  partner: langchain
-  partner_name: LangChain
-  type: coverage
-  channel: partner-built
-  evidence: https://github.com/langchain-ai/langchain/tree/master/libs/partners/exa
-  source: edge
-  relationship: system-coverage
+    detected: '2026-10-19'
   status: not-a-workflow
   arazzo: null
 - slug: exa-ai-zapier
@@ -80,7 +80,7 @@
   type: marketplace
   marketplace: pipedream-components
   channel: open-source-node
-  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/exa
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/d5872355ef27b4efa769f05352f2820c299a456e/components/exa
   source: edge
   relationship: ipaas-bridge
   contract_reference:
