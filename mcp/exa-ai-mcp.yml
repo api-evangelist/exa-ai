@@ -28,35 +28,22 @@ local:
   source: https://github.com/exa-labs/websets-mcp-server
 tools:
 - name: web_search_exa
-  description: Search the web for any topic and get clean, ready-to-use content.
+  description: "Search the web for any topic and get clean, ready-to-use content.\n\n      Best for: Finding\
+    \ current information, news, facts, people, companies, or answering questions about any topic.\n \
+    \     Returns: Clean text content from top search results.\n\n      Query tips:\n      describe the\
+    \ ideal page, not keywords. \"blog post comparing React and Vue performance\" not \"React vs Vue\"\
+    .\n      Use category:people / category:company to search through Linkedin profiles / companies respectively.\n\
+    \      If highlights are insufficient, follow up with web_fetch_exa on the best URLs."
   default: true
 - name: web_fetch_exa
-  description: Read a webpage's full content as clean markdown from one or more URLs.
+  description: 'Read a webpage''s full content as clean markdown. Use after web_search_exa when highlights
+    are insufficient or to read any URL.
+
+
+    Best for: Extracting full content from known URLs. Batch multiple URLs in one call.
+
+    Returns: Clean text content and metadata from the page(s).'
   default: true
-- name: get_code_context_exa
-  description: Search for code and technical documentation context.
-- name: web_search_advanced_exa
-  description: Advanced web search with category filters, domain restrictions, date ranges, highlights,
-    summaries, and subpage crawling.
-- name: crawling_exa
-  description: Crawl and extract content from specific URLs.
-- name: company_research_exa
-  description: Research companies with structured entity data.
-- name: linkedin_search_exa
-  description: Search LinkedIn profiles and companies.
-- name: deep_researcher_start
-  description: Start an asynchronous deep-research task.
-- name: deep_researcher_check
-  description: Poll a deep-research task for completion and results.
-- name: agent_create_run
-  description: Start async Agent runs for multi-step research, list-building, enrichment, or structured
-    JSON output.
-- name: agent_wait_for_run
-  description: Poll a run until terminal status or timeout.
-- name: agent_get_run_output
-  description: Retrieve completed output with text, structured results, citations, usage, and cost data.
-- name: agent_cancel_run
-  description: Stop a queued or running operation.
 deployment:
   mode: remote
   endpoint: https://mcp.exa.ai/mcp
@@ -90,3 +77,4 @@ tool_quality:
   scored: false
   note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
     from Glimind's agent-readiness audit.
+tools_count: 2
