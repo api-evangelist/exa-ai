@@ -268,6 +268,23 @@ edges:
   detected_by: mirror-platform-listings.py
   category: Agents Searching
   partner_tier: native
+- partner_name: Raycast (raycast-store)
+  partner: raycast
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: raycast-store
+  evidence: https://www.raycast.com/exa_ai/exa-search
+  mirror_of: raycast/integrations/raycast-integration-edges.yml
+  apps:
+  - Exa
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Raycast Store extension (first-party)
 generated: '2026-10-14'
 method: searched
 checked:
@@ -290,5 +307,6 @@ checked:
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
 - vercel/integrations/vercel-integration-edges.yml
+- raycast/integrations/raycast-integration-edges.yml
 source:
 - stripe/integrations/stripe-integration-edges.yml
