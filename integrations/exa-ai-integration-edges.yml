@@ -1,21 +1,4 @@
 edges:
-- partner_name: Stripe (own)
-  partner: stripe
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://marketplace.stripe.com/apps/exa
-  mirror_of: stripe/integrations/stripe-integration-edges.yml
-  apps:
-  - Exa
-  listing_count: 1
-  detected: '2026-10-15'
-  detected_by: mirror-platform-listings.py
-  category: developer_tools
 - partner_name: LangChain
   partner: langchain
   partner_match: framework
@@ -250,6 +233,41 @@ edges:
     sector: Growth;Infra
   detected_by: sweep-vc-portfolios.py
   first_seen: '2026-10-21'
+- partner_name: Stripe (own)
+  partner: stripe
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.stripe.com/apps/exa
+  mirror_of: stripe/integrations/stripe-integration-edges.yml
+  apps:
+  - Exa
+  listing_count: 1
+  detected: '2026-10-15'
+  detected_by: mirror-platform-listings.py
+  category: developer_tools
+- partner_name: Vercel (own)
+  partner: vercel
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://vercel.com/marketplace/exa
+  mirror_of: vercel/integrations/vercel-integration-edges.yml
+  apps:
+  - Exa
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Agents Searching
+  partner_tier: native
 generated: '2026-10-14'
 method: searched
 checked:
@@ -271,5 +289,6 @@ checked:
 - https://www.indexventures.com/companies/
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
+- vercel/integrations/vercel-integration-edges.yml
 source:
 - stripe/integrations/stripe-integration-edges.yml
