@@ -222,3 +222,16 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: exa-ai-obsidian-obsidian-community-plugins
+  label: Obsidian (obsidian-community-plugins)
+  partner: obsidian
+  partner_name: Obsidian (obsidian-community-plugins)
+  category: Obsidian community plugin
+  type: marketplace
+  marketplace: obsidian-community-plugins
+  channel: partner-built
+  evidence: https://github.com/exa-labs/obsidian-exa-search
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null

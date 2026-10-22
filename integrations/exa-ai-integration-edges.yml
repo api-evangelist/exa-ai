@@ -285,6 +285,23 @@ edges:
   detected: '2026-10-22'
   detected_by: mirror-platform-listings.py
   category: Raycast Store extension (first-party)
+- partner_name: Obsidian (obsidian-community-plugins)
+  partner: obsidian
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: obsidian-community-plugins
+  evidence: https://github.com/exa-labs/obsidian-exa-search
+  mirror_of: obsidian/integrations/obsidian-integration-edges.yml
+  apps:
+  - Exa Search
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Obsidian community plugin
 generated: '2026-10-14'
 method: searched
 checked:
@@ -308,5 +325,6 @@ checked:
 - https://www.sequoiacap.com/sitemap.xml
 - vercel/integrations/vercel-integration-edges.yml
 - raycast/integrations/raycast-integration-edges.yml
+- obsidian/integrations/obsidian-integration-edges.yml
 source:
 - stripe/integrations/stripe-integration-edges.yml
