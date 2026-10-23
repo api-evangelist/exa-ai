@@ -302,6 +302,25 @@ edges:
   detected: '2026-10-22'
   detected_by: mirror-platform-listings.py
   category: Obsidian community plugin
+- partner_name: Hugging Face (hugging-face-hub)
+  partner: hugging-face
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: hugging-face-hub
+  evidence: https://huggingface.co/exa-ai
+  mirror_of: hugging-face/integrations/hugging-face-integration-edges.yml
+  apps:
+  - exa-ai/CodeDocsNER
+  listing_count: 1
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Hugging Face Hub datasets
+  badges:
+  - Verified publisher (Hugging Face verified organisation)
 generated: '2026-10-14'
 method: searched
 checked:
@@ -326,5 +345,6 @@ checked:
 - vercel/integrations/vercel-integration-edges.yml
 - raycast/integrations/raycast-integration-edges.yml
 - obsidian/integrations/obsidian-integration-edges.yml
+- hugging-face/integrations/hugging-face-integration-edges.yml
 source:
 - stripe/integrations/stripe-integration-edges.yml
